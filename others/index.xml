@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Metalblueberry - A passionate programmer</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on Metalblueberry - A passionate programmer</description>
+    <title>Others on Metalblueberry - A passionate programmer</title>
+    <link>http://localhost:1313/others/</link>
+    <description>Recent content in Others on Metalblueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 19 Oct 2019 13:59:31 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 30 Aug 2016 16:01:23 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/others/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>About Me</title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Sat, 19 Oct 2019 13:59:31 +0200</pubDate>
-      
-      <guid>http://localhost:1313/about/</guid>
-      <description>About Metalblueberry I&amp;rsquo;m a passionate developer moving toward the specialization in IoT technologies.
- I&amp;rsquo;ve experience with several technologies from the IoT world from the sensors to the cloud infrastructure.
- Sensoring: Arduino/ Raspberry Pi Transport: MQTT, HTTP, TCP/UDP Processing: Python Pandas Storage formats: Parquet, csv, json, xml&amp;hellip; Analysis: SQL, Python Pandas, Jupyter Notebook Provider: REST API, Plotly Dash, PowerBI  I&amp;rsquo;m also learning AWS services. I feel familiar with the following services.</description>
-    </item>
     
     <item>
       <title>Shortcodes</title>
