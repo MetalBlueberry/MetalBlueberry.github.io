@@ -6,17 +6,26 @@
     <description>Recent content on Metalblueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 24 Oct 2019 10:25:24 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 24 Oct 2019 17:10:38 +0200</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Why This Blog</title>
+      <link>http://localhost:1313/post/life/2019-10-24_why-this-blog/</link>
+      <pubDate>Thu, 24 Oct 2019 17:10:38 +0200</pubDate>
+      
+      <guid>http://localhost:1313/post/life/2019-10-24_why-this-blog/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m starting this blog to have feedback of my improvement over time.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Hello World</title>
-      <link>http://localhost:1313/post/2019-10-24_hello-world/</link>
+      <link>http://localhost:1313/post/misc/2019-10-24_hello-world/</link>
       <pubDate>Thu, 24 Oct 2019 10:25:24 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/2019-10-24_hello-world/</guid>
+      <guid>http://localhost:1313/post/misc/2019-10-24_hello-world/</guid>
       <description>&lt;p&gt;This is my very first post :)&lt;/p&gt;</description>
     </item>
     
