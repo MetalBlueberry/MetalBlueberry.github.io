@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>misc on Metalblueberry - A passionate programmer</title>
-    <link>http://localhost:1313/categories/misc/</link>
+    <link>https://metalblueberry.github.io/categories/misc/</link>
     <description>Recent content in misc on Metalblueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 24 Oct 2019 10:25:24 +0200</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/misc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://metalblueberry.github.io/categories/misc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello World</title>
-      <link>http://localhost:1313/post/misc/2019-10-24_hello-world/</link>
+      <link>https://metalblueberry.github.io/post/misc/2019-10-24_hello-world/</link>
       <pubDate>Thu, 24 Oct 2019 10:25:24 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/misc/2019-10-24_hello-world/</guid>
+      <guid>https://metalblueberry.github.io/post/misc/2019-10-24_hello-world/</guid>
       <description>&lt;p&gt;This is my very first post :)&lt;/p&gt;</description>
     </item>
     
