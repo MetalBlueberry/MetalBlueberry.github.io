@@ -2,15 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://metalblueberry.github.io/categories/</loc>
+    <lastmod>2019-10-29T11:41:00+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/post/howto/2019-10-29_create-a-blog-like-this/</loc>
+    <lastmod>2019-10-29T11:41:00+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/categories/howto/</loc>
+    <lastmod>2019-10-29T11:41:00+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://metalblueberry.github.io/</loc>
-    <lastmod>2019-10-24T17:10:38+02:00</lastmod>
+    <lastmod>2019-10-29T11:41:00+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://metalblueberry.github.io/post/</loc>
-    <lastmod>2019-10-24T17:10:38+02:00</lastmod>
+    <lastmod>2019-10-29T11:41:00+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -18,13 +39,6 @@
   <url>
     <loc>https://metalblueberry.github.io/post/life/2019-10-24_why-this-blog/</loc>
     <lastmod>2019-10-24T17:10:38+02:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://metalblueberry.github.io/categories/</loc>
-    <lastmod>2019-10-24T10:25:24+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
