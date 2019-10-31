@@ -1,0 +1,14 @@
+.post .post-content img[src$='#center'] {
+    display: block;
+    margin: 0.7rem auto;
+}
+
+.post .post-content img[src$='#floatleft'] {
+    float: left;
+    margin: 0.7rem;
+}
+
+.post .post-content img[src$='#floatright'] {
+    float: right;
+    margin: 0.7rem;
+}
