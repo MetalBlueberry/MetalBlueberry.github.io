@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Metalblueberry - A passionate programmer</title>
+    <title>Posts on MetalBlueberry - A passionate programmer</title>
     <link>https://metalblueberry.github.io/post/</link>
-    <description>Recent content in Posts on Metalblueberry - A passionate programmer</description>
+    <description>Recent content in Posts on MetalBlueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 29 Oct 2019 11:41:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 29 Oct 2019 21:33:33 +0100</lastBuildDate>
     
 	<atom:link href="https://metalblueberry.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Mandelbrot Set Calculation</title>
+      <link>https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/</link>
+      <pubDate>Tue, 29 Oct 2019 21:33:33 +0100</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/</guid>
+      <description>&lt;p&gt;The Mandelbrot set is one of the most famous fractals and it is really simple to draw. Personally I enjoy a lot seeing how simple rules lead to complex patterns.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Create a Blog Like This</title>

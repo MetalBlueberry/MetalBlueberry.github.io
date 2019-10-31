@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Mandelbrot Set Calculation - MetalBlueberry - A passionate programmer</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="MetalBlueberry" /><meta name="description" content="How to calculate and draw the Mandelbrot set" /><meta name="keywords" content="mandelbrot, go, golang" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.3 with theme even" />
+
+
+<link rel="canonical" href="https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta property="og:title" content="Mandelbrot Set Calculation" />
+<meta property="og:description" content="How to calculate and draw the Mandelbrot set" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/" />
+<meta property="article:published_time" content="2019-10-29T21:33:33+01:00" />
+<meta property="article:modified_time" content="2019-10-31T21:33:33+01:00" />
+<meta itemprop="name" content="Mandelbrot Set Calculation">
+<meta itemprop="description" content="How to calculate and draw the Mandelbrot set">
+
+
+<meta itemprop="datePublished" content="2019-10-29T21:33:33&#43;01:00" />
+<meta itemprop="dateModified" content="2019-10-31T21:33:33&#43;01:00" />
+<meta itemprop="wordCount" content="2880">
+
+
+
+<meta itemprop="keywords" content="go,mandelbrot," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mandelbrot Set Calculation"/>
+<meta name="twitter:description" content="How to calculate and draw the Mandelbrot set"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">MetalBlueberry</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">MetalBlueberry</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Mandelbrot Set Calculation</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-29 </span>
+        <div class="post-category">
+            <a href="/categories/howto/"> howto </a>
+            </div>
+          <span class="more-meta"> 2880 words </span>
+          <span class="more-meta"> 14 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#keep-things-real">Keep things real</a></li>
+<li><a href="#let-your-imagination-fly">Let your imagination fly</a></li>
+<li><a href="#let-the-computer-do-its-work">Let the computer do its work</a>
+<ul>
+<li><a href="#mandelbrot-point">Mandelbrot point</a></li>
+<li><a href="#mandelbrot-set">Mandelbrot set</a></li>
+</ul></li>
+<li><a href="#generate-mandelbrot-data">Generate Mandelbrot Data</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references-and-links">References and Links</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>The Mandelbrot set is one of the most famous fractals and it is really simple to draw. Personally I enjoy a lot seeing how simple rules lead to complex patterns.</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1024px-Mandel_zoom_00_mandelbrot_set.jpg" alt="Mandelbrot set image" /></p>
+
+<blockquote>
+<p>Mandelbrot set representation from <a href="https://en.wikipedia.org/wiki/Mandelbrot_set">wikipedia</a>.</p>
+</blockquote>
+
+<h2 id="definition">Definition</h2>
+
+<p>The Mandelbrot set is defined by a set of complex numbers for which the following function does not diverge when iterated from z = 0. This means that the value remains bounded in absolute value.</p>
+
+<p>$$
+f_c(z) = z^2 + c
+$$</p>
+
+<p>The following image displays the axes to see where the set is located in space. x axis is the real part and y axis is the imaginary part.</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Mandelset_hires.png/322px-Mandelset_hires.png#center" alt="Mandelbrot set position" /></p>
+
+<h2 id="keep-things-real">Keep things real</h2>
+
+<p>Whit the previous image in mind, we can start playing with some sample numbers to understand how to generate the image. Let&rsquo;s pick a point outside the set <code>(1,0)</code> and perform the iterations with the previously defined function.</p>
+
+<p>$$ z_0 := 0 $$
+$$ c := 1 + 0i $$
+$$ z_1 = f_c(z_0) = z^2 + c $$
+$$ z_1 = f_c(0) = 0^2 + 1 + 0i = 1$$</p>
+
+<p>After the fist iteration, $z_1 = 1$ and for the next iteration we just need to input the value to the function again.</p>
+
+<p>$$ z_1 := 1 $$
+$$ c := 1 + 0i $$
+$$ z_2 = f_c(z_1) = z^2 + c $$
+$$ z_2 = f_c(0) = 1^2 + 1 + 0i = 2$$</p>
+
+<p>if we continue the iterations, we can see that the value keeps growing forever.</p>
+
+<p>$$z_0 = 0$$
+$$z_1 = 1$$
+$$z_2 = 2$$
+$$z_3 = 5$$
+$$z_4 = 26$$</p>
+
+<p>This means that the point doesn&rsquo;t belong to the set, as we know from the image. Let&rsquo;s pick a point that we know that belongs to the set. <code>(-1,0)</code>. if we are right, the iterations must keep within a bounded value.</p>
+
+<p>$$ z_0 := 0 $$
+$$ c := -1 + 0i $$
+$$ z_1 = f_c(z_0) = z^2 + c $$
+$$ z_1 = f_c(0) = 0^2 + -1 + 0i = -1$$
+$$ z_2 = f_c(z_1) = z^2 + c $$
+$$ z_2 = f_c(0) = (-1)^2 + -1 + 0i = 0$$</p>
+
+<p>Wops&hellip; turns out that $z_2 = z_0$ and this means that we are stuck in a infinite loop. You can iterate as much as you want but values will be either -1 or 0 for ever.</p>
+
+<h2 id="let-your-imagination-fly">Let your imagination fly</h2>
+
+<p>Things get interesting the you add imaginary numbers to the previous equation so lets pick another point, but this time with imaginary values. <code>(-0.5, 0.5)</code></p>
+
+<blockquote>
+<p>Remember that $i^2 = -1$</p>
+</blockquote>
+
+<p>$$ z_0 := 0 $$
+$$ c := -0.5 + 0.5i $$
+$$ z_1 = f_c(0) = 0^2 + -0.5 + 0.5i = -0.5 + 0.5i $$
+$$ z_2 = f_c(z_1) = (-0.5 + 0.5i)^2 + -0.5 + 0.5i = 0.25 - 2*0.25i - 0.25 - 0.5 + 0.5i $$
+$$ z_2 = - 0.5 $$</p>
+
+<p>Let&rsquo;s keep iterating and see what we get. Remember that we expect this point to belong to the set, so it should stay within a bounded value.</p>
+
+<p>$$z_1=(-0.500000+0.500000i)$$</p>
+
+<p>$$z_2=(-0.500000-0.000000i)$$</p>
+
+<p>$$z_3=(-0.250000+0.500000i)$$</p>
+
+<p>$$z_4=(-0.687500+0.250000i)$$</p>
+
+<p>$$z_5=(-0.089844+0.156250i)$$</p>
+
+<p>$$z_6=(-0.516342+0.471924i)$$</p>
+
+<p>$$z_7=(-0.456103+0.012652i)$$</p>
+
+<p>$$z_8=(-0.292130+0.488459i)$$</p>
+
+<p>$$z_9=(-0.653252+0.214613i)$$</p>
+
+<p>$$z_{10}=(-0.119320+0.219608i)$$</p>
+
+<p>$$z_{20}=(-0.170860+0.314224i)$$</p>
+
+<p>$$z_{30}=(-0.238482+0.376027i)$$</p>
+
+<p>$$z_{40}=(-0.305512+0.399379i)$$</p>
+
+<p>$$z_{50}=(-0.360070+0.401208i)$$</p>
+
+<p>$$z_{60}=(-0.403868+0.390242i)$$</p>
+
+<p>After 60 iterations, looks like the value stays within a bounded value but there is no guarantee that the value will remain here and the only way to know it is to keep iterating. That is why we need to define a maximum number of iterations to give up.</p>
+
+<p>Last try with an imaginary number outside the set. <code>(0,1)</code></p>
+
+<p>$$ z_2 = (1i)^2 + i = -1+i $$
+$$ z_3 = (-1+i)^2 + i = 1 -2i -1 + i = -i $$
+$$ z_4 = (-i)^2 + i = 1 + i = -1 + i $$
+$$ z_5 = (-1+i)^2 + i = 1 -2i -1 + i = -i $$</p>
+
+<p>What happen here? $z_2 = z_5$ and this means that we are stuck in a infinite loop therefore the point belongs to the set. This is just a special point that belongs to the set but if you move a minimal distance from it, the iteration quickly scapes to infinity. You can visualize this as balancing a ball in a pencil. It is possible but the slightest perturbation will make the ball fall. For this reason, you don&rsquo;t see anything if you zoom in this zone of the Mandelbrot set.</p>
+
+<h2 id="let-the-computer-do-its-work">Let the computer do its work</h2>
+
+<p>I&rsquo;m tired of manually calculating this values so lets create some code to do it for us.</p>
+
+<p>First, we need to have a <a href="https://en.wikipedia.org/wiki/Mandelbrot_set#Formal_definition">formal definition</a> of the Mandelbrot set. This can be obtained from wikipedia.</p>
+
+<p>$$ z_{n+1} = z^2_n+c $$</p>
+
+<p>$$ c ∈ M ↔ limsup_{z-&gt;∞}|z_{n+1}| &lt; 2 $$</p>
+
+<p>The important information here is that we already know the condition of &ldquo;diverge&rdquo;. When de module of the value z is bigger than 2, we know that the point is not in the set.</p>
+
+<h3 id="mandelbrot-point">Mandelbrot point</h3>
+
+<p>I&rsquo;m going to create a structure mandelbrot.Point to hold the necessary information to calculate any given point of the set. This will contain the methods Calculate, Diverges and Iterations.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">mandelbrot</span>
+
+<span class="kn">import</span> <span class="p">()</span>
+
+<span class="kd">type</span> <span class="nx">Point</span> <span class="kd">struct</span> <span class="p">{</span>
+  <span class="nx">Point</span>      <span class="kt">complex128</span>
+  <span class="nx">iterations</span> <span class="kt">int</span>
+  <span class="nx">z</span>          <span class="kt">complex128</span>
+<span class="p">}</span>
+
+<span class="c1">// NewPoint returns a new point at a given coordenates
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewPoint</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">i</span> <span class="kt">float64</span><span class="p">)</span> <span class="o">*</span><span class="nx">Point</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">Point</span><span class="p">{</span>
+    <span class="nx">Point</span><span class="p">:</span> <span class="nb">complex</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">i</span><span class="p">),</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Calculate performs as many calculations as MaxIterations to determine if the point belongs to the set or not
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">(</span><span class="nx">MaxIterations</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;To be implemented&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Diverges returns whether the points diverges from the set.
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Diverges</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
+  <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;To be implemented&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Iterations returns the number of performed iterations.
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Iterations</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">m</span><span class="p">.</span><span class="nf">Iterations</span><span class="p">()</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>it is time to write tests to develop this functionality. TDD fits really well in cases like this were we already have a clear definition of what are all the outputs.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">mandelbrot_test</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+  <span class="s">&#34;testing&#34;</span>
+
+  <span class="p">.</span> <span class="s">&#34;github.com/metalblueberry/mandelbrot/mandelbrot&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">testMandelbrotPointCases</span> <span class="kd">struct</span> <span class="p">{</span>
+  <span class="nx">point</span>      <span class="o">*</span><span class="nx">Point</span>
+  <span class="nx">iterations</span> <span class="kt">int</span>
+  <span class="nx">diverges</span>   <span class="kt">bool</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">TestMandelbrotPoint</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">tests</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">testMandelbrotPointCases</span><span class="p">{</span>
+    <span class="nx">testMandelbrotPointCases</span><span class="p">{</span>
+      <span class="nx">point</span><span class="p">:</span>      <span class="nf">NewPoint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+      <span class="nx">iterations</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="nx">diverges</span><span class="p">:</span>   <span class="kc">true</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nx">testMandelbrotPointCases</span><span class="p">{</span>
+      <span class="nx">point</span><span class="p">:</span>      <span class="nf">NewPoint</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+      <span class="nx">iterations</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="nx">diverges</span><span class="p">:</span>   <span class="kc">false</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nx">testMandelbrotPointCases</span><span class="p">{</span>
+      <span class="nx">point</span><span class="p">:</span>      <span class="nf">NewPoint</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+      <span class="nx">iterations</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="nx">diverges</span><span class="p">:</span>   <span class="kc">false</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nx">testMandelbrotPointCases</span><span class="p">{</span>
+      <span class="nx">point</span><span class="p">:</span>      <span class="nf">NewPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+      <span class="nx">iterations</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="nx">diverges</span><span class="p">:</span>   <span class="kc">true</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">test</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">tests</span> <span class="p">{</span>
+    <span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="nx">test</span><span class="p">)</span>
+    <span class="nx">test</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">iterations</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">test</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nf">Diverges</span><span class="p">()</span> <span class="o">!=</span> <span class="nx">test</span><span class="p">.</span><span class="nx">diverges</span> <span class="p">{</span>
+      <span class="nx">t</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Test %d failed, Point %f diverges %t expected %t&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">test</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">Point</span><span class="p">,</span> <span class="nx">test</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nf">Diverges</span><span class="p">(),</span> <span class="nx">test</span><span class="p">.</span><span class="nx">diverges</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>You may notice that the point <code>(0,1)</code> is expected to diverge but we already know that this is a special case that does not diverge. If you debug the program, you will notice that it diverges after a few iterations due to numerical errors. This is not a problem though, the representation of the set is still perfectly fine.</p>
+</blockquote>
+
+<p>The code is in fact really simple with go because there is support for complex numbers that handles all the special cases with $i^2$</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">(</span><span class="nx">MaxIterations</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">!</span><span class="nx">m</span><span class="p">.</span><span class="nf">Diverges</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span> <span class="p">&lt;</span> <span class="nx">MaxIterations</span> <span class="p">{</span>
+    <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span><span class="o">++</span>
+    <span class="nx">m</span><span class="p">.</span><span class="nx">z</span> <span class="p">=</span> <span class="nx">cmplx</span><span class="p">.</span><span class="nf">Pow</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nx">m</span><span class="p">.</span><span class="nx">Point</span>
+    <span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;z_%d=%f\n&#34;</span><span class="p">,</span> <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span><span class="p">,</span> <span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Diverges</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">cmplx</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span> <span class="p">&gt;</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<div class="expand">
+    <div class="expand-label" style="cursor: pointer;"
+        onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+        <span>
+            
+            
+            &gt; Click here to see all code
+            
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+        <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">mandelbrot</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+  <span class="s">&#34;log&#34;</span>
+  <span class="s">&#34;math/cmplx&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">Point</span> <span class="kd">struct</span> <span class="p">{</span>
+  <span class="nx">Point</span>      <span class="kt">complex128</span>
+  <span class="nx">iterations</span> <span class="kt">int</span>
+  <span class="nx">z</span>          <span class="kt">complex128</span>
+<span class="p">}</span>
+
+<span class="c1">// NewPoint returns a new point at a given coordenates
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewPoint</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">i</span> <span class="kt">float64</span><span class="p">)</span> <span class="o">*</span><span class="nx">Point</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">Point</span><span class="p">{</span>
+    <span class="nx">Point</span><span class="p">:</span> <span class="nb">complex</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">i</span><span class="p">),</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Calculate performs as many calculations as MaxIterations to determine if the point belongs to the set or not
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">(</span><span class="nx">MaxIterations</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">!</span><span class="nx">m</span><span class="p">.</span><span class="nf">Diverges</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span> <span class="p">&lt;</span> <span class="nx">MaxIterations</span> <span class="p">{</span>
+    <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span><span class="o">++</span>
+    <span class="nx">m</span><span class="p">.</span><span class="nx">z</span> <span class="p">=</span> <span class="nx">cmplx</span><span class="p">.</span><span class="nf">Pow</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nx">m</span><span class="p">.</span><span class="nx">Point</span>
+    <span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;z_%d=%f\n&#34;</span><span class="p">,</span> <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span><span class="p">,</span> <span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Diverges returns whether the points diverges from the set.
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Diverges</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">cmplx</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span> <span class="p">&gt;</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Iterations returns the number of performed iterations.
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Iterations</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">m</span><span class="p">.</span><span class="nf">Iterations</span><span class="p">()</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+</div>
+
+<h3 id="mandelbrot-set">Mandelbrot set</h3>
+
+<p>The mandelbrot.Set will hold all the mandelbrot.Points. To ease the usage, I&rsquo;ve added a constructor of rectangular Areas centered at a given point. This will come handy when zooming in the future.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Area</span> <span class="kd">struct</span> <span class="p">{</span>
+  <span class="nx">HorizontalResolution</span> <span class="kt">int</span>
+  <span class="nx">VerticalResolution</span>   <span class="kt">int</span>
+  <span class="nx">TopLeft</span>              <span class="kt">complex128</span>
+  <span class="nx">BottomRight</span>          <span class="kt">complex128</span>
+  <span class="nx">MaxIterations</span>        <span class="kt">int</span>
+  <span class="nx">Points</span>               <span class="p">[]</span><span class="nx">Point</span>
+<span class="p">}</span>
+
+<span class="c1">//NewAreaCentered creates a mandelbrot.Area with squared shape centered area at x,y of width = 2*area
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewAreaCentered</span><span class="p">(</span><span class="nx">Resolution</span><span class="p">,</span> <span class="nx">MaxIterations</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">area</span> <span class="kt">float64</span><span class="p">)</span> <span class="o">*</span><span class="nx">Area</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">Area</span><span class="p">{</span>
+    <span class="nx">HorizontalResolution</span><span class="p">:</span> <span class="nx">Resolution</span><span class="p">,</span>
+    <span class="nx">VerticalResolution</span><span class="p">:</span>   <span class="nx">Resolution</span><span class="p">,</span>
+    <span class="nx">MaxIterations</span><span class="p">:</span>        <span class="nx">MaxIterations</span><span class="p">,</span>
+    <span class="nx">TopLeft</span><span class="p">:</span>              <span class="nb">complex</span><span class="p">(</span><span class="nx">x</span><span class="o">-</span><span class="nx">area</span><span class="p">,</span> <span class="nx">y</span><span class="o">+</span><span class="nx">area</span><span class="p">),</span>
+    <span class="nx">BottomRight</span><span class="p">:</span>          <span class="nb">complex</span><span class="p">(</span><span class="nx">x</span><span class="o">+</span><span class="nx">area</span><span class="p">,</span> <span class="nx">y</span><span class="o">-</span><span class="nx">area</span><span class="p">),</span>
+    <span class="nx">Points</span><span class="p">:</span>               <span class="nb">make</span><span class="p">([]</span><span class="nx">Point</span><span class="p">,</span> <span class="nx">Resolution</span><span class="o">*</span><span class="nx">Resolution</span><span class="p">),</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>You may notice that the <code>Points</code> variable is a single dimension array. The idea behind this is to have a single memory allocation for all the data. This will increase the difficulty to index a given point, but we will easily solve this by two helper methods <code>ForIndex</code> and <code>IndexFor</code> that will server to obtain the valid index for a given x,y coordinates and the x,y coordinates of a given index.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">IndexFor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="o">*</span><span class="nx">a</span><span class="p">.</span><span class="nx">HorizontalResolution</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">ForIndex</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">y</span> <span class="p">=</span> <span class="nx">i</span> <span class="o">/</span> <span class="nx">a</span><span class="p">.</span><span class="nx">VerticalResolution</span>
+  <span class="nx">x</span> <span class="p">=</span> <span class="nx">i</span> <span class="o">%</span> <span class="nx">a</span><span class="p">.</span><span class="nx">HorizontalResolution</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Before using the Area, we need to initialize the Points array depending on the resolution. For this purpose let&rsquo;s add a method <code>Init</code> to the struct that for each point. To get the complex number for a x,y position, I&rsquo;m creating the method <code>getNumber</code>. So in the <code>Init</code> method I&rsquo;m iterating over all the pixels defined by the resolution getting a NewPoint for each one.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">getNumber</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">i</span> <span class="kt">float64</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">TopLeftReal</span> <span class="o">:=</span> <span class="nb">real</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">TopLeft</span><span class="p">)</span>
+  <span class="nx">TopLeftImag</span> <span class="o">:=</span> <span class="nb">imag</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">TopLeft</span><span class="p">)</span>
+  <span class="nx">BottomRightReal</span> <span class="o">:=</span> <span class="nb">real</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">BottomRight</span><span class="p">)</span>
+  <span class="nx">BottomRightImag</span> <span class="o">:=</span> <span class="nb">imag</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">BottomRight</span><span class="p">)</span>
+
+  <span class="nx">r</span> <span class="p">=</span> <span class="nx">TopLeftReal</span> <span class="o">+</span> <span class="p">(</span><span class="nb">float64</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="o">/</span><span class="nb">float64</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">HorizontalResolution</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="nx">BottomRightReal</span><span class="o">-</span><span class="nx">TopLeftReal</span><span class="p">)</span>
+  <span class="nx">i</span> <span class="p">=</span> <span class="nx">TopLeftImag</span> <span class="o">+</span> <span class="p">(</span><span class="nb">float64</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span><span class="o">/</span><span class="nb">float64</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">VerticalResolution</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="nx">BottomRightImag</span><span class="o">-</span><span class="nx">TopLeftImag</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">i</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">Init</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="nx">x</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="p">&lt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">HorizontalResolution</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="nx">y</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="p">&lt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">VerticalResolution</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span> <span class="p">{</span>
+      <span class="nx">point</span> <span class="o">:=</span> <span class="nf">NewPoint</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nf">getNumber</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">))</span>
+      <span class="nx">a</span><span class="p">.</span><span class="nf">SetPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">point</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Now I&rsquo;m going to create a <code>Calculate</code> method to start the computational task. As it will be a long process, I want to do it in a separate go routine and have some kind of progress give feedback to the main thread. The method returns a channel that we can read to get the point that has been just analyzed by the function and we can divide this by the total count to know the overall progress. I don&rsquo;t want the function to get blocked if the user is not reading the progress channel and that is why you see the select block at the end of the for loop. Another think is that the Points variable is a slice of struct, this means that we need to reassign the value in order to update the content of the slice.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">()</span> <span class="p">(</span><span class="nx">progress</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">progress</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+  <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">defer</span> <span class="nb">close</span><span class="p">(</span><span class="nx">progress</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pixel</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span> <span class="p">{</span>
+      <span class="nx">pixel</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">MaxIterations</span><span class="p">)</span>
+      <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">pixel</span>
+
+      <span class="k">select</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="nx">progress</span> <span class="o">&lt;-</span> <span class="nx">i</span><span class="p">:</span>
+      <span class="k">default</span><span class="p">:</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}()</span>
+  <span class="k">return</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<div class="expand">
+    <div class="expand-label" style="cursor: pointer;"
+        onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+        <span>
+            
+            
+            &gt; Click here to see all code
+            
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+        <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">mandelbrot</span>
+
+<span class="kd">type</span> <span class="nx">Area</span> <span class="kd">struct</span> <span class="p">{</span>
+  <span class="nx">HorizontalResolution</span> <span class="kt">int</span>
+  <span class="nx">VerticalResolution</span>   <span class="kt">int</span>
+  <span class="nx">TopLeft</span>              <span class="kt">complex128</span>
+  <span class="nx">BottomRight</span>          <span class="kt">complex128</span>
+  <span class="nx">MaxIterations</span>        <span class="kt">int</span>
+  <span class="nx">Points</span>               <span class="p">[]</span><span class="nx">Point</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">NewAreaCentered</span><span class="p">(</span><span class="nx">Resolution</span><span class="p">,</span> <span class="nx">MaxIterations</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">area</span> <span class="kt">float64</span><span class="p">)</span> <span class="o">*</span><span class="nx">Area</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="nx">Area</span><span class="p">{</span>
+    <span class="nx">HorizontalResolution</span><span class="p">:</span> <span class="nx">Resolution</span><span class="p">,</span>
+    <span class="nx">VerticalResolution</span><span class="p">:</span>   <span class="nx">Resolution</span><span class="p">,</span>
+    <span class="nx">MaxIterations</span><span class="p">:</span>        <span class="nx">MaxIterations</span><span class="p">,</span>
+    <span class="nx">TopLeft</span><span class="p">:</span>              <span class="nb">complex</span><span class="p">(</span><span class="nx">x</span><span class="o">-</span><span class="nx">area</span><span class="p">,</span> <span class="nx">y</span><span class="o">+</span><span class="nx">area</span><span class="p">),</span>
+    <span class="nx">BottomRight</span><span class="p">:</span>          <span class="nb">complex</span><span class="p">(</span><span class="nx">x</span><span class="o">+</span><span class="nx">area</span><span class="p">,</span> <span class="nx">y</span><span class="o">-</span><span class="nx">area</span><span class="p">),</span>
+    <span class="nx">Points</span><span class="p">:</span>               <span class="nb">make</span><span class="p">([]</span><span class="nx">Point</span><span class="p">,</span> <span class="nx">Resolution</span><span class="o">*</span><span class="nx">Resolution</span><span class="p">),</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">Init</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="nx">x</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="p">&lt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">HorizontalResolution</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="nx">y</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="p">&lt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">VerticalResolution</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span> <span class="p">{</span>
+      <span class="nx">point</span> <span class="o">:=</span> <span class="nf">NewPoint</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nf">getNumber</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">))</span>
+      <span class="nx">a</span><span class="p">.</span><span class="nf">SetPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">point</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">()</span> <span class="p">(</span><span class="nx">progress</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">progress</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+  <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">defer</span> <span class="nb">close</span><span class="p">(</span><span class="nx">progress</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pixel</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span> <span class="p">{</span>
+      <span class="nx">pixel</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">MaxIterations</span><span class="p">)</span>
+      <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">pixel</span>
+
+      <span class="k">select</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="nx">progress</span> <span class="o">&lt;-</span> <span class="nx">i</span><span class="p">:</span>
+      <span class="k">default</span><span class="p">:</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}()</span>
+  <span class="k">return</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">IndexFor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="o">*</span><span class="nx">a</span><span class="p">.</span><span class="nx">HorizontalResolution</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">ForIndex</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">y</span> <span class="p">=</span> <span class="nx">i</span> <span class="o">/</span> <span class="nx">a</span><span class="p">.</span><span class="nx">VerticalResolution</span>
+  <span class="nx">x</span> <span class="p">=</span> <span class="nx">i</span> <span class="o">%</span> <span class="nx">a</span><span class="p">.</span><span class="nx">HorizontalResolution</span>
+  <span class="k">return</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span>
+<span class="p">}</span>
+
+<span class="c1">// SetPoint changes the address of the point located at x,y
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">SetPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">p</span> <span class="nx">Point</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">[</span><span class="nx">a</span><span class="p">.</span><span class="nf">IndexFor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)]</span> <span class="p">=</span> <span class="nx">p</span>
+<span class="p">}</span>
+
+<span class="c1">// GetPoint changes the address of the point located at x,y
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">GetPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">Point</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">[</span><span class="nx">a</span><span class="p">.</span><span class="nf">IndexFor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)]</span>
+<span class="p">}</span>
+
+<span class="c1">// getNumber gives the real and imaginary parts for the complex number located at the given x,y coordenates in the given resolution.
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">getNumber</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">i</span> <span class="kt">float64</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">TopLeftReal</span> <span class="o">:=</span> <span class="nb">real</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">TopLeft</span><span class="p">)</span>
+  <span class="nx">TopLeftImag</span> <span class="o">:=</span> <span class="nb">imag</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">TopLeft</span><span class="p">)</span>
+  <span class="nx">BottomRightReal</span> <span class="o">:=</span> <span class="nb">real</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">BottomRight</span><span class="p">)</span>
+  <span class="nx">BottomRightImag</span> <span class="o">:=</span> <span class="nb">imag</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">BottomRight</span><span class="p">)</span>
+
+  <span class="nx">r</span> <span class="p">=</span> <span class="nx">TopLeftReal</span> <span class="o">+</span> <span class="p">(</span><span class="nb">float64</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="o">/</span><span class="nb">float64</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">HorizontalResolution</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="nx">BottomRightReal</span><span class="o">-</span><span class="nx">TopLeftReal</span><span class="p">)</span>
+  <span class="nx">i</span> <span class="p">=</span> <span class="nx">TopLeftImag</span> <span class="o">+</span> <span class="p">(</span><span class="nb">float64</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span><span class="o">/</span><span class="nb">float64</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">VerticalResolution</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="nx">BottomRightImag</span><span class="o">-</span><span class="nx">TopLeftImag</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">i</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+</div>
+
+<h2 id="generate-mandelbrot-data">Generate Mandelbrot Data</h2>
+
+<p>Now it is time to generate a simple main program to calculate the data for a given section of the complex number space. I&rsquo;m going to use the image package to generate a png file of the given section and write it to the standard output. I&rsquo;ve chosen a squared area centered at <code>(-0.5, 0)</code> of size 1.5 with 5000x5000 resolution using 200 iterations at maximum.</p>
+
+<p>After calling <code>set.Calculate</code> I&rsquo;m using range progress to get the updates and to print feedback to Stderr. To avoid printing a line for every pixel, I&rsquo;ve added a <code>&lt;-time.After(time.Second * 1)</code> to limit the prints to 1 per second.</p>
+
+<p>The process of generating the image is as simple as initializing it with the Horizontal and Vertical resolutions and then fill each pixel using the method <code>setRGBA</code>. I&rsquo;m not using any complex algorithm for choosing the color. For simplicity I&rsquo;m just using red and the intensity depends on the iterations needed to tell if the point belongs to the set or not. the more iterations, the darker the color. That&rsquo;s why the points that belong to the set are black.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+  <span class="s">&#34;fmt&#34;</span>
+  <span class="s">&#34;image&#34;</span>
+  <span class="s">&#34;image/color&#34;</span>
+  <span class="s">&#34;image/jpeg&#34;</span>
+  <span class="s">&#34;os&#34;</span>
+  <span class="s">&#34;time&#34;</span>
+
+  <span class="s">&#34;github.com/metalblueberry/mandelbrot/mandelbrot&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">set</span> <span class="o">:=</span> <span class="nx">mandelbrot</span><span class="p">.</span><span class="nf">NewAreaCentered</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+  <span class="nx">set</span><span class="p">.</span><span class="nf">Init</span><span class="p">()</span>
+  <span class="nx">progress</span> <span class="o">:=</span> <span class="nx">set</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">()</span>
+  <span class="k">for</span> <span class="nx">p</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">progress</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;%d\r&#34;</span><span class="p">,</span> <span class="mi">100</span><span class="o">*</span><span class="nx">p</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="nx">set</span><span class="p">.</span><span class="nx">Points</span><span class="p">))</span>
+    <span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">img</span> <span class="o">:=</span> <span class="nx">image</span><span class="p">.</span><span class="nf">NewRGBA</span><span class="p">(</span><span class="nx">image</span><span class="p">.</span><span class="nf">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">set</span><span class="p">.</span><span class="nx">HorizontalResolution</span><span class="p">,</span> <span class="nx">set</span><span class="p">.</span><span class="nx">VerticalResolution</span><span class="p">))</span>
+
+  <span class="k">for</span> <span class="nx">x</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="p">&lt;</span> <span class="nx">set</span><span class="p">.</span><span class="nx">HorizontalResolution</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="nx">y</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="p">&lt;</span> <span class="nx">set</span><span class="p">.</span><span class="nx">VerticalResolution</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span> <span class="p">{</span>
+      <span class="nx">point</span> <span class="o">:=</span> <span class="nx">set</span><span class="p">.</span><span class="nf">GetPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
+      <span class="nx">intensity</span> <span class="o">:=</span> <span class="mi">255</span> <span class="o">-</span> <span class="p">(</span><span class="mi">255</span> <span class="o">*</span> <span class="nx">point</span><span class="p">.</span><span class="nf">Iterations</span><span class="p">()</span> <span class="o">/</span> <span class="nx">set</span><span class="p">.</span><span class="nx">MaxIterations</span><span class="p">)</span>
+      <span class="nx">img</span><span class="p">.</span><span class="nf">SetRGBA</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">color</span><span class="p">.</span><span class="nx">RGBA</span><span class="p">{</span><span class="nx">R</span><span class="p">:</span> <span class="nb">uint8</span><span class="p">(</span><span class="nx">intensity</span><span class="p">),</span> <span class="nx">A</span><span class="p">:</span> <span class="mi">255</span><span class="p">})</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nx">err</span> <span class="o">:=</span> <span class="nx">jpeg</span><span class="p">.</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="nx">img</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">jpeg</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span><span class="nx">Quality</span><span class="p">:</span> <span class="mi">90</span><span class="p">})</span>
+  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Now you can build or run the code directly and pipe the Stdout to a png file. This code generates the following image.</p>
+
+<p><img src="./mandelbrot.jpeg" alt="mandelbrot-img" /></p>
+
+<p>And with just modifying the input parameters, we can zoom in a given section. For example, this image is generated from the following input.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">mandelbrot</span><span class="p">.</span><span class="nf">NewAreaCentered</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7463</span><span class="p">,</span> <span class="mf">0.1102</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="./mandelbrot_-07463_01102_0005.jpeg" alt="mandelbrot-zoom" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I&rsquo;ve plans to keep improving this code. In one hand, I would like to create an API to send the image data to a web browser. Then we will be able to use JS to build a simple viewer to ease the work of requesting zooms in a given area. In the other hand, I would like to speedup the calculation by splitting the area in chunks and compute them in parallel.</p>
+
+<p>You can explore the repository to see the whole code and to play with it <a href="https://github.com/MetalBlueberry/go-mandelbrot/tree/2019-10-31_mandelbrot-set-calculation">here</a>.</p>
+
+<p>Thank you for reading and feel free to leave a comment bellow, I will be really happy to hear from you.</p>
+
+<h2 id="references-and-links">References and Links</h2>
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Mandelbrot_set">wikipedia</a></li>
+<li><a href="https://sciencedemos.org.uk/mandelbrot.php">Interactive Mandelbrot Zoom</a></li>
+<li><a href="https://www.youtube.com/watch?v=PD2XgQOyCCk">Incredible zoom video</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/go/">go</a>
+          <a href="/tags/mandelbrot/">mandelbrot</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/howto/2019-10-29_create-a-blog-like-this/">
+            <span class="next-text nav-default">Create a Blog Like This</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="MetalBlueberry/MetalBlueberry.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:metalblueberry@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/MetalBlueberry" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.linkedin.com/in/victorperezdomingo/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/MetalBlueberry" class="iconfont icon-github" title="github"></a>
+  <a href="https://metalblueberry.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">MetalBlueberry</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-150427130-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
