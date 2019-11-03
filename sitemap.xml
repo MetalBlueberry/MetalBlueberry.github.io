@@ -72,21 +72,21 @@
   </url>
   
   <url>
-    <loc>https://metalblueberry.github.io/post/life/2019-10-24_why-this-blog/</loc>
+    <loc>https://metalblueberry.github.io/categories/blog/</loc>
     <lastmod>2019-10-24T17:10:38+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://metalblueberry.github.io/post/misc/2019-10-24_hello-world/</loc>
-    <lastmod>2019-10-24T10:25:24+02:00</lastmod>
+    <loc>https://metalblueberry.github.io/post/blog/2019-10-24_why-this-blog/</loc>
+    <lastmod>2019-10-24T17:10:38+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://metalblueberry.github.io/categories/misc/</loc>
+    <loc>https://metalblueberry.github.io/post/blog/2019-10-24_hello-world/</loc>
     <lastmod>2019-10-24T10:25:24+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
