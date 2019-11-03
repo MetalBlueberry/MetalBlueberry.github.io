@@ -64,8 +64,20 @@
       <guid>https://metalblueberry.github.io/about/</guid>
       <description>About MetalBlueberry I&amp;rsquo;m a passionate developer moving toward the specialization in IoT technologies.
 I feel comfortable working with Python and Go as most of my recent development time has been invested with those two languages but I have experience with other popular languages such as C/C++, C# and Java.
-I&amp;rsquo;ve experience with several technologies from the IoT world from the sensors to the cloud infrastructure.
- Sensoring: Arduino/ Raspberry Pi Transport: MQTT, HTTP, TCP/UDP Processing: Python Pandas Storage formats: Parquet, csv, json, xml&amp;hellip; Analysis: SQL, Python Pandas, Jupyter Notebook Provider: REST API, Plotly Dash, PowerBI  I&amp;rsquo;m also learning AWS services.</description>
+I&amp;rsquo;m always looking for new challenges and constantly learning new things.
+Technical background I&amp;rsquo;ve experience with several technologies from the IoT world from the sensors to the cloud infrastructure.</description>
+    </item>
+    
+    <item>
+      <title>About Me - The long story</title>
+      <link>https://metalblueberry.github.io/the-long-story/</link>
+      <pubDate>Sat, 19 Oct 2019 13:59:31 +0200</pubDate>
+      
+      <guid>https://metalblueberry.github.io/the-long-story/</guid>
+      <description>About MetalBlueberry I&amp;rsquo;m a programmer since I discovered that things could be automated.
+Attention
+You are about to read my life since I remember it, focused on how I became a professional developer.
+ The beginning I started with Win-logo in the school by drawing some figures with simple functions. I still remember what could be one of the firsts function I&amp;rsquo;ve ever wrote. tits(size) The objective is clear, draw two tangent circles of a desired size.</description>
     </item>
     
   </channel>
