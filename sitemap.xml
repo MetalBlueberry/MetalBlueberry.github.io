@@ -2,8 +2,64 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://metalblueberry.github.io/categories/blog/</loc>
+    <lastmod>2019-11-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://metalblueberry.github.io/categories/</loc>
-    <lastmod>2019-11-01T00:00:00+00:00</lastmod>
+    <lastmod>2019-11-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/tags/communication/</loc>
+    <lastmod>2019-11-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/tags/leadership/</loc>
+    <lastmod>2019-11-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/post/blog/2019-11-03_leadership_training/</loc>
+    <lastmod>2019-11-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/</loc>
+    <lastmod>2019-11-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/post/</loc>
+    <lastmod>2019-11-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/tags/</loc>
+    <lastmod>2019-11-16T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/tags/training/</loc>
+    <lastmod>2019-11-16T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -37,27 +93,6 @@
   </url>
   
   <url>
-    <loc>https://metalblueberry.github.io/</loc>
-    <lastmod>2019-11-01T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://metalblueberry.github.io/post/</loc>
-    <lastmod>2019-11-01T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://metalblueberry.github.io/tags/</loc>
-    <lastmod>2019-11-01T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/</loc>
     <lastmod>2019-10-31T21:33:33+01:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -67,13 +102,6 @@
   <url>
     <loc>https://metalblueberry.github.io/post/howto/2019-10-29_create-a-blog-like-this/</loc>
     <lastmod>2019-10-29T11:41:00+01:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://metalblueberry.github.io/categories/blog/</loc>
-    <lastmod>2019-10-24T17:10:38+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
