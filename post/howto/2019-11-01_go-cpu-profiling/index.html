@@ -53,7 +53,7 @@
 
 <meta itemprop="datePublished" content="2019-11-01T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-11-01T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2338">
+<meta itemprop="wordCount" content="2408">
 
 
 
@@ -128,8 +128,8 @@
         <div class="post-category">
     <a class="howto"  href="/categories/howto/"> howto </a>
     </div>
-          <span class="more-meta"> 2338 words </span>
-          <span class="more-meta"> 11 mins read </span>
+          <span class="more-meta"> 2408 words </span>
+          <span class="more-meta"> 12 mins read </span>
         
       </div>
     </header>
@@ -268,6 +268,15 @@ ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">1</span>
 <p>The bad news are that this is not the best way of optimizing the code. First we need to analyze it to see if saving 1 ns/op in this function is relevant or not to the whole computational work.</p>
 
 <h3 id="full-benchmark">Full benchmark</h3>
+
+<div class="admonition bug"><p class="admonition-title">Bug</p>
+  
+<p>There is a bug in the following benchmark function. Only the first iteration performs the real calculation. After that, the result is cached in the &ldquo;set&rdquo; variable. In the following post related to <a href="/tags/mandelbrot">mandelbrot</a> I fix this issue.</p>
+
+<p>This means that the numbers in this benchmarks are not right if the number of executions is greater than 1. The good news are that the flame graph will be still reliable.</p>
+
+
+</div>
 
 <p>Let&rsquo;s write a benchmark function that simulates the whole process. The idea is to be as similar as possible to the main.</p>
 <div class="highlight"><div class="chroma">
@@ -1157,7 +1166,7 @@ ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">6</span>
 
 <p>I&rsquo;m really happy with the result of the optimization. We have improved the code to run 85% faster than the initial version and this is quite impressive. I think the next step is to render the set by chunks to parallelize the computational task and take advantage of the multiple cores.</p>
 
-<p>You can explore the repository to see the whole code and to play with it here.</p>
+<p>You can explore the repository to see the whole code and to play with it.</p>
 
 <p>Thank you for reading and feel free to leave a comment bellow, I will be really happy to hear from you.</p>
 
