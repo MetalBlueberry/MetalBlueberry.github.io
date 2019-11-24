@@ -6,10 +6,19 @@
     <description>Recent content in blog on MetalBlueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 03 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 Nov 2019 19:25:15 +0100</lastBuildDate>
     
 	<atom:link href="https://metalblueberry.github.io/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Avoid Github Government Block</title>
+      <link>https://metalblueberry.github.io/post/blog/2019-11-24_avoid_github_government_block/</link>
+      <pubDate>Sun, 24 Nov 2019 19:25:15 +0100</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/blog/2019-11-24_avoid_github_government_block/</guid>
+      <description>&lt;p&gt;I cannot believe this&amp;hellip; How in his right mind requires to block github because of terrorism? Open source code is freedom, not terrorism. Anyway, &lt;strong&gt;here is how to avoid it&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Leadership Training</title>
