@@ -128,20 +128,6 @@
   </url>
   
   <url>
-    <loc>https://metalblueberry.github.io/post/blog/2019-10-24_hello-world/</loc>
-    <lastmod>2019-10-24T10:25:24+02:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://metalblueberry.github.io/tags/test/</loc>
-    <lastmod>2019-10-24T10:25:24+02:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://metalblueberry.github.io/about/</loc>
     <lastmod>2019-10-19T13:59:31+02:00</lastmod>
     <changefreq>weekly</changefreq>
