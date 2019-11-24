@@ -24,6 +24,14 @@
     padding: 1px;
 }
 
+.post .post-header .post-tags a::before {
+    content: "#";
+}
+
+.post .post-header .post-tags a {
+    color: #c05b4d;
+}
+
 .highlight pre {
     -moz-tab-size: 4;
     tab-size: 4;
