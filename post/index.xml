@@ -6,10 +6,19 @@
     <description>Recent content in Posts on MetalBlueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://metalblueberry.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Add Plots With Hugo Shortcodes - Plotly</title>
+      <link>https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</link>
+      <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</guid>
+      <description>&lt;p&gt;Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&amp;rsquo;m going to show you how to create a shortcode to add plots to your hugo static site.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>2019-12-02 Weekend Learnings</title>

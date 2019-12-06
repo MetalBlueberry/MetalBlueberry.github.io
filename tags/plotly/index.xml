@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>plotly on MetalBlueberry - A passionate programmer</title>
+    <link>https://metalblueberry.github.io/tags/plotly/</link>
+    <description>Recent content in plotly on MetalBlueberry - A passionate programmer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 06 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://metalblueberry.github.io/tags/plotly/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Add Plots With Hugo Shortcodes - Plotly</title>
+      <link>https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</link>
+      <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</guid>
+      <description>&lt;p&gt;Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&amp;rsquo;m going to show you how to create a shortcode to add plots to your hugo static site.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

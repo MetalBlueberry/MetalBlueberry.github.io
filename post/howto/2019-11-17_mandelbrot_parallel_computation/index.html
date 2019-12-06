@@ -53,7 +53,7 @@
 
 <meta itemprop="datePublished" content="2019-11-17T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-11-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="5990">
+<meta itemprop="wordCount" content="6060">
 
 
 
@@ -129,7 +129,7 @@
         <div class="post-category">
     <a class="howto"  href="/categories/howto/"> howto </a>
     </div>
-          <span class="more-meta"> 5990 words </span>
+          <span class="more-meta"> 6060 words </span>
           <span class="more-meta"> 29 mins read </span>
         
       </div>
@@ -712,14 +712,33 @@
 
 <p>Now we need to choose an image size and try all the combinations of these values. I&rsquo;ve started with an image of 1024x1024 in the Mandelbrot area <code>topLeft:(-1.401854499759, -0.000743603637), bottomRight: (−1,180199459759,−0,222398643637)</code>. The most fragmented case is when I divide the image in 1024x1024 areas of 1 pixel and the less fragmented is just 1 area of 1024x1024 pixels. In the following graph you can see the benchmark results for all the power of 2 combinations from the most fragmented to the less fragmented. In the X axis, the numbers of the previous multiplication. in the Y axis, the s/op returned by the benchmark.  The Y axis is in logarithmic scale to improve the visualization. You can hover the mouse over any point to see the exact value. The horizontal lines represent the optimal speed based on the 1 worker benchmark. is expected to get x2 x3 x4 etc&hellip; speed for each extra worker. You also need to know that my computer has 6 cores.</p>
 
-
 <div class="figure">
-<div class="figure-plot" id="figure1"></div>
+<div class="figure-plot" id="figure1">
+	Code could not finish, this are some reasons why this happen.
+	- Plot name not defined. The first parameter of the shortcode is the name.
+	- There is a syntax error. check browser console.
+</div>
 <script>
-	TESTER = document.getElementById("figure1");
-	Plotly.plot( TESTER,
-{"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[5.319377513,3.730183194,3.492960513,3.416568462,3.406160365,3.404795796,3.401629099,3.403963371,3.406568944,3.403851128,3.401489335],"name":"1 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[5.105426336,2.403512541,1.769243872,1.720678808,1.705878765,1.702246865,1.705907853,1.731687894,1.819791773,1.954560985,3.404077505],"name":"2 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[4.665434148,1.840141806,1.23159353,1.156602142,1.139298289,1.135465838,1.145931396,1.190932724,1.324346159,1.955651422,3.401555276],"name":"3 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[3.277424857,1.508889857,1.000251994,0.877004851,0.855757891,0.851836168,0.859728354,0.902649372,1.012687753,1.955834209,3.404003372],"name":"4 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[2.687810723,1.299930746,0.848919389,0.71687461,0.697146793,0.686797944,0.695021475,0.733307298,0.782258103,1.958691928,3.406197102],"name":"5 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[2.419063112,1.172598442,0.770078822,0.636418239,0.59517132,0.58758251,0.598871324,0.655497364,0.722161112,1.955789037,3.40305645],"name":"6 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[1.991583443,1.033091053,0.712726608,0.605582734,0.578420338,0.577574125,0.580463384,0.652894185,0.691949137,1.970116638,3.452580344],"name":"7 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[1.942149854,0.947873093,0.683032395,0.605635427,0.575207906,0.573205018,0.580969231,0.653116053,0.72285752,1.954330764,3.407772597],"name":"8 workers"}],"layout":{"title":"Benchmark results","yaxis":{"title":"s/op","type":"log","autorange":true},"shapes":[{"type":"line","xref":"paper","yref":"y","y0":3.40394218,"x0":0,"y1":3.40394218,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":1.70197109,"x0":0,"y1":1.70197109,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":1.1346473933333334,"x0":0,"y1":1.1346473933333334,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":0.850985545,"x0":0,"y1":0.850985545,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":0.680788436,"x0":0,"y1":0.680788436,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":0.5673236966666667,"x0":0,"y1":0.5673236966666667,"x1":1,"line":{"width":1}}],"margin":{"l":25,"r":5,"b":75,"t":50,"pad":4}},"config":{"responsive":true}}
-);
+  function draw(){
+	test = document.getElementById("figure1");
+	if (test == null){
+		console.log("The plot name is not defined")
+		return
+	}
+
+	fig = null
+	
+fig = {"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[5.319377513,3.730183194,3.492960513,3.416568462,3.406160365,3.404795796,3.401629099,3.403963371,3.406568944,3.403851128,3.401489335],"name":"1 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[5.105426336,2.403512541,1.769243872,1.720678808,1.705878765,1.702246865,1.705907853,1.731687894,1.819791773,1.954560985,3.404077505],"name":"2 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[4.665434148,1.840141806,1.23159353,1.156602142,1.139298289,1.135465838,1.145931396,1.190932724,1.324346159,1.955651422,3.401555276],"name":"3 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[3.277424857,1.508889857,1.000251994,0.877004851,0.855757891,0.851836168,0.859728354,0.902649372,1.012687753,1.955834209,3.404003372],"name":"4 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[2.687810723,1.299930746,0.848919389,0.71687461,0.697146793,0.686797944,0.695021475,0.733307298,0.782258103,1.958691928,3.406197102],"name":"5 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[2.419063112,1.172598442,0.770078822,0.636418239,0.59517132,0.58758251,0.598871324,0.655497364,0.722161112,1.955789037,3.40305645],"name":"6 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[1.991583443,1.033091053,0.712726608,0.605582734,0.578420338,0.577574125,0.580463384,0.652894185,0.691949137,1.970116638,3.452580344],"name":"7 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[1.942149854,0.947873093,0.683032395,0.605635427,0.575207906,0.573205018,0.580969231,0.653116053,0.72285752,1.954330764,3.407772597],"name":"8 workers"}],"layout":{"title":"Benchmark results","yaxis":{"title":"s/op","type":"log","autorange":true},"shapes":[{"type":"line","xref":"paper","yref":"y","y0":3.40394218,"x0":0,"y1":3.40394218,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":1.70197109,"x0":0,"y1":1.70197109,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":1.1346473933333334,"x0":0,"y1":1.1346473933333334,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":0.850985545,"x0":0,"y1":0.850985545,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":0.680788436,"x0":0,"y1":0.680788436,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":0.5673236966666667,"x0":0,"y1":0.5673236966666667,"x1":1,"line":{"width":1}}],"margin":{"l":25,"r":5,"b":75,"t":50,"pad":4}},"config":{"responsive":true}}
+
+
+	if (!fig) {
+		test.innerText = "ERROR: fig variable is not defined"
+		return
+	}
+	test.innerText = null
+	Plotly.plot(test ,fig);
+  }
+  draw()
 </script>
 </div>
 
