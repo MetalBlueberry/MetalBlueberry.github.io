@@ -6,10 +6,19 @@
     <description>Recent content in Tags on MetalBlueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 17 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://metalblueberry.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>weekend</title>
+      <link>https://metalblueberry.github.io/tags/weekend/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/tags/weekend/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>go</title>

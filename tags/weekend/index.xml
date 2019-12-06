@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>weekend on MetalBlueberry - A passionate programmer</title>
+    <link>https://metalblueberry.github.io/tags/weekend/</link>
+    <description>Recent content in weekend on MetalBlueberry - A passionate programmer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://metalblueberry.github.io/tags/weekend/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2019-12-02 Weekend Learnings</title>
+      <link>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</guid>
+      <description>&lt;p&gt;I managed to send audio to my &lt;strong&gt;Google Home&lt;/strong&gt;, discovered the &lt;strong&gt;Go tool trace&lt;/strong&gt; and started a post about &lt;strong&gt;Python and Jupyter&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>2019-12-02 Weekend Learnings - MetalBlueberry - A passionate programmer</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="MetalBlueberry" /><meta name="description" content="My Weekend Learnings" /><meta name="keywords" content="go, tracing, Google, Home" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta property="og:title" content="2019-12-02 Weekend Learnings" />
+<meta property="og:description" content="My Weekend Learnings" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/" />
+
+<meta property="og:image" content="https://media.licdn.com/dms/image/C5603AQEAio-1dZdrEg/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=ZGwNytWjwnQIrOL0Xqr5NrrD4aWiwoAaPQrI9WqXXVU" />
+<meta property="article:published_time" content="2019-12-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-12-05T00:00:00+00:00" />
+<meta itemprop="name" content="2019-12-02 Weekend Learnings">
+<meta itemprop="description" content="My Weekend Learnings">
+
+
+<meta itemprop="datePublished" content="2019-12-02T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-12-05T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="617">
+
+
+
+<meta itemprop="keywords" content="weekend," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://media.licdn.com/dms/image/C5603AQEAio-1dZdrEg/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=ZGwNytWjwnQIrOL0Xqr5NrrD4aWiwoAaPQrI9WqXXVU"/>
+
+<meta name="twitter:title" content="2019-12-02 Weekend Learnings"/>
+<meta name="twitter:description" content="My Weekend Learnings"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">MetalBlueberry</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">MetalBlueberry</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">2019-12-02 Weekend Learnings</h1>
+      <script src="https://cdn.plot.ly/plotly-1.50.0.min.js"></script>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-02 </span>
+        <div class="post-category">
+    <a class="blog"  href="/categories/blog/"> blog </a>
+    </div>
+          <span class="more-meta"> 617 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <p>I managed to send audio to my <strong>Google Home</strong>, discovered the <strong>Go tool trace</strong> and started a post about <strong>Python and Jupyter</strong>.</p>
+
+<h2 id="my-new-google-home">My new Google Home</h2>
+
+<p>I was playing with my new Google Home device when I wonder if it would be possible to trigger local actions, like sending a message to my Raspberry Pi. After some research I found the <a href="https://rithvikvibhu.github.io/GHLocalApi/#top">Hiden API</a> of Google home but It is a little bit disappointing. There is nothing interesting to do with it.</p>
+
+<p>The I discovered a post about <a href="https://www.gioexperience.com/google-home-hack-send-voice-programmaticaly-with-python/">how to use the Google Home as a Choromecast</a> and this was a little bit more promising. The post starts with a simple tutorial to control the volume using <code>pychromecast</code> library. Then, using <code>gtts</code> Google Text To Speech library, generates an mp3 file and send a request to the Google Home with the url that serves that sound. In the original post, It&rsquo;s using an Apache web server, I replaced it by a simple web static file server in Go. Here is the code. The logRequest is just to have some feedback.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;net/http&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">fs</span> <span class="o">:=</span> <span class="nf">logRequest</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nf">FileServer</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nf">Dir</span><span class="p">(</span><span class="s">&#34;music&#34;</span><span class="p">)))</span>
+	<span class="nx">http</span><span class="p">.</span><span class="nf">Handle</span><span class="p">(</span><span class="s">&#34;/mp3_cache/&#34;</span><span class="p">,</span> <span class="nx">fs</span><span class="p">)</span>
+
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Listening...&#34;</span><span class="p">)</span>
+	<span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:80&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">logRequest</span><span class="p">(</span><span class="nx">next</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span><span class="p">)</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">http</span><span class="p">.</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Request&#34;</span><span class="p">)</span>
+		<span class="nx">next</span><span class="p">.</span><span class="nf">ServeHTTP</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span>
+	<span class="p">})</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>So this code basically serves the files in the directory music. You just have to modify the Python code to store the mp3 there. Keep in mind that by default, Go looks for the full path in the given directory. This means that the folder structure should look like this</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-txt" data-lang="txt">- main.go
+- ghome_say.py
+- music
+  - mp3_cache
+    - voice.mp3</code></pre></td></tr></table>
+</div>
+</div>
+<p>This is really funny. I&rsquo;m thinking about removing the dust from my Raspberry Pi and program it warn me if the temperature of my home is too high or too low. why? Because I can.</p>
+
+<h2 id="go-tool-trace">Go Tool Trace</h2>
+
+<p>I&rsquo;ve found two interesting post about this tool. <a href="https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner">post1</a> <a href="https://making.pusher.com/go-tool-trace/">post2</a>. This has been really interesting for me as I&rsquo;ve been wondering for some time if there was any way of visualizing the program execution time.</p>
+
+<p>As you my guess, the first thing I did is to run the Mandelbrot tests and visualize the output. This help me to prove that the reason why the performance is the same for the configuration 2x2x512 is that one of the areas is much more expensive to calculate.</p>
+
+
+<div class="figure">
+<div class="figure-plot" id="figure1"></div>
+<script>
+	TESTER = document.getElementById("figure1");
+	Plotly.plot( TESTER,
+{"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[5.319377513,3.730183194,3.492960513,3.416568462,3.406160365,3.404795796,3.401629099,3.403963371,3.406568944,3.403851128,3.401489335],"name":"1 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[5.105426336,2.403512541,1.769243872,1.720678808,1.705878765,1.702246865,1.705907853,1.731687894,1.819791773,1.954560985,3.404077505],"name":"2 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[4.665434148,1.840141806,1.23159353,1.156602142,1.139298289,1.135465838,1.145931396,1.190932724,1.324346159,1.955651422,3.401555276],"name":"3 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[3.277424857,1.508889857,1.000251994,0.877004851,0.855757891,0.851836168,0.859728354,0.902649372,1.012687753,1.955834209,3.404003372],"name":"4 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[2.687810723,1.299930746,0.848919389,0.71687461,0.697146793,0.686797944,0.695021475,0.733307298,0.782258103,1.958691928,3.406197102],"name":"5 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[2.419063112,1.172598442,0.770078822,0.636418239,0.59517132,0.58758251,0.598871324,0.655497364,0.722161112,1.955789037,3.40305645],"name":"6 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[1.991583443,1.033091053,0.712726608,0.605582734,0.578420338,0.577574125,0.580463384,0.652894185,0.691949137,1.970116638,3.452580344],"name":"7 workers"},{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16","32x32x32","16x16x64","8x8x128","4x4x256","2x2x512","1x1x1024"],"y":[1.942149854,0.947873093,0.683032395,0.605635427,0.575207906,0.573205018,0.580969231,0.653116053,0.72285752,1.954330764,3.407772597],"name":"8 workers"}],"layout":{"title":"Benchmark results","yaxis":{"title":"s/op","type":"log","autorange":true},"shapes":[{"type":"line","xref":"paper","yref":"y","y0":3.40394218,"x0":0,"y1":3.40394218,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":1.70197109,"x0":0,"y1":1.70197109,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":1.1346473933333334,"x0":0,"y1":1.1346473933333334,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":0.850985545,"x0":0,"y1":0.850985545,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":0.680788436,"x0":0,"y1":0.680788436,"x1":1,"line":{"width":1}},{"type":"line","xref":"paper","yref":"y","y0":0.5673236966666667,"x0":0,"y1":0.5673236966666667,"x1":1,"line":{"width":1}}],"margin":{"l":25,"r":5,"b":75,"t":50,"pad":4}},"config":{"responsive":true}}
+);
+</script>
+</div>
+
+<p>Adding some tracing to the code I got the exact timing for each section and this is how it looks like.</p>
+
+<table>
+<thead>
+<tr>
+<th>When</th>
+<th>Elapsed</th>
+<th>Goroutine ID</th>
+<th>Events</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0.007260554s</td>
+<td>568.048659ms</td>
+<td></td>
+<td>Task 1 (complete)</td>
+</tr>
+
+<tr>
+<td>0.007260554</td>
+<td>.</td>
+<td>8a</td>
+<td>task Calculate (id 1, parent 0) created</td>
+</tr>
+
+<tr>
+<td>0.007466081</td>
+<td>.   205527</td>
+<td>39</td>
+<td>region Area 0 started (duration: 289.046531ms)</td>
+</tr>
+
+<tr>
+<td>0.007476658</td>
+<td>.    10577</td>
+<td>38</td>
+<td>region Area 2 started (duration: 4.819706ms)</td>
+</tr>
+
+<tr>
+<td>0.007532978</td>
+<td>.    56320</td>
+<td>37</td>
+<td>region Area 1 started (duration: 563.917497ms)</td>
+</tr>
+
+<tr>
+<td>0.012303297</td>
+<td>.  4770319</td>
+<td>38</td>
+<td>region Area 3 started (duration: 148.341257ms)</td>
+</tr>
+
+<tr>
+<td>0.575309213</td>
+<td>.563005916</td>
+<td>8</td>
+<td>task end</td>
+</tr>
+
+<tr>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>GC:74.168µs</td>
+</tr>
+</tbody>
+</table>
+
+<p>So now it&rsquo;s clear, The area with index 1 is the most expensive and takes 563ms to complete. This means that meanwhile one worker is doing this task, the other workers have plenty of time to finish the other areas.</p>
+
+<p>This is just a brief summary of all the information the the tracer can provide. I&rsquo;m thinking about doing a single post about this.</p>
+
+<h2 id="python-an-jupyter">Python an Jupyter</h2>
+
+<p>Provably will be the next #howto post. stay tunned!</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li><a href="https://rithvikvibhu.github.io/GHLocalApi/#top">Hiden API</a></li>
+<li><a href="https://www.gioexperience.com/google-home-hack-send-voice-programmaticaly-with-python/">Google Home as Chromecast</a></li>
+<li><a href="https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner">Tracing post 1</a></li>
+<li><a href="https://making.pusher.com/go-tool-trace/">Tracing post 2</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/weekend/">weekend</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/blog/2019-11-24_avoid_github_government_block/">
+            <span class="next-text nav-default">Avoid Github Government Block</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="MetalBlueberry/MetalBlueberry.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:metalblueberry@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/MetalBlueberry" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.linkedin.com/in/victorperezdomingo/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/MetalBlueberry" class="iconfont icon-github" title="github"></a>
+  <a href="https://metalblueberry.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">MetalBlueberry</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-150427130-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
