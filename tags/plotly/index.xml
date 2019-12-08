@@ -6,10 +6,19 @@
     <description>Recent content in plotly on MetalBlueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 06 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://metalblueberry.github.io/tags/plotly/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python Jupyter Notebook With Plotly Support</title>
+      <link>https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</link>
+      <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</guid>
+      <description>&lt;p&gt;Python is awesome because you can do anything. In this case, I&amp;rsquo;m going to show you how to configure a Jupyter notebook with integrated Plotly support to draw interactive graphs. This is very useful if you have to analyse something.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Add Plots With Hugo Shortcodes - Plotly</title>

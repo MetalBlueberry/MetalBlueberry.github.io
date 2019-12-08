@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python Jupyter Notebook With Plotly Support - MetalBlueberry - A passionate programmer</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="MetalBlueberry" /><meta name="description" content="Learn how to setup a local Jupyter notebook with Plotly Support" /><meta name="keywords" content="plotly, pandas, python, jupyter, jupyterlab, docker, docker-compose" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta property="og:title" content="Python Jupyter Notebook With Plotly Support" />
+<meta property="og:description" content="Learn how to setup a local Jupyter notebook with Plotly Support" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/" />
+
+<meta property="og:image" content="https://media.licdn.com/dms/image/C5603AQEAio-1dZdrEg/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=ZGwNytWjwnQIrOL0Xqr5NrrD4aWiwoAaPQrI9WqXXVU" />
+<meta property="article:published_time" content="2019-12-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-12-07T00:00:00+00:00" />
+<meta itemprop="name" content="Python Jupyter Notebook With Plotly Support">
+<meta itemprop="description" content="Learn how to setup a local Jupyter notebook with Plotly Support">
+
+
+<meta itemprop="datePublished" content="2019-12-07T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-12-07T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2798">
+
+
+
+<meta itemprop="keywords" content="python,plotly," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://media.licdn.com/dms/image/C5603AQEAio-1dZdrEg/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=ZGwNytWjwnQIrOL0Xqr5NrrD4aWiwoAaPQrI9WqXXVU"/>
+
+<meta name="twitter:title" content="Python Jupyter Notebook With Plotly Support"/>
+<meta name="twitter:description" content="Learn how to setup a local Jupyter notebook with Plotly Support"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">MetalBlueberry</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">MetalBlueberry</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python Jupyter Notebook With Plotly Support</h1>
+      <script src="https://cdn.plot.ly/plotly-1.50.0.min.js"></script>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-07 </span>
+        <div class="post-category">
+    <a class="howto"  href="/categories/howto/"> howto </a>
+    </div>
+          <span class="more-meta"> 2798 words </span>
+          <span class="more-meta"> 14 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#docker-environment">Docker environment</a>
+<ul>
+<li><a href="#the-base-image">The Base Image</a></li>
+<li><a href="#the-docker-file">The Docker file</a></li>
+<li><a href="#enable-jupyterlab-optional">Enable JupyterLab (Optional)</a></li>
+</ul></li>
+<li><a href="#setting-up-plotly">Setting up Plotly</a>
+<ul>
+<li><a href="#dict-syntax-vs-graph-objects">Dict syntax vs graph_objects</a></li>
+</ul></li>
+<li><a href="#working-with-pandas">Working with Pandas</a>
+<ul>
+<li><a href="#export-figure-as-json">Export figure as json</a></li>
+</ul></li>
+<li><a href="#docker-compose-recipe">docker-compose recipe</a></li>
+<li><a href="#conclussion">Conclussion</a></li>
+<li><a href="#references">References</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Python is awesome because you can do anything. In this case, I&rsquo;m going to show you how to configure a Jupyter notebook with integrated Plotly support to draw interactive graphs. This is very useful if you have to analyse something.</p>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>In case you don&rsquo;t know it, the <a href="https://jupyter.org/">Jupyter project</a> exist to develop open-source software, open-standards, and services for interactive computing across dozens of programming languages. All started with Python and R, but nowadays, it is compatible with almost any popular language.</p>
+
+<p>I&rsquo;m going to focus in how to create a Jupyter notebook for Python using a Docker image. This will allow you to replicate the environment wherever you want with a single command and keep all the dependencies in a single place.</p>
+
+<p>One of the key things is that I&rsquo;m going to explain how to integrate the Plotly library into the notebook so we will be able to create interactive plots that can be exported with the notebook itself. This create an amazing tool to share reports within your organization.</p>
+
+<h2 id="docker-environment">Docker environment</h2>
+
+<p>Finding the images is easy. If you google it, you will find the repository <a href="https://github.com/jupyter/docker-stacks">jupyter/docker-stacks</a> that contains the images that you need. but, what do you need? The Jupyter environment is growing fast and sometimes is hard to know what are we looking for. The best place to start, as always, is the <a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/">documentation</a> page. Skipping the examples that shows you how to create a notebook in a single command, I&rsquo;m going to enter directly in the section &ldquo;<a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html">Selecting an image</a>&rdquo; to understand the difference and select what we need. Go to the link to read about the images and then come back here. Keep in mind that I&rsquo;m looking for a Python environment with at least Pandas and Plotly installed.</p>
+
+<p>The image &ldquo;jupyter/base-notebook&rdquo; could be a good options, but there are still useful missing dependencies provided by &ldquo;jupyter/minimal-notebook&rdquo;. &ldquo;jupyter/r-notebook&rdquo; is discarded, we want Python. &ldquo;jupyter/scipy-notebook&rdquo; contains everything we need except Plotly. It even contain more things that we need, like seaborn. The following images diverge further more from our needs so I&rsquo;m going to use the jupyter/minimal-notebook and install the dependencies myself. Let&rsquo;s create a Docker container.</p>
+
+<h3 id="the-base-image">The Base Image</h3>
+
+<p>The documentation warns that the images are regularly updated with backward incompatible changes. For this reason, it is recommendable to use a constant docker tag instead of the $LATEST reference. You can go directly to <a href="https://hub.docker.com/r/jupyter/minimal-notebook/tags/">docker hub</a> and find the current latest tag to start a new project. In this moment, the tag is &ldquo;jupyter/minimal-notebook:ad3574d3c5c7&rdquo;. Let&rsquo;s download it and create a minimal notebook. The following command will do it.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">docker run -p <span class="m">8888</span>:8888 jupyter/minimal-notebook:ad3574d3c5c7</code></pre></td></tr></table>
+</div>
+</div>
+<p>When it finishes, you will have the notebook running in <a href="http://localhost:8888">http://localhost:8888</a>. Check it out. The notebook requires you to give the token that has been printed in the terminal. Just copy and paste it.</p>
+
+<p>Now you can create a new Python notebook by clicking on the top left button &ldquo;new&rdquo; and selecting &ldquo;Python 3&rdquo;. This will open a new windows and you will be ready to go. Try to type a few Python commands and press <code>Shift+Enter</code>. This will execute the command and move to the next cell.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;Hello world!&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This is cool, but we need a lot of dependencies. If you try to run <code>import pandas</code>, it will complain. To install the dependencies, we need a Dockerfile and a requirements.txt.</p>
+
+<h3 id="the-docker-file">The Docker file</h3>
+
+<p>It is time to create a folder somewhere in your system to put everything on it. I would recommend you to put it under VSC with git. The first thing you should create is a <code>Dockerfile</code> and a <code>requirements.txt</code> with the following content.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> jupyter/minimal-notebook:ad3574d3c5c7</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /tml</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> requirements.txt .<span class="err">
+</span><span class="err"></span><span class="k">RUN</span> pip install -r requirements.txt</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-txt" data-lang="txt">pandas
+plotly</code></pre></td></tr></table>
+</div>
+</div>
+<p>Now we can give it a try by building and running the container.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># from the folder containing the files</span>
+docker build -t jupyter .
+docker run --rm -it -p <span class="m">8888</span>:8888 jupyter </code></pre></td></tr></table>
+</div>
+</div>
+<div class="admonition tip"><p class="admonition-title">tip</p>
+  
+<ul>
+<li><code>--rm</code> deletes the container at exit.</li>
+<li><code>-it</code> creates an interactive tty. is not necessary but i like to run containers with it when I&rsquo;m exploring.</li>
+<li><code>-p 8888:8888</code> exposes the port 8888 to my localhost.</li>
+<li><code>jupyter</code> is the name of the image given by me when building it</li>
+</ul>
+
+
+</div>
+
+<p>This will print in the terminal a series of messages. You should look for the one displaying the localhost URL and the token. If you click the link, It will open the browser with your new jupyter notebook environment.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-log" data-lang="log"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-log" data-lang="log">[I 09:32:25.749 NotebookApp] The Jupyter Notebook is running at:
+[I 09:32:25.749 NotebookApp] http://75fcb2e2b029:8888/?token=da7ef85e9afb1568794b3c222f633c144ba9c010f9de26b2
+[I 09:32:25.749 NotebookApp]  or http://127.0.0.1:8888/?token=da7ef85e9afb1568794b3c222f633c144ba9c010f9de26b2</code></pre></td></tr></table>
+</div>
+</div>
+<p>So it is done! We can star playing with it.</p>
+
+<h3 id="enable-jupyterlab-optional">Enable JupyterLab (Optional)</h3>
+
+<p>Looks like the world is always moving and now we have the JupyterLab web interface instead of the classic Jupyter Notebook. We can easily enable it by adding an environment variable at the end of the Dockerfile. It is still a little bit unstable but I think that It will be quickly improved.</p>
+
+<p>Also, I&rsquo;ve added some essential extensions for me directly in the dockerfile.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">ENV</span> <span class="nv">JUPYTER_ENABLE_LAB</span><span class="o">=</span>yes
+
+<span class="k">RUN</span> jupyter labextension install jupyterlab_vim <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>    jupyter labextension install @jupyterlab/dataregistry-extension <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>    pip install --upgrade jupyterlab-git <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>    jupyter lab build</code></pre></td></tr></table>
+</div>
+</div>
+<p>From my point of view, this is a must just for the vim extension.</p>
+
+<h2 id="setting-up-plotly">Setting up Plotly</h2>
+
+<p>By default, Plotly should work without any extra setup. The problem is that in some occasions you have to change the render configuration. This is really well explained in the <a href="https://plot.ly/python/renderers/">Plotly Renderers</a> documentation. You can use the following snippet to check your default render and to modify it</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># [0]</span>
+<span class="c1"># print</span>
+<span class="kn">import</span> <span class="nn">plotly.io</span> <span class="kn">as</span> <span class="nn">pio</span>
+<span class="n">pio</span><span class="o">.</span><span class="n">renderers</span>
+
+<span class="c1"># [1]</span>
+<span class="c1"># modify</span>
+<span class="n">pio</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="s2">&#34;iframe&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>It&rsquo;s time to run a sample code to see if we can draw a plot. Just copy and paste this into a cell.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="kn">as</span> <span class="nn">go</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])],</span>
+    <span class="n">layout_title_text</span><span class="o">=</span><span class="s2">&#34;A Figure Displaying Itself&#34;</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>You should see something like this, but with a different style.</p>
+
+<div class="figure">
+<div class="figure-plot" id="fig1">
+    Code could not finish, this are some reasons why this happen.
+    - Plot name not defined. The first parameter of the shortcode is the name.
+    - There is a syntax error. check browser console.
+</div>
+<script>
+  function draw(){
+    test = document.getElementById("fig1");
+    if (test == null){
+        console.log("The plot name is not defined")
+        return
+    }
+
+    fig = null
+    
+fig = {
+    "data": [
+        {
+            "type": "bar",
+            "y": [ 2, 1, 3 ]
+        }
+    ],
+    "layout": {
+        "title": "A Figure Displaying Itself"
+    }
+}
+
+
+    if (!fig) {
+        test.innerText = "ERROR: fig variable is not defined"
+        return
+    }
+    test.innerText = null
+    Plotly.plot(test ,fig);
+  }
+  draw()
+</script>
+</div>
+
+<h3 id="dict-syntax-vs-graph-objects">Dict syntax vs graph_objects</h3>
+
+<p>In the previous example, the figure is build using the <code>graph_objects</code>. This is not a bad idea, but for simple cases, I prefer to create the dict by my self. This is basically the same idea. Let&rsquo;s compare.</p>
+
+<div class="admonition tip"><p class="admonition-title">tip</p>
+  
+<p>Quoting the docs [Creating and Updating Figures]:</p>
+
+<p><em>The goal of plotly.py is to provide a pleasant Python interface for creating figure specifications for display in the Plotly.js JavaScript library. In Plotly.js, a figure is specified by a declarative JSON data structure, and so <strong>the ultimate responsibility of plotly.py is to produce Python dictionaries that can be serialized into a JSON data structure that represents a valid figure</strong>.</em></p>
+
+
+</div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">plotly.io</span> <span class="kn">as</span> <span class="nn">pio</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&#34;data&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+            <span class="s2">&#34;y&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span> <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&#34;layout&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;A Figure Displaying Itself&#34;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">pio</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="kn">as</span> <span class="nn">go</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+      <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span>
+        <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+      <span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">layout_title_text</span><span class="o">=</span><span class="s2">&#34;A Figure Displaying Itself&#34;</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>If you want to get the json representation of the <code>graph_objects</code>, there is a method <code>to_json</code> that is what you expect. There is also an option to convert the dict to a <code>graph_objects</code> using <code>go.Figure</code> and passing the dictionary as parameter.</p>
+
+<h2 id="working-with-pandas">Working with Pandas</h2>
+
+<p>The next big question is. How do we draw pandas dataframes? Thankfully, we have Python List Comprehensions that make things much easier. First let&rsquo;s fetch some data. I&rsquo;ve chossen data from Airbnb Barcelona from <a href="http://insideairbnb.com/get-the-data.html">here</a>.
+Loading the data is straight forward thanks to pandas. The second instructions is to parse the price values into float values to allow calculations.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;http://data.insideairbnb.com/spain/catalonia/barcelona/2019-09-17/data/listings.csv.gz&#34;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&#34;price_value&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[\$,]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Okey, now let&rsquo;s draw the mean price of a room based on the number of room. I like to wrap my plots with a function, but this is just personal preference.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="k">def</span> <span class="nf">beds_vs_meanprice</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&#34;beds&#34;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="bp">False</span><span class="p">)[</span><span class="s2">&#34;price_value&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&#34;data&#34;</span><span class="p">:[</span>
+            <span class="p">{</span>
+                <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;x&#34;</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="s2">&#34;beds&#34;</span><span class="p">],</span>
+                <span class="s2">&#34;y&#34;</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="s2">&#34;price_value&#34;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="n">pio</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">beds_vs_meanprice</span><span class="p">(</span><span class="n">df</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This produces an ugly plot, but let&rsquo;s focus on just the data for now.</p>
+
+<div class="figure">
+<div class="figure-plot" id="airbnb">
+    Code could not finish, this are some reasons why this happen.
+    - Plot name not defined. The first parameter of the shortcode is the name.
+    - There is a syntax error. check browser console.
+</div>
+<script>
+  function draw(){
+    test = document.getElementById("airbnb");
+    if (test == null){
+        console.log("The plot name is not defined")
+        return
+    }
+
+    fig = null
+    
+fig = {"data": [{"type": "bar", "x": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 18.0, 19.0, 20.0, 23.0, 24.0, 25.0, 26.0, 28.0, 30.0], "y": [122.85340314136126, 91.16547917711992, 114.47470915528578, 197.531164249314, 197.89040318001136, 190.08771929824562, 222.9758620689655, 251.88349514563106, 463.08620689655174, 391.8727272727273, 499.4423076923077, 344.22222222222223, 755.1666666666666, 613.8, 350.8666666666667, 336.8888888888889, 431.7857142857143, 440.0, 628.0, 453.0, 500.0, 550.0, 545.5, 740.0, 15.0, 483.0]}]}
+
+
+    if (!fig) {
+        test.innerText = "ERROR: fig variable is not defined"
+        return
+    }
+    test.innerText = null
+    Plotly.plot(test ,fig);
+  }
+  draw()
+</script>
+</div>
+
+<p>This is really easy to follow, you just have to put the columns that you want to draw and it works! Provably you will find yourself wanting to add categories, so let&rsquo;s do it. This is where list comprehension is essential. Let&rsquo;s include a category by the cancellation policy.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="k">def</span> <span class="nf">beds_vs_meanprice</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&#34;cancellation_policy&#34;</span><span class="p">,</span><span class="s2">&#34;beds&#34;</span><span class="p">],</span><span class="n">as_index</span><span class="o">=</span><span class="bp">False</span><span class="p">)[</span><span class="s2">&#34;price_value&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&#34;data&#34;</span><span class="p">:[</span>
+            <span class="p">{</span>
+                <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;x&#34;</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&#34;cancellation_policy&#34;</span><span class="p">]</span><span class="o">==</span><span class="n">policy</span><span class="p">][</span><span class="s2">&#34;beds&#34;</span><span class="p">],</span>
+                <span class="s2">&#34;y&#34;</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&#34;cancellation_policy&#34;</span><span class="p">]</span><span class="o">==</span><span class="n">policy</span><span class="p">][</span><span class="s2">&#34;price_value&#34;</span><span class="p">],</span>
+                <span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="n">policy</span>
+            <span class="p">}</span> <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;cancellation_policy&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="n">pio</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">beds_vs_meanprice</span><span class="p">(</span><span class="n">df</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<div class="figure">
+<div class="figure-plot" id="airbnb2">
+    Code could not finish, this are some reasons why this happen.
+    - Plot name not defined. The first parameter of the shortcode is the name.
+    - There is a syntax error. check browser console.
+</div>
+<script>
+  function draw(){
+    test = document.getElementById("airbnb2");
+    if (test == null){
+        console.log("The plot name is not defined")
+        return
+    }
+
+    fig = null
+    
+fig = {"data": [{"type": "bar", "x": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 12.0, 14.0, 15.0, 16.0], "y": [58.049180327868854, 137.5415173237754, 138.96512935883015, 393.92602040816325, 293.5128205128205, 357.9247311827957, 210.82432432432432, 155.11764705882354, 1966.3333333333333, 358.42857142857144, 1050.3846153846155, 4160.0, 454.75, 146.0, 805.0], "name": "flexible"}, {"type": "bar", "x": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 16.0, 18.0, 26.0, 28.0], "y": [89.23809523809524, 65.87909209951987, 116.96257796257797, 187.15055467511885, 208.99554565701558, 189.24479166666666, 258.75, 387.48936170212767, 256.4347826086956, 431.75, 258.0, 30.0, 107.5, 899.0, 20.0, 25.0, 300.0, 740.0, 15.0], "name": "moderate"}, {"type": "bar", "x": [1.0], "y": [42.5], "name": "strict"}, {"type": "bar", "x": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 18.0, 19.0, 20.0, 23.0, 24.0, 25.0, 30.0], "y": [183.8181818181818, 64.93736903376019, 99.97269624573379, 138.1967654986523, 161.53831231813774, 160.23861566484518, 210.30085959885386, 214.05797101449275, 257.85714285714283, 385.0833333333333, 328.4375, 383.5, 361.2857142857143, 542.5, 342.4, 391.42857142857144, 484.44444444444446, 580.0, 628.0, 453.0, 500.0, 550.0, 545.5, 483.0], "name": "strict_14_with_grace_period"}, {"type": "bar", "x": [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0], "y": [625.6923076923077, 222.1764705882353, 615.170731707317, 386.4418604651163, 234.85714285714286, 236.15384615384616, 374.75, 1092.25], "name": "super_strict_30"}, {"type": "bar", "x": [1.0, 2.0, 3.0, 4.0], "y": [595.6666666666666, 200.0, 361.6666666666667, 700.25], "name": "super_strict_60"}]}
+
+
+    if (!fig) {
+        test.innerText = "ERROR: fig variable is not defined"
+        return
+    }
+    test.innerText = null
+    Plotly.plot(test ,fig);
+  }
+  draw()
+</script>
+</div>
+
+<p>This may look complicated, but the idea behind is really simple. We get the unique policy values and create a trace for each one. To select the appropriate data, we filter the dataframe by the given policy. To identify it, we assign the trace name the value of the policy.</p>
+
+<p>with this technique, you can draw almost anything in a dataframe using plotly. If you are familiar with working with big datasets, you may notice that working in this way is not efficient. The good new are that you will hit plotly limitations before you have to think a better way of generating the plot.</p>
+
+<h3 id="export-figure-as-json">Export figure as json</h3>
+
+<p>To draw the figures in the blog, I&rsquo;ve exported the figure in json format and used the <a href="https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/">plot shortcode</a>. This is cool because allows me to generate complex structures like the category groupby from the previous example and display it here in a dynamic plot with just a copy/paste operation.</p>
+
+<p>fist thing is to import the json package and modify the plot code like this.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="k">def</span> <span class="nf">beds_vs_meanprice</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&#34;cancellation_policy&#34;</span><span class="p">,</span><span class="s2">&#34;beds&#34;</span><span class="p">],</span><span class="n">as_index</span><span class="o">=</span><span class="bp">False</span><span class="p">)[</span><span class="s2">&#34;price_value&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&#34;data&#34;</span><span class="p">:[</span>
+            <span class="p">{</span>
+                <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;x&#34;</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&#34;cancellation_policy&#34;</span><span class="p">]</span><span class="o">==</span><span class="n">policy</span><span class="p">][</span><span class="s2">&#34;beds&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span>
+                <span class="s2">&#34;y&#34;</span><span class="p">:</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&#34;cancellation_policy&#34;</span><span class="p">]</span><span class="o">==</span><span class="n">policy</span><span class="p">][</span><span class="s2">&#34;price_value&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span>
+                <span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="n">policy</span>
+            <span class="p">}</span> <span class="k">for</span> <span class="n">policy</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;cancellation_policy&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">fig</span><span class="p">))</span>
+    <span class="n">pio</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">beds_vs_meanprice</span><span class="p">(</span><span class="n">df</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>the <code>to_list()</code> is important because if not, the json generated contains the dataframe data. Then the <code>json.dumps</code> just works. Here is the output.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;data&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;x&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span> <span class="p">],</span>
+            <span class="nt">&#34;y&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">58.049180327868854</span><span class="p">,</span> <span class="mf">137.5415173237754</span><span class="p">,</span> <span class="mf">138.96512935883015</span><span class="p">,</span> <span class="mf">393.92602040816325</span><span class="p">,</span> <span class="mf">293.5128205128205</span><span class="p">,</span> <span class="mf">357.9247311827957</span><span class="p">,</span> <span class="mf">210.82432432432432</span><span class="p">,</span> <span class="mf">155.11764705882354</span><span class="p">,</span> <span class="mf">1966.3333333333333</span><span class="p">,</span> <span class="mf">358.42857142857144</span><span class="p">,</span> <span class="mf">1050.3846153846155</span><span class="p">,</span> <span class="mi">4160</span><span class="p">,</span> <span class="mf">454.75</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">805</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;flexible&#34;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;x&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">28</span> <span class="p">],</span>
+            <span class="nt">&#34;y&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">89.23809523809524</span><span class="p">,</span> <span class="mf">65.87909209951987</span><span class="p">,</span> <span class="mf">116.96257796257797</span><span class="p">,</span> <span class="mf">187.15055467511885</span><span class="p">,</span> <span class="mf">208.99554565701558</span><span class="p">,</span> <span class="mf">189.24479166666666</span><span class="p">,</span> <span class="mf">258.75</span><span class="p">,</span> <span class="mf">387.48936170212767</span><span class="p">,</span> <span class="mf">256.4347826086956</span><span class="p">,</span> <span class="mf">431.75</span><span class="p">,</span> <span class="mi">258</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">107.5</span><span class="p">,</span> <span class="mi">899</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">740</span><span class="p">,</span> <span class="mi">15</span> <span class="p">],</span>
+            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;moderate&#34;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;x&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">1</span> <span class="p">],</span>
+            <span class="nt">&#34;y&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">42.5</span> <span class="p">],</span>
+            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;strict&#34;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;x&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span> <span class="p">],</span>
+            <span class="nt">&#34;y&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">183.8181818181818</span><span class="p">,</span> <span class="mf">64.93736903376019</span><span class="p">,</span> <span class="mf">99.97269624573379</span><span class="p">,</span> <span class="mf">138.1967654986523</span><span class="p">,</span> <span class="mf">161.53831231813774</span><span class="p">,</span> <span class="mf">160.23861566484518</span><span class="p">,</span> <span class="mf">210.30085959885386</span><span class="p">,</span> <span class="mf">214.05797101449275</span><span class="p">,</span> <span class="mf">257.85714285714283</span><span class="p">,</span> <span class="mf">385.0833333333333</span><span class="p">,</span> <span class="mf">328.4375</span><span class="p">,</span> <span class="mf">383.5</span><span class="p">,</span> <span class="mf">361.2857142857143</span><span class="p">,</span> <span class="mf">542.5</span><span class="p">,</span> <span class="mf">342.4</span><span class="p">,</span> <span class="mf">391.42857142857144</span><span class="p">,</span> <span class="mf">484.44444444444446</span><span class="p">,</span> <span class="mi">580</span><span class="p">,</span> <span class="mi">628</span><span class="p">,</span> <span class="mi">453</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mf">545.5</span><span class="p">,</span> <span class="mi">483</span> <span class="p">],</span>
+            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;strict_14_with_grace_period&#34;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;x&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span> <span class="p">],</span>
+            <span class="nt">&#34;y&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">625.6923076923077</span><span class="p">,</span> <span class="mf">222.1764705882353</span><span class="p">,</span> <span class="mf">615.170731707317</span><span class="p">,</span> <span class="mf">386.4418604651163</span><span class="p">,</span> <span class="mf">234.85714285714286</span><span class="p">,</span> <span class="mf">236.15384615384616</span><span class="p">,</span> <span class="mf">374.75</span><span class="p">,</span> <span class="mf">1092.25</span> <span class="p">],</span>
+            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;super_strict_30&#34;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;bar&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;x&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">],</span>
+            <span class="nt">&#34;y&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">595.6666666666666</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">361.6666666666667</span><span class="p">,</span> <span class="mf">700.25</span> <span class="p">],</span>
+            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;super_strict_60&#34;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>using this json body in the plot shortcode, generates the graph above.</p>
+
+<p>This is not the only way of generating json. The package plotly.io has an option <code>pio.to_json</code> that is much more robust. This function handles the dataframes without the <code>to_list</code> option and also prints style configuration. The only drawback is that the output is much bigger. This is the plot generated from that json.</p>
+
+<div class="figure">
+<div class="figure-plot" id="plot3">
+    Code could not finish, this are some reasons why this happen.
+    - Plot name not defined. The first parameter of the shortcode is the name.
+    - There is a syntax error. check browser console.
+</div>
+<script>
+  function draw(){
+    test = document.getElementById("plot3");
+    if (test == null){
+        console.log("The plot name is not defined")
+        return
+    }
+
+    fig = null
+    
+fig = {"data":[{"name":"flexible","type":"bar","x":[0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,12.0,14.0,15.0,16.0],"y":[58.049180327868854,137.5415173237754,138.96512935883015,393.92602040816325,293.5128205128205,357.9247311827957,210.82432432432432,155.11764705882354,1966.3333333333333,358.42857142857144,1050.3846153846155,4160.0,454.75,146.0,805.0]},{"name":"moderate","type":"bar","x":[0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,16.0,18.0,26.0,28.0],"y":[89.23809523809524,65.87909209951987,116.96257796257797,187.15055467511885,208.99554565701558,189.24479166666666,258.75,387.48936170212767,256.4347826086956,431.75,258.0,30.0,107.5,899.0,20.0,25.0,300.0,740.0,15.0]},{"name":"strict","type":"bar","x":[1.0],"y":[42.5]},{"name":"strict_14_with_grace_period","type":"bar","x":[0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,18.0,19.0,20.0,23.0,24.0,25.0,30.0],"y":[183.8181818181818,64.93736903376019,99.97269624573379,138.1967654986523,161.53831231813774,160.23861566484518,210.30085959885386,214.05797101449275,257.85714285714283,385.0833333333333,328.4375,383.5,361.2857142857143,542.5,342.4,391.42857142857144,484.44444444444446,580.0,628.0,453.0,500.0,550.0,545.5,483.0]},{"name":"super_strict_30","type":"bar","x":[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0],"y":[625.6923076923077,222.1764705882353,615.170731707317,386.4418604651163,234.85714285714286,236.15384615384616,374.75,1092.25]},{"name":"super_strict_60","type":"bar","x":[1.0,2.0,3.0,4.0],"y":[595.6666666666666,200.0,361.6666666666667,700.25]}],"layout":{"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}}}}
+
+
+    if (!fig) {
+        test.innerText = "ERROR: fig variable is not defined"
+        return
+    }
+    test.innerText = null
+    Plotly.plot(test ,fig);
+  }
+  draw()
+</script>
+</div>
+
+<h2 id="docker-compose-recipe">docker-compose recipe</h2>
+
+<p>And to finish this howto, I&rsquo;m going to leave a repository with a docker-compose configured to create this environment. This way, you can easily create the environment wherever you want. It also includes a volume under the work folder to ensure that your notebooks survive when you stop the container.</p>
+
+<p>Just keep in mind that this is a basic template. You will need to modify it to include credentials, other libraries, more extenssions&hellip; whatever you want.</p>
+
+<p><a href="https://github.com/MetalBlueberry/juypterLabTemplate">check it out here</a></p>
+
+<p>Now just run this, and you are ready to code!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">docker-compose up --build lab</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="conclussion">Conclussion</h2>
+
+<p>If you are planning to understand some data, you should start with an environment like this. With Pandas is really easy to transform data. With plotly you can create amazing interactive plots. And if you need anything else, remember that you are using Python and everything is already implemented in Python.</p>
+
+<p>Thank you for reading and feel free to leave a comment bellow, I will be really happy to hear from you.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li><a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/">Jupyter Docker Stacks</a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/">Dockerfile reference</a></li>
+<li><a href="https://plot.ly/python/creating-and-updating-figures/">Creating and Updating Figures</a></li>
+<li><a href="https://plot.ly/python/renderers/">Plotly renderers</a></li>
+</ul>
+
+<p>extra</p>
+
+<ul>
+<li><a href="https://plot.ly/python/jupyter-lab-tools/">JupyterLab Interactive</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">python</a>
+          <a href="/tags/plotly/">plotly</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/">
+            <span class="next-text nav-default">Add Plots With Hugo Shortcodes - Plotly</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="MetalBlueberry/MetalBlueberry.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:metalblueberry@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/MetalBlueberry" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.linkedin.com/in/victorperezdomingo/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/MetalBlueberry" class="iconfont icon-github" title="github"></a>
+  <a href="https://metalblueberry.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">MetalBlueberry</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-150427130-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
