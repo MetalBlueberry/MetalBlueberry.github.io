@@ -6,10 +6,19 @@
     <description>Recent content in weekend on MetalBlueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://metalblueberry.github.io/tags/weekend/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2019-12-09 Weekend Learnings</title>
+      <link>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</link>
+      <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</guid>
+      <description>&lt;p&gt;I discovered that Go supports build to Web Assembly. What a great time to be alive. Also I&amp;rsquo;ve spent some time changing the favicon of this blog and finished the post about Python Jupyter notebook with Plotly&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>2019-12-02 Weekend Learnings</title>
