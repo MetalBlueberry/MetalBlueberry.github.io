@@ -6,19 +6,10 @@
     <description>Recent content in go on MetalBlueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://metalblueberry.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>2019-12-15 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve been using VSCode as my principal editor for a while now, and it keeps improving in every release with things that I cannot believe. Last was remote containers. Today is&amp;hellip;.(drums)&amp;hellip; Live Share!&lt;/p&gt;</description>
-    </item>
     
     <item>
       <title>2019-12-09 Weekend Learnings</title>

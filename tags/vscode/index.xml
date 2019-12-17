@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VSCode on MetalBlueberry - A passionate programmer</title>
+    <link>https://metalblueberry.github.io/tags/vscode/</link>
+    <description>Recent content in VSCode on MetalBlueberry - A passionate programmer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://metalblueberry.github.io/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2019-12-15 Weekend Learnings</title>
+      <link>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</link>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been using VSCode as my principal editor for a while now, and it keeps improving in every release with things that I cannot believe. Last was remote containers. Today is&amp;hellip;.(drums)&amp;hellip; Live Share!&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
