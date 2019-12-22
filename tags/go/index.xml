@@ -6,10 +6,19 @@
     <description>Recent content in go on MetalBlueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 09 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://metalblueberry.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2019-12-22 Weekend Learnings</title>
+      <link>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</link>
+      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</guid>
+      <description>&lt;p&gt;I understood how to use Go composition to extend the functionality similar to inheritance in OOP. I&amp;rsquo;ve used it before but now I can say that I understand it. Also, I&amp;rsquo;ve done a 3D model of the van that I&amp;rsquo;m going to use for the moving in January. Just to know if I can fit everything inside.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>2019-12-09 Weekend Learnings</title>
