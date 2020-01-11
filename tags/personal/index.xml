@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>personal on MetalBlueberry - A passionate programmer</title>
+    <link>https://metalblueberry.github.io/tags/personal/</link>
+    <description>Recent content in personal on MetalBlueberry - A passionate programmer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 11 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://metalblueberry.github.io/tags/personal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to get bored</title>
+      <link>https://metalblueberry.github.io/post/blog/2020-01-11_boredom/</link>
+      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/blog/2020-01-11_boredom/</guid>
+      <description>&lt;p&gt;Being bored is really unpleasant and is considered as something to avoid for most of the people. In this post I want to show you why &lt;strong&gt;boredom can be something good&lt;/strong&gt; and how you can take advantage of it.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
