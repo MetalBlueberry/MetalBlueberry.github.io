@@ -6,10 +6,28 @@
     <description>Recent content in Tags on MetalBlueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 11 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://metalblueberry.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>docker</title>
+      <link>https://metalblueberry.github.io/tags/docker/</link>
+      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>https://metalblueberry.github.io/tags/go/</link>
+      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/tags/go/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>leadership</title>
@@ -26,15 +44,6 @@
       <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://metalblueberry.github.io/tags/personal/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>https://metalblueberry.github.io/tags/go/</link>
-      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/tags/go/</guid>
       <description></description>
     </item>
     

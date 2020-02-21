@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Ready to Go Auth server with Nginx - MetalBlueberry - A passionate programmer</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="MetalBlueberry" /><meta name="description" content="learn how to secure a web application behind nginx with an auth server" /><meta name="keywords" content="nginx, go, docker, auth, security, auth_request" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta property="og:title" content="Ready to Go Auth server with Nginx" />
+<meta property="og:description" content="learn how to secure a web application behind nginx with an auth server" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/" />
+
+<meta property="og:image" content="https://media.licdn.com/dms/image/C5603AQEAio-1dZdrEg/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=ZGwNytWjwnQIrOL0Xqr5NrrD4aWiwoAaPQrI9WqXXVU" />
+<meta property="article:published_time" content="2020-02-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-21T00:00:00+00:00" />
+<meta itemprop="name" content="Ready to Go Auth server with Nginx">
+<meta itemprop="description" content="learn how to secure a web application behind nginx with an auth server">
+
+
+<meta itemprop="datePublished" content="2020-02-14T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-02-21T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2106">
+
+
+
+<meta itemprop="keywords" content="go,docker," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://media.licdn.com/dms/image/C5603AQEAio-1dZdrEg/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=ZGwNytWjwnQIrOL0Xqr5NrrD4aWiwoAaPQrI9WqXXVU"/>
+
+<meta name="twitter:title" content="Ready to Go Auth server with Nginx"/>
+<meta name="twitter:description" content="learn how to secure a web application behind nginx with an auth server"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">MetalBlueberry</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">MetalBlueberry</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Ready to Go Auth server with Nginx</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-02-14 </span>
+        <div class="post-category">
+    <a class="howto"  href="/categories/howto/"> howto </a>
+    </div>
+          <span class="more-meta"> 2106 words </span>
+          <span class="more-meta"> 10 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#sample-app">Sample App</a></li>
+<li><a href="#auth-server">Auth server</a></li>
+<li><a href="#implementation">Implementation</a>
+<ul>
+<li><a href="#loginposthandler">loginPOSTHandler</a></li>
+<li><a href="#logoutposthandler">logoutPOSTHandler</a></li>
+<li><a href="#authhandler">authHandler</a></li>
+<li><a href="#dockerize">Dockerize</a></li>
+<li><a href="#final-docker-compose-yaml">Final docker-compose.yaml</a></li>
+</ul></li>
+<li><a href="#run-it">Run it</a></li>
+<li><a href="#final-thoughts">Final thoughts</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like <a href="https://developers.google.com/identity/protocols/OAuth2">Google oauth2</a>. But if you really need you own system&hellip; this approach should ease the work.</p>
+
+<p>First thing, I will try to discourage you to actually do this to store your own passwords. Please, invest some time in watching this video from computerphile</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/8ZtInClXe1Q" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Knowing this, I hope that you use this implementation being fully aware of what it means. Also keep in mind that I&rsquo;m not an expert and I will be glad to hear about improvements in what I&rsquo;m going to post here.</p>
+
+<h1 id="sample-app">Sample App</h1>
+
+<p>Let&rsquo;s create a simple docker-compose setup with a minimal application. I&rsquo;m going to include https configuration because it&rsquo;s not that hard. You can go <a href="https://www.humankode.com/ssl/create-a-selfsigned-certificate-for-nginx-in-5-minutes">here</a> to learn how to create your own self signed certificate.</p>
+
+<p>File structure</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-txt" data-lang="txt">.
+├── docker-compose.yaml
+└── nginx
+    ├── Dockerfile
+    ├── localhost.conf
+    ├── localhost.crt
+    ├── localhost.key
+    └── nginx.conf</code></pre></td></tr></table>
+</div>
+</div>
+<p>docker-compose.yaml</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">version<span class="p">:</span><span class="w"> </span><span class="s2">&#34;2.2&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>services<span class="p">:</span><span class="w">
+</span><span class="w">  </span>nginx<span class="p">:</span><span class="w">
+</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>nginx<span class="w">
+</span><span class="w">    </span>volumes<span class="p">:</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span>./nginx/nginx.conf<span class="p">:</span>/etc/nginx/nginx.conf<span class="p">:</span>ro<span class="w">
+</span><span class="w">      </span>-<span class="w"> </span>./nginx/localhost.crt<span class="p">:</span>/etc/ssl/certs/localhost.crt<span class="p">:</span>ro<span class="w">
+</span><span class="w">      </span>-<span class="w"> </span>./nginx/localhost.key<span class="p">:</span>/etc/ssl/private/localhost.key<span class="p">:</span>ro<span class="w">
+</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span><span class="m">80</span><span class="p">:</span><span class="m">80</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span><span class="m">443</span><span class="p">:</span><span class="m">443</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span>whoami<span class="p">:</span><span class="w">
+</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>jwilder/whoami<span class="w">
+</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span><span class="m">8000</span><span class="p">:</span><span class="m">8000</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>nginx.conf</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">http</span> <span class="p">{</span>
+    <span class="kn">server</span> <span class="p">{</span>
+        <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+
+        <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$server_name$request_uri</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">server</span> <span class="p">{</span>
+        <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+
+        <span class="kn">ssl_certificate</span> <span class="s">/etc/ssl/certs/localhost.crt</span><span class="p">;</span>
+        <span class="kn">ssl_certificate_key</span> <span class="s">/etc/ssl/private/localhost.key</span><span class="p">;</span>
+
+        <span class="kn">ssl_protocols</span> <span class="s">TLSv1.2</span> <span class="s">TLSv1.1</span> <span class="p">;</span>
+
+
+        <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+            <span class="kn">proxy_pass</span> <span class="s">http://whoami:8000</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Et voilà! If you run docker-compose up, you will be able to get the output of whoami image using https from <a href="https://localhost">your browser</a>. BTW, whoami is the easiest application I can imagine. You can find more info <a href="https://hub.docker.com/r/jwilder/whoami/">here</a></p>
+
+<h1 id="auth-server">Auth server</h1>
+
+<p>Quote from the <a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-subrequest-authentication/">Nginx official documentation</a>. Please, read the docs ;)</p>
+
+<blockquote>
+<p><strong>NGINX and NGINX Plus</strong> can authenticate each request to your website with an <strong>external service</strong>. To perform authentication, NGINX makes an <strong>HTTP subrequest</strong> to an external server where the subrequest is verified. If the subrequest returns a 2xx response code, the access is allowed, if it returns 401 or 403, the access is denied. Such type of authentication allows implementing various authentication schemes, such as multifactor authentication, or allows implementing LDAP or OAuth authentication.</p>
+</blockquote>
+
+<p>Now that you understand how Nginx works, let&rsquo;s modify the configuration to protect our app with an auth server.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">http</span> <span class="p">{</span>
+    <span class="kn">server</span> <span class="p">{</span>
+        <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+
+        <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$server_name$request_uri</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">server</span> <span class="p">{</span>
+        <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+
+        <span class="kn">ssl_certificate</span> <span class="s">/etc/ssl/certs/localhost.crt</span><span class="p">;</span>
+        <span class="kn">ssl_certificate_key</span> <span class="s">/etc/ssl/private/localhost.key</span><span class="p">;</span>
+
+        <span class="kn">ssl_protocols</span> <span class="s">TLSv1.2</span> <span class="s">TLSv1.1</span> <span class="p">;</span>
+
+        <span class="kn">location</span> <span class="p">=</span> <span class="s">/auth</span> <span class="p">{</span>
+            <span class="kn">internal</span><span class="p">;</span>
+            <span class="kn">proxy_pass</span> <span class="s">http://auth-server:8080</span><span class="p">;</span>
+            <span class="kn">proxy_pass_request_body</span> <span class="no">off</span><span class="p">;</span>
+            <span class="kn">proxy_set_header</span> <span class="s">Content-Length</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+            <span class="kn">proxy_set_header</span> <span class="s">X-Original-URI</span> <span class="nv">$request_uri</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/(login|logout)</span> <span class="p">{</span>
+            <span class="kn">proxy_pass</span> <span class="s">http://auth-server:8080</span><span class="p">;</span>
+        <span class="p">}</span>
+
+
+        <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+            <span class="kn">proxy_pass</span> <span class="s">http://whoami:8000</span><span class="p">;</span>
+            <span class="kn">auth_request</span> <span class="s">/auth</span><span class="p">;</span>
+            <span class="kn">auth_request_set</span> <span class="nv">$auth_status</span> <span class="nv">$upstream_status</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="implementation">Implementation</h1>
+
+<p>The process is really simple. You need the following three endpoint</p>
+
+<ul>
+<li><strong>login</strong>: POST that receives the user login information. typically from a html form.</li>
+<li><strong>logout</strong>: POST empty that just removes the session.</li>
+<li><strong>auth</strong>: GET to check if the user is logged in.</li>
+</ul>
+
+<p>Let&rsquo;s see how each handler looks like.</p>
+
+<h2 id="loginposthandler">loginPOSTHandler</h2>
+
+<ol>
+<li>Extracts the values from the html form.</li>
+<li>Tries to login the user with the given password.</li>
+<li>If succeeds, It creates a JWT with 5 minutes expiration time.</li>
+<li>Puts the user data inside.</li>
+<li>Signs it.</li>
+<li>Stores it in a cookie with the same expiration time.</li>
+</ol>
+
+<p>Here is the code.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">loginPOSTHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">username</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">FormValue</span><span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">)</span>
+	<span class="nx">password</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">FormValue</span><span class="p">(</span><span class="s">&#34;password&#34;</span><span class="p">)</span>
+
+	<span class="nx">user</span> <span class="o">:=</span> <span class="nf">loginUser</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">user</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">expirationTime</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Add</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
+	<span class="nx">claims</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Claims</span><span class="p">{</span>
+		<span class="nx">User</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
+		<span class="nx">StandardClaims</span><span class="p">:</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">StandardClaims</span><span class="p">{</span>
+			<span class="nx">ExpiresAt</span><span class="p">:</span> <span class="nx">expirationTime</span><span class="p">.</span><span class="nf">Unix</span><span class="p">(),</span>
+		<span class="p">},</span>
+	<span class="p">}</span>
+
+	<span class="nx">token</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nf">NewWithClaims</span><span class="p">(</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">SigningMethodHS256</span><span class="p">,</span> <span class="nx">claims</span><span class="p">)</span>
+	<span class="nx">tokenString</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">token</span><span class="p">.</span><span class="nf">SignedString</span><span class="p">(</span><span class="nx">jwtKey</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">http</span><span class="p">.</span><span class="nf">SetCookie</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">{</span>
+		<span class="nx">Name</span><span class="p">:</span>     <span class="s">&#34;token&#34;</span><span class="p">,</span>
+		<span class="nx">Path</span><span class="p">:</span>     <span class="s">&#34;/&#34;</span><span class="p">,</span>
+		<span class="nx">Value</span><span class="p">:</span>    <span class="nx">tokenString</span><span class="p">,</span>
+		<span class="nx">Expires</span><span class="p">:</span>  <span class="nx">expirationTime</span><span class="p">,</span>
+		<span class="nx">HttpOnly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="p">})</span>
+
+	<span class="nx">http</span><span class="p">.</span><span class="nf">Redirect</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">basePath</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusFound</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="logoutposthandler">logoutPOSTHandler</h2>
+
+<p>This handler simply deletes the token cookies if exists.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">logoutPOSTHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">http</span><span class="p">.</span><span class="nf">SetCookie</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">{</span>
+		<span class="nx">Name</span><span class="p">:</span>     <span class="s">&#34;token&#34;</span><span class="p">,</span>
+		<span class="nx">Path</span><span class="p">:</span>     <span class="s">&#34;/&#34;</span><span class="p">,</span>
+		<span class="nx">MaxAge</span><span class="p">:</span>   <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+		<span class="nx">HttpOnly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="p">})</span>
+
+	<span class="nx">http</span><span class="p">.</span><span class="nf">Redirect</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">basePath</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusFound</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="authhandler">authHandler</h2>
+
+<p>The purpose of the authHandler is to validate the token generated by the loginPOSTHandler. Because this is something that will be performed in other places, I&rsquo;ve created the function getSession that given a requests, extracts the JWT claims or returns a nil claim if the token is not valid.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">authHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">claims</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="nx">claims</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="nx">encoder</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span>
+	<span class="nx">encoder</span><span class="p">.</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">claims</span><span class="p">.</span><span class="nx">User</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">Claims</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Cookie</span><span class="p">(</span><span class="s">&#34;token&#34;</span><span class="p">)</span>
+	<span class="k">switch</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ErrNoCookie</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
+	<span class="k">case</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Could not get token cookie. cause %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">tokenString</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Value</span>
+	<span class="nx">claims</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Claims</span><span class="p">{}</span>
+
+	<span class="nx">tkn</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nf">ParseWithClaims</span><span class="p">(</span><span class="nx">tokenString</span><span class="p">,</span> <span class="nx">claims</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">token</span> <span class="o">*</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">Token</span><span class="p">)</span> <span class="p">(</span><span class="kd">interface</span><span class="p">{},</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">jwtKey</span><span class="p">,</span> <span class="kc">nil</span>
+	<span class="p">})</span>
+	<span class="k">switch</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">ErrSignatureInvalid</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
+	<span class="k">case</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Could not parse jwt, cause %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="k">case</span> <span class="p">!</span><span class="nx">tkn</span><span class="p">.</span><span class="nx">Valid</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">claims</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>In a real world problem, you will provably implement some cool frontend that communicates with this service. For simplicity, I&rsquo;ve added a login GET handler that returns a the front end. This takes advantage of the go html/template package. See the source code to see the template code. I&rsquo;m only displaying the name for the logout template.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">loginGETHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">claims</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">pages</span> <span class="o">:=</span> <span class="nx">template</span><span class="p">.</span><span class="nf">Must</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nf">ParseGlob</span><span class="p">(</span><span class="s">&#34;templates/*.tmpl&#34;</span><span class="p">))</span>
+
+	<span class="k">switch</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">claims</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
+		<span class="nx">pages</span><span class="p">.</span><span class="nf">ExecuteTemplate</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;logout.tmpl&#34;</span><span class="p">,</span> <span class="nx">claims</span><span class="p">)</span>
+	<span class="k">default</span><span class="p">:</span>
+		<span class="nx">pages</span><span class="p">.</span><span class="nf">ExecuteTemplate</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;login.tmpl&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+	<span class="p">}</span>
+
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+
+<div class="expand">
+    <div class="expand-label" style="cursor: pointer;"
+        onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
+        <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+        <span>
+            
+            
+            &gt; Click here to see all code from main.go
+            
+        </span>
+    </div>
+    <div class="expand-content" style="display: none;">
+        <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;encoding/json&#34;</span>
+	<span class="s">&#34;flag&#34;</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;html/template&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;net/http&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+
+	<span class="s">&#34;github.com/dgrijalva/jwt-go&#34;</span>
+	<span class="s">&#34;github.com/gorilla/mux&#34;</span>
+<span class="p">)</span>
+
+<span class="c1">// Create the JWT key used to create the signature
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">jwtKey</span> <span class="p">=</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&#34;my_secret_key&#34;</span><span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">UserData</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span>        <span class="kt">string</span> <span class="s">`json:&#34;name,omitempty&#34;`</span>
+	<span class="nx">Email</span>       <span class="kt">string</span> <span class="s">`json:&#34;email,omitempty&#34;`</span>
+	<span class="nx">AccessLevel</span> <span class="kt">int</span>    <span class="s">`json:&#34;access_level,omitempty&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Claims</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">User</span> <span class="o">*</span><span class="nx">UserData</span> <span class="s">`json:&#34;user&#34;`</span>
+	<span class="nx">jwt</span><span class="p">.</span><span class="nx">StandardClaims</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">basePath</span> <span class="kt">string</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">flag</span><span class="p">.</span><span class="nf">StringVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">basePath</span><span class="p">,</span> <span class="s">&#34;base-path&#34;</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="s">&#34;indicates the base path where the app is running&#34;</span><span class="p">)</span>
+	<span class="nx">flag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
+
+	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">mux</span><span class="p">.</span><span class="nf">NewRouter</span><span class="p">().</span>
+		<span class="nf">PathPrefix</span><span class="p">(</span><span class="nx">basePath</span><span class="p">).</span>
+		<span class="nf">Subrouter</span><span class="p">()</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Path</span><span class="p">(</span><span class="s">&#34;/auth&#34;</span><span class="p">).</span><span class="nf">Methods</span><span class="p">(</span><span class="s">&#34;GET&#34;</span><span class="p">).</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="nx">authHandler</span><span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Path</span><span class="p">(</span><span class="s">&#34;/login&#34;</span><span class="p">).</span><span class="nf">Methods</span><span class="p">(</span><span class="s">&#34;POST&#34;</span><span class="p">).</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="nx">loginPOSTHandler</span><span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Path</span><span class="p">(</span><span class="s">&#34;/logout&#34;</span><span class="p">).</span><span class="nf">Methods</span><span class="p">(</span><span class="s">&#34;POST&#34;</span><span class="p">).</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="nx">logoutPOSTHandler</span><span class="p">)</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">PathPrefix</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">).</span><span class="nf">Methods</span><span class="p">(</span><span class="s">&#34;GET&#34;</span><span class="p">).</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="nx">loginGETHandler</span><span class="p">)</span>
+
+	<span class="nx">http</span><span class="p">.</span><span class="nf">Handle</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span>
+
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ready&#34;</span><span class="p">)</span>
+	<span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">loginPOSTHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">username</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">FormValue</span><span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">)</span>
+	<span class="nx">password</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">FormValue</span><span class="p">(</span><span class="s">&#34;password&#34;</span><span class="p">)</span>
+
+	<span class="nx">user</span> <span class="o">:=</span> <span class="nf">loginUser</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">user</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">expirationTime</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Add</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
+	<span class="nx">claims</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Claims</span><span class="p">{</span>
+		<span class="nx">User</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
+		<span class="nx">StandardClaims</span><span class="p">:</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">StandardClaims</span><span class="p">{</span>
+			<span class="nx">ExpiresAt</span><span class="p">:</span> <span class="nx">expirationTime</span><span class="p">.</span><span class="nf">Unix</span><span class="p">(),</span>
+		<span class="p">},</span>
+	<span class="p">}</span>
+
+	<span class="nx">token</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nf">NewWithClaims</span><span class="p">(</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">SigningMethodHS256</span><span class="p">,</span> <span class="nx">claims</span><span class="p">)</span>
+	<span class="nx">tokenString</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">token</span><span class="p">.</span><span class="nf">SignedString</span><span class="p">(</span><span class="nx">jwtKey</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">http</span><span class="p">.</span><span class="nf">SetCookie</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">{</span>
+		<span class="nx">Name</span><span class="p">:</span>     <span class="s">&#34;token&#34;</span><span class="p">,</span>
+		<span class="nx">Path</span><span class="p">:</span>     <span class="s">&#34;/&#34;</span><span class="p">,</span>
+		<span class="nx">Value</span><span class="p">:</span>    <span class="nx">tokenString</span><span class="p">,</span>
+		<span class="nx">Expires</span><span class="p">:</span>  <span class="nx">expirationTime</span><span class="p">,</span>
+		<span class="nx">HttpOnly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="p">})</span>
+
+	<span class="nx">http</span><span class="p">.</span><span class="nf">Redirect</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">basePath</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusFound</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">loginGETHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">claims</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+
+	<span class="nx">pages</span> <span class="o">:=</span> <span class="nx">template</span><span class="p">.</span><span class="nf">Must</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nf">ParseGlob</span><span class="p">(</span><span class="s">&#34;templates/*.tmpl&#34;</span><span class="p">))</span>
+
+	<span class="k">switch</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">claims</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
+		<span class="nx">pages</span><span class="p">.</span><span class="nf">ExecuteTemplate</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;logout.tmpl&#34;</span><span class="p">,</span> <span class="nx">claims</span><span class="p">)</span>
+	<span class="k">default</span><span class="p">:</span>
+		<span class="nx">pages</span><span class="p">.</span><span class="nf">ExecuteTemplate</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;login.tmpl&#34;</span><span class="p">,</span> <span class="nx">claims</span><span class="p">)</span>
+	<span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">loginUser</span><span class="p">(</span><span class="nx">username</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">UserData</span> <span class="p">{</span>
+	<span class="c1">// TODO: Now any user can login, implement proper validation
+</span><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">UserData</span><span class="p">{</span>
+		<span class="nx">Name</span><span class="p">:</span> <span class="nx">username</span><span class="p">,</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">logoutPOSTHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">http</span><span class="p">.</span><span class="nf">SetCookie</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">{</span>
+		<span class="nx">Name</span><span class="p">:</span>     <span class="s">&#34;token&#34;</span><span class="p">,</span>
+		<span class="nx">Path</span><span class="p">:</span>     <span class="s">&#34;/&#34;</span><span class="p">,</span>
+		<span class="nx">MaxAge</span><span class="p">:</span>   <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+		<span class="nx">HttpOnly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="p">})</span>
+
+	<span class="nx">http</span><span class="p">.</span><span class="nf">Redirect</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">basePath</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusFound</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">authHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">claims</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="nx">claims</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="p">}</span>
+	<span class="nx">encoder</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span>
+	<span class="nx">encoder</span><span class="p">.</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">claims</span><span class="p">.</span><span class="nx">User</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">Claims</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Cookie</span><span class="p">(</span><span class="s">&#34;token&#34;</span><span class="p">)</span>
+	<span class="k">switch</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ErrNoCookie</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
+	<span class="k">case</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Could not get token cookie. cause %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">tokenString</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Value</span>
+	<span class="nx">claims</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Claims</span><span class="p">{}</span>
+
+	<span class="nx">tkn</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nf">ParseWithClaims</span><span class="p">(</span><span class="nx">tokenString</span><span class="p">,</span> <span class="nx">claims</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">token</span> <span class="o">*</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">Token</span><span class="p">)</span> <span class="p">(</span><span class="kd">interface</span><span class="p">{},</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">jwtKey</span><span class="p">,</span> <span class="kc">nil</span>
+	<span class="p">})</span>
+	<span class="k">switch</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">ErrSignatureInvalid</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
+	<span class="k">case</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Could not parse jwt, cause %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+	<span class="k">case</span> <span class="p">!</span><span class="nx">tkn</span><span class="p">.</span><span class="nx">Valid</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">claims</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+</div>
+
+<h2 id="dockerize">Dockerize</h2>
+
+<p>Like any other go project, let&rsquo;s use a simple multi-stage alpine image to get the minimal image size.</p>
+
+<div class="admonition tip"><p class="admonition-title">tip</p>
+  
+<p>Copy first <strong>go.mod</strong> and <strong>go.sum</strong> and use <strong>go mod download</strong> to take advantage of Docker cache. This will save tons of time downloading dependencies.</p>
+
+
+</div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> golang:alpine AS build</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> go.mod .<span class="err">
+</span><span class="err"></span><span class="k">COPY</span> go.sum .<span class="err">
+</span><span class="err"></span><span class="k">RUN</span> go mod download<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> *.go .<span class="err">
+</span><span class="err"></span><span class="k">RUN</span> go build<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> alpine as run</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> templates templates<span class="err">
+</span><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build /app/auth-server /app/<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> chmod +x auth-server<span class="err">
+</span><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span> <span class="s2">&#34;./auth-server&#34;</span> <span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="final-docker-compose-yaml">Final docker-compose.yaml</h2>
+
+<p>Now we just have to add the auth-server to the docker compose and provide the base path to ensure that it works properly.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yml" data-lang="yml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yml" data-lang="yml">version<span class="p">:</span><span class="w"> </span><span class="s2">&#34;2.2&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span>services<span class="p">:</span><span class="w">
+</span><span class="w">  </span>nginx<span class="p">:</span><span class="w">
+</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>nginx<span class="w">
+</span><span class="w">    </span>volumes<span class="p">:</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span>./nginx/nginx.conf<span class="p">:</span>/etc/nginx/nginx.conf<span class="p">:</span>ro<span class="w">
+</span><span class="w">      </span>-<span class="w"> </span>./nginx/localhost.crt<span class="p">:</span>/etc/ssl/certs/localhost.crt<span class="p">:</span>ro<span class="w">
+</span><span class="w">      </span>-<span class="w"> </span>./nginx/localhost.key<span class="p">:</span>/etc/ssl/private/localhost.key<span class="p">:</span>ro<span class="w">
+</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span><span class="m">80</span><span class="p">:</span><span class="m">80</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span><span class="m">443</span><span class="p">:</span><span class="m">443</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span>auth-server<span class="p">:</span><span class="w">
+</span><span class="w">    </span>build<span class="p">:</span><span class="w"> </span>auth-server<span class="w">
+</span><span class="w">    </span>command<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;--base-path&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;/users/&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w">
+</span><span class="w">  </span>whoami<span class="p">:</span><span class="w">
+</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>jwilder/whoami<span class="w">
+</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span><span class="m">8000</span><span class="p">:</span><span class="m">8000</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="run-it">Run it</h1>
+
+<p>Start the service with docker compose and ensure to build the images again.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose up --build</code></pre></td></tr></table>
+</div>
+</div>
+<p>The workflow is:</p>
+
+<ol>
+<li>Navigate to <a href="https://localhost">https://localhost</a> to see that you are not allowed.</li>
+<li>Navigate to <a href="https://localhost/users/">https://localhost/users/</a> to see the login form.</li>
+<li>Login using the same name and password, IE: MetalBlueberry, MetalBluberry.</li>
+<li>Go again to <a href="https://localhost">https://localhost</a> to see the whoami container.</li>
+<li>Go to <a href="https://localhost">https://localhost</a> to see the logout form.</li>
+<li>Click logout</li>
+<li>Navigate to <a href="https://localhost">https://localhost</a> to see that you are not allowed.</li>
+<li>Repeat until you get bored.</li>
+</ol>
+
+<h1 id="final-thoughts">Final thoughts</h1>
+
+<p>How to protect the user/passwords or register new users is out of the scope, but I think <strong>you can easily extend this example</strong> to do whatever you want. Also, I would like to implement the &ldquo;next&rdquo; behaviour to properly redirect the users when they try to access to a protected page and instruct nginx to redirect users to login page if the page is protected. But again, this is out of the scope. Maybe in the near future.</p>
+
+<p>The best thing about this approach is that you can protect anything without actually modifying it. If you have some legacy app or old code that do not implement user auth, this can easily add a new layer of protection without too much effort.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>I hope you&rsquo;ve enjoyed this post and <strong>I will appreciate any feedback</strong> in the comments bellow. I&rsquo;m fairly new to the world of nginx and I&rsquo;m discovering new things every day. For example, looks like there is a <a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-jwt-authentication/">JWT validation directive</a> for nginx that will effectively replace the auth endpoint implemented in this tutorial.</p>
+
+<p>I&rsquo;m learning <a href="https://docs.traefik.io/">Traefik</a> at the same time and I&rsquo;m enjoying it a lot. I know that it offers less features than nginx, but looks like a really good idea if you are dealing with docker-compose or kubernetes. I&rsquo;m going to give it a try. From the docs, looks like it is compatible with the <a href="https://docs.traefik.io/middlewares/forwardauth/">auth request pattern</a></p>
+
+<p>.</p>
+
+<p>And as always, Thanks for watching.</p>
+
+<p>.</p>
+
+<p>Sorry, I&rsquo;ve been watching a lot of Michel Toys last week.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/GjgImsVqPfg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h1 id="references">References</h1>
+
+<ul>
+<li><a href="https://github.com/MetalBlueberry/AuthServer">Source Code</a></li>
+<li><a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-subrequest-authentication/">nginx documentation - subrequest authentication</a></li>
+<li><a href="https://www.humankode.com/ssl/create-a-selfsigned-certificate-for-nginx-in-5-minutes">nginx - Setup ssl for localhost</a></li>
+<li><a href="https://github.com/pusher/oauth2_proxy">someone did something similar - oauth2_proxy</a></li>
+<li><a href="https://www.w3schools.com/howto/howto_css_login_form.asp">html login form</a></li>
+<li><a href="https://www.sohamkamani.com/blog/golang/2019-01-01-jwt-authentication/">Go JWT auth</a></li>
+</ul>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/go/">go</a>
+          <a href="/tags/docker/">docker</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/blog/2020-01-11_boredom/">
+            <span class="next-text nav-default">How to get bored</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="MetalBlueberry/MetalBlueberry.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:metalblueberry@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/MetalBlueberry" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.linkedin.com/in/victorperezdomingo/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/MetalBlueberry" class="iconfont icon-github" title="github"></a>
+  <a href="https://metalblueberry.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">MetalBlueberry</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-150427130-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

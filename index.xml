@@ -6,10 +6,19 @@
     <description>Recent content on MetalBlueberry - A passionate programmer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 11 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://metalblueberry.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ready to Go Auth server with Nginx</title>
+      <link>https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/</link>
+      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/</guid>
+      <description>&lt;p&gt;I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like &lt;a href=&#34;https://developers.google.com/identity/protocols/OAuth2&#34;&gt;Google oauth2&lt;/a&gt;. But if you really need you own system&amp;hellip; this approach should ease the work.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>How to get bored</title>
