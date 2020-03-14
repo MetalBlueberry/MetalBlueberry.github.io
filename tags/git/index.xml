@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on MetalBlueberry - A passionate programmer</title>
+    <link>https://metalblueberry.github.io/tags/git/</link>
+    <description>Recent content in git on MetalBlueberry - A passionate programmer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://metalblueberry.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Use Git to track Git versions</title>
+      <link>https://metalblueberry.github.io/post/howto/2020-03-11_use_git_to_track_git_versions/</link>
+      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://metalblueberry.github.io/post/howto/2020-03-11_use_git_to_track_git_versions/</guid>
+      <description>&lt;p&gt;Everyone who has ever been involved in managing versions of different applications, knows that in can be a pain in the ass. Luckily enough there are tools to ease this work and I&amp;rsquo;ve found that Git provides a general solution independently of your technology stack. Git Submodules.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

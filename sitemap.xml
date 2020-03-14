@@ -3,14 +3,56 @@
   
   <url>
     <loc>https://metalblueberry.github.io/categories/</loc>
-    <lastmod>2020-02-21T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://metalblueberry.github.io/tags/docker/</loc>
-    <lastmod>2020-02-21T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/tags/git/</loc>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/categories/howto/</loc>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/</loc>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/post/</loc>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/tags/</loc>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://metalblueberry.github.io/post/howto/2020-03-11_use_git_to_track_git_versions/</loc>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -23,35 +65,7 @@
   </url>
   
   <url>
-    <loc>https://metalblueberry.github.io/categories/howto/</loc>
-    <lastmod>2020-02-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://metalblueberry.github.io/</loc>
-    <lastmod>2020-02-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://metalblueberry.github.io/post/</loc>
-    <lastmod>2020-02-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/</loc>
-    <lastmod>2020-02-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://metalblueberry.github.io/tags/</loc>
     <lastmod>2020-02-21T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
