@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Ready to Go Auth server with Nginx&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ready to Go Auth server with Nginx"/>
@@ -16,24 +16,29 @@
 <body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Ready to Go Auth server with Nginx</h1><p class="article date">Friday, February 14, 2020<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like <a href="https://developers.google.com/identity/protocols/OAuth2">Google oauth2</a>. But if you really need you own system&hellip; this approach should ease the work.</p>
-
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Ready to Go Auth server with Nginx</h1><p class="article date">Friday, February 14, 2020<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like <a href="https://developers.google.com/identity/protocols/OAuth2"target="_blank">Google oauth2</a>. But if you really need you own system&hellip; this approach should ease the work.</p>
 <p>First thing, I will try to discourage you to actually do this to store your own passwords. Please, invest some time in watching this video from computerphile</p>
-
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube-nocookie.com/embed/8ZtInClXe1Q" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
-
 <p>Knowing this, I hope that you use this implementation being fully aware of what it means. Also keep in mind that I&rsquo;m not an expert and I will be glad to hear about improvements in what I&rsquo;m going to post here.</p>
-
 <h1 id="sample-app">Sample App</h1>
-
-<p>Let&rsquo;s create a simple docker-compose setup with a minimal application. I&rsquo;m going to include https configuration because it&rsquo;s not that hard. You can go <a href="https://www.humankode.com/ssl/create-a-selfsigned-certificate-for-nginx-in-5-minutes">here</a> to learn how to create your own self signed certificate.</p>
-
+<p>Let&rsquo;s create a simple docker-compose setup with a minimal application. I&rsquo;m going to include https configuration because it&rsquo;s not that hard. You can go <a href="https://www.humankode.com/ssl/create-a-selfsigned-certificate-for-nginx-in-5-minutes"target="_blank">here</a> to learn how to create your own self signed certificate.</p>
 <p>File structure</p>
-
-<pre><code class="language-txt">.
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">.
 ├── docker-compose.yaml
 └── nginx
     ├── Dockerfile
@@ -41,122 +46,200 @@
     ├── localhost.crt
     ├── localhost.key
     └── nginx.conf
-</code></pre>
+</code></pre></td></tr></table>
+</div>
+</div><p>docker-compose.yaml</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#ff79c6">version</span>: <span style="color:#f1fa8c">&#34;2.2&#34;</span>
 
-<p>docker-compose.yaml</p>
-
-<pre><code class="language-yaml">version: &quot;2.2&quot;
-
-services:
-  nginx:
-    image: nginx
-    volumes:
+<span style="color:#ff79c6">services</span>:
+  <span style="color:#ff79c6">nginx</span>:
+    <span style="color:#ff79c6">image</span>: nginx
+    <span style="color:#ff79c6">volumes</span>:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/localhost.crt:/etc/ssl/certs/localhost.crt:ro
       - ./nginx/localhost.key:/etc/ssl/private/localhost.key:ro
-    ports:
-      - 80:80
-      - 443:443
+    <span style="color:#ff79c6">ports</span>:
+      - <span style="color:#bd93f9">80</span>:<span style="color:#bd93f9">80</span>
+      - <span style="color:#bd93f9">443</span>:<span style="color:#bd93f9">443</span>
 
-  whoami:
-    image: jwilder/whoami
-    ports:
-      - 8000:8000
-</code></pre>
+  <span style="color:#ff79c6">whoami</span>:
+    <span style="color:#ff79c6">image</span>: jwilder/whoami
+    <span style="color:#ff79c6">ports</span>:
+      - <span style="color:#bd93f9">8000</span>:<span style="color:#bd93f9">8000</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>nginx.conf</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-nginx" data-lang="nginx"><span style="color:#ff79c6">http</span> {
+    <span style="color:#ff79c6">server</span> {
+        <span style="color:#ff79c6">listen</span> <span style="color:#bd93f9">80</span>;
+        <span style="color:#ff79c6">server_name</span> <span style="color:#f1fa8c">localhost</span>;
 
-<p>nginx.conf</p>
-
-<pre><code class="language-nginx">http {
-    server {
-        listen 80;
-        server_name localhost;
-
-        return 301 https://$server_name$request_uri;
+        <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">301</span> <span style="color:#f1fa8c">https://</span><span style="color:#8be9fd;font-style:italic">$server_name$request_uri</span>;
     }
 
-    server {
-        listen 443 ssl http2;
-        server_name localhost;
+    <span style="color:#ff79c6">server</span> {
+        <span style="color:#ff79c6">listen</span> <span style="color:#bd93f9">443</span> <span style="color:#f1fa8c">ssl</span> <span style="color:#f1fa8c">http2</span>;
+        <span style="color:#ff79c6">server_name</span> <span style="color:#f1fa8c">localhost</span>;
 
-        ssl_certificate /etc/ssl/certs/localhost.crt;
-        ssl_certificate_key /etc/ssl/private/localhost.key;
+        <span style="color:#ff79c6">ssl_certificate</span> <span style="color:#f1fa8c">/etc/ssl/certs/localhost.crt</span>;
+        <span style="color:#ff79c6">ssl_certificate_key</span> <span style="color:#f1fa8c">/etc/ssl/private/localhost.key</span>;
 
-        ssl_protocols TLSv1.2 TLSv1.1 ;
+        <span style="color:#ff79c6">ssl_protocols</span> <span style="color:#f1fa8c">TLSv1.2</span> <span style="color:#f1fa8c">TLSv1.1</span> ;
 
 
-        location / {
-            proxy_pass http://whoami:8000;
+        <span style="color:#ff79c6">location</span> <span style="color:#f1fa8c">/</span> {
+            <span style="color:#ff79c6">proxy_pass</span> <span style="color:#f1fa8c">http://whoami:8000</span>;
         }
 
     }
 }
-</code></pre>
-
-<p>Et voilà! If you run docker-compose up, you will be able to get the output of whoami image using https from <a href="https://localhost">your browser</a>. BTW, whoami is the easiest application I can imagine. You can find more info <a href="https://hub.docker.com/r/jwilder/whoami/">here</a></p>
-
+</code></pre></td></tr></table>
+</div>
+</div><p>Et voilà! If you run docker-compose up, you will be able to get the output of whoami image using https from <a href="https://localhost"target="_blank">your browser</a>. BTW, whoami is the easiest application I can imagine. You can find more info <a href="https://hub.docker.com/r/jwilder/whoami/"target="_blank">here</a></p>
 <h1 id="auth-server">Auth server</h1>
-
-<p>Quote from the <a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-subrequest-authentication/">Nginx official documentation</a>. Please, read the docs ;)</p>
-
+<p>Quote from the <a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-subrequest-authentication/"target="_blank">Nginx official documentation</a>. Please, read the docs ;)</p>
 <blockquote>
 <p><strong>NGINX and NGINX Plus</strong> can authenticate each request to your website with an <strong>external service</strong>. To perform authentication, NGINX makes an <strong>HTTP subrequest</strong> to an external server where the subrequest is verified. If the subrequest returns a 2xx response code, the access is allowed, if it returns 401 or 403, the access is denied. Such type of authentication allows implementing various authentication schemes, such as multifactor authentication, or allows implementing LDAP or OAuth authentication.</p>
 </blockquote>
-
 <p>Now that you understand how Nginx works, let&rsquo;s modify the configuration to protect our app with an auth server.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-nginx" data-lang="nginx"><span style="color:#ff79c6">http</span> {
+    <span style="color:#ff79c6">server</span> {
+        <span style="color:#ff79c6">listen</span> <span style="color:#bd93f9">80</span>;
+        <span style="color:#ff79c6">server_name</span> <span style="color:#f1fa8c">localhost</span>;
 
-<pre><code class="language-nginx">http {
-    server {
-        listen 80;
-        server_name localhost;
-
-        return 301 https://$server_name$request_uri;
+        <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">301</span> <span style="color:#f1fa8c">https://</span><span style="color:#8be9fd;font-style:italic">$server_name$request_uri</span>;
     }
 
-    server {
-        listen 443 ssl http2;
-        server_name localhost;
+    <span style="color:#ff79c6">server</span> {
+        <span style="color:#ff79c6">listen</span> <span style="color:#bd93f9">443</span> <span style="color:#f1fa8c">ssl</span> <span style="color:#f1fa8c">http2</span>;
+        <span style="color:#ff79c6">server_name</span> <span style="color:#f1fa8c">localhost</span>;
 
-        ssl_certificate /etc/ssl/certs/localhost.crt;
-        ssl_certificate_key /etc/ssl/private/localhost.key;
+        <span style="color:#ff79c6">ssl_certificate</span> <span style="color:#f1fa8c">/etc/ssl/certs/localhost.crt</span>;
+        <span style="color:#ff79c6">ssl_certificate_key</span> <span style="color:#f1fa8c">/etc/ssl/private/localhost.key</span>;
 
-        ssl_protocols TLSv1.2 TLSv1.1 ;
+        <span style="color:#ff79c6">ssl_protocols</span> <span style="color:#f1fa8c">TLSv1.2</span> <span style="color:#f1fa8c">TLSv1.1</span> ;
 
-        location = /auth {
-            internal;
-            proxy_pass http://auth-server:8080;
-            proxy_pass_request_body off;
-            proxy_set_header Content-Length &quot;&quot;;
-            proxy_set_header X-Original-URI $request_uri;
+        <span style="color:#ff79c6">location</span> = <span style="color:#f1fa8c">/auth</span> {
+            <span style="color:#ff79c6">internal</span>;
+            <span style="color:#ff79c6">proxy_pass</span> <span style="color:#f1fa8c">http://auth-server:8080</span>;
+            <span style="color:#ff79c6">proxy_pass_request_body</span> off;
+            <span style="color:#ff79c6">proxy_set_header</span> <span style="color:#f1fa8c">Content-Length</span> <span style="color:#f1fa8c">&#34;&#34;</span>;
+            <span style="color:#ff79c6">proxy_set_header</span> <span style="color:#f1fa8c">X-Original-URI</span> <span style="color:#8be9fd;font-style:italic">$request_uri</span>;
         }
 
-        location ~ ^/(login|logout) {
-            proxy_pass http://auth-server:8080;
+        <span style="color:#ff79c6">location</span> ~ <span style="color:#f1fa8c">^/(login|logout)</span> {
+            <span style="color:#ff79c6">proxy_pass</span> <span style="color:#f1fa8c">http://auth-server:8080</span>;
         }
 
 
-        location / {
-            proxy_pass http://whoami:8000;
-            auth_request /auth;
-            auth_request_set $auth_status $upstream_status;
+        <span style="color:#ff79c6">location</span> <span style="color:#f1fa8c">/</span> {
+            <span style="color:#ff79c6">proxy_pass</span> <span style="color:#f1fa8c">http://whoami:8000</span>;
+            <span style="color:#ff79c6">auth_request</span> <span style="color:#f1fa8c">/auth</span>;
+            <span style="color:#ff79c6">auth_request_set</span> <span style="color:#8be9fd;font-style:italic">$auth_status</span> <span style="color:#8be9fd;font-style:italic">$upstream_status</span>;
         }
     }
 }
-</code></pre>
-
-<h1 id="implementation">Implementation</h1>
-
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="implementation">Implementation</h1>
 <p>The process is really simple. You need the following three endpoint</p>
-
 <ul>
 <li><strong>login</strong>: POST that receives the user login information. typically from a html form.</li>
 <li><strong>logout</strong>: POST empty that just removes the session.</li>
 <li><strong>auth</strong>: GET to check if the user is logged in.</li>
 </ul>
-
 <p>Let&rsquo;s see how each handler looks like.</p>
-
 <h2 id="loginposthandler">loginPOSTHandler</h2>
-
 <ol>
 <li>Extracts the values from the html form.</li>
 <li>Tries to login the user with the given password.</li>
@@ -165,131 +248,243 @@ services:
 <li>Signs it.</li>
 <li>Stores it in a cookie with the same expiration time.</li>
 </ol>
-
 <p>Here is the code.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">loginPOSTHandler</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+	username <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">FormValue</span>(<span style="color:#f1fa8c">&#34;username&#34;</span>)
+	password <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">FormValue</span>(<span style="color:#f1fa8c">&#34;password&#34;</span>)
 
-<pre><code class="language-go">func loginPOSTHandler(w http.ResponseWriter, r *http.Request) {
-	username := r.FormValue(&quot;username&quot;)
-	password := r.FormValue(&quot;password&quot;)
-
-	user := loginUser(username, password)
-	if user == nil {
-		w.WriteHeader(http.StatusUnauthorized)
-		return
+	user <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">loginUser</span>(username, password)
+	<span style="color:#ff79c6">if</span> user <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">nil</span> {
+		w.<span style="color:#50fa7b">WriteHeader</span>(http.StatusUnauthorized)
+		<span style="color:#ff79c6">return</span>
 	}
 
-	expirationTime := time.Now().Add(5 * time.Minute)
-	claims := &amp;Claims{
+	expirationTime <span style="color:#ff79c6">:=</span> time.<span style="color:#50fa7b">Now</span>().<span style="color:#50fa7b">Add</span>(<span style="color:#bd93f9">5</span> <span style="color:#ff79c6">*</span> time.Minute)
+	claims <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>Claims{
 		User: user,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: expirationTime.Unix(),
+			ExpiresAt: expirationTime.<span style="color:#50fa7b">Unix</span>(),
 		},
 	}
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString(jwtKey)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
+	token <span style="color:#ff79c6">:=</span> jwt.<span style="color:#50fa7b">NewWithClaims</span>(jwt.SigningMethodHS256, claims)
+	tokenString, err <span style="color:#ff79c6">:=</span> token.<span style="color:#50fa7b">SignedString</span>(jwtKey)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		w.<span style="color:#50fa7b">WriteHeader</span>(http.StatusInternalServerError)
+		<span style="color:#ff79c6">return</span>
 	}
 
-	http.SetCookie(w, &amp;http.Cookie{
-		Name:     &quot;token&quot;,
-		Path:     &quot;/&quot;,
+	http.<span style="color:#50fa7b">SetCookie</span>(w, <span style="color:#ff79c6">&amp;</span>http.Cookie{
+		Name:     <span style="color:#f1fa8c">&#34;token&#34;</span>,
+		Path:     <span style="color:#f1fa8c">&#34;/&#34;</span>,
 		Value:    tokenString,
 		Expires:  expirationTime,
-		HttpOnly: true,
+		HttpOnly: <span style="color:#ff79c6">true</span>,
 	})
 
-	http.Redirect(w, r, basePath, http.StatusFound)
+	http.<span style="color:#50fa7b">Redirect</span>(w, r, basePath, http.StatusFound)
 }
-</code></pre>
-
-<h2 id="logoutposthandler">logoutPOSTHandler</h2>
-
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="logoutposthandler">logoutPOSTHandler</h2>
 <p>This handler simply deletes the token cookies if exists.</p>
-
-<pre><code class="language-go">func logoutPOSTHandler(w http.ResponseWriter, r *http.Request) {
-	http.SetCookie(w, &amp;http.Cookie{
-		Name:     &quot;token&quot;,
-		Path:     &quot;/&quot;,
-		MaxAge:   -1,
-		HttpOnly: true,
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">logoutPOSTHandler</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+	http.<span style="color:#50fa7b">SetCookie</span>(w, <span style="color:#ff79c6">&amp;</span>http.Cookie{
+		Name:     <span style="color:#f1fa8c">&#34;token&#34;</span>,
+		Path:     <span style="color:#f1fa8c">&#34;/&#34;</span>,
+		MaxAge:   <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,
+		HttpOnly: <span style="color:#ff79c6">true</span>,
 	})
 
-	http.Redirect(w, r, basePath, http.StatusFound)
+	http.<span style="color:#50fa7b">Redirect</span>(w, r, basePath, http.StatusFound)
 }
-</code></pre>
-
-<h2 id="authhandler">authHandler</h2>
-
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="authhandler">authHandler</h2>
 <p>The purpose of the authHandler is to validate the token generated by the loginPOSTHandler. Because this is something that will be performed in other places, I&rsquo;ve created the function getSession that given a requests, extracts the JWT claims or returns a nil claim if the token is not valid.</p>
-
-<pre><code class="language-go">func authHandler(w http.ResponseWriter, r *http.Request) {
-	claims, err := getSession(r)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">authHandler</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+	claims, err <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">getSession</span>(r)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		w.<span style="color:#50fa7b">WriteHeader</span>(http.StatusBadRequest)
+		<span style="color:#ff79c6">return</span>
 	}
-	if claims == nil {
-		w.WriteHeader(http.StatusUnauthorized)
-		return
+	<span style="color:#ff79c6">if</span> claims <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">nil</span> {
+		w.<span style="color:#50fa7b">WriteHeader</span>(http.StatusUnauthorized)
+		<span style="color:#ff79c6">return</span>
 	}
-	encoder := json.NewEncoder(w)
-	encoder.Encode(claims.User)
+	encoder <span style="color:#ff79c6">:=</span> json.<span style="color:#50fa7b">NewEncoder</span>(w)
+	encoder.<span style="color:#50fa7b">Encode</span>(claims.User)
 }
 
-func getSession(r *http.Request) (*Claims, error) {
-	c, err := r.Cookie(&quot;token&quot;)
-	switch {
-	case err == http.ErrNoCookie:
-		return nil, nil
-	case err != nil:
-		return nil, fmt.Errorf(&quot;Could not get token cookie. cause %w&quot;, err)
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">getSession</span>(r <span style="color:#ff79c6">*</span>http.Request) (<span style="color:#ff79c6">*</span>Claims, <span style="color:#8be9fd">error</span>) {
+	c, err <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">Cookie</span>(<span style="color:#f1fa8c">&#34;token&#34;</span>)
+	<span style="color:#ff79c6">switch</span> {
+	<span style="color:#ff79c6">case</span> err <span style="color:#ff79c6">==</span> http.ErrNoCookie:
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, <span style="color:#ff79c6">nil</span>
+	<span style="color:#ff79c6">case</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span>:
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, fmt.<span style="color:#50fa7b">Errorf</span>(<span style="color:#f1fa8c">&#34;Could not get token cookie. cause %w&#34;</span>, err)
 	}
 
-	tokenString := c.Value
-	claims := &amp;Claims{}
+	tokenString <span style="color:#ff79c6">:=</span> c.Value
+	claims <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>Claims{}
 
-	tkn, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-		return jwtKey, nil
+	tkn, err <span style="color:#ff79c6">:=</span> jwt.<span style="color:#50fa7b">ParseWithClaims</span>(tokenString, claims, <span style="color:#8be9fd;font-style:italic">func</span>(token <span style="color:#ff79c6">*</span>jwt.Token) (<span style="color:#8be9fd;font-style:italic">interface</span>{}, <span style="color:#8be9fd">error</span>) {
+		<span style="color:#ff79c6">return</span> jwtKey, <span style="color:#ff79c6">nil</span>
 	})
-	switch {
-	case err == jwt.ErrSignatureInvalid:
-		return nil, nil
-	case err != nil:
-		return nil, fmt.Errorf(&quot;Could not parse jwt, cause %w&quot;, err)
-	case !tkn.Valid:
-		return nil, nil
+	<span style="color:#ff79c6">switch</span> {
+	<span style="color:#ff79c6">case</span> err <span style="color:#ff79c6">==</span> jwt.ErrSignatureInvalid:
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, <span style="color:#ff79c6">nil</span>
+	<span style="color:#ff79c6">case</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span>:
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, fmt.<span style="color:#50fa7b">Errorf</span>(<span style="color:#f1fa8c">&#34;Could not parse jwt, cause %w&#34;</span>, err)
+	<span style="color:#ff79c6">case</span> !tkn.Valid:
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, <span style="color:#ff79c6">nil</span>
 	}
 
-	return claims, nil
+	<span style="color:#ff79c6">return</span> claims, <span style="color:#ff79c6">nil</span>
 }
 
-</code></pre>
-
-<p>In a real world problem, you will provably implement some cool frontend that communicates with this service. For simplicity, I&rsquo;ve added a login GET handler that returns a the front end. This takes advantage of the go html/template package. See the source code to see the template code. I&rsquo;m only displaying the name for the logout template.</p>
-
-<pre><code class="language-go">func loginGETHandler(w http.ResponseWriter, r *http.Request) {
-	claims, err := getSession(r)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
+</code></pre></td></tr></table>
+</div>
+</div><p>In a real world problem, you will provably implement some cool frontend that communicates with this service. For simplicity, I&rsquo;ve added a login GET handler that returns a the front end. This takes advantage of the go html/template package. See the source code to see the template code. I&rsquo;m only displaying the name for the logout template.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">loginGETHandler</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+	claims, err <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">getSession</span>(r)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		w.<span style="color:#50fa7b">WriteHeader</span>(http.StatusBadRequest)
+		<span style="color:#ff79c6">return</span>
 	}
 
-	pages := template.Must(template.ParseGlob(&quot;templates/*.tmpl&quot;))
+	pages <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">Must</span>(template.<span style="color:#50fa7b">ParseGlob</span>(<span style="color:#f1fa8c">&#34;templates/*.tmpl&#34;</span>))
 
-	switch {
-	case claims != nil:
-		pages.ExecuteTemplate(w, &quot;logout.tmpl&quot;, claims)
-	default:
-		pages.ExecuteTemplate(w, &quot;login.tmpl&quot;, nil)
+	<span style="color:#ff79c6">switch</span> {
+	<span style="color:#ff79c6">case</span> claims <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span>:
+		pages.<span style="color:#50fa7b">ExecuteTemplate</span>(w, <span style="color:#f1fa8c">&#34;logout.tmpl&#34;</span>, claims)
+	<span style="color:#ff79c6">default</span>:
+		pages.<span style="color:#50fa7b">ExecuteTemplate</span>(w, <span style="color:#f1fa8c">&#34;login.tmpl&#34;</span>, <span style="color:#ff79c6">nil</span>)
 	}
 
 }
-</code></pre>
-
-<div class="expand">
+</code></pre></td></tr></table>
+</div>
+</div><div class="expand">
     <div class="expand-label" id="expand-label-1" style="cursor: pointer;">
         <span>
             
@@ -299,168 +494,335 @@ func getSession(r *http.Request) (*Claims, error) {
         </span>
     </div>
     <div class="expand-content" id="expand-content-1" style="display: none;">
-        <pre><code class="language-go">package main
+        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">149
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">150
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">151
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">152
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">153
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">154
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">155
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">156
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">157
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">158
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">159
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">160
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">161
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
 
-import (
-	&quot;encoding/json&quot;
-	&quot;flag&quot;
-	&quot;fmt&quot;
-	&quot;html/template&quot;
-	&quot;log&quot;
-	&quot;net/http&quot;
-	&quot;time&quot;
+<span style="color:#ff79c6">import</span> (
+	<span style="color:#f1fa8c">&#34;encoding/json&#34;</span>
+	<span style="color:#f1fa8c">&#34;flag&#34;</span>
+	<span style="color:#f1fa8c">&#34;fmt&#34;</span>
+	<span style="color:#f1fa8c">&#34;html/template&#34;</span>
+	<span style="color:#f1fa8c">&#34;log&#34;</span>
+	<span style="color:#f1fa8c">&#34;net/http&#34;</span>
+	<span style="color:#f1fa8c">&#34;time&#34;</span>
 
-	&quot;github.com/dgrijalva/jwt-go&quot;
-	&quot;github.com/gorilla/mux&quot;
+	<span style="color:#f1fa8c">&#34;github.com/dgrijalva/jwt-go&#34;</span>
+	<span style="color:#f1fa8c">&#34;github.com/gorilla/mux&#34;</span>
 )
 
-// Create the JWT key used to create the signature
-var jwtKey = []byte(&quot;my_secret_key&quot;)
+<span style="color:#6272a4">// Create the JWT key used to create the signature
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">var</span> jwtKey = []<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;my_secret_key&#34;</span>)
 
-type UserData struct {
-	Name        string `json:&quot;name,omitempty&quot;`
-	Email       string `json:&quot;email,omitempty&quot;`
-	AccessLevel int    `json:&quot;access_level,omitempty&quot;`
+<span style="color:#8be9fd;font-style:italic">type</span> UserData <span style="color:#8be9fd;font-style:italic">struct</span> {
+	Name        <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`json:&#34;name,omitempty&#34;`</span>
+	Email       <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`json:&#34;email,omitempty&#34;`</span>
+	AccessLevel <span style="color:#8be9fd">int</span>    <span style="color:#f1fa8c">`json:&#34;access_level,omitempty&#34;`</span>
 }
 
-type Claims struct {
-	User *UserData `json:&quot;user&quot;`
+<span style="color:#8be9fd;font-style:italic">type</span> Claims <span style="color:#8be9fd;font-style:italic">struct</span> {
+	User <span style="color:#ff79c6">*</span>UserData <span style="color:#f1fa8c">`json:&#34;user&#34;`</span>
 	jwt.StandardClaims
 }
 
-var basePath string
+<span style="color:#8be9fd;font-style:italic">var</span> basePath <span style="color:#8be9fd">string</span>
 
-func main() {
-	flag.StringVar(&amp;basePath, &quot;base-path&quot;, &quot;/&quot;, &quot;indicates the base path where the app is running&quot;)
-	flag.Parse()
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+	flag.<span style="color:#50fa7b">StringVar</span>(<span style="color:#ff79c6">&amp;</span>basePath, <span style="color:#f1fa8c">&#34;base-path&#34;</span>, <span style="color:#f1fa8c">&#34;/&#34;</span>, <span style="color:#f1fa8c">&#34;indicates the base path where the app is running&#34;</span>)
+	flag.<span style="color:#50fa7b">Parse</span>()
 
-	r := mux.NewRouter().
-		PathPrefix(basePath).
-		Subrouter()
-	r.Path(&quot;/auth&quot;).Methods(&quot;GET&quot;).HandlerFunc(authHandler)
-	r.Path(&quot;/login&quot;).Methods(&quot;POST&quot;).HandlerFunc(loginPOSTHandler)
-	r.Path(&quot;/logout&quot;).Methods(&quot;POST&quot;).HandlerFunc(logoutPOSTHandler)
-	r.PathPrefix(&quot;/&quot;).Methods(&quot;GET&quot;).HandlerFunc(loginGETHandler)
+	r <span style="color:#ff79c6">:=</span> mux.<span style="color:#50fa7b">NewRouter</span>().
+		<span style="color:#50fa7b">PathPrefix</span>(basePath).
+		<span style="color:#50fa7b">Subrouter</span>()
+	r.<span style="color:#50fa7b">Path</span>(<span style="color:#f1fa8c">&#34;/auth&#34;</span>).<span style="color:#50fa7b">Methods</span>(<span style="color:#f1fa8c">&#34;GET&#34;</span>).<span style="color:#50fa7b">HandlerFunc</span>(authHandler)
+	r.<span style="color:#50fa7b">Path</span>(<span style="color:#f1fa8c">&#34;/login&#34;</span>).<span style="color:#50fa7b">Methods</span>(<span style="color:#f1fa8c">&#34;POST&#34;</span>).<span style="color:#50fa7b">HandlerFunc</span>(loginPOSTHandler)
+	r.<span style="color:#50fa7b">Path</span>(<span style="color:#f1fa8c">&#34;/logout&#34;</span>).<span style="color:#50fa7b">Methods</span>(<span style="color:#f1fa8c">&#34;POST&#34;</span>).<span style="color:#50fa7b">HandlerFunc</span>(logoutPOSTHandler)
+	r.<span style="color:#50fa7b">PathPrefix</span>(<span style="color:#f1fa8c">&#34;/&#34;</span>).<span style="color:#50fa7b">Methods</span>(<span style="color:#f1fa8c">&#34;GET&#34;</span>).<span style="color:#50fa7b">HandlerFunc</span>(loginGETHandler)
 
-	http.Handle(&quot;/&quot;, r)
+	http.<span style="color:#50fa7b">Handle</span>(<span style="color:#f1fa8c">&#34;/&#34;</span>, r)
 
-	log.Println(&quot;ready&quot;)
-	http.ListenAndServe(&quot;:8080&quot;, nil)
+	log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;ready&#34;</span>)
+	http.<span style="color:#50fa7b">ListenAndServe</span>(<span style="color:#f1fa8c">&#34;:8080&#34;</span>, <span style="color:#ff79c6">nil</span>)
 }
 
-func loginPOSTHandler(w http.ResponseWriter, r *http.Request) {
-	username := r.FormValue(&quot;username&quot;)
-	password := r.FormValue(&quot;password&quot;)
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">loginPOSTHandler</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+	username <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">FormValue</span>(<span style="color:#f1fa8c">&#34;username&#34;</span>)
+	password <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">FormValue</span>(<span style="color:#f1fa8c">&#34;password&#34;</span>)
 
-	user := loginUser(username, password)
-	if user == nil {
-		w.WriteHeader(http.StatusUnauthorized)
-		return
+	user <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">loginUser</span>(username, password)
+	<span style="color:#ff79c6">if</span> user <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">nil</span> {
+		w.<span style="color:#50fa7b">WriteHeader</span>(http.StatusUnauthorized)
+		<span style="color:#ff79c6">return</span>
 	}
 
-	expirationTime := time.Now().Add(5 * time.Minute)
-	claims := &amp;Claims{
+	expirationTime <span style="color:#ff79c6">:=</span> time.<span style="color:#50fa7b">Now</span>().<span style="color:#50fa7b">Add</span>(<span style="color:#bd93f9">5</span> <span style="color:#ff79c6">*</span> time.Minute)
+	claims <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>Claims{
 		User: user,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: expirationTime.Unix(),
+			ExpiresAt: expirationTime.<span style="color:#50fa7b">Unix</span>(),
 		},
 	}
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString(jwtKey)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
+	token <span style="color:#ff79c6">:=</span> jwt.<span style="color:#50fa7b">NewWithClaims</span>(jwt.SigningMethodHS256, claims)
+	tokenString, err <span style="color:#ff79c6">:=</span> token.<span style="color:#50fa7b">SignedString</span>(jwtKey)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		w.<span style="color:#50fa7b">WriteHeader</span>(http.StatusInternalServerError)
+		<span style="color:#ff79c6">return</span>
 	}
 
-	http.SetCookie(w, &amp;http.Cookie{
-		Name:     &quot;token&quot;,
-		Path:     &quot;/&quot;,
+	http.<span style="color:#50fa7b">SetCookie</span>(w, <span style="color:#ff79c6">&amp;</span>http.Cookie{
+		Name:     <span style="color:#f1fa8c">&#34;token&#34;</span>,
+		Path:     <span style="color:#f1fa8c">&#34;/&#34;</span>,
 		Value:    tokenString,
 		Expires:  expirationTime,
-		HttpOnly: true,
+		HttpOnly: <span style="color:#ff79c6">true</span>,
 	})
 
-	http.Redirect(w, r, basePath, http.StatusFound)
+	http.<span style="color:#50fa7b">Redirect</span>(w, r, basePath, http.StatusFound)
 }
 
-func loginGETHandler(w http.ResponseWriter, r *http.Request) {
-	claims, err := getSession(r)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">loginGETHandler</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+	claims, err <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">getSession</span>(r)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		w.<span style="color:#50fa7b">WriteHeader</span>(http.StatusBadRequest)
+		<span style="color:#ff79c6">return</span>
 	}
 
-	pages := template.Must(template.ParseGlob(&quot;templates/*.tmpl&quot;))
+	pages <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">Must</span>(template.<span style="color:#50fa7b">ParseGlob</span>(<span style="color:#f1fa8c">&#34;templates/*.tmpl&#34;</span>))
 
-	switch {
-	case claims != nil:
-		pages.ExecuteTemplate(w, &quot;logout.tmpl&quot;, claims)
-	default:
-		pages.ExecuteTemplate(w, &quot;login.tmpl&quot;, claims)
+	<span style="color:#ff79c6">switch</span> {
+	<span style="color:#ff79c6">case</span> claims <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span>:
+		pages.<span style="color:#50fa7b">ExecuteTemplate</span>(w, <span style="color:#f1fa8c">&#34;logout.tmpl&#34;</span>, claims)
+	<span style="color:#ff79c6">default</span>:
+		pages.<span style="color:#50fa7b">ExecuteTemplate</span>(w, <span style="color:#f1fa8c">&#34;login.tmpl&#34;</span>, claims)
 	}
 
 }
 
-func loginUser(username string, password string) *UserData {
-	// TODO: Now any user can login, implement proper validation
-	return &amp;UserData{
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">loginUser</span>(username <span style="color:#8be9fd">string</span>, password <span style="color:#8be9fd">string</span>) <span style="color:#ff79c6">*</span>UserData {
+	<span style="color:#6272a4">// TODO: Now any user can login, implement proper validation
+</span><span style="color:#6272a4"></span>	<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>UserData{
 		Name: username,
 	}
 }
 
-func logoutPOSTHandler(w http.ResponseWriter, r *http.Request) {
-	http.SetCookie(w, &amp;http.Cookie{
-		Name:     &quot;token&quot;,
-		Path:     &quot;/&quot;,
-		MaxAge:   -1,
-		HttpOnly: true,
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">logoutPOSTHandler</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+	http.<span style="color:#50fa7b">SetCookie</span>(w, <span style="color:#ff79c6">&amp;</span>http.Cookie{
+		Name:     <span style="color:#f1fa8c">&#34;token&#34;</span>,
+		Path:     <span style="color:#f1fa8c">&#34;/&#34;</span>,
+		MaxAge:   <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,
+		HttpOnly: <span style="color:#ff79c6">true</span>,
 	})
 
-	http.Redirect(w, r, basePath, http.StatusFound)
+	http.<span style="color:#50fa7b">Redirect</span>(w, r, basePath, http.StatusFound)
 }
 
-func authHandler(w http.ResponseWriter, r *http.Request) {
-	claims, err := getSession(r)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">authHandler</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+	claims, err <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">getSession</span>(r)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		w.<span style="color:#50fa7b">WriteHeader</span>(http.StatusBadRequest)
+		<span style="color:#ff79c6">return</span>
 	}
-	if claims == nil {
-		w.WriteHeader(http.StatusUnauthorized)
-		return
+	<span style="color:#ff79c6">if</span> claims <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">nil</span> {
+		w.<span style="color:#50fa7b">WriteHeader</span>(http.StatusUnauthorized)
+		<span style="color:#ff79c6">return</span>
 	}
-	encoder := json.NewEncoder(w)
-	encoder.Encode(claims.User)
+	encoder <span style="color:#ff79c6">:=</span> json.<span style="color:#50fa7b">NewEncoder</span>(w)
+	encoder.<span style="color:#50fa7b">Encode</span>(claims.User)
 }
 
-func getSession(r *http.Request) (*Claims, error) {
-	c, err := r.Cookie(&quot;token&quot;)
-	switch {
-	case err == http.ErrNoCookie:
-		return nil, nil
-	case err != nil:
-		return nil, fmt.Errorf(&quot;Could not get token cookie. cause %w&quot;, err)
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">getSession</span>(r <span style="color:#ff79c6">*</span>http.Request) (<span style="color:#ff79c6">*</span>Claims, <span style="color:#8be9fd">error</span>) {
+	c, err <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">Cookie</span>(<span style="color:#f1fa8c">&#34;token&#34;</span>)
+	<span style="color:#ff79c6">switch</span> {
+	<span style="color:#ff79c6">case</span> err <span style="color:#ff79c6">==</span> http.ErrNoCookie:
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, <span style="color:#ff79c6">nil</span>
+	<span style="color:#ff79c6">case</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span>:
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, fmt.<span style="color:#50fa7b">Errorf</span>(<span style="color:#f1fa8c">&#34;Could not get token cookie. cause %w&#34;</span>, err)
 	}
 
-	tokenString := c.Value
-	claims := &amp;Claims{}
+	tokenString <span style="color:#ff79c6">:=</span> c.Value
+	claims <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>Claims{}
 
-	tkn, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-		return jwtKey, nil
+	tkn, err <span style="color:#ff79c6">:=</span> jwt.<span style="color:#50fa7b">ParseWithClaims</span>(tokenString, claims, <span style="color:#8be9fd;font-style:italic">func</span>(token <span style="color:#ff79c6">*</span>jwt.Token) (<span style="color:#8be9fd;font-style:italic">interface</span>{}, <span style="color:#8be9fd">error</span>) {
+		<span style="color:#ff79c6">return</span> jwtKey, <span style="color:#ff79c6">nil</span>
 	})
-	switch {
-	case err == jwt.ErrSignatureInvalid:
-		return nil, nil
-	case err != nil:
-		return nil, fmt.Errorf(&quot;Could not parse jwt, cause %w&quot;, err)
-	case !tkn.Valid:
-		return nil, nil
+	<span style="color:#ff79c6">switch</span> {
+	<span style="color:#ff79c6">case</span> err <span style="color:#ff79c6">==</span> jwt.ErrSignatureInvalid:
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, <span style="color:#ff79c6">nil</span>
+	<span style="color:#ff79c6">case</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span>:
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, fmt.<span style="color:#50fa7b">Errorf</span>(<span style="color:#f1fa8c">&#34;Could not parse jwt, cause %w&#34;</span>, err)
+	<span style="color:#ff79c6">case</span> !tkn.Valid:
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, <span style="color:#ff79c6">nil</span>
 	}
 
-	return claims, nil
+	<span style="color:#ff79c6">return</span> claims, <span style="color:#ff79c6">nil</span>
 }
-</code></pre>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
     <script>
         function collapse(e) {
@@ -485,120 +847,149 @@ func getSession(r *http.Request) (*Claims, error) {
         document.getElementById("expand-label-1").addEventListener("click", collapse);
     </script>
 </div>
-
 <h2 id="dockerize">Dockerize</h2>
-
 <p>Like any other go project, let&rsquo;s use a simple multi-stage alpine image to get the minimal image size.</p>
-
 <div class="admonition tip"><p class="admonition-title">tip</p>
-  
 <p>Copy first <strong>go.mod</strong> and <strong>go.sum</strong> and use <strong>go mod download</strong> to take advantage of Docker cache. This will save tons of time downloading dependencies.</p>
-
-
 </div>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> golang:alpine AS build</span>
 
-<pre><code class="language-Dockerfile">FROM golang:alpine AS build
+<span style="color:#ff79c6">WORKDIR</span><span style="color:#f1fa8c"> /app</span>
 
-WORKDIR /app
+<span style="color:#ff79c6">COPY</span> go.mod .
+<span style="color:#ff79c6">COPY</span> go.sum .
+<span style="color:#ff79c6">RUN</span> go mod download
 
-COPY go.mod .
-COPY go.sum .
-RUN go mod download
+<span style="color:#ff79c6">COPY</span> *.go .
+<span style="color:#ff79c6">RUN</span> go build
 
-COPY *.go .
-RUN go build
+<span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> alpine as run</span>
 
-FROM alpine as run
+<span style="color:#ff79c6">WORKDIR</span><span style="color:#f1fa8c"> /app</span>
 
-WORKDIR /app
+<span style="color:#ff79c6">COPY</span> templates templates
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>build /app/auth-server /app/
 
-COPY templates templates
-COPY --from=build /app/auth-server /app/
-
-RUN chmod +x auth-server
-ENTRYPOINT [ &quot;./auth-server&quot; ]
-</code></pre>
-
-<h2 id="final-docker-compose-yaml">Final docker-compose.yaml</h2>
-
+<span style="color:#ff79c6">RUN</span> chmod +x auth-server
+<span style="color:#ff79c6">ENTRYPOINT</span> [ <span style="color:#f1fa8c">&#34;./auth-server&#34;</span> ]
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="final-docker-composeyaml">Final docker-compose.yaml</h2>
 <p>Now we just have to add the auth-server to the docker compose and provide the base path to ensure that it works properly.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yml" data-lang="yml"><span style="color:#ff79c6">version</span>: <span style="color:#f1fa8c">&#34;2.2&#34;</span>
 
-<pre><code class="language-yml">version: &quot;2.2&quot;
-
-services:
-  nginx:
-    image: nginx
-    volumes:
+<span style="color:#ff79c6">services</span>:
+  <span style="color:#ff79c6">nginx</span>:
+    <span style="color:#ff79c6">image</span>: nginx
+    <span style="color:#ff79c6">volumes</span>:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/localhost.crt:/etc/ssl/certs/localhost.crt:ro
       - ./nginx/localhost.key:/etc/ssl/private/localhost.key:ro
-    ports:
-      - 80:80
-      - 443:443
+    <span style="color:#ff79c6">ports</span>:
+      - <span style="color:#bd93f9">80</span>:<span style="color:#bd93f9">80</span>
+      - <span style="color:#bd93f9">443</span>:<span style="color:#bd93f9">443</span>
 
-  auth-server:
-    build: auth-server
-    command: [&quot;--base-path&quot;, &quot;/users/&quot;]
+  <span style="color:#ff79c6">auth-server</span>:
+    <span style="color:#ff79c6">build</span>: auth-server
+    <span style="color:#ff79c6">command</span>: [<span style="color:#f1fa8c">&#34;--base-path&#34;</span>, <span style="color:#f1fa8c">&#34;/users/&#34;</span>]
 
-  whoami:
-    image: jwilder/whoami
-    ports:
-      - 8000:8000
-</code></pre>
-
-<h1 id="run-it">Run it</h1>
-
+  <span style="color:#ff79c6">whoami</span>:
+    <span style="color:#ff79c6">image</span>: jwilder/whoami
+    <span style="color:#ff79c6">ports</span>:
+      - <span style="color:#bd93f9">8000</span>:<span style="color:#bd93f9">8000</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="run-it">Run it</h1>
 <p>Start the service with docker compose and ensure to build the images again.</p>
-
-<pre><code class="language-bash">docker-compose up --build
-</code></pre>
-
-<p>The workflow is:</p>
-
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">docker-compose up --build
+</code></pre></td></tr></table>
+</div>
+</div><p>The workflow is:</p>
 <ol>
-<li>Navigate to <a href="https://localhost">https://localhost</a> to see that you are not allowed.</li>
-<li>Navigate to <a href="https://localhost/users/">https://localhost/users/</a> to see the login form.</li>
+<li>Navigate to https://localhost to see that you are not allowed.</li>
+<li>Navigate to https://localhost/users/ to see the login form.</li>
 <li>Login using the same name and password, IE: MetalBlueberry, MetalBluberry.</li>
-<li>Go again to <a href="https://localhost">https://localhost</a> to see the whoami container.</li>
-<li>Go to <a href="https://localhost">https://localhost</a> to see the logout form.</li>
+<li>Go again to https://localhost to see the whoami container.</li>
+<li>Go to https://localhost to see the logout form.</li>
 <li>Click logout</li>
-<li>Navigate to <a href="https://localhost">https://localhost</a> to see that you are not allowed.</li>
+<li>Navigate to https://localhost to see that you are not allowed.</li>
 <li>Repeat until you get bored.</li>
 </ol>
-
 <h1 id="final-thoughts">Final thoughts</h1>
-
 <p>How to protect the user/passwords or register new users is out of the scope, but I think <strong>you can easily extend this example</strong> to do whatever you want. Also, I would like to implement the &ldquo;next&rdquo; behaviour to properly redirect the users when they try to access to a protected page and instruct nginx to redirect users to login page if the page is protected. But again, this is out of the scope. Maybe in the near future.</p>
-
 <p>The best thing about this approach is that you can protect anything without actually modifying it. If you have some legacy app or old code that do not implement user auth, this can easily add a new layer of protection without too much effort.</p>
-
 <h1 id="conclusion">Conclusion</h1>
-
-<p>I hope you&rsquo;ve enjoyed this post and <strong>I will appreciate any feedback</strong> in the comments bellow. I&rsquo;m fairly new to the world of nginx and I&rsquo;m discovering new things every day. For example, looks like there is a <a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-jwt-authentication/">JWT validation directive</a> for nginx that will effectively replace the auth endpoint implemented in this tutorial.</p>
-
-<p>I&rsquo;m learning <a href="https://docs.traefik.io/">Traefik</a> at the same time and I&rsquo;m enjoying it a lot. I know that it offers less features than nginx, but looks like a really good idea if you are dealing with docker-compose or kubernetes. I&rsquo;m going to give it a try. From the docs, looks like it is compatible with the <a href="https://docs.traefik.io/middlewares/forwardauth/">auth request pattern</a></p>
-
+<p>I hope you&rsquo;ve enjoyed this post and <strong>I will appreciate any feedback</strong> in the comments bellow. I&rsquo;m fairly new to the world of nginx and I&rsquo;m discovering new things every day. For example, looks like there is a <a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-jwt-authentication/"target="_blank">JWT validation directive</a> for nginx that will effectively replace the auth endpoint implemented in this tutorial.</p>
+<p>I&rsquo;m learning <a href="https://docs.traefik.io/"target="_blank">Traefik</a> at the same time and I&rsquo;m enjoying it a lot. I know that it offers less features than nginx, but looks like a really good idea if you are dealing with docker-compose or kubernetes. I&rsquo;m going to give it a try. From the docs, looks like it is compatible with the <a href="https://docs.traefik.io/middlewares/forwardauth/"target="_blank">auth request pattern</a></p>
 <p>.</p>
-
 <p>And as always, Thanks for watching.</p>
-
 <p>.</p>
-
 <p>Sorry, I&rsquo;ve been watching a lot of Michel Toys last week.</p>
-
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube-nocookie.com/embed/GjgImsVqPfg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
-
 <h1 id="references">References</h1>
-
 <ul>
-<li><a href="https://github.com/MetalBlueberry/AuthServer">Source Code</a></li>
-<li><a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-subrequest-authentication/">nginx documentation - subrequest authentication</a></li>
-<li><a href="https://www.humankode.com/ssl/create-a-selfsigned-certificate-for-nginx-in-5-minutes">nginx - Setup ssl for localhost</a></li>
-<li><a href="https://github.com/pusher/oauth2_proxy">someone did something similar - oauth2_proxy</a></li>
-<li><a href="https://www.w3schools.com/howto/howto_css_login_form.asp">html login form</a></li>
-<li><a href="https://www.sohamkamani.com/blog/golang/2019-01-01-jwt-authentication/">Go JWT auth</a></li>
+<li><a href="https://github.com/MetalBlueberry/AuthServer"target="_blank">Source Code</a></li>
+<li><a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-subrequest-authentication/"target="_blank">nginx documentation - subrequest authentication</a></li>
+<li><a href="https://www.humankode.com/ssl/create-a-selfsigned-certificate-for-nginx-in-5-minutes"target="_blank">nginx - Setup ssl for localhost</a></li>
+<li><a href="https://github.com/pusher/oauth2_proxy"target="_blank">someone did something similar - oauth2_proxy</a></li>
+<li><a href="https://www.w3schools.com/howto/howto_css_login_form.asp"target="_blank">html login form</a></li>
+<li><a href="https://www.sohamkamani.com/blog/golang/2019-01-01-jwt-authentication/"target="_blank">Go JWT auth</a></li>
 </ul></article><section class="article labels"><a class="category" href=/categories/howto/>howto</a><a class="tag" href=/tags/go/>go</a><a class="tag" href=/tags/docker/>docker</a></section></div><section class="article navigation"><p><a class="link" href="/post/howto/2020-03-11_use_git_to_track_git_versions/"><span class="li">&larr;</span>Use Git to track Git versions</a></p><p><a class="link" href="/post/blog/2020-01-11_boredom/"><span class="li">&rarr;</span>How to get bored</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
     label="comment" theme="github-light" crossorigin="anonymous" async>
     </script></div><section id="footer" class="footer"><div class="footer-wrap">

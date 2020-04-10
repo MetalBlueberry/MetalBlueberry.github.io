@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Mandelbrot Set Calculation&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Mandelbrot Set Calculation"/>
@@ -16,239 +16,291 @@
 <body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">Mandelbrot Set Calculation</h1><p class="article date">Tuesday, October 29, 2019<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>The Mandelbrot set is one of the most famous fractals and it is really simple to draw. Personally I enjoy a lot seeing how simple rules lead to complex patterns.</p>
-
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1024px-Mandel_zoom_00_mandelbrot_set.jpg" alt="Mandelbrot set image" /></p>
-
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1024px-Mandel_zoom_00_mandelbrot_set.jpg"><img  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1024px-Mandel_zoom_00_mandelbrot_set.jpg"
+        alt="Mandelbrot set image"/></a></p>
 <blockquote>
-<p>Mandelbrot set representation from <a href="https://en.wikipedia.org/wiki/Mandelbrot_set">wikipedia</a>.</p>
+<p>Mandelbrot set representation from <a href="https://en.wikipedia.org/wiki/Mandelbrot_set"target="_blank">wikipedia</a>.</p>
 </blockquote>
-
 <h2 id="definition">Definition</h2>
-
 <p>The Mandelbrot set is defined by a set of complex numbers for which the following function does not diverge when iterated from z = 0. This means that the value remains bounded in absolute value.</p>
-
 <p>$$
 f_c(z) = z^2 + c
 $$</p>
-
 <p>The following image displays the axes to see where the set is located in space. x axis is the real part and y axis is the imaginary part.</p>
-
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Mandelset_hires.png/322px-Mandelset_hires.png#center" alt="Mandelbrot set position" /></p>
-
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Mandelset_hires.png/322px-Mandelset_hires.png#center"><img  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Mandelset_hires.png/322px-Mandelset_hires.png#center"
+        alt="Mandelbrot set position"/></a></p>
 <h2 id="keep-things-real">Keep things real</h2>
-
 <p>Whit the previous image in mind, we can start playing with some sample numbers to understand how to generate the image. Let&rsquo;s pick a point outside the set <code>(1,0)</code> and perform the iterations with the previously defined function.</p>
-
 <p>$$ z_0 := 0 $$
 $$ c := 1 + 0i $$
 $$ z_1 = f_c(z_0) = z^2 + c $$
 $$ z_1 = f_c(0) = 0^2 + 1 + 0i = 1$$</p>
-
 <p>After the fist iteration, $z_1 = 1$ and for the next iteration we just need to input the value to the function again.</p>
-
 <p>$$ z_1 := 1 $$
 $$ c := 1 + 0i $$
 $$ z_2 = f_c(z_1) = z^2 + c $$
 $$ z_2 = f_c(0) = 1^2 + 1 + 0i = 2$$</p>
-
 <p>if we continue the iterations, we can see that the value keeps growing forever.</p>
-
 <p>$$z_0 = 0$$
 $$z_1 = 1$$
 $$z_2 = 2$$
 $$z_3 = 5$$
 $$z_4 = 26$$</p>
-
 <p>This means that the point doesn&rsquo;t belong to the set, as we know from the image. Let&rsquo;s pick a point that we know that belongs to the set. <code>(-1,0)</code>. if we are right, the iterations must keep within a bounded value.</p>
-
 <p>$$ z_0 := 0 $$
 $$ c := -1 + 0i $$
 $$ z_1 = f_c(z_0) = z^2 + c $$
 $$ z_1 = f_c(0) = 0^2 + -1 + 0i = -1$$
 $$ z_2 = f_c(z_1) = z^2 + c $$
 $$ z_2 = f_c(0) = (-1)^2 + -1 + 0i = 0$$</p>
-
 <p>Wops&hellip; turns out that $z_2 = z_0$ and this means that we are stuck in a infinite loop. You can iterate as much as you want but values will be either -1 or 0 for ever.</p>
-
 <h2 id="let-your-imagination-fly">Let your imagination fly</h2>
-
 <p>Things get interesting the you add imaginary numbers to the previous equation so lets pick another point, but this time with imaginary values. <code>(-0.5, 0.5)</code></p>
-
 <blockquote>
 <p>Remember that $i^2 = -1$</p>
 </blockquote>
-
 <p>$$ z_0 := 0 $$
 $$ c := -0.5 + 0.5i $$
 $$ z_1 = f_c(0) = 0^2 + -0.5 + 0.5i = -0.5 + 0.5i $$
 $$ z_2 = f_c(z_1) = (-0.5 + 0.5i)^2 + -0.5 + 0.5i = 0.25 - 2*0.25i - 0.25 - 0.5 + 0.5i $$
 $$ z_2 = - 0.5 $$</p>
-
 <p>Let&rsquo;s keep iterating and see what we get. Remember that we expect this point to belong to the set, so it should stay within a bounded value.</p>
-
 <p>$$z_1=(-0.500000+0.500000i)$$</p>
-
 <p>$$z_2=(-0.500000-0.000000i)$$</p>
-
 <p>$$z_3=(-0.250000+0.500000i)$$</p>
-
 <p>$$z_4=(-0.687500+0.250000i)$$</p>
-
 <p>$$z_5=(-0.089844+0.156250i)$$</p>
-
 <p>$$z_6=(-0.516342+0.471924i)$$</p>
-
 <p>$$z_7=(-0.456103+0.012652i)$$</p>
-
 <p>$$z_8=(-0.292130+0.488459i)$$</p>
-
 <p>$$z_9=(-0.653252+0.214613i)$$</p>
-
 <p>$$z_{10}=(-0.119320+0.219608i)$$</p>
-
 <p>$$z_{20}=(-0.170860+0.314224i)$$</p>
-
 <p>$$z_{30}=(-0.238482+0.376027i)$$</p>
-
 <p>$$z_{40}=(-0.305512+0.399379i)$$</p>
-
 <p>$$z_{50}=(-0.360070+0.401208i)$$</p>
-
 <p>$$z_{60}=(-0.403868+0.390242i)$$</p>
-
 <p>After 60 iterations, looks like the value stays within a bounded value but there is no guarantee that the value will remain here and the only way to know it is to keep iterating. That is why we need to define a maximum number of iterations to give up.</p>
-
 <p>Last try with an imaginary number outside the set. <code>(0,1)</code></p>
-
 <p>$$ z_2 = (1i)^2 + i = -1+i $$
 $$ z_3 = (-1+i)^2 + i = 1 -2i -1 + i = -i $$
 $$ z_4 = (-i)^2 + i = 1 + i = -1 + i $$
 $$ z_5 = (-1+i)^2 + i = 1 -2i -1 + i = -i $$</p>
-
 <p>What happen here? $z_2 = z_5$ and this means that we are stuck in a infinite loop therefore the point belongs to the set. This is just a special point that belongs to the set but if you move a minimal distance from it, the iteration quickly scapes to infinity. You can visualize this as balancing a ball in a pencil. It is possible but the slightest perturbation will make the ball fall. For this reason, you don&rsquo;t see anything if you zoom in this zone of the Mandelbrot set.</p>
-
 <h2 id="let-the-computer-do-its-work">Let the computer do its work</h2>
-
 <p>I&rsquo;m tired of manually calculating this values so lets create some code to do it for us.</p>
-
-<p>First, we need to have a <a href="https://en.wikipedia.org/wiki/Mandelbrot_set#Formal_definition">formal definition</a> of the Mandelbrot set. This can be obtained from wikipedia.</p>
-
+<p>First, we need to have a <a href="https://en.wikipedia.org/wiki/Mandelbrot_set#Formal_definition"target="_blank">formal definition</a> of the Mandelbrot set. This can be obtained from wikipedia.</p>
 <p>$$ z_{n+1} = z^2_n+c $$</p>
-
 <p>$$ c ∈ M ↔ limsup_{z-&gt;∞}|z_{n+1}| &lt; 2 $$</p>
-
 <p>The important information here is that we already know the condition of &ldquo;diverge&rdquo;. When de module of the value z is bigger than 2, we know that the point is not in the set.</p>
-
 <h3 id="mandelbrot-point">Mandelbrot point</h3>
-
 <p>I&rsquo;m going to create a structure mandelbrot.Point to hold the necessary information to calculate any given point of the set. This will contain the methods Calculate, Diverges and Iterations.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> mandelbrot
 
-<pre><code class="language-go">package mandelbrot
+<span style="color:#ff79c6">import</span> ()
 
-import ()
-
-type Point struct {
-  Point      complex128
-  iterations int
-  z          complex128
+<span style="color:#8be9fd;font-style:italic">type</span> Point <span style="color:#8be9fd;font-style:italic">struct</span> {
+  Point      <span style="color:#8be9fd">complex128</span>
+  iterations <span style="color:#8be9fd">int</span>
+  z          <span style="color:#8be9fd">complex128</span>
 }
 
-// NewPoint returns a new point at a given coordenates
-func NewPoint(r, i float64) *Point {
-  return &amp;Point{
-    Point: complex(r, i),
+<span style="color:#6272a4">// NewPoint returns a new point at a given coordenates
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">NewPoint</span>(r, i <span style="color:#8be9fd">float64</span>) <span style="color:#ff79c6">*</span>Point {
+  <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>Point{
+    Point: <span style="color:#8be9fd;font-style:italic">complex</span>(r, i),
   }
 }
 
-// Calculate performs as many calculations as MaxIterations to determine if the point belongs to the set or not
-func (m *Point) Calculate(MaxIterations int) {
-  panic(&quot;To be implemented&quot;)
+<span style="color:#6272a4">// Calculate performs as many calculations as MaxIterations to determine if the point belongs to the set or not
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (m <span style="color:#ff79c6">*</span>Point) <span style="color:#50fa7b">Calculate</span>(MaxIterations <span style="color:#8be9fd">int</span>) {
+  <span style="color:#8be9fd;font-style:italic">panic</span>(<span style="color:#f1fa8c">&#34;To be implemented&#34;</span>)
 }
 
-// Diverges returns whether the points diverges from the set.
-func (m *Point) Diverges() bool {
-  panic(&quot;To be implemented&quot;)
+<span style="color:#6272a4">// Diverges returns whether the points diverges from the set.
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (m <span style="color:#ff79c6">*</span>Point) <span style="color:#50fa7b">Diverges</span>() <span style="color:#8be9fd">bool</span> {
+  <span style="color:#8be9fd;font-style:italic">panic</span>(<span style="color:#f1fa8c">&#34;To be implemented&#34;</span>)
 }
 
-// Iterations returns the number of performed iterations.
-func (m *Point) Iterations() int {
-  return m.Iterations()
+<span style="color:#6272a4">// Iterations returns the number of performed iterations.
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (m <span style="color:#ff79c6">*</span>Point) <span style="color:#50fa7b">Iterations</span>() <span style="color:#8be9fd">int</span> {
+  <span style="color:#ff79c6">return</span> m.<span style="color:#50fa7b">Iterations</span>()
 }
-</code></pre>
+</code></pre></td></tr></table>
+</div>
+</div><p>it is time to write tests to develop this functionality. TDD fits really well in cases like this were we already have a clear definition of what are all the outputs.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> mandelbrot_test
 
-<p>it is time to write tests to develop this functionality. TDD fits really well in cases like this were we already have a clear definition of what are all the outputs.</p>
+<span style="color:#ff79c6">import</span> (
+  <span style="color:#f1fa8c">&#34;testing&#34;</span>
 
-<pre><code class="language-go">package mandelbrot_test
-
-import (
-  &quot;testing&quot;
-
-  . &quot;github.com/metalblueberry/mandelbrot/mandelbrot&quot;
+  . <span style="color:#f1fa8c">&#34;github.com/metalblueberry/mandelbrot/mandelbrot&#34;</span>
 )
 
-type testMandelbrotPointCases struct {
-  point      *Point
-  iterations int
-  diverges   bool
+<span style="color:#8be9fd;font-style:italic">type</span> testMandelbrotPointCases <span style="color:#8be9fd;font-style:italic">struct</span> {
+  point      <span style="color:#ff79c6">*</span>Point
+  iterations <span style="color:#8be9fd">int</span>
+  diverges   <span style="color:#8be9fd">bool</span>
 }
 
-func TestMandelbrotPoint(t *testing.T) {
-  tests := []testMandelbrotPointCases{
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestMandelbrotPoint</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+  tests <span style="color:#ff79c6">:=</span> []testMandelbrotPointCases{
     testMandelbrotPointCases{
-      point:      NewPoint(1, 0),
-      iterations: 100,
-      diverges:   true,
+      point:      <span style="color:#50fa7b">NewPoint</span>(<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">0</span>),
+      iterations: <span style="color:#bd93f9">100</span>,
+      diverges:   <span style="color:#ff79c6">true</span>,
     },
     testMandelbrotPointCases{
-      point:      NewPoint(-1, 0),
-      iterations: 100,
-      diverges:   false,
+      point:      <span style="color:#50fa7b">NewPoint</span>(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">0</span>),
+      iterations: <span style="color:#bd93f9">100</span>,
+      diverges:   <span style="color:#ff79c6">false</span>,
     },
     testMandelbrotPointCases{
-      point:      NewPoint(-0.5, 0.5),
-      iterations: 100,
-      diverges:   false,
+      point:      <span style="color:#50fa7b">NewPoint</span>(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">0.5</span>, <span style="color:#bd93f9">0.5</span>),
+      iterations: <span style="color:#bd93f9">100</span>,
+      diverges:   <span style="color:#ff79c6">false</span>,
     },
     testMandelbrotPointCases{
-      point:      NewPoint(0, 1),
-      iterations: 100,
-      diverges:   true,
+      point:      <span style="color:#50fa7b">NewPoint</span>(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>),
+      iterations: <span style="color:#bd93f9">100</span>,
+      diverges:   <span style="color:#ff79c6">true</span>,
     },
   }
 
-  for i, test := range tests {
-    t.Log(test)
-    test.point.Calculate(test.iterations)
-    if test.point.Diverges() != test.diverges {
-      t.Errorf(&quot;Test %d failed, Point %f diverges %t expected %t&quot;, i, test.point.Point, test.point.Diverges(), test.diverges)
+  <span style="color:#ff79c6">for</span> i, test <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> tests {
+    t.<span style="color:#50fa7b">Log</span>(test)
+    test.point.<span style="color:#50fa7b">Calculate</span>(test.iterations)
+    <span style="color:#ff79c6">if</span> test.point.<span style="color:#50fa7b">Diverges</span>() <span style="color:#ff79c6">!=</span> test.diverges {
+      t.<span style="color:#50fa7b">Errorf</span>(<span style="color:#f1fa8c">&#34;Test %d failed, Point %f diverges %t expected %t&#34;</span>, i, test.point.Point, test.point.<span style="color:#50fa7b">Diverges</span>(), test.diverges)
     }
   }
 }
 
-</code></pre>
-
-<blockquote>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <p>You may notice that the point <code>(0,1)</code> is expected to diverge but we already know that this is a special case that does not diverge. If you debug the program, you will notice that it diverges after a few iterations due to numerical errors. This is not a problem though, the representation of the set is still perfectly fine.</p>
 </blockquote>
-
 <p>The code is in fact really simple with go because there is support for complex numbers that handles all the special cases with $i^2$</p>
-
-<pre><code class="language-go">func (m *Point) Calculate(MaxIterations int) {
-  for !m.Diverges() &amp;&amp; m.iterations &lt; MaxIterations {
-    m.iterations++
-    m.z = cmplx.Pow(m.z, 2) + m.Point
-    log.Printf(&quot;z_%d=%f\n&quot;, m.iterations, m.z)
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> (m <span style="color:#ff79c6">*</span>Point) <span style="color:#50fa7b">Calculate</span>(MaxIterations <span style="color:#8be9fd">int</span>) {
+  <span style="color:#ff79c6">for</span> !m.<span style="color:#50fa7b">Diverges</span>() <span style="color:#ff79c6">&amp;&amp;</span> m.iterations &lt; MaxIterations {
+    m.iterations<span style="color:#ff79c6">++</span>
+    m.z = cmplx.<span style="color:#50fa7b">Pow</span>(m.z, <span style="color:#bd93f9">2</span>) <span style="color:#ff79c6">+</span> m.Point
+    log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;z_%d=%f\n&#34;</span>, m.iterations, m.z)
   }
 }
 
-func (m *Point) Diverges() bool {
-  return cmplx.Abs(m.z) &gt; complex(2, 0)
+<span style="color:#8be9fd;font-style:italic">func</span> (m <span style="color:#ff79c6">*</span>Point) <span style="color:#50fa7b">Diverges</span>() <span style="color:#8be9fd">bool</span> {
+  <span style="color:#ff79c6">return</span> cmplx.<span style="color:#50fa7b">Abs</span>(m.z) &gt; <span style="color:#8be9fd;font-style:italic">complex</span>(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">0</span>)
 }
-</code></pre>
-
-<div class="expand">
+</code></pre></td></tr></table>
+</div>
+</div><div class="expand">
     <div class="expand-label" id="expand-label-0" style="cursor: pointer;">
         <span>
             
@@ -258,45 +310,89 @@ func (m *Point) Diverges() bool {
         </span>
     </div>
     <div class="expand-content" id="expand-content-0" style="display: none;">
-        <pre><code class="language-go">package mandelbrot
+        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> mandelbrot
 
-import (
-  &quot;log&quot;
-  &quot;math/cmplx&quot;
+<span style="color:#ff79c6">import</span> (
+  <span style="color:#f1fa8c">&#34;log&#34;</span>
+  <span style="color:#f1fa8c">&#34;math/cmplx&#34;</span>
 )
 
-type Point struct {
-  Point      complex128
-  iterations int
-  z          complex128
+<span style="color:#8be9fd;font-style:italic">type</span> Point <span style="color:#8be9fd;font-style:italic">struct</span> {
+  Point      <span style="color:#8be9fd">complex128</span>
+  iterations <span style="color:#8be9fd">int</span>
+  z          <span style="color:#8be9fd">complex128</span>
 }
 
-// NewPoint returns a new point at a given coordenates
-func NewPoint(r, i float64) *Point {
-  return &amp;Point{
-    Point: complex(r, i),
+<span style="color:#6272a4">// NewPoint returns a new point at a given coordenates
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">NewPoint</span>(r, i <span style="color:#8be9fd">float64</span>) <span style="color:#ff79c6">*</span>Point {
+  <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>Point{
+    Point: <span style="color:#8be9fd;font-style:italic">complex</span>(r, i),
   }
 }
 
-// Calculate performs as many calculations as MaxIterations to determine if the point belongs to the set or not
-func (m *Point) Calculate(MaxIterations int) {
-  for !m.Diverges() &amp;&amp; m.iterations &lt; MaxIterations {
-    m.iterations++
-    m.z = cmplx.Pow(m.z, 2) + m.Point
-    log.Printf(&quot;z_%d=%f\n&quot;, m.iterations, m.z)
+<span style="color:#6272a4">// Calculate performs as many calculations as MaxIterations to determine if the point belongs to the set or not
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (m <span style="color:#ff79c6">*</span>Point) <span style="color:#50fa7b">Calculate</span>(MaxIterations <span style="color:#8be9fd">int</span>) {
+  <span style="color:#ff79c6">for</span> !m.<span style="color:#50fa7b">Diverges</span>() <span style="color:#ff79c6">&amp;&amp;</span> m.iterations &lt; MaxIterations {
+    m.iterations<span style="color:#ff79c6">++</span>
+    m.z = cmplx.<span style="color:#50fa7b">Pow</span>(m.z, <span style="color:#bd93f9">2</span>) <span style="color:#ff79c6">+</span> m.Point
+    log.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;z_%d=%f\n&#34;</span>, m.iterations, m.z)
   }
 }
 
-// Diverges returns whether the points diverges from the set.
-func (m *Point) Diverges() bool {
-  return cmplx.Abs(m.z) &gt; complex(2, 0)
+<span style="color:#6272a4">// Diverges returns whether the points diverges from the set.
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (m <span style="color:#ff79c6">*</span>Point) <span style="color:#50fa7b">Diverges</span>() <span style="color:#8be9fd">bool</span> {
+  <span style="color:#ff79c6">return</span> cmplx.<span style="color:#50fa7b">Abs</span>(m.z) &gt; <span style="color:#8be9fd;font-style:italic">complex</span>(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">0</span>)
 }
 
-// Iterations returns the number of performed iterations.
-func (m *Point) Iterations() int {
-  return m.Iterations()
+<span style="color:#6272a4">// Iterations returns the number of performed iterations.
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (m <span style="color:#ff79c6">*</span>Point) <span style="color:#50fa7b">Iterations</span>() <span style="color:#8be9fd">int</span> {
+  <span style="color:#ff79c6">return</span> m.<span style="color:#50fa7b">Iterations</span>()
 }
-</code></pre>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
     <script>
         function collapse(e) {
@@ -321,90 +417,164 @@ func (m *Point) Iterations() int {
         document.getElementById("expand-label-0").addEventListener("click", collapse);
     </script>
 </div>
-
 <h3 id="mandelbrot-set">Mandelbrot set</h3>
-
 <p>The mandelbrot.Set will hold all the mandelbrot.Points. To ease the usage, I&rsquo;ve added a constructor of rectangular Areas centered at a given point. This will come handy when zooming in the future.</p>
-
-<pre><code class="language-go">type Area struct {
-  HorizontalResolution int
-  VerticalResolution   int
-  TopLeft              complex128
-  BottomRight          complex128
-  MaxIterations        int
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">type</span> Area <span style="color:#8be9fd;font-style:italic">struct</span> {
+  HorizontalResolution <span style="color:#8be9fd">int</span>
+  VerticalResolution   <span style="color:#8be9fd">int</span>
+  TopLeft              <span style="color:#8be9fd">complex128</span>
+  BottomRight          <span style="color:#8be9fd">complex128</span>
+  MaxIterations        <span style="color:#8be9fd">int</span>
   Points               []Point
 }
 
-//NewAreaCentered creates a mandelbrot.Area with squared shape centered area at x,y of width = 2*area
-func NewAreaCentered(Resolution, MaxIterations int, x, y, area float64) *Area {
-  return &amp;Area{
+<span style="color:#6272a4">//NewAreaCentered creates a mandelbrot.Area with squared shape centered area at x,y of width = 2*area
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">NewAreaCentered</span>(Resolution, MaxIterations <span style="color:#8be9fd">int</span>, x, y, area <span style="color:#8be9fd">float64</span>) <span style="color:#ff79c6">*</span>Area {
+  <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>Area{
     HorizontalResolution: Resolution,
     VerticalResolution:   Resolution,
     MaxIterations:        MaxIterations,
-    TopLeft:              complex(x-area, y+area),
-    BottomRight:          complex(x+area, y-area),
-    Points:               make([]Point, Resolution*Resolution),
+    TopLeft:              <span style="color:#8be9fd;font-style:italic">complex</span>(x<span style="color:#ff79c6">-</span>area, y<span style="color:#ff79c6">+</span>area),
+    BottomRight:          <span style="color:#8be9fd;font-style:italic">complex</span>(x<span style="color:#ff79c6">+</span>area, y<span style="color:#ff79c6">-</span>area),
+    Points:               <span style="color:#8be9fd;font-style:italic">make</span>([]Point, Resolution<span style="color:#ff79c6">*</span>Resolution),
   }
 }
-</code></pre>
-
-<p>You may notice that the <code>Points</code> variable is a single dimension array. The idea behind this is to have a single memory allocation for all the data. This will increase the difficulty to index a given point, but we will easily solve this by two helper methods <code>ForIndex</code> and <code>IndexFor</code> that will server to obtain the valid index for a given x,y coordinates and the x,y coordinates of a given index.</p>
-
-<pre><code class="language-go">func (a *Area) IndexFor(x, y int) int {
-  return x + y*a.HorizontalResolution
+</code></pre></td></tr></table>
+</div>
+</div><p>You may notice that the <code>Points</code> variable is a single dimension array. The idea behind this is to have a single memory allocation for all the data. This will increase the difficulty to index a given point, but we will easily solve this by two helper methods <code>ForIndex</code> and <code>IndexFor</code> that will server to obtain the valid index for a given x,y coordinates and the x,y coordinates of a given index.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">IndexFor</span>(x, y <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">int</span> {
+  <span style="color:#ff79c6">return</span> x <span style="color:#ff79c6">+</span> y<span style="color:#ff79c6">*</span>a.HorizontalResolution
 }
 
-func (a *Area) ForIndex(i int) (x, y int) {
-  y = i / a.VerticalResolution
-  x = i % a.HorizontalResolution
-  return x, y
+<span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">ForIndex</span>(i <span style="color:#8be9fd">int</span>) (x, y <span style="color:#8be9fd">int</span>) {
+  y = i <span style="color:#ff79c6">/</span> a.VerticalResolution
+  x = i <span style="color:#ff79c6">%</span> a.HorizontalResolution
+  <span style="color:#ff79c6">return</span> x, y
 }
-</code></pre>
+</code></pre></td></tr></table>
+</div>
+</div><p>Before using the Area, we need to initialize the Points array depending on the resolution. For this purpose let&rsquo;s add a method <code>Init</code> to the struct that for each point. To get the complex number for a x,y position, I&rsquo;m creating the method <code>getNumber</code>. So in the <code>Init</code> method I&rsquo;m iterating over all the pixels defined by the resolution getting a NewPoint for each one.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">getNumber</span>(x, y <span style="color:#8be9fd">int</span>) (r, i <span style="color:#8be9fd">float64</span>) {
+  TopLeftReal <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">real</span>(a.TopLeft)
+  TopLeftImag <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">imag</span>(a.TopLeft)
+  BottomRightReal <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">real</span>(a.BottomRight)
+  BottomRightImag <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">imag</span>(a.BottomRight)
 
-<p>Before using the Area, we need to initialize the Points array depending on the resolution. For this purpose let&rsquo;s add a method <code>Init</code> to the struct that for each point. To get the complex number for a x,y position, I&rsquo;m creating the method <code>getNumber</code>. So in the <code>Init</code> method I&rsquo;m iterating over all the pixels defined by the resolution getting a NewPoint for each one.</p>
-
-<pre><code class="language-go">func (a *Area) getNumber(x, y int) (r, i float64) {
-  TopLeftReal := real(a.TopLeft)
-  TopLeftImag := imag(a.TopLeft)
-  BottomRightReal := real(a.BottomRight)
-  BottomRightImag := imag(a.BottomRight)
-
-  r = TopLeftReal + (float64(x)/float64(a.HorizontalResolution))*(BottomRightReal-TopLeftReal)
-  i = TopLeftImag + (float64(y)/float64(a.VerticalResolution))*(BottomRightImag-TopLeftImag)
-  return r, i
+  r = TopLeftReal <span style="color:#ff79c6">+</span> (<span style="color:#8be9fd;font-style:italic">float64</span>(x)<span style="color:#ff79c6">/</span><span style="color:#8be9fd;font-style:italic">float64</span>(a.HorizontalResolution))<span style="color:#ff79c6">*</span>(BottomRightReal<span style="color:#ff79c6">-</span>TopLeftReal)
+  i = TopLeftImag <span style="color:#ff79c6">+</span> (<span style="color:#8be9fd;font-style:italic">float64</span>(y)<span style="color:#ff79c6">/</span><span style="color:#8be9fd;font-style:italic">float64</span>(a.VerticalResolution))<span style="color:#ff79c6">*</span>(BottomRightImag<span style="color:#ff79c6">-</span>TopLeftImag)
+  <span style="color:#ff79c6">return</span> r, i
 }
 
-func (a *Area) Init() {
-  for x := 0; x &lt; a.HorizontalResolution; x++ {
-    for y := 0; y &lt; a.VerticalResolution; y++ {
-      point := NewPoint(a.getNumber(x, y))
-      a.SetPoint(x, y, point)
+<span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">Init</span>() {
+  <span style="color:#ff79c6">for</span> x <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; x &lt; a.HorizontalResolution; x<span style="color:#ff79c6">++</span> {
+    <span style="color:#ff79c6">for</span> y <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; y &lt; a.VerticalResolution; y<span style="color:#ff79c6">++</span> {
+      point <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">NewPoint</span>(a.<span style="color:#50fa7b">getNumber</span>(x, y))
+      a.<span style="color:#50fa7b">SetPoint</span>(x, y, point)
     }
   }
 }
-</code></pre>
-
-<p>Now I&rsquo;m going to create a <code>Calculate</code> method to start the computational task. As it will be a long process, I want to do it in a separate go routine and have some kind of progress give feedback to the main thread. The method returns a channel that we can read to get the point that has been just analyzed by the function and we can divide this by the total count to know the overall progress. I don&rsquo;t want the function to get blocked if the user is not reading the progress channel and that is why you see the select block at the end of the for loop. Another think is that the Points variable is a slice of struct, this means that we need to reassign the value in order to update the content of the slice.</p>
-
-<pre><code class="language-go">func (a *Area) Calculate() (progress chan int) {
-  progress = make(chan int)
-  go func() {
-    defer close(progress)
-    for i, pixel := range a.Points {
-      pixel.Calculate(a.MaxIterations)
+</code></pre></td></tr></table>
+</div>
+</div><p>Now I&rsquo;m going to create a <code>Calculate</code> method to start the computational task. As it will be a long process, I want to do it in a separate go routine and have some kind of progress give feedback to the main thread. The method returns a channel that we can read to get the point that has been just analyzed by the function and we can divide this by the total count to know the overall progress. I don&rsquo;t want the function to get blocked if the user is not reading the progress channel and that is why you see the select block at the end of the for loop. Another think is that the Points variable is a slice of struct, this means that we need to reassign the value in order to update the content of the slice.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">Calculate</span>() (progress <span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">int</span>) {
+  progress = <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">int</span>)
+  <span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>() {
+    <span style="color:#ff79c6">defer</span> <span style="color:#8be9fd;font-style:italic">close</span>(progress)
+    <span style="color:#ff79c6">for</span> i, pixel <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> a.Points {
+      pixel.<span style="color:#50fa7b">Calculate</span>(a.MaxIterations)
       a.Points[i] = pixel
 
-      select {
-      case progress &lt;- i:
-      default:
+      <span style="color:#ff79c6">select</span> {
+      <span style="color:#ff79c6">case</span> progress <span style="color:#ff79c6">&lt;-</span> i:
+      <span style="color:#ff79c6">default</span>:
       }
     }
   }()
-  return
+  <span style="color:#ff79c6">return</span>
 }
-</code></pre>
-
-<div class="expand">
+</code></pre></td></tr></table>
+</div>
+</div><div class="expand">
     <div class="expand-label" id="expand-label-1" style="cursor: pointer;">
         <span>
             
@@ -414,86 +584,171 @@ func (a *Area) Init() {
         </span>
     </div>
     <div class="expand-content" id="expand-content-1" style="display: none;">
-        <pre><code class="language-go">package mandelbrot
+        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> mandelbrot
 
-type Area struct {
-  HorizontalResolution int
-  VerticalResolution   int
-  TopLeft              complex128
-  BottomRight          complex128
-  MaxIterations        int
+<span style="color:#8be9fd;font-style:italic">type</span> Area <span style="color:#8be9fd;font-style:italic">struct</span> {
+  HorizontalResolution <span style="color:#8be9fd">int</span>
+  VerticalResolution   <span style="color:#8be9fd">int</span>
+  TopLeft              <span style="color:#8be9fd">complex128</span>
+  BottomRight          <span style="color:#8be9fd">complex128</span>
+  MaxIterations        <span style="color:#8be9fd">int</span>
   Points               []Point
 }
 
-func NewAreaCentered(Resolution, MaxIterations int, x, y, area float64) *Area {
-  return &amp;Area{
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">NewAreaCentered</span>(Resolution, MaxIterations <span style="color:#8be9fd">int</span>, x, y, area <span style="color:#8be9fd">float64</span>) <span style="color:#ff79c6">*</span>Area {
+  <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>Area{
     HorizontalResolution: Resolution,
     VerticalResolution:   Resolution,
     MaxIterations:        MaxIterations,
-    TopLeft:              complex(x-area, y+area),
-    BottomRight:          complex(x+area, y-area),
-    Points:               make([]Point, Resolution*Resolution),
+    TopLeft:              <span style="color:#8be9fd;font-style:italic">complex</span>(x<span style="color:#ff79c6">-</span>area, y<span style="color:#ff79c6">+</span>area),
+    BottomRight:          <span style="color:#8be9fd;font-style:italic">complex</span>(x<span style="color:#ff79c6">+</span>area, y<span style="color:#ff79c6">-</span>area),
+    Points:               <span style="color:#8be9fd;font-style:italic">make</span>([]Point, Resolution<span style="color:#ff79c6">*</span>Resolution),
   }
 }
 
-func (a *Area) Init() {
-  for x := 0; x &lt; a.HorizontalResolution; x++ {
-    for y := 0; y &lt; a.VerticalResolution; y++ {
-      point := NewPoint(a.getNumber(x, y))
-      a.SetPoint(x, y, point)
+<span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">Init</span>() {
+  <span style="color:#ff79c6">for</span> x <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; x &lt; a.HorizontalResolution; x<span style="color:#ff79c6">++</span> {
+    <span style="color:#ff79c6">for</span> y <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; y &lt; a.VerticalResolution; y<span style="color:#ff79c6">++</span> {
+      point <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">NewPoint</span>(a.<span style="color:#50fa7b">getNumber</span>(x, y))
+      a.<span style="color:#50fa7b">SetPoint</span>(x, y, point)
     }
   }
 }
 
-func (a *Area) Calculate() (progress chan int) {
-  progress = make(chan int)
-  go func() {
-    defer close(progress)
-    for i, pixel := range a.Points {
-      pixel.Calculate(a.MaxIterations)
+<span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">Calculate</span>() (progress <span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">int</span>) {
+  progress = <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">int</span>)
+  <span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>() {
+    <span style="color:#ff79c6">defer</span> <span style="color:#8be9fd;font-style:italic">close</span>(progress)
+    <span style="color:#ff79c6">for</span> i, pixel <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> a.Points {
+      pixel.<span style="color:#50fa7b">Calculate</span>(a.MaxIterations)
       a.Points[i] = pixel
 
-      select {
-      case progress &lt;- i:
-      default:
+      <span style="color:#ff79c6">select</span> {
+      <span style="color:#ff79c6">case</span> progress <span style="color:#ff79c6">&lt;-</span> i:
+      <span style="color:#ff79c6">default</span>:
       }
     }
   }()
-  return
+  <span style="color:#ff79c6">return</span>
 }
 
-func (a *Area) IndexFor(x, y int) int {
-  return x + y*a.HorizontalResolution
+<span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">IndexFor</span>(x, y <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">int</span> {
+  <span style="color:#ff79c6">return</span> x <span style="color:#ff79c6">+</span> y<span style="color:#ff79c6">*</span>a.HorizontalResolution
 }
 
-func (a *Area) ForIndex(i int) (x, y int) {
-  y = i / a.VerticalResolution
-  x = i % a.HorizontalResolution
-  return x, y
+<span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">ForIndex</span>(i <span style="color:#8be9fd">int</span>) (x, y <span style="color:#8be9fd">int</span>) {
+  y = i <span style="color:#ff79c6">/</span> a.VerticalResolution
+  x = i <span style="color:#ff79c6">%</span> a.HorizontalResolution
+  <span style="color:#ff79c6">return</span> x, y
 }
 
-// SetPoint changes the address of the point located at x,y
-func (a *Area) SetPoint(x, y int, p Point) {
-  a.Points[a.IndexFor(x, y)] = p
+<span style="color:#6272a4">// SetPoint changes the address of the point located at x,y
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">SetPoint</span>(x, y <span style="color:#8be9fd">int</span>, p Point) {
+  a.Points[a.<span style="color:#50fa7b">IndexFor</span>(x, y)] = p
 }
 
-// GetPoint changes the address of the point located at x,y
-func (a *Area) GetPoint(x, y int) Point {
-  return a.Points[a.IndexFor(x, y)]
+<span style="color:#6272a4">// GetPoint changes the address of the point located at x,y
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">GetPoint</span>(x, y <span style="color:#8be9fd">int</span>) Point {
+  <span style="color:#ff79c6">return</span> a.Points[a.<span style="color:#50fa7b">IndexFor</span>(x, y)]
 }
 
-// getNumber gives the real and imaginary parts for the complex number located at the given x,y coordenates in the given resolution.
-func (a *Area) getNumber(x, y int) (r, i float64) {
-  TopLeftReal := real(a.TopLeft)
-  TopLeftImag := imag(a.TopLeft)
-  BottomRightReal := real(a.BottomRight)
-  BottomRightImag := imag(a.BottomRight)
+<span style="color:#6272a4">// getNumber gives the real and imaginary parts for the complex number located at the given x,y coordenates in the given resolution.
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> (a <span style="color:#ff79c6">*</span>Area) <span style="color:#50fa7b">getNumber</span>(x, y <span style="color:#8be9fd">int</span>) (r, i <span style="color:#8be9fd">float64</span>) {
+  TopLeftReal <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">real</span>(a.TopLeft)
+  TopLeftImag <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">imag</span>(a.TopLeft)
+  BottomRightReal <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">real</span>(a.BottomRight)
+  BottomRightImag <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">imag</span>(a.BottomRight)
 
-  r = TopLeftReal + (float64(x)/float64(a.HorizontalResolution))*(BottomRightReal-TopLeftReal)
-  i = TopLeftImag + (float64(y)/float64(a.VerticalResolution))*(BottomRightImag-TopLeftImag)
-  return r, i
+  r = TopLeftReal <span style="color:#ff79c6">+</span> (<span style="color:#8be9fd;font-style:italic">float64</span>(x)<span style="color:#ff79c6">/</span><span style="color:#8be9fd;font-style:italic">float64</span>(a.HorizontalResolution))<span style="color:#ff79c6">*</span>(BottomRightReal<span style="color:#ff79c6">-</span>TopLeftReal)
+  i = TopLeftImag <span style="color:#ff79c6">+</span> (<span style="color:#8be9fd;font-style:italic">float64</span>(y)<span style="color:#ff79c6">/</span><span style="color:#8be9fd;font-style:italic">float64</span>(a.VerticalResolution))<span style="color:#ff79c6">*</span>(BottomRightImag<span style="color:#ff79c6">-</span>TopLeftImag)
+  <span style="color:#ff79c6">return</span> r, i
 }
-</code></pre>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
     <script>
         function collapse(e) {
@@ -518,78 +773,113 @@ func (a *Area) getNumber(x, y int) (r, i float64) {
         document.getElementById("expand-label-1").addEventListener("click", collapse);
     </script>
 </div>
-
 <h2 id="generate-mandelbrot-data">Generate Mandelbrot Data</h2>
-
 <p>Now it is time to generate a simple main program to calculate the data for a given section of the complex number space. I&rsquo;m going to use the image package to generate a png file of the given section and write it to the standard output. I&rsquo;ve chosen a squared area centered at <code>(-0.5, 0)</code> of size 1.5 with 5000x5000 resolution using 200 iterations at maximum.</p>
-
 <p>After calling <code>set.Calculate</code> I&rsquo;m using range progress to get the updates and to print feedback to Stderr. To avoid printing a line for every pixel, I&rsquo;ve added a <code>&lt;-time.After(time.Second * 1)</code> to limit the prints to 1 per second.</p>
-
 <p>The process of generating the image is as simple as initializing it with the Horizontal and Vertical resolutions and then fill each pixel using the method <code>setRGBA</code>. I&rsquo;m not using any complex algorithm for choosing the color. For simplicity I&rsquo;m just using red and the intensity depends on the iterations needed to tell if the point belongs to the set or not. the more iterations, the darker the color. That&rsquo;s why the points that belong to the set are black.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
 
-<pre><code class="language-go">package main
+<span style="color:#ff79c6">import</span> (
+  <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+  <span style="color:#f1fa8c">&#34;image&#34;</span>
+  <span style="color:#f1fa8c">&#34;image/color&#34;</span>
+  <span style="color:#f1fa8c">&#34;image/jpeg&#34;</span>
+  <span style="color:#f1fa8c">&#34;os&#34;</span>
+  <span style="color:#f1fa8c">&#34;time&#34;</span>
 
-import (
-  &quot;fmt&quot;
-  &quot;image&quot;
-  &quot;image/color&quot;
-  &quot;image/jpeg&quot;
-  &quot;os&quot;
-  &quot;time&quot;
-
-  &quot;github.com/metalblueberry/mandelbrot/mandelbrot&quot;
+  <span style="color:#f1fa8c">&#34;github.com/metalblueberry/mandelbrot/mandelbrot&#34;</span>
 )
 
-func main() {
-  set := mandelbrot.NewAreaCentered(5000, 200, -0.5, 0, 1.5)
-  set.Init()
-  progress := set.Calculate()
-  for p := range progress {
-    fmt.Fprintf(os.Stderr, &quot;%d\r&quot;, 100*p/len(set.Points))
-    &lt;-time.After(time.Second * 1)
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+  set <span style="color:#ff79c6">:=</span> mandelbrot.<span style="color:#50fa7b">NewAreaCentered</span>(<span style="color:#bd93f9">5000</span>, <span style="color:#bd93f9">200</span>, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">0.5</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1.5</span>)
+  set.<span style="color:#50fa7b">Init</span>()
+  progress <span style="color:#ff79c6">:=</span> set.<span style="color:#50fa7b">Calculate</span>()
+  <span style="color:#ff79c6">for</span> p <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> progress {
+    fmt.<span style="color:#50fa7b">Fprintf</span>(os.Stderr, <span style="color:#f1fa8c">&#34;%d\r&#34;</span>, <span style="color:#bd93f9">100</span><span style="color:#ff79c6">*</span>p<span style="color:#ff79c6">/</span><span style="color:#8be9fd;font-style:italic">len</span>(set.Points))
+    <span style="color:#ff79c6">&lt;-</span>time.<span style="color:#50fa7b">After</span>(time.Second <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">1</span>)
   }
 
-  img := image.NewRGBA(image.Rect(0, 0, set.HorizontalResolution, set.VerticalResolution))
+  img <span style="color:#ff79c6">:=</span> image.<span style="color:#50fa7b">NewRGBA</span>(image.<span style="color:#50fa7b">Rect</span>(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, set.HorizontalResolution, set.VerticalResolution))
 
-  for x := 0; x &lt; set.HorizontalResolution; x++ {
-    for y := 0; y &lt; set.VerticalResolution; y++ {
-      point := set.GetPoint(x, y)
-      intensity := 255 - (255 * point.Iterations() / set.MaxIterations)
-      img.SetRGBA(x, y, color.RGBA{R: uint8(intensity), A: 255})
+  <span style="color:#ff79c6">for</span> x <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; x &lt; set.HorizontalResolution; x<span style="color:#ff79c6">++</span> {
+    <span style="color:#ff79c6">for</span> y <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; y &lt; set.VerticalResolution; y<span style="color:#ff79c6">++</span> {
+      point <span style="color:#ff79c6">:=</span> set.<span style="color:#50fa7b">GetPoint</span>(x, y)
+      intensity <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">255</span> <span style="color:#ff79c6">-</span> (<span style="color:#bd93f9">255</span> <span style="color:#ff79c6">*</span> point.<span style="color:#50fa7b">Iterations</span>() <span style="color:#ff79c6">/</span> set.MaxIterations)
+      img.<span style="color:#50fa7b">SetRGBA</span>(x, y, color.RGBA{R: <span style="color:#8be9fd;font-style:italic">uint8</span>(intensity), A: <span style="color:#bd93f9">255</span>})
     }
   }
-  err := jpeg.Encode(os.Stdout, img, &amp;jpeg.Options{Quality: 90})
-  if err != nil {
-    panic(err)
+  err <span style="color:#ff79c6">:=</span> jpeg.<span style="color:#50fa7b">Encode</span>(os.Stdout, img, <span style="color:#ff79c6">&amp;</span>jpeg.Options{Quality: <span style="color:#bd93f9">90</span>})
+  <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+    <span style="color:#8be9fd;font-style:italic">panic</span>(err)
   }
 }
-</code></pre>
-
-<p>Now you can build or run the code directly and pipe the Stdout to a png file. This code generates the following image.</p>
-
-<p><img src="./mandelbrot.jpeg" alt="mandelbrot-img" /></p>
-
+</code></pre></td></tr></table>
+</div>
+</div><p>Now you can build or run the code directly and pipe the Stdout to a png file. This code generates the following image.</p>
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="./mandelbrot.jpeg"><img  src="./mandelbrot.jpeg"
+        alt="mandelbrot-img"/></a></p>
 <p>And with just modifying the input parameters, we can zoom in a given section. For example, this image is generated from the following input.</p>
-
-<pre><code class="language-go">mandelbrot.NewAreaCentered(5000, 350, -0.7463, 0.1102, 0.005)
-</code></pre>
-
-<p><img src="./mandelbrot_-07463_01102_0005.jpeg" alt="mandelbrot-zoom" /></p>
-
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go">mandelbrot.<span style="color:#50fa7b">NewAreaCentered</span>(<span style="color:#bd93f9">5000</span>, <span style="color:#bd93f9">350</span>, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">0.7463</span>, <span style="color:#bd93f9">0.1102</span>, <span style="color:#bd93f9">0.005</span>)
+</code></pre></td></tr></table>
+</div>
+</div><p><a target="_blank" rel="noopener noreferrer" 
+  href="./mandelbrot_-07463_01102_0005.jpeg"><img  src="./mandelbrot_-07463_01102_0005.jpeg"
+        alt="mandelbrot-zoom"/></a></p>
 <h2 id="conclusion">Conclusion</h2>
-
 <p>I&rsquo;ve plans to keep improving this code. In one hand, I would like to create an API to send the image data to a web browser. Then we will be able to use JS to build a simple viewer to ease the work of requesting zooms in a given area. In the other hand, I would like to speedup the calculation by splitting the area in chunks and compute them in parallel.</p>
-
-<p>You can explore the repository to see the whole code and to play with it <a href="https://github.com/MetalBlueberry/go-mandelbrot/tree/2019-10-31_mandelbrot-set-calculation">here</a>.</p>
-
+<p>You can explore the repository to see the whole code and to play with it <a href="https://github.com/MetalBlueberry/go-mandelbrot/tree/2019-10-31_mandelbrot-set-calculation"target="_blank">here</a>.</p>
 <p>Thank you for reading and feel free to leave a comment bellow, I will be really happy to hear from you.</p>
-
 <h2 id="references-and-links">References and Links</h2>
-
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Mandelbrot_set">wikipedia</a></li>
-<li><a href="https://sciencedemos.org.uk/mandelbrot.php">Interactive Mandelbrot Zoom</a></li>
-<li><a href="https://www.youtube.com/watch?v=PD2XgQOyCCk">Incredible zoom video</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mandelbrot_set"target="_blank">wikipedia</a></li>
+<li><a href="https://sciencedemos.org.uk/mandelbrot.php"target="_blank">Interactive Mandelbrot Zoom</a></li>
+<li><a href="https://www.youtube.com/watch?v=PD2XgQOyCCk"target="_blank">Incredible zoom video</a></li>
 </ul></article><section class="article labels"><a class="category" href=/categories/howto/>howto</a><a class="tag" href=/tags/go/>go</a><a class="tag" href=/tags/mandelbrot/>mandelbrot</a></section></div><section class="article navigation"><p><a class="link" href="/post/howto/2019-11-01_go-cpu-profiling/"><span class="li">&larr;</span>Go CPU profiling</a></p><p><a class="link" href="/post/howto/2019-10-29_create-a-blog-like-this/"><span class="li">&rarr;</span>Create a Blog Like This</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
     label="comment" theme="github-light" crossorigin="anonymous" async>
     </script></div><section id="footer" class="footer"><div class="footer-wrap">

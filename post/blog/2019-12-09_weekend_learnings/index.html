@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>2019-12-09 Weekend Learnings&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="2019-12-09 Weekend Learnings"/>
@@ -16,53 +16,84 @@
 <body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">2019-12-09 Weekend Learnings</h1><p class="article date">Monday, December 9, 2019<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>I discovered that Go supports build to Web Assembly. What a great time to be alive. Also I&rsquo;ve spent some time changing the favicon of this blog and finished the post about Python Jupyter notebook with Plotly</p>
-
 <p>So one weekend more and now I can say that I&rsquo;ve generated Web Assembly. Just the fact that Go can be compiled into WASM is incredible because it means that one day we will be able to write everything with the amazing Go syntax and run everywhere.</p>
-
-<p>I&rsquo;ve been following <a href="https://tutorialedge.net/golang/go-webassembly-tutorial/">this tutorial</a> that explains how to do a hello world in WASM. I&rsquo;ve modified it to run my Mandelbrot code in the browser and guess what. It actually works! The modifications are really simple. I took the test code used for benchmarks and modified it to return the jpg image encoded as base64. I&rsquo;ve set the number of Areas to 1, this is because WASM doesn&rsquo;t support multithread applications so there is no advantage in splitting the calculation over multiple goroutines.</p>
-
-<pre><code class="language-go">func mandelbrotDraw(this js.Value, i []js.Value) interface{} {
-	pic := mandelbrot.NewPicture(complex(-1.401854499759, -0.000743603637), 0.00021646*1024, 1024, 1, 1000)
-	var err error
-	pic.Init()
-	result, err := Calculate(100, 1, pic)
-	if err != nil {
-		log.Panic(err)
+<p>I&rsquo;ve been following <a href="https://tutorialedge.net/golang/go-webassembly-tutorial/"target="_blank">this tutorial</a> that explains how to do a hello world in WASM. I&rsquo;ve modified it to run my Mandelbrot code in the browser and guess what. It actually works! The modifications are really simple. I took the test code used for benchmarks and modified it to return the jpg image encoded as base64. I&rsquo;ve set the number of Areas to 1, this is because WASM doesn&rsquo;t support multithread applications so there is no advantage in splitting the calculation over multiple goroutines.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">mandelbrotDraw</span>(this js.Value, i []js.Value) <span style="color:#8be9fd;font-style:italic">interface</span>{} {
+	pic <span style="color:#ff79c6">:=</span> mandelbrot.<span style="color:#50fa7b">NewPicture</span>(<span style="color:#8be9fd;font-style:italic">complex</span>(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1.401854499759</span>, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">0.000743603637</span>), <span style="color:#bd93f9">0.00021646</span><span style="color:#ff79c6">*</span><span style="color:#bd93f9">1024</span>, <span style="color:#bd93f9">1024</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1000</span>)
+	<span style="color:#8be9fd;font-style:italic">var</span> err <span style="color:#8be9fd">error</span>
+	pic.<span style="color:#50fa7b">Init</span>()
+	result, err <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">Calculate</span>(<span style="color:#bd93f9">100</span>, <span style="color:#bd93f9">1</span>, pic)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		log.<span style="color:#50fa7b">Panic</span>(err)
 	}
 
-	buf := &amp;bytes.Buffer{}
+	buf <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>bytes.Buffer{}
 
-	encodingError := jpeg.Encode(buf, result, &amp;jpeg.Options{Quality: 90})
-	if encodingError != nil {
-		panic(err)
+	encodingError <span style="color:#ff79c6">:=</span> jpeg.<span style="color:#50fa7b">Encode</span>(buf, result, <span style="color:#ff79c6">&amp;</span>jpeg.Options{Quality: <span style="color:#bd93f9">90</span>})
+	<span style="color:#ff79c6">if</span> encodingError <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		<span style="color:#8be9fd;font-style:italic">panic</span>(err)
 	}
-	return js.ValueOf(
-		b64.StdEncoding.EncodeToString(buf.Bytes()),
+	<span style="color:#ff79c6">return</span> js.<span style="color:#50fa7b">ValueOf</span>(
+		b64.StdEncoding.<span style="color:#50fa7b">EncodeToString</span>(buf.<span style="color:#50fa7b">Bytes</span>()),
 	)
 }
-</code></pre>
+</code></pre></td></tr></table>
+</div>
+</div><p>The javascript code is really simple. Just call the <code>mandelbrotDraw</code> function and set the image.src to the value returned. I&rsquo;ve added timing information to measure the performance.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-js" data-lang="js"><span style="color:#8be9fd;font-style:italic">function</span> draw(a, b) {
+	startTime <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> <span style="color:#8be9fd;font-style:italic">Date</span>();
+	data <span style="color:#ff79c6">=</span> mandelbrotDraw(a, b)
+	endTime <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> <span style="color:#8be9fd;font-style:italic">Date</span>();
+	<span style="color:#8be9fd;font-style:italic">var</span> timeDiff <span style="color:#ff79c6">=</span> endTime <span style="color:#ff79c6">-</span> startTime; 
+	console.log(timeDiff<span style="color:#ff79c6">/</span><span style="color:#bd93f9">1000.0</span> <span style="color:#ff79c6">+</span> <span style="color:#f1fa8c">&#34; seconds&#34;</span>);
 
-<p>The javascript code is really simple. Just call the <code>mandelbrotDraw</code> function and set the image.src to the value returned. I&rsquo;ve added timing information to measure the performance.</p>
-
-<pre><code class="language-js">function draw(a, b) {
-	startTime = new Date();
-	data = mandelbrotDraw(a, b)
-	endTime = new Date();
-	var timeDiff = endTime - startTime; 
-	console.log(timeDiff/1000.0 + &quot; seconds&quot;);
-
-	img = document.getElementById(&quot;img&quot;)
-	img.src = 'data:image/jpeg;base64,' + data
+	img <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">document</span>.getElementById(<span style="color:#f1fa8c">&#34;img&#34;</span>)
+	img.src <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;data:image/jpeg;base64,&#39;</span> <span style="color:#ff79c6">+</span> data
 }
-</code></pre>
-
-<p>First, I ran this in Firefox, because is my default browser. The result is that the mandelbrot image is rendered in 6.743s. Well&hellip; the go version of this render takes 1.111s. So there is a clear problem of performance. Before throwing everything away and wait a few years before this is improved. I&rsquo;ve read somewhere that the performance of WASM is highly dependent on the browser. So I decided to try in Chrome. It took 1.576s to render the image. AMAZING! Sayonara, JavaScript.</p>
-
+</code></pre></td></tr></table>
+</div>
+</div><p>First, I ran this in Firefox, because is my default browser. The result is that the mandelbrot image is rendered in 6.743s. Well&hellip; the go version of this render takes 1.111s. So there is a clear problem of performance. Before throwing everything away and wait a few years before this is improved. I&rsquo;ve read somewhere that the performance of WASM is highly dependent on the browser. So I decided to try in Chrome. It took 1.576s to render the image. AMAZING! Sayonara, JavaScript.</p>
 <p>For fun, I loaded the page in my phone browser and it took about 10s. Not bad.</p>
-
-<p>Check out the full code in the <a href="https://github.com/MetalBlueberry/go-mandelbrot/tree/mandelbrot-wasm">mandelbrot repository</a> under cmd/mandelbrot-wasm in the mandelbrot-wasm branch</p></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/weekend/>weekend</a><a class="tag" href=/tags/go/>go</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2019-12-15_weekend_learnings/"><span class="li">&larr;</span>2019-12-15 Weekend Learnings</a></p><p><a class="link" href="/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/"><span class="li">&rarr;</span>Python Jupyter Notebook With Plotly Support</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
+<p>Check out the full code in the <a href="https://github.com/MetalBlueberry/go-mandelbrot/tree/mandelbrot-wasm"target="_blank">mandelbrot repository</a> under cmd/mandelbrot-wasm in the mandelbrot-wasm branch</p></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/weekend/>weekend</a><a class="tag" href=/tags/go/>go</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2019-12-15_weekend_learnings/"><span class="li">&larr;</span>2019-12-15 Weekend Learnings</a></p><p><a class="link" href="/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/"><span class="li">&rarr;</span>Python Jupyter Notebook With Plotly Support</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
     label="comment" theme="github-light" crossorigin="anonymous" async>
     </script></div><section id="footer" class="footer"><div class="footer-wrap">
     <p class="copyright">Víctor Pérez Domingo</p>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Use Git to track Git versions&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Use Git to track Git versions"/>
@@ -16,46 +16,28 @@
 <body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">Use Git to track Git versions</h1><p class="article date">Wednesday, March 11, 2020<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>Everyone who has ever been involved in managing versions of different applications, knows that in can be a pain in the ass. Luckily enough there are tools to ease this work and I&rsquo;ve found that Git provides a general solution independently of your technology stack. Git Submodules.</p>
-
-<p>The <a href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency Hell</a> is a well known problem and a lot of different solutions has been proposed to solve it. In real life, <strong>there is no golden key</strong> to open all your locks, so you have to look at your problem and decide which approach fits to your project. If you look at different technologies, you will find that most them implement a system to track versions. Recent technologies such as Go modules and NPM, relies on <strong>versions numbers</strong> plus <strong>hashes</strong> to keep track of dependencies.</p>
-
+<p>The <a href="https://en.wikipedia.org/wiki/Dependency_hell"target="_blank">Dependency Hell</a> is a well known problem and a lot of different solutions has been proposed to solve it. In real life, <strong>there is no golden key</strong> to open all your locks, so you have to look at your problem and decide which approach fits to your project. If you look at different technologies, you will find that most them implement a system to track versions. Recent technologies such as Go modules and NPM, relies on <strong>versions numbers</strong> plus <strong>hashes</strong> to keep track of dependencies.</p>
 <h1 id="before-we-begin-version-numbers">Before we begin, Version Numbers</h1>
-
 <div class="admonition quote"><p class="admonition-title">Quote from Semantic Versioning</p>
-  
 <p>In the world of software management there exists a dreaded place called “<strong>dependency hell</strong>.” The bigger your system grows and the more packages you integrate into your software, the more likely you are to find yourself, one day, in this <strong>pit of despair</strong>.</p>
-
 <p>In systems with many dependencies, releasing new package versions can quickly become a nightmare. If the dependency specifications are too tight, you are in danger of version lock (the inability to upgrade a package without having to release new versions of every dependent package). If dependencies are specified too loosely, you will inevitably be bitten by version promiscuity (assuming compatibility with more future versions than is reasonable). Dependency hell is where you are when version lock and/or version promiscuity <strong>prevent you from easily and safely moving your project forward</strong>.</p>
-
 <p><strong>As a solution</strong> to this problem, I propose a <strong>simple set of rules</strong> and requirements that dictate <strong>how version numbers are assigned</strong> and incremented. These rules are based on but not necessarily limited to pre-existing widespread common practices in use in both closed and open-source software. For this system to work, you first need to declare a public API. This may consist of documentation or be enforced by the code itself. Regardless, it is important that this API be clear and precise. Once you identify your public API, you communicate changes to it with specific increments to your version number. Consider a version format of X.Y.Z (Major.Minor.Patch). Bug fixes not affecting the API increment the patch version, backwards compatible API additions/changes increment the minor version, and backwards incompatible API changes increment the major version.</p>
-
 <p>I call this system <strong>“Semantic Versioning.”</strong> Under this scheme, version numbers and the way they change convey meaning about the underlying code and what has been modified from one version to the next.</p>
-
 <p><strong>This is not revolutionary idea</strong>. In fact, you probably do something close to this already. The problem is that “close” isn’t good enough. Without compliance to some sort of formal specification, version numbers are essentially useless for dependency management. By giving a name and clear definition to the above ideas, it becomes easy to communicate your intentions to the users of your software. Once these intentions are clear, flexible (but not too flexible) dependency specifications can finally be made.</p>
-
-
 </div>
-
-<p>If you have time, read the full paper of Semantic Versioning <a href="https://semver.org/">SemVer</a> to understand the details. I found it really interesting and a life changing knowledge.</p>
-
+<p>If you have time, read the full paper of Semantic Versioning <a href="https://semver.org/"target="_blank">SemVer</a> to understand the details. I found it really interesting and a life changing knowledge.</p>
 <p>The gist is that given a version number MAJOR.MINOR.PATCH, increment the:</p>
-
 <ul>
 <li><strong>MAJOR</strong> version when you make incompatible API changes,</li>
 <li><strong>MINOR</strong> version when you add functionality in a backwards compatible manner, and</li>
 <li><strong>PATCH</strong> version when you make backwards compatible bug fixes.</li>
 </ul>
-
-<p>From my experience, developers that are new to <a href="https://semver.org/">SemVer</a> tend to create new versions every week. Especially when the project is in an early stage and it is required to share something with other teams. <strong>My recommendation</strong> is to follow the SemVer.9 paragraph. Create a version such as 0.2.0-[date] to differentiate between quick changes and, once you achieve the milestone, release the 0.2.0 and start the same process with 0.3.0.</p>
-
+<p>From my experience, developers that are new to <a href="https://semver.org/"target="_blank">SemVer</a> tend to create new versions every week. Especially when the project is in an early stage and it is required to share something with other teams. <strong>My recommendation</strong> is to follow the SemVer.9 paragraph. Create a version such as 0.2.0-[date] to differentiate between quick changes and, once you achieve the milestone, release the 0.2.0 and start the same process with 0.3.0.</p>
 <h1 id="when-to-use-git-to-manage-versions-between-services">When to use Git to manage versions between services</h1>
-
-<p>If you are working with a single technology with a single purpose. Let&rsquo;s say Go to develop Traefik. You will be ok by just following <a href="https://semver.org/">SemVer</a> and using Go Modules. Same applies for an Angular application. You are backed by <a href="https://semver.org/">SemVer</a> and npm. But what happen when you are developing a backend in Java with a frontend in Angular? How do you keep track if which versions actually work? What if I told you that the backend is not a single boring monolith but a cool set of microservices? Soon, you will find yourself in <a href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency Hell</a> and this is the case where Git can help you.</p>
-
+<p>If you are working with a single technology with a single purpose. Let&rsquo;s say Go to develop Traefik. You will be ok by just following <a href="https://semver.org/"target="_blank">SemVer</a> and using Go Modules. Same applies for an Angular application. You are backed by <a href="https://semver.org/"target="_blank">SemVer</a> and npm. But what happen when you are developing a backend in Java with a frontend in Angular? How do you keep track if which versions actually work? What if I told you that the backend is not a single boring monolith but a cool set of microservices? Soon, you will find yourself in <a href="https://en.wikipedia.org/wiki/Dependency_hell"target="_blank">Dependency Hell</a> and this is the case where Git can help you.</p>
 <p>Let&rsquo;s imagine shop application with different modules. I&rsquo;m going to focus in the parts of the application that are usually developed and ignoring infrastructure details such as reverse proxy, secret management, databases&hellip;</p>
-
 <ul>
 <li>Frontend with Angular 8</li>
 <li>Cart service With Java - Reused from the past</li>
@@ -63,13 +45,9 @@
 <li>Search service with Go - Old java version doesn&rsquo;t meet the performance requirements</li>
 <li>Recommendation service with Python - Is in Python because of the tooling.</li>
 </ul>
-
 <p>Due to the nature of the different stacks, there will be different people involved in the development of each service. This implies each one will be hosted in a separated Git repository.</p>
-
 <iframe frameborder="0" style="width:100%;height:533px;" src="https://app.diagrams.net?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Untitled%20Diagram.drawio#R7Vjfk9MgEP5r8qiThLTXvvbH6XieOtbxeo8Y1gQnhQ6laeJfL7lAE5q2Ez1P7OlLh%2F1YWNjdb7PUQ9NV8UrgdXrLCWRe6JPCQzMvDKNBpH4roKyBq%2FGwBhJBSQ0FDbCg30GDvka3lMDGUpScZ5KubTDmjEEsLQwLwXe22lee2VbXOIEOsIhx1kXvKJFpjY4GfoO%2FBpqkxnLg65kVNsoa2KSY8F0LQnMPTQXnsh6tiilkle%2BMX%2Bp11ydm9wcTwGSfBXfv392gT2%2BWQXyTzEbl51uRly9QvUuOs62%2BsD6sLI0HgCiHaJELmfKEM5zNG3Qi%2BJYRqMz4Smp03nK%2BVmCgwG8gZamji7eSKyiVq0zP1jYrQyfvpqEN34oYzlzI5AgWCcgzeuE%2BAipzga9AilKtE5BhSXP7HFjnULLXa9ysBtrTP%2BH10b%2Fq9cil101Jcex25VxRLqv1LwdGvNfbPQizwpJKLTkI1%2FCR4dJLP3CqThj6%2BpuATPHUn4RgPLC3qM%2BlVx0EfX%2BMR%2BSBm7AXVC5b4%2FsmA5TUxLwSynYCXEaqBIFTaneYfS04k8BIJ9R2IHcplbBY4wcf7FQHc6xE5iAkFOdd2b25WTA6yHaT%2FbumnRhrKG11Egb77b4Kj1TBYaasTgjN1TCphlMspIGVldbMEeUFiJwqD%2BqZL%2BJQ93AHxyFBdkRQ6DgiAXJZkPxfKUiBVY6a6vT0BSm6hAYv6sOxSfU6gWfLssPC555m0X%2Ba9abZsCfNnHb0wz40WwAWcfpsaYb%2Buq%2FZwAnNTrTKwZ%2BjTHAZr%2BBur3yEBR8hVvYYUQfirDd35iyh7HKoE13Z1ImiJ6OOVz1IzD999UO2%2BbsUzX8A"></iframe>
-
 <p>In the tradicional approach, when you want to create a working environment, you follow the following steps.</p>
-
 <ol>
 <li>Clone repositories.</li>
 <li>Checkout version tags.</li>
@@ -80,28 +58,50 @@
 <li>Deploy to Production</li>
 <li>Sanity Check</li>
 </ol>
-
 <p>After the step Integration Testing, you can simply take note of which versions are deployed and check this combination as a valid one. The problem of manually handling valid combinations is that it can become a mess really quickly. What if we use Git to track this versions? Let me introduce you to Git Submodules.</p>
-
 <h2 id="git-submodules">Git Submodules</h2>
-
-<p>A Git <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">Submodule</a> is just a reference to another repository versioned as any other file inside the repository. It&rsquo;s similar to a pointer.</p>
-
+<p>A Git <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"target="_blank">Submodule</a> is just a reference to another repository versioned as any other file inside the repository. It&rsquo;s similar to a pointer.</p>
 <p>To add Submodules, you have a special git command. This is how you can create the previous environment with Git Submodules.</p>
-
-<pre><code class="language-bash">git init
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">git init
 git submodule add https://www.github.com/frontend
 git submodule add https://www.github.com/services/cart
 git submodule add https://www.github.com/services/browse
 git submodule add https://www.github.com/services/search
 git submodule add https://www.github.com/services/recommendation
 git add .
-git commit -m &quot;added project dependencies&quot;
-</code></pre>
-
-<p>This is how the file structure will look like.</p>
-
-<pre><code class="language-bash">.
+git commit -m <span style="color:#f1fa8c">&#34;added project dependencies&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This is how the file structure will look like.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">.
 ├── .git
 ├── browse
 │   └── .git
@@ -113,32 +113,33 @@ git commit -m &quot;added project dependencies&quot;
 │   └── .git
 └── search
     └── .git
-</code></pre>
-
-<p><strong>Each submodule is an independent git repository</strong>. If you cd into one of them, you will see that git commands works as usual. You can edit files, commit and push changes back to the remote repository. When you perform this operation, the parent git repository will display changes in a submodule. This happens when the referenced commit of the submodule is different from the actual commit. Now you can just add this changes and create a commit to tell Git that you want to update the version of a submodule.</p>
-
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Each submodule is an independent git repository</strong>. If you cd into one of them, you will see that git commands works as usual. You can edit files, commit and push changes back to the remote repository. When you perform this operation, the parent git repository will display changes in a submodule. This happens when the referenced commit of the submodule is different from the actual commit. Now you can just add this changes and create a commit to tell Git that you want to update the version of a submodule.</p>
 <h3 id="init">init</h3>
-
 <p>One of the most annoying parts of Submodules is that when you clone the repository, the Submodules are not cloned by default. There is an special command called <code>init</code> that downloads each repository that must be executed after clone.</p>
-
-<pre><code class="language-bash">git submodule init
-</code></pre>
-
-<h3 id="update">update</h3>
-
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">git submodule init
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="update">update</h3>
 <p>When you use git checkout to move around the different versions, the Submodules are not updated by default. Once you are in the desired commit, you will see changes in the Git head due to different versions in Submodules. To automatically checkout each submodule to the right version, use <code>update</code>.</p>
-
-<pre><code class="language-bash">git submodule update
-</code></pre>
-
-<h3 id="conflicts">conflicts</h3>
-
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">git submodule update
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="conflicts">conflicts</h3>
 <p>When you move between versions that have different Submodules, git doesn&rsquo;t handle it gracefully. You will see weird messages when executing update. The easy way to move forward is to remove the submodule folders manually and execute <a href="#init">init</a> again.</p>
-
 <h2 id="workflow">Workflow</h2>
-
 <p>Now that we have a repository to control different versions, the workflow is straight forward. Recalling the previous steps, now it look like this.</p>
-
 <ol>
 <li><strong>Clone root repository.</strong></li>
 <li>Init Submodules</li>
@@ -152,14 +153,32 @@ git commit -m &quot;added project dependencies&quot;
 <li>Deploy to Production</li>
 <li>Sanity Check</li>
 </ol>
-
 <p>This gives you a clear version control of versions that work fine together. At any given moment you can use the root repository to create environments at any given version combination.</p>
-
 <h1 id="docker-compose">Docker compose</h1>
-
 <p>If we assume that each submodule is packaged as a docker container that will be deployed to an orchestrator, this gives us a super easy and straight forward way to create environments on demand. Following the previous sample application, this is how the file structure will look like.</p>
-
-<pre><code class="language-bash">.
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">.
 ├── .git
 ├── docker-compose.yaml
 ├── browse
@@ -177,187 +196,287 @@ git commit -m &quot;added project dependencies&quot;
 └── search
     ├── .git
     └── Dockerfile
-</code></pre>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#ff79c6">version</span>: <span style="color:#f1fa8c">&#34;2.4&#34;</span>
 
-<pre><code class="language-yaml">version: &quot;2.4&quot;
-
-services:
-  browser:
-    build: browser
-    image: browser:latest
-  cart:
-    build: cart
-    image: cart:latest
-  frontend:
-    build: frontend
-    image: frontend:latest
-  recommendation:
-    build: recommendation
-    image: recommendation:latest
-  search:
-    build: search
-    image: search:latest
-</code></pre>
-
-<p>Let&rsquo;s translate the previous abstract steps into commands</p>
-
+<span style="color:#ff79c6">services</span>:
+  <span style="color:#ff79c6">browser</span>:
+    <span style="color:#ff79c6">build</span>: browser
+    <span style="color:#ff79c6">image</span>: browser:latest
+  <span style="color:#ff79c6">cart</span>:
+    <span style="color:#ff79c6">build</span>: cart
+    <span style="color:#ff79c6">image</span>: cart:latest
+  <span style="color:#ff79c6">frontend</span>:
+    <span style="color:#ff79c6">build</span>: frontend
+    <span style="color:#ff79c6">image</span>: frontend:latest
+  <span style="color:#ff79c6">recommendation</span>:
+    <span style="color:#ff79c6">build</span>: recommendation
+    <span style="color:#ff79c6">image</span>: recommendation:latest
+  <span style="color:#ff79c6">search</span>:
+    <span style="color:#ff79c6">build</span>: search
+    <span style="color:#ff79c6">image</span>: search:latest
+</code></pre></td></tr></table>
+</div>
+</div><p>Let&rsquo;s translate the previous abstract steps into commands</p>
 <ol>
-<li><p>Clone root repository.</p>
-
-<pre><code class="language-bash">git clone https://www.github.com/shop
-</code></pre></li>
-
-<li><p>Init Submodules</p>
-
-<pre><code class="language-bash">git submodule init
-</code></pre></li>
-
-<li><p>For each submodule, Checkout version tags.</p>
-
-<pre><code class="language-bash">git submodule update
-</code></pre></li>
-
-<li><p>Build/Test service images.</p>
-
-<pre><code class="language-bash"># Assuming unit tests are executed at docker build time
-docker-compose build
-</code></pre></li>
-
-<li><p>Commit changes to root repository</p>
-
-<pre><code class="language-bash">git add .
-git commit -m &quot;version x.x.x-rcx build successful&quot;
-</code></pre></li>
-
-<li><p>Push artefacts.</p>
-
-<pre><code class="language-bash">docker-compose push
-</code></pre></li>
-
-<li><p>Create an environment</p>
-
-<pre><code class="language-bash">docker-compose up
-</code></pre></li>
-
-<li><p>Integration testing</p>
-
-<pre><code class="language-bash"># Maybe a newman container or Robot python scripts... Up to you
-</code></pre></li>
+<li>Clone root repository.</li>
 </ol>
-
-<p>With this approach we solve not only de dependency hell problem, but also the environment recreation. In other words, this solves the problem of &ldquo;works on my machine&rdquo; or at least reduces the chances of finding this problem.</p>
-
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">git clone https://www.github.com/shop
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>Init Submodules</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">git submodule init
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>For each submodule, Checkout version tags.</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">git submodule update
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>Build/Test service images.</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Assuming unit tests are executed at docker build time</span>
+docker-compose build
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>Commit changes to root repository</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">git add .
+git commit -m <span style="color:#f1fa8c">&#34;version x.x.x-rcx build successful&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>Push artefacts.</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">docker-compose push
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>Create an environment</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">docker-compose up
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>Integration testing</li>
+</ol>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Maybe a newman container or Robot python scripts... Up to you</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>With this approach we solve not only de dependency hell problem, but also the environment recreation. In other words, this solves the problem of &ldquo;works on my machine&rdquo; or at least reduces the chances of finding this problem.</p>
 <p>There are tools for dependency management for different programming languages or frameworks
 There are tools for managing container versions</p>
-
 <p>But how to we keep track of which versions should we use when we are dealing with multiple sources.</p>
-
 <h1 id="gitmodules-file">.gitmodules file</h1>
-
-<p>You may have noticed that there is an extra file called .gitmodules that contains. <a href="https://git-scm.com/docs/gitmodules">Here</a> is the full file reference in case you want to read it. I will just explain the most basic functionality.</p>
-
+<p>You may have noticed that there is an extra file called .gitmodules that contains. <a href="https://git-scm.com/docs/gitmodules"target="_blank">Here</a> is the full file reference in case you want to read it. I will just explain the most basic functionality.</p>
 <p>This is how the file will look like after adding the Submodules.</p>
-
-<pre><code class="language-txt">[submodule &quot;frontend&quot;]
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">[submodule &#34;frontend&#34;]
 	path = frontend
 	url = https://www.github.com/frontend
 
-[submodule &quot;cart&quot;]
+[submodule &#34;cart&#34;]
 	path = cart
 	url = https://www.github.com/services/cart
 
-[submodule &quot;browse&quot;]
+[submodule &#34;browse&#34;]
 	path = browse
 	url = https://www.github.com/services/browse
 
-[submodule &quot;search&quot;]
+[submodule &#34;search&#34;]
 	path = search
 	url = https://www.github.com/services/search
 
-[submodule &quot;recommendation&quot;]
+[submodule &#34;recommendation&#34;]
 	path = recommendation
 	url = https://www.github.com/services/recommendtion
-</code></pre>
-
-<p>It is really simple to understand, it specifies the path and the remote url. You can modify these values manually but it is recommended to use the git cli to avoid introducing any mistake. Maybe the only exception is to <a href="#relative-paths">modify the url to be relative</a>. Check the Tips section.</p>
-
+</code></pre></td></tr></table>
+</div>
+</div><p>It is really simple to understand, it specifies the path and the remote url. You can modify these values manually but it is recommended to use the git cli to avoid introducing any mistake. Maybe the only exception is to <a href="#relative-paths">modify the url to be relative</a>. Check the Tips section.</p>
 <h1 id="tips">Tips</h1>
-
 <h2 id="relative-paths">Relative paths</h2>
-
 <p>Submodules added in the previous sections were added with full path. This means that we can specify a different protocol or different servers to clone the data. In practice, the repositories are hosted under the same domain most of the time or forks are crated. This situation allows us to modify paths of the submodules to be relative to the root repository.</p>
-
-<pre><code class="language-txt">[submodule &quot;frontend&quot;]
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">[submodule &#34;frontend&#34;]
 	path = frontend
 	url = .../frontend
 
-[submodule &quot;cart&quot;]
+[submodule &#34;cart&#34;]
 	path = cart
 	url = .../services/cart
 
-[submodule &quot;browse&quot;]
+[submodule &#34;browse&#34;]
 	path = browse
 	url = .../services/browse
 
-[submodule &quot;search&quot;]
+[submodule &#34;search&#34;]
 	path = search
 	url = .../services/search
 
-[submodule &quot;recommendation&quot;]
+[submodule &#34;recommendation&#34;]
 	path = recommendation
 	url = .../services/recommendation
-</code></pre>
-
-<p>The advantage of this approach is that now you can select https or ssh depending on your needs and only modify it in one place. This is also a requirement if you have a CI/CD pipeline as you can read in <a href="https://docs.gitlab.com/ee/ci/git_submodules.html">GitLab documentation</a></p>
-
-<h2 id="update-init">update &ndash;init</h2>
-
+</code></pre></td></tr></table>
+</div>
+</div><p>The advantage of this approach is that now you can select https or ssh depending on your needs and only modify it in one place. This is also a requirement if you have a CI/CD pipeline as you can read in <a href="https://docs.gitlab.com/ee/ci/git_submodules.html"target="_blank">GitLab documentation</a></p>
+<h2 id="update---init">update &ndash;init</h2>
 <p>You can run init + update in a single command with the flag <code>--init</code></p>
-
-<pre><code class="language-bash">git submodule update --init
-</code></pre>
-
-<h2 id="update-remote">update &ndash;remote</h2>
-
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">git submodule update --init
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="update---remote">update &ndash;remote</h2>
 <p>If you need to update all the Submodules to the latest version, you can use the &ndash;remote flag.</p>
-
-<pre><code class="language-bash">git submodule update --remote
-</code></pre>
-
-<p>Also, you can specify which branch to track in .gitmodules file. This will allow you to track branches that are not the default.</p>
-
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">git submodule update --remote
+</code></pre></td></tr></table>
+</div>
+</div><p>Also, you can specify which branch to track in .gitmodules file. This will allow you to track branches that are not the default.</p>
 <h2 id="remove-submodule">Remove Submodule</h2>
-
-<p>As creating submodules is really easy, removing them is not straight forward. You can find instructions here <a href="https://gist.github.com/myusuf3/7f645819ded92bda6677">Remove Submodule</a>.</p>
-
+<p>As creating submodules is really easy, removing them is not straight forward. You can find instructions here <a href="https://gist.github.com/myusuf3/7f645819ded92bda6677"target="_blank">Remove Submodule</a>.</p>
 <p>To remove a submodule you need to:</p>
-
 <ul>
 <li>Delete the relevant section from the .gitmodules file.</li>
 <li>Stage the .gitmodules changes git add .gitmodules</li>
 <li>Delete the relevant section from .git/config.</li>
 <li>Run git rm &ndash;cached path_to_submodule (no trailing slash).</li>
 <li>Run rm -rf .git/modules/path_to_submodule (no trailing slash).</li>
-<li>Commit git commit -m &ldquo;Removed submodule &ldquo;</li>
+<li>Commit git commit -m &ldquo;Removed submodule &quot;</li>
 <li>Delete the now untracked submodule files rm -rf path_to_submodule</li>
 </ul>
-
 <h2 id="modules-folder">Modules folder</h2>
-
 <p>Put all Submodules under modules folder, so you can delete all of them with a single operation. This will be really helpful to resolve <a href="#conflicts">conflicts</a>.</p>
-
 <h1 id="conclusion">Conclusion</h1>
-
 <p>This is just scratching the surface of how to setup a project, but hopefully will give you some hints of how to introduce Git Submodules to track versions of different repositories.</p>
-
 <h1 id="references">References</h1>
-
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency Hell</a></li>
-<li><a href="https://semver.org/">SemVer</a></li>
-<li><a href="https://codewinsarguments.co/2016/05/01/git-submodules-vs-git-subtrees/">Submodule vs Subtrees</a></li>
-<li><a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">Submodule</a></li>
-<li><a href="https://gist.github.com/myusuf3/7f645819ded92bda6677">Remove Submodule</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dependency_hell"target="_blank">Dependency Hell</a></li>
+<li><a href="https://semver.org/"target="_blank">SemVer</a></li>
+<li><a href="https://codewinsarguments.co/2016/05/01/git-submodules-vs-git-subtrees/"target="_blank">Submodule vs Subtrees</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"target="_blank">Submodule</a></li>
+<li><a href="https://gist.github.com/myusuf3/7f645819ded92bda6677"target="_blank">Remove Submodule</a></li>
 </ul></article><section class="article labels"><a class="category" href=/categories/howto/>howto</a><a class="tag" href=/tags/git/>git</a><a class="tag" href=/tags/docker/>docker</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2020-03-30-weekend_learnings/"><span class="li">&larr;</span>2020-03-30 Weekend Learnings</a></p><p><a class="link" href="/post/howto/2020-02-14_nginx_auth_server_with_go/"><span class="li">&rarr;</span>Ready to Go Auth server with Nginx</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
     label="comment" theme="github-light" crossorigin="anonymous" async>
     </script></div><section id="footer" class="footer"><div class="footer-wrap">

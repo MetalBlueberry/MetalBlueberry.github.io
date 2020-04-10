@@ -7,7 +7,6 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Víctor Pérez Domingo</copyright>
-    <lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/categories/howto/index.xml" rel="self" type="application/rss+xml" />
     
@@ -28,7 +27,7 @@
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/howto/2020-02-14_nginx_auth_server_with_go/</guid>
-      <description>&lt;p&gt;I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like &lt;a href=&#34;https://developers.google.com/identity/protocols/OAuth2&#34;&gt;Google oauth2&lt;/a&gt;. But if you really need you own system&amp;hellip; this approach should ease the work.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like &lt;a href=&#34;https://developers.google.com/identity/protocols/OAuth2&#34;target=&#34;_blank&#34;&gt;Google oauth2&lt;/a&gt;. But if you really need you own system&amp;hellip; this approach should ease the work.&lt;/p&gt;</description>
       
     </item>
     
@@ -88,7 +87,7 @@
       <pubDate>Tue, 29 Oct 2019 11:41:00 +0100</pubDate>
       
       <guid>/post/howto/2019-10-29_create-a-blog-like-this/</guid>
-      <description>&lt;p&gt;A blog like this can be generated with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo.io&lt;/a&gt; hosted for free using &lt;a href=&#34;https://github.com/&#34;&gt;Github.com&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;A blog like this can be generated with &lt;a href=&#34;https://gohugo.io/&#34;target=&#34;_blank&#34;&gt;Hugo.io&lt;/a&gt; hosted for free using &lt;a href=&#34;https://github.com/&#34;target=&#34;_blank&#34;&gt;Github.com&lt;/a&gt;.&lt;/p&gt;</description>
       
     </item>
     

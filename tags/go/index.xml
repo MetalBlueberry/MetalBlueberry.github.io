@@ -7,7 +7,6 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Víctor Pérez Domingo</copyright>
-    <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,7 +17,7 @@
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/blog/2020-03-30-weekend_learnings/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve learned a little bit about frontend testing with chromium web drivers using &lt;a href=&#34;https://agouti.org/&#34;&gt;Agouti&lt;/a&gt; and It has proven to be a really good option to write test in Go. Also we are in quarantine so I let you here a WebGL interactive animation to entertain you.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve learned a little bit about frontend testing with chromium web drivers using &lt;a href=&#34;https://agouti.org/&#34;target=&#34;_blank&#34;&gt;Agouti&lt;/a&gt; and It has proven to be a really good option to write test in Go. Also we are in quarantine so I let you here a WebGL interactive animation to entertain you.&lt;/p&gt;</description>
       
     </item>
     
@@ -28,7 +27,7 @@
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/howto/2020-02-14_nginx_auth_server_with_go/</guid>
-      <description>&lt;p&gt;I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like &lt;a href=&#34;https://developers.google.com/identity/protocols/OAuth2&#34;&gt;Google oauth2&lt;/a&gt;. But if you really need you own system&amp;hellip; this approach should ease the work.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like &lt;a href=&#34;https://developers.google.com/identity/protocols/OAuth2&#34;target=&#34;_blank&#34;&gt;Google oauth2&lt;/a&gt;. But if you really need you own system&amp;hellip; this approach should ease the work.&lt;/p&gt;</description>
       
     </item>
     

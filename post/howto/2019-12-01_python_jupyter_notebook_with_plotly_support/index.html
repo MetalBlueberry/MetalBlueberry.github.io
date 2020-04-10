@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Python Jupyter Notebook With Plotly Support&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python Jupyter Notebook With Plotly Support"/>
@@ -18,124 +18,156 @@
 <body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">Python Jupyter Notebook With Plotly Support</h1><p class="article date">Saturday, December 7, 2019<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>Python is awesome because you can do anything. In this case, I&rsquo;m going to show you how to configure a Jupyter notebook with integrated Plotly support to draw interactive graphs. This is very useful if you have to analyse something.</p>
-
 <h1 id="introduction">Introduction</h1>
-
-<p>In case you don&rsquo;t know it, the <a href="https://jupyter.org/">Jupyter project</a> exist to develop open-source software, open-standards, and services for interactive computing across dozens of programming languages. All started with Python and R, but nowadays, it is compatible with almost any popular language.</p>
-
+<p>In case you don&rsquo;t know it, the <a href="https://jupyter.org/"target="_blank">Jupyter project</a> exist to develop open-source software, open-standards, and services for interactive computing across dozens of programming languages. All started with Python and R, but nowadays, it is compatible with almost any popular language.</p>
 <p>I&rsquo;m going to focus in how to create a Jupyter notebook for Python using a Docker image. This will allow you to replicate the environment wherever you want with a single command and keep all the dependencies in a single place.</p>
-
 <p>One of the key things is that I&rsquo;m going to explain how to integrate the Plotly library into the notebook so we will be able to create interactive plots that can be exported with the notebook itself. This create an amazing tool to share reports within your organization.</p>
-
 <h2 id="docker-environment">Docker environment</h2>
-
-<p>Finding the images is easy. If you google it, you will find the repository <a href="https://github.com/jupyter/docker-stacks">jupyter/docker-stacks</a> that contains the images that you need. but, what do you need? The Jupyter environment is growing fast and sometimes is hard to know what are we looking for. The best place to start, as always, is the <a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/">documentation</a> page. Skipping the examples that shows you how to create a notebook in a single command, I&rsquo;m going to enter directly in the section &ldquo;<a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html">Selecting an image</a>&rdquo; to understand the difference and select what we need. Go to the link to read about the images and then come back here. Keep in mind that I&rsquo;m looking for a Python environment with at least Pandas and Plotly installed.</p>
-
+<p>Finding the images is easy. If you google it, you will find the repository <a href="https://github.com/jupyter/docker-stacks"target="_blank">jupyter/docker-stacks</a> that contains the images that you need. but, what do you need? The Jupyter environment is growing fast and sometimes is hard to know what are we looking for. The best place to start, as always, is the <a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/"target="_blank">documentation</a> page. Skipping the examples that shows you how to create a notebook in a single command, I&rsquo;m going to enter directly in the section &ldquo;<a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html"target="_blank">Selecting an image</a>&rdquo; to understand the difference and select what we need. Go to the link to read about the images and then come back here. Keep in mind that I&rsquo;m looking for a Python environment with at least Pandas and Plotly installed.</p>
 <p>The image &ldquo;jupyter/base-notebook&rdquo; could be a good options, but there are still useful missing dependencies provided by &ldquo;jupyter/minimal-notebook&rdquo;. &ldquo;jupyter/r-notebook&rdquo; is discarded, we want Python. &ldquo;jupyter/scipy-notebook&rdquo; contains everything we need except Plotly. It even contain more things that we need, like seaborn. The following images diverge further more from our needs so I&rsquo;m going to use the jupyter/minimal-notebook and install the dependencies myself. Let&rsquo;s create a Docker container.</p>
-
 <h3 id="the-base-image">The Base Image</h3>
-
-<p>The documentation warns that the images are regularly updated with backward incompatible changes. For this reason, it is recommendable to use a constant docker tag instead of the $LATEST reference. You can go directly to <a href="https://hub.docker.com/r/jupyter/minimal-notebook/tags/">docker hub</a> and find the current latest tag to start a new project. In this moment, the tag is &ldquo;jupyter/minimal-notebook:ad3574d3c5c7&rdquo;. Let&rsquo;s download it and create a minimal notebook. The following command will do it.</p>
-
-<pre><code class="language-sh">docker run -p 8888:8888 jupyter/minimal-notebook:ad3574d3c5c7
-</code></pre>
-
-<p>When it finishes, you will have the notebook running in <a href="http://localhost:8888">http://localhost:8888</a>. Check it out. The notebook requires you to give the token that has been printed in the terminal. Just copy and paste it.</p>
-
+<p>The documentation warns that the images are regularly updated with backward incompatible changes. For this reason, it is recommendable to use a constant docker tag instead of the $LATEST reference. You can go directly to <a href="https://hub.docker.com/r/jupyter/minimal-notebook/tags/"target="_blank">docker hub</a> and find the current latest tag to start a new project. In this moment, the tag is &ldquo;jupyter/minimal-notebook:ad3574d3c5c7&rdquo;. Let&rsquo;s download it and create a minimal notebook. The following command will do it.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">docker run -p 8888:8888 jupyter/minimal-notebook:ad3574d3c5c7
+</code></pre></td></tr></table>
+</div>
+</div><p>When it finishes, you will have the notebook running in <a href="http://localhost:8888"target="_blank">http://localhost:8888</a>. Check it out. The notebook requires you to give the token that has been printed in the terminal. Just copy and paste it.</p>
 <p>Now you can create a new Python notebook by clicking on the top left button &ldquo;new&rdquo; and selecting &ldquo;Python 3&rdquo;. This will open a new windows and you will be ready to go. Try to type a few Python commands and press <code>Shift+Enter</code>. This will execute the command and move to the next cell.</p>
-
-<pre><code class="language-Python">print(&quot;Hello world!&quot;)
-</code></pre>
-
-<p>This is cool, but we need a lot of dependencies. If you try to run <code>import pandas</code>, it will complain. To install the dependencies, we need a Dockerfile and a requirements.txt.</p>
-
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-Python" data-lang="Python"><span style="color:#ff79c6">print</span>(<span style="color:#f1fa8c">&#34;Hello world!&#34;</span>)
+</code></pre></td></tr></table>
+</div>
+</div><p>This is cool, but we need a lot of dependencies. If you try to run <code>import pandas</code>, it will complain. To install the dependencies, we need a Dockerfile and a requirements.txt.</p>
 <h3 id="the-docker-file">The Docker file</h3>
-
 <p>It is time to create a folder somewhere in your system to put everything on it. I would recommend you to put it under VSC with git. The first thing you should create is a <code>Dockerfile</code> and a <code>requirements.txt</code> with the following content.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> jupyter/minimal-notebook:ad3574d3c5c7</span>
 
-<pre><code class="language-Dockerfile">FROM jupyter/minimal-notebook:ad3574d3c5c7
-
-WORKDIR /tml
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-</code></pre>
-
-<pre><code class="language-txt">pandas
+<span style="color:#ff79c6">WORKDIR</span><span style="color:#f1fa8c"> /tml</span>
+<span style="color:#ff79c6">COPY</span> requirements.txt .
+<span style="color:#ff79c6">RUN</span> pip install -r requirements.txt
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">pandas
 plotly
-</code></pre>
-
-<p>Now we can give it a try by building and running the container.</p>
-
-<pre><code class="language-sh"># from the folder containing the files
+</code></pre></td></tr></table>
+</div>
+</div><p>Now we can give it a try by building and running the container.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#6272a4"># from the folder containing the files</span>
 docker build -t jupyter .
 docker run --rm -it -p 8888:8888 jupyter 
-</code></pre>
-
-<div class="admonition tip"><p class="admonition-title">tip</p>
-  
+</code></pre></td></tr></table>
+</div>
+</div><div class="admonition tip"><p class="admonition-title">tip</p>
 <ul>
 <li><code>--rm</code> deletes the container at exit.</li>
 <li><code>-it</code> creates an interactive tty. is not necessary but i like to run containers with it when I&rsquo;m exploring.</li>
 <li><code>-p 8888:8888</code> exposes the port 8888 to my localhost.</li>
 <li><code>jupyter</code> is the name of the image given by me when building it</li>
 </ul>
-
-
 </div>
-
 <p>This will print in the terminal a series of messages. You should look for the one displaying the localhost URL and the token. If you click the link, It will open the browser with your new jupyter notebook environment.</p>
-
-<pre><code class="language-log">[I 09:32:25.749 NotebookApp] The Jupyter Notebook is running at:
+<pre><code class="language-log" data-lang="log">[I 09:32:25.749 NotebookApp] The Jupyter Notebook is running at:
 [I 09:32:25.749 NotebookApp] http://75fcb2e2b029:8888/?token=da7ef85e9afb1568794b3c222f633c144ba9c010f9de26b2
 [I 09:32:25.749 NotebookApp]  or http://127.0.0.1:8888/?token=da7ef85e9afb1568794b3c222f633c144ba9c010f9de26b2
-</code></pre>
-
-<p>So it is done! We can star playing with it.</p>
-
+</code></pre><p>So it is done! We can star playing with it.</p>
 <h3 id="enable-jupyterlab-optional">Enable JupyterLab (Optional)</h3>
-
 <p>Looks like the world is always moving and now we have the JupyterLab web interface instead of the classic Jupyter Notebook. We can easily enable it by adding an environment variable at the end of the Dockerfile. It is still a little bit unstable but I think that It will be quickly improved.</p>
-
 <p>Also, I&rsquo;ve added some essential extensions for me directly in the dockerfile.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#ff79c6">ENV</span> <span style="color:#8be9fd;font-style:italic">JUPYTER_ENABLE_LAB</span><span style="color:#ff79c6">=</span>yes
 
-<pre><code class="language-Dockerfile">ENV JUPYTER_ENABLE_LAB=yes
-
-RUN jupyter labextension install jupyterlab_vim &amp;&amp; \
-    jupyter labextension install @jupyterlab/dataregistry-extension &amp;&amp; \
-    pip install --upgrade jupyterlab-git &amp;&amp; \
-    jupyter lab build
-</code></pre>
-
-<p>From my point of view, this is a must just for the vim extension.</p>
-
+<span style="color:#ff79c6">RUN</span> jupyter labextension install jupyterlab_vim <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    jupyter labextension install @jupyterlab/dataregistry-extension <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    pip install --upgrade jupyterlab-git <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    jupyter lab build
+</code></pre></td></tr></table>
+</div>
+</div><p>From my point of view, this is a must just for the vim extension.</p>
 <h2 id="setting-up-plotly">Setting up Plotly</h2>
+<p>By default, Plotly should work without any extra setup. The problem is that in some occasions you have to change the render configuration. This is really well explained in the <a href="https://plot.ly/python/renderers/"target="_blank">Plotly Renderers</a> documentation. You can use the following snippet to check your default render and to modify it</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="color:#6272a4"># [0]</span>
+<span style="color:#6272a4"># print</span>
+<span style="color:#ff79c6">import</span> plotly.io <span style="color:#ff79c6">as</span> pio
+pio<span style="color:#ff79c6">.</span>renderers
 
-<p>By default, Plotly should work without any extra setup. The problem is that in some occasions you have to change the render configuration. This is really well explained in the <a href="https://plot.ly/python/renderers/">Plotly Renderers</a> documentation. You can use the following snippet to check your default render and to modify it</p>
-
-<pre><code class="language-python"># [0]
-# print
-import plotly.io as pio
-pio.renderers
-
-# [1]
-# modify
-pio.renderers.default = &quot;iframe&quot;
-</code></pre>
-
-<p>It&rsquo;s time to run a sample code to see if we can draw a plot. Just copy and paste this into a cell.</p>
-
-<pre><code class="language-py">import plotly.graph_objects as go
-fig = go.Figure(
-    data=[go.Bar(y=[2, 1, 3])],
-    layout_title_text=&quot;A Figure Displaying Itself&quot;
+<span style="color:#6272a4"># [1]</span>
+<span style="color:#6272a4"># modify</span>
+pio<span style="color:#ff79c6">.</span>renderers<span style="color:#ff79c6">.</span>default <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;iframe&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>It&rsquo;s time to run a sample code to see if we can draw a plot. Just copy and paste this into a cell.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-py" data-lang="py"><span style="color:#ff79c6">import</span> plotly.graph_objects <span style="color:#ff79c6">as</span> go
+fig <span style="color:#ff79c6">=</span> go<span style="color:#ff79c6">.</span>Figure(
+    data<span style="color:#ff79c6">=</span>[go<span style="color:#ff79c6">.</span>Bar(y<span style="color:#ff79c6">=</span>[<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">3</span>])],
+    layout_title_text<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;A Figure Displaying Itself&#34;</span>
 )
-fig.show()
-</code></pre>
-
-<p>You should see something like this, but with a different style.</p>
-
+fig<span style="color:#ff79c6">.</span>show()
+</code></pre></td></tr></table>
+</div>
+</div><p>You should see something like this, but with a different style.</p>
 <div class="figure">
 <div class="figure-plot" id="fig1">
 	Code could not finish, this are some reasons why this happen.
@@ -175,79 +207,122 @@ fig = {
   draw()
 </script>
 </div>
-
-<h3 id="dict-syntax-vs-graph-objects">Dict syntax vs graph_objects</h3>
-
+<h3 id="dict-syntax-vs-graph_objects">Dict syntax vs graph_objects</h3>
 <p>In the previous example, the figure is build using the <code>graph_objects</code>. This is not a bad idea, but for simple cases, I prefer to create the dict by my self. This is basically the same idea. Let&rsquo;s compare.</p>
-
 <div class="admonition tip"><p class="admonition-title">tip</p>
-  
 <p>Quoting the docs [Creating and Updating Figures]:</p>
-
 <p><em>The goal of plotly.py is to provide a pleasant Python interface for creating figure specifications for display in the Plotly.js JavaScript library. In Plotly.js, a figure is specified by a declarative JSON data structure, and so <strong>the ultimate responsibility of plotly.py is to produce Python dictionaries that can be serialized into a JSON data structure that represents a valid figure</strong>.</em></p>
-
-
 </div>
-
-<pre><code class="language-python">import plotly.io as pio
-fig = {
-    &quot;data&quot;: [
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="color:#ff79c6">import</span> plotly.io <span style="color:#ff79c6">as</span> pio
+fig <span style="color:#ff79c6">=</span> {
+    <span style="color:#f1fa8c">&#34;data&#34;</span>: [
         {
-            &quot;type&quot;: &quot;bar&quot;,
-            &quot;y&quot;: [ 2, 1, 3 ]
+            <span style="color:#f1fa8c">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+            <span style="color:#f1fa8c">&#34;y&#34;</span>: [ <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">3</span> ]
         }
     ],
-    &quot;layout&quot;: {
-        &quot;title&quot;: &quot;A Figure Displaying Itself&quot;
+    <span style="color:#f1fa8c">&#34;layout&#34;</span>: {
+        <span style="color:#f1fa8c">&#34;title&#34;</span>: <span style="color:#f1fa8c">&#34;A Figure Displaying Itself&#34;</span>
     }
 }
-pio.show(fig)
+pio<span style="color:#ff79c6">.</span>show(fig)
 
-</code></pre>
-
-<pre><code class="language-python">import plotly.graph_objects as go
-fig = go.Figure(
-    data=[
-      go.Bar(
-        y=[2, 1, 3]
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="color:#ff79c6">import</span> plotly.graph_objects <span style="color:#ff79c6">as</span> go
+fig <span style="color:#ff79c6">=</span> go<span style="color:#ff79c6">.</span>Figure(
+    data<span style="color:#ff79c6">=</span>[
+      go<span style="color:#ff79c6">.</span>Bar(
+        y<span style="color:#ff79c6">=</span>[<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">3</span>]
       )
     ],
-    layout_title_text=&quot;A Figure Displaying Itself&quot;
+    layout_title_text<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;A Figure Displaying Itself&#34;</span>
 )
-fig.show()
-</code></pre>
-
-<p>If you want to get the json representation of the <code>graph_objects</code>, there is a method <code>to_json</code> that is what you expect. There is also an option to convert the dict to a <code>graph_objects</code> using <code>go.Figure</code> and passing the dictionary as parameter.</p>
-
+fig<span style="color:#ff79c6">.</span>show()
+</code></pre></td></tr></table>
+</div>
+</div><p>If you want to get the json representation of the <code>graph_objects</code>, there is a method <code>to_json</code> that is what you expect. There is also an option to convert the dict to a <code>graph_objects</code> using <code>go.Figure</code> and passing the dictionary as parameter.</p>
 <h2 id="working-with-pandas">Working with Pandas</h2>
-
-<p>The next big question is. How do we draw pandas dataframes? Thankfully, we have Python List Comprehensions that make things much easier. First let&rsquo;s fetch some data. I&rsquo;ve chossen data from Airbnb Barcelona from <a href="http://insideairbnb.com/get-the-data.html">here</a>.
+<p>The next big question is. How do we draw pandas dataframes? Thankfully, we have Python List Comprehensions that make things much easier. First let&rsquo;s fetch some data. I&rsquo;ve chossen data from Airbnb Barcelona from <a href="http://insideairbnb.com/get-the-data.html"target="_blank">here</a>.
 Loading the data is straight forward thanks to pandas. The second instructions is to parse the price values into float values to allow calculations.</p>
-
-<pre><code class="language-py">import pandas as pd
-df = pd.read_csv(&quot;http://data.insideairbnb.com/spain/catalonia/barcelona/2019-09-17/data/listings.csv.gz&quot;)
-df[&quot;price_value&quot;] = df.price.replace('[\$,]', '', regex=True).astype(float)
-</code></pre>
-
-<p>Okey, now let&rsquo;s draw the mean price of a room based on the number of room. I like to wrap my plots with a function, but this is just personal preference.</p>
-
-<pre><code class="language-py">def beds_vs_meanprice(df: pd.DataFrame):
-    data = df.groupby(&quot;beds&quot;,as_index=False)[&quot;price_value&quot;].mean()
-    fig = {
-        &quot;data&quot;:[
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-py" data-lang="py"><span style="color:#ff79c6">import</span> pandas <span style="color:#ff79c6">as</span> pd
+df <span style="color:#ff79c6">=</span> pd<span style="color:#ff79c6">.</span>read_csv(<span style="color:#f1fa8c">&#34;http://data.insideairbnb.com/spain/catalonia/barcelona/2019-09-17/data/listings.csv.gz&#34;</span>)
+df[<span style="color:#f1fa8c">&#34;price_value&#34;</span>] <span style="color:#ff79c6">=</span> df<span style="color:#ff79c6">.</span>price<span style="color:#ff79c6">.</span>replace(<span style="color:#f1fa8c">&#39;[\$,]&#39;</span>, <span style="color:#f1fa8c">&#39;&#39;</span>, regex<span style="color:#ff79c6">=</span>True)<span style="color:#ff79c6">.</span>astype(<span style="color:#8be9fd;font-style:italic">float</span>)
+</code></pre></td></tr></table>
+</div>
+</div><p>Okey, now let&rsquo;s draw the mean price of a room based on the number of room. I like to wrap my plots with a function, but this is just personal preference.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-py" data-lang="py"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">beds_vs_meanprice</span>(df: pd<span style="color:#ff79c6">.</span>DataFrame):
+    data <span style="color:#ff79c6">=</span> df<span style="color:#ff79c6">.</span>groupby(<span style="color:#f1fa8c">&#34;beds&#34;</span>,as_index<span style="color:#ff79c6">=</span>False)[<span style="color:#f1fa8c">&#34;price_value&#34;</span>]<span style="color:#ff79c6">.</span>mean()
+    fig <span style="color:#ff79c6">=</span> {
+        <span style="color:#f1fa8c">&#34;data&#34;</span>:[
             {
-                &quot;type&quot;: &quot;bar&quot;,
-                &quot;x&quot;:data[&quot;beds&quot;],
-                &quot;y&quot;:data[&quot;price_value&quot;]
+                <span style="color:#f1fa8c">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+                <span style="color:#f1fa8c">&#34;x&#34;</span>:data[<span style="color:#f1fa8c">&#34;beds&#34;</span>],
+                <span style="color:#f1fa8c">&#34;y&#34;</span>:data[<span style="color:#f1fa8c">&#34;price_value&#34;</span>]
             }
         ]
     }
-    pio.show(fig)
+    pio<span style="color:#ff79c6">.</span>show(fig)
 beds_vs_meanprice(df)
-</code></pre>
-
-<p>This produces an ugly plot, but let&rsquo;s focus on just the data for now.</p>
-
+</code></pre></td></tr></table>
+</div>
+</div><p>This produces an ugly plot, but let&rsquo;s focus on just the data for now.</p>
 <div class="figure">
 <div class="figure-plot" id="airbnb">
 	Code could not finish, this are some reasons why this happen.
@@ -277,26 +352,42 @@ fig = {"data": [{"type": "bar", "x": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.
   draw()
 </script>
 </div>
-
 <p>This is really easy to follow, you just have to put the columns that you want to draw and it works! Provably you will find yourself wanting to add categories, so let&rsquo;s do it. This is where list comprehension is essential. Let&rsquo;s include a category by the cancellation policy.</p>
-
-<pre><code class="language-py">def beds_vs_meanprice(df: pd.DataFrame):
-    data = df.groupby([&quot;cancellation_policy&quot;,&quot;beds&quot;],as_index=False)[&quot;price_value&quot;].mean()
-    fig = {
-        &quot;data&quot;:[
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-py" data-lang="py"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">beds_vs_meanprice</span>(df: pd<span style="color:#ff79c6">.</span>DataFrame):
+    data <span style="color:#ff79c6">=</span> df<span style="color:#ff79c6">.</span>groupby([<span style="color:#f1fa8c">&#34;cancellation_policy&#34;</span>,<span style="color:#f1fa8c">&#34;beds&#34;</span>],as_index<span style="color:#ff79c6">=</span>False)[<span style="color:#f1fa8c">&#34;price_value&#34;</span>]<span style="color:#ff79c6">.</span>mean()
+    fig <span style="color:#ff79c6">=</span> {
+        <span style="color:#f1fa8c">&#34;data&#34;</span>:[
             {
-                &quot;type&quot;: &quot;bar&quot;,
-                &quot;x&quot;:data[data[&quot;cancellation_policy&quot;]==policy][&quot;beds&quot;],
-                &quot;y&quot;:data[data[&quot;cancellation_policy&quot;]==policy][&quot;price_value&quot;],
-                &quot;name&quot;:policy
-            } for policy in data[&quot;cancellation_policy&quot;].unique()
+                <span style="color:#f1fa8c">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+                <span style="color:#f1fa8c">&#34;x&#34;</span>:data[data[<span style="color:#f1fa8c">&#34;cancellation_policy&#34;</span>]<span style="color:#ff79c6">==</span>policy][<span style="color:#f1fa8c">&#34;beds&#34;</span>],
+                <span style="color:#f1fa8c">&#34;y&#34;</span>:data[data[<span style="color:#f1fa8c">&#34;cancellation_policy&#34;</span>]<span style="color:#ff79c6">==</span>policy][<span style="color:#f1fa8c">&#34;price_value&#34;</span>],
+                <span style="color:#f1fa8c">&#34;name&#34;</span>:policy
+            } <span style="color:#ff79c6">for</span> policy <span style="color:#ff79c6">in</span> data[<span style="color:#f1fa8c">&#34;cancellation_policy&#34;</span>]<span style="color:#ff79c6">.</span>unique()
         ]
     }
-    pio.show(fig)
+    pio<span style="color:#ff79c6">.</span>show(fig)
 beds_vs_meanprice(df)
-</code></pre>
-
-<div class="figure">
+</code></pre></td></tr></table>
+</div>
+</div><div class="figure">
 <div class="figure-plot" id="airbnb2">
 	Code could not finish, this are some reasons why this happen.
 	- Plot name not defined. The first parameter of the shortcode is the name.
@@ -325,83 +416,138 @@ fig = {"data": [{"type": "bar", "x": [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.
   draw()
 </script>
 </div>
-
 <p>This may look complicated, but the idea behind is really simple. We get the unique policy values and create a trace for each one. To select the appropriate data, we filter the dataframe by the given policy. To identify it, we assign the trace name the value of the policy.</p>
-
 <p>with this technique, you can draw almost anything in a dataframe using plotly. If you are familiar with working with big datasets, you may notice that working in this way is not efficient. The good new are that you will hit plotly limitations before you have to think a better way of generating the plot.</p>
-
 <h3 id="export-figure-as-json">Export figure as json</h3>
-
-<p>To draw the figures in the blog, I&rsquo;ve exported the figure in json format and used the <a href="https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/">plot shortcode</a>. This is cool because allows me to generate complex structures like the category groupby from the previous example and display it here in a dynamic plot with just a copy/paste operation.</p>
-
+<p>To draw the figures in the blog, I&rsquo;ve exported the figure in json format and used the <a href="https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/"target="_blank">plot shortcode</a>. This is cool because allows me to generate complex structures like the category groupby from the previous example and display it here in a dynamic plot with just a copy/paste operation.</p>
 <p>fist thing is to import the json package and modify the plot code like this.</p>
-
-<pre><code class="language-py">def beds_vs_meanprice(df: pd.DataFrame):
-    data = df.groupby([&quot;cancellation_policy&quot;,&quot;beds&quot;],as_index=False)[&quot;price_value&quot;].mean()
-    fig = {
-        &quot;data&quot;:[
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-py" data-lang="py"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">beds_vs_meanprice</span>(df: pd<span style="color:#ff79c6">.</span>DataFrame):
+    data <span style="color:#ff79c6">=</span> df<span style="color:#ff79c6">.</span>groupby([<span style="color:#f1fa8c">&#34;cancellation_policy&#34;</span>,<span style="color:#f1fa8c">&#34;beds&#34;</span>],as_index<span style="color:#ff79c6">=</span>False)[<span style="color:#f1fa8c">&#34;price_value&#34;</span>]<span style="color:#ff79c6">.</span>mean()
+    fig <span style="color:#ff79c6">=</span> {
+        <span style="color:#f1fa8c">&#34;data&#34;</span>:[
             {
-                &quot;type&quot;: &quot;bar&quot;,
-                &quot;x&quot;:data[data[&quot;cancellation_policy&quot;]==policy][&quot;beds&quot;].to_list(),
-                &quot;y&quot;:data[data[&quot;cancellation_policy&quot;]==policy][&quot;price_value&quot;].to_list(),
-                &quot;name&quot;:policy
-            } for policy in data[&quot;cancellation_policy&quot;].unique()
+                <span style="color:#f1fa8c">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+                <span style="color:#f1fa8c">&#34;x&#34;</span>:data[data[<span style="color:#f1fa8c">&#34;cancellation_policy&#34;</span>]<span style="color:#ff79c6">==</span>policy][<span style="color:#f1fa8c">&#34;beds&#34;</span>]<span style="color:#ff79c6">.</span>to_list(),
+                <span style="color:#f1fa8c">&#34;y&#34;</span>:data[data[<span style="color:#f1fa8c">&#34;cancellation_policy&#34;</span>]<span style="color:#ff79c6">==</span>policy][<span style="color:#f1fa8c">&#34;price_value&#34;</span>]<span style="color:#ff79c6">.</span>to_list(),
+                <span style="color:#f1fa8c">&#34;name&#34;</span>:policy
+            } <span style="color:#ff79c6">for</span> policy <span style="color:#ff79c6">in</span> data[<span style="color:#f1fa8c">&#34;cancellation_policy&#34;</span>]<span style="color:#ff79c6">.</span>unique()
         ]
     }
-    print(json.dumps(fig))
-    pio.show(fig)
+    <span style="color:#ff79c6">print</span>(json<span style="color:#ff79c6">.</span>dumps(fig))
+    pio<span style="color:#ff79c6">.</span>show(fig)
 beds_vs_meanprice(df)
-</code></pre>
-
-<p>the <code>to_list()</code> is important because if not, the json generated contains the dataframe data. Then the <code>json.dumps</code> just works. Here is the output.</p>
-
-<pre><code class="language-json">{
-    &quot;data&quot;: [
+</code></pre></td></tr></table>
+</div>
+</div><p>the <code>to_list()</code> is important because if not, the json generated contains the dataframe data. Then the <code>json.dumps</code> just works. Here is the output.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-json" data-lang="json">{
+    <span style="color:#ff79c6">&#34;data&#34;</span>: [
         {
-            &quot;type&quot;: &quot;bar&quot;,
-            &quot;x&quot;: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16 ],
-            &quot;y&quot;: [ 58.049180327868854, 137.5415173237754, 138.96512935883015, 393.92602040816325, 293.5128205128205, 357.9247311827957, 210.82432432432432, 155.11764705882354, 1966.3333333333333, 358.42857142857144, 1050.3846153846155, 4160, 454.75, 146, 805
+            <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+            <span style="color:#ff79c6">&#34;x&#34;</span>: [ <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">7</span>, <span style="color:#bd93f9">8</span>, <span style="color:#bd93f9">9</span>, <span style="color:#bd93f9">10</span>, <span style="color:#bd93f9">12</span>, <span style="color:#bd93f9">14</span>, <span style="color:#bd93f9">15</span>, <span style="color:#bd93f9">16</span> ],
+            <span style="color:#ff79c6">&#34;y&#34;</span>: [ <span style="color:#bd93f9">58.049180327868854</span>, <span style="color:#bd93f9">137.5415173237754</span>, <span style="color:#bd93f9">138.96512935883015</span>, <span style="color:#bd93f9">393.92602040816325</span>, <span style="color:#bd93f9">293.5128205128205</span>, <span style="color:#bd93f9">357.9247311827957</span>, <span style="color:#bd93f9">210.82432432432432</span>, <span style="color:#bd93f9">155.11764705882354</span>, <span style="color:#bd93f9">1966.3333333333333</span>, <span style="color:#bd93f9">358.42857142857144</span>, <span style="color:#bd93f9">1050.3846153846155</span>, <span style="color:#bd93f9">4160</span>, <span style="color:#bd93f9">454.75</span>, <span style="color:#bd93f9">146</span>, <span style="color:#bd93f9">805</span>
             ],
-            &quot;name&quot;: &quot;flexible&quot;
+            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;flexible&#34;</span>
         },
         {
-            &quot;type&quot;: &quot;bar&quot;,
-            &quot;x&quot;: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 18, 26, 28 ],
-            &quot;y&quot;: [ 89.23809523809524, 65.87909209951987, 116.96257796257797, 187.15055467511885, 208.99554565701558, 189.24479166666666, 258.75, 387.48936170212767, 256.4347826086956, 431.75, 258, 30, 107.5, 899, 20, 25, 300, 740, 15 ],
-            &quot;name&quot;: &quot;moderate&quot;
+            <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+            <span style="color:#ff79c6">&#34;x&#34;</span>: [ <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">7</span>, <span style="color:#bd93f9">8</span>, <span style="color:#bd93f9">9</span>, <span style="color:#bd93f9">10</span>, <span style="color:#bd93f9">11</span>, <span style="color:#bd93f9">12</span>, <span style="color:#bd93f9">13</span>, <span style="color:#bd93f9">14</span>, <span style="color:#bd93f9">16</span>, <span style="color:#bd93f9">18</span>, <span style="color:#bd93f9">26</span>, <span style="color:#bd93f9">28</span> ],
+            <span style="color:#ff79c6">&#34;y&#34;</span>: [ <span style="color:#bd93f9">89.23809523809524</span>, <span style="color:#bd93f9">65.87909209951987</span>, <span style="color:#bd93f9">116.96257796257797</span>, <span style="color:#bd93f9">187.15055467511885</span>, <span style="color:#bd93f9">208.99554565701558</span>, <span style="color:#bd93f9">189.24479166666666</span>, <span style="color:#bd93f9">258.75</span>, <span style="color:#bd93f9">387.48936170212767</span>, <span style="color:#bd93f9">256.4347826086956</span>, <span style="color:#bd93f9">431.75</span>, <span style="color:#bd93f9">258</span>, <span style="color:#bd93f9">30</span>, <span style="color:#bd93f9">107.5</span>, <span style="color:#bd93f9">899</span>, <span style="color:#bd93f9">20</span>, <span style="color:#bd93f9">25</span>, <span style="color:#bd93f9">300</span>, <span style="color:#bd93f9">740</span>, <span style="color:#bd93f9">15</span> ],
+            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;moderate&#34;</span>
         },
         {
-            &quot;type&quot;: &quot;bar&quot;,
-            &quot;x&quot;: [ 1 ],
-            &quot;y&quot;: [ 42.5 ],
-            &quot;name&quot;: &quot;strict&quot;
+            <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+            <span style="color:#ff79c6">&#34;x&#34;</span>: [ <span style="color:#bd93f9">1</span> ],
+            <span style="color:#ff79c6">&#34;y&#34;</span>: [ <span style="color:#bd93f9">42.5</span> ],
+            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;strict&#34;</span>
         },
         {
-            &quot;type&quot;: &quot;bar&quot;,
-            &quot;x&quot;: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 23, 24, 25, 30 ],
-            &quot;y&quot;: [ 183.8181818181818, 64.93736903376019, 99.97269624573379, 138.1967654986523, 161.53831231813774, 160.23861566484518, 210.30085959885386, 214.05797101449275, 257.85714285714283, 385.0833333333333, 328.4375, 383.5, 361.2857142857143, 542.5, 342.4, 391.42857142857144, 484.44444444444446, 580, 628, 453, 500, 550, 545.5, 483 ],
-            &quot;name&quot;: &quot;strict_14_with_grace_period&quot;
+            <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+            <span style="color:#ff79c6">&#34;x&#34;</span>: [ <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">7</span>, <span style="color:#bd93f9">8</span>, <span style="color:#bd93f9">9</span>, <span style="color:#bd93f9">10</span>, <span style="color:#bd93f9">11</span>, <span style="color:#bd93f9">12</span>, <span style="color:#bd93f9">13</span>, <span style="color:#bd93f9">14</span>, <span style="color:#bd93f9">15</span>, <span style="color:#bd93f9">16</span>, <span style="color:#bd93f9">18</span>, <span style="color:#bd93f9">19</span>, <span style="color:#bd93f9">20</span>, <span style="color:#bd93f9">23</span>, <span style="color:#bd93f9">24</span>, <span style="color:#bd93f9">25</span>, <span style="color:#bd93f9">30</span> ],
+            <span style="color:#ff79c6">&#34;y&#34;</span>: [ <span style="color:#bd93f9">183.8181818181818</span>, <span style="color:#bd93f9">64.93736903376019</span>, <span style="color:#bd93f9">99.97269624573379</span>, <span style="color:#bd93f9">138.1967654986523</span>, <span style="color:#bd93f9">161.53831231813774</span>, <span style="color:#bd93f9">160.23861566484518</span>, <span style="color:#bd93f9">210.30085959885386</span>, <span style="color:#bd93f9">214.05797101449275</span>, <span style="color:#bd93f9">257.85714285714283</span>, <span style="color:#bd93f9">385.0833333333333</span>, <span style="color:#bd93f9">328.4375</span>, <span style="color:#bd93f9">383.5</span>, <span style="color:#bd93f9">361.2857142857143</span>, <span style="color:#bd93f9">542.5</span>, <span style="color:#bd93f9">342.4</span>, <span style="color:#bd93f9">391.42857142857144</span>, <span style="color:#bd93f9">484.44444444444446</span>, <span style="color:#bd93f9">580</span>, <span style="color:#bd93f9">628</span>, <span style="color:#bd93f9">453</span>, <span style="color:#bd93f9">500</span>, <span style="color:#bd93f9">550</span>, <span style="color:#bd93f9">545.5</span>, <span style="color:#bd93f9">483</span> ],
+            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;strict_14_with_grace_period&#34;</span>
         },
         {
-            &quot;type&quot;: &quot;bar&quot;,
-            &quot;x&quot;: [ 1, 2, 3, 4, 5, 6, 7, 8 ],
-            &quot;y&quot;: [ 625.6923076923077, 222.1764705882353, 615.170731707317, 386.4418604651163, 234.85714285714286, 236.15384615384616, 374.75, 1092.25 ],
-            &quot;name&quot;: &quot;super_strict_30&quot;
+            <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+            <span style="color:#ff79c6">&#34;x&#34;</span>: [ <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span>, <span style="color:#bd93f9">7</span>, <span style="color:#bd93f9">8</span> ],
+            <span style="color:#ff79c6">&#34;y&#34;</span>: [ <span style="color:#bd93f9">625.6923076923077</span>, <span style="color:#bd93f9">222.1764705882353</span>, <span style="color:#bd93f9">615.170731707317</span>, <span style="color:#bd93f9">386.4418604651163</span>, <span style="color:#bd93f9">234.85714285714286</span>, <span style="color:#bd93f9">236.15384615384616</span>, <span style="color:#bd93f9">374.75</span>, <span style="color:#bd93f9">1092.25</span> ],
+            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;super_strict_30&#34;</span>
         },
         {
-            &quot;type&quot;: &quot;bar&quot;,
-            &quot;x&quot;: [ 1, 2, 3, 4 ],
-            &quot;y&quot;: [ 595.6666666666666, 200, 361.6666666666667, 700.25 ],
-            &quot;name&quot;: &quot;super_strict_60&quot;
+            <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+            <span style="color:#ff79c6">&#34;x&#34;</span>: [ <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span> ],
+            <span style="color:#ff79c6">&#34;y&#34;</span>: [ <span style="color:#bd93f9">595.6666666666666</span>, <span style="color:#bd93f9">200</span>, <span style="color:#bd93f9">361.6666666666667</span>, <span style="color:#bd93f9">700.25</span> ],
+            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;super_strict_60&#34;</span>
         }
     ]
 }
-</code></pre>
-
-<p>using this json body in the plot shortcode, generates the graph above.</p>
-
+</code></pre></td></tr></table>
+</div>
+</div><p>using this json body in the plot shortcode, generates the graph above.</p>
 <p>This is not the only way of generating json. The package plotly.io has an option <code>pio.to_json</code> that is much more robust. This function handles the dataframes without the <code>to_list</code> option and also prints style configuration. The only drawback is that the output is much bigger. This is the plot generated from that json.</p>
-
 <div class="figure">
 <div class="figure-plot" id="plot3">
 	Code could not finish, this are some reasons why this happen.
@@ -431,39 +577,32 @@ fig = {"data":[{"name":"flexible","type":"bar","x":[0.0,1.0,2.0,3.0,4.0,5.0,6.0,
   draw()
 </script>
 </div>
-
 <h2 id="docker-compose-recipe">docker-compose recipe</h2>
-
 <p>And to finish this howto, I&rsquo;m going to leave a repository with a docker-compose configured to create this environment. This way, you can easily create the environment wherever you want. It also includes a volume under the work folder to ensure that your notebooks survive when you stop the container.</p>
-
 <p>Just keep in mind that this is a basic template. You will need to modify it to include credentials, other libraries, more extenssions&hellip; whatever you want.</p>
-
-<p><a href="https://github.com/MetalBlueberry/juypterLabTemplate">check it out here</a></p>
-
+<p><a href="https://github.com/MetalBlueberry/juypterLabTemplate"target="_blank">check it out here</a></p>
 <p>Now just run this, and you are ready to code!</p>
-
-<pre><code class="language-sh">docker-compose up --build lab
-</code></pre>
-
-<h2 id="conclussion">Conclussion</h2>
-
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">docker-compose up --build lab
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="conclussion">Conclussion</h2>
 <p>If you are planning to understand some data, you should start with an environment like this. With Pandas is really easy to transform data. With plotly you can create amazing interactive plots. And if you need anything else, remember that you are using Python and everything is already implemented in Python.</p>
-
 <p>Thank you for reading and feel free to leave a comment bellow, I will be really happy to hear from you.</p>
-
 <h2 id="references">References</h2>
-
 <ul>
-<li><a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/">Jupyter Docker Stacks</a></li>
-<li><a href="https://docs.docker.com/engine/reference/builder/">Dockerfile reference</a></li>
-<li><a href="https://plot.ly/python/creating-and-updating-figures/">Creating and Updating Figures</a></li>
-<li><a href="https://plot.ly/python/renderers/">Plotly renderers</a></li>
+<li><a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/"target="_blank">Jupyter Docker Stacks</a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/"target="_blank">Dockerfile reference</a></li>
+<li><a href="https://plot.ly/python/creating-and-updating-figures/"target="_blank">Creating and Updating Figures</a></li>
+<li><a href="https://plot.ly/python/renderers/"target="_blank">Plotly renderers</a></li>
 </ul>
-
 <p>extra</p>
-
 <ul>
-<li><a href="https://plot.ly/python/jupyter-lab-tools/">JupyterLab Interactive</a></li>
+<li><a href="https://plot.ly/python/jupyter-lab-tools/"target="_blank">JupyterLab Interactive</a></li>
 </ul></article><section class="article labels"><a class="category" href=/categories/howto/>howto</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/plotly/>plotly</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2019-12-09_weekend_learnings/"><span class="li">&larr;</span>2019-12-09 Weekend Learnings</a></p><p><a class="link" href="/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/"><span class="li">&rarr;</span>Add Plots With Hugo Shortcodes - Plotly</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
     label="comment" theme="github-light" crossorigin="anonymous" async>
     </script></div><section id="footer" class="footer"><div class="footer-wrap">

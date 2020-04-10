@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Víctor Pérez Domingo</copyright>
-    <lastBuildDate>Tue, 07 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 19 Oct 2019 13:59:31 +0200</lastBuildDate>
     
         <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -28,7 +28,8 @@
       <pubDate>Sat, 19 Oct 2019 13:59:31 +0200</pubDate>
       
       <guid>/about/</guid>
-      <description>About MetalBlueberry I&amp;rsquo;m a passionate developer moving toward the specialization in IoT technologies.
+      <description>About MetalBlueberry 
+I&amp;rsquo;m a passionate developer moving toward the specialization in IoT technologies.
 I feel comfortable working with Python and Go as most of my recent development time has been invested with those two languages but I have experience with other popular languages such as C/C++, C# and Java.
 I&amp;rsquo;m always looking for new challenges and constantly learning new things.
 Technical background I&amp;rsquo;ve experience with several technologies from the IoT world from the sensors to the cloud infrastructure.</description>
@@ -54,9 +55,9 @@ You are about to read my life since I remember it, focused on how I became a pro
       
       <guid>/social/</guid>
       <description>Follow me on GitHub, Twitter and Linkedin!
- www.github.com/MetalBlueberry
- www.twitter.com/MetalBlueberry
- www.linkedin.com/in/victorperezdomingo
+  www.github.com/MetalBlueberry
+  www.twitter.com/MetalBlueberry
+  www.linkedin.com/in/victorperezdomingo
   </description>
       
     </item>

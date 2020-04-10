@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>2019-12-22 Weekend Learnings&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="2019-12-22 Weekend Learnings"/>
@@ -16,161 +16,260 @@
 <body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">2019-12-22 Weekend Learnings</h1><p class="article date">Sunday, December 22, 2019<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>I understood how to use Go composition to extend the functionality similar to inheritance in OOP. I&rsquo;ve used it before but now I can say that I understand it. Also, I&rsquo;ve done a 3D model of the van that I&rsquo;m going to use for the moving in January. Just to know if I can fit everything inside.</p>
-
 <h2 id="go-composition">Go composition</h2>
-
 <blockquote>
-<p>I&rsquo;m a few years late. This guy is explaining a similar problem to the one that I was trying to solve in his post &ldquo;<a href="https://dave.cheney.net/2015/05/22/struct-composition-with-go">struct composition with go</a>&rdquo;.</p>
+<p>I&rsquo;m a few years late. This guy is explaining a similar problem to the one that I was trying to solve in his post &ldquo;<a href="https://dave.cheney.net/2015/05/22/struct-composition-with-go"target="_blank">struct composition with go</a>&quot;.</p>
 </blockquote>
-
 <p>The problem I was facing this week was how to record a web request body using a middleware. In my case, it was for debugging purposes but this technique can be used in similar scenarios. The structure <code>http.Request</code> contains a lot of fields, but we are only interested now in the <code>Request.Body</code> which is an <code>io.ReadCloser</code></p>
-
-<pre><code class="language-go">type Request struct {
-	// Body is the request's body.
-	//
-	// For client requests, a nil body means the request has no
-	// body, such as a GET request. The HTTP Client's Transport
-	// is responsible for calling the Close method.
-	//
-	// For server requests, the Request Body is always non-nil
-	// but will return EOF immediately when no body is present.
-	// The Server will close the request body. The ServeHTTP
-	// Handler does not need to.
-  Body io.ReadCloser
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">type</span> Request <span style="color:#8be9fd;font-style:italic">struct</span> {
+	<span style="color:#6272a4">// Body is the request&#39;s body.
+</span><span style="color:#6272a4"></span>	<span style="color:#6272a4">//
+</span><span style="color:#6272a4"></span>	<span style="color:#6272a4">// For client requests, a nil body means the request has no
+</span><span style="color:#6272a4"></span>	<span style="color:#6272a4">// body, such as a GET request. The HTTP Client&#39;s Transport
+</span><span style="color:#6272a4"></span>	<span style="color:#6272a4">// is responsible for calling the Close method.
+</span><span style="color:#6272a4"></span>	<span style="color:#6272a4">//
+</span><span style="color:#6272a4"></span>	<span style="color:#6272a4">// For server requests, the Request Body is always non-nil
+</span><span style="color:#6272a4"></span>	<span style="color:#6272a4">// but will return EOF immediately when no body is present.
+</span><span style="color:#6272a4"></span>	<span style="color:#6272a4">// The Server will close the request body. The ServeHTTP
+</span><span style="color:#6272a4"></span>	<span style="color:#6272a4">// Handler does not need to.
+</span><span style="color:#6272a4"></span>  Body io.ReadCloser
 }
-</code></pre>
-
-<p>After Googling a little bit, I found that the package <code>io</code> provides a structure called <code>io.TeeReader</code>. This is the functionality that I&rsquo;m looking for. Given a Reader and a Writer, It writes everything that is read to the writer. It&rsquo;s like the <code>tee</code> terminal tool.</p>
-
-<pre><code class="language-go">// TeeReader returns a Reader that writes to w what it reads from r.
-// All reads from r performed through it are matched with
-// corresponding writes to w. There is no internal buffering -
-// the write must complete before the read completes.
-// Any error encountered while writing is reported as a read error.
-func TeeReader(r Reader, w Writer) Reader {
-	return &amp;teeReader{r, w}
+</code></pre></td></tr></table>
+</div>
+</div><p>After Googling a little bit, I found that the package <code>io</code> provides a structure called <code>io.TeeReader</code>. This is the functionality that I&rsquo;m looking for. Given a Reader and a Writer, It writes everything that is read to the writer. It&rsquo;s like the <code>tee</code> terminal tool.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#6272a4">// TeeReader returns a Reader that writes to w what it reads from r.
+</span><span style="color:#6272a4">// All reads from r performed through it are matched with
+</span><span style="color:#6272a4">// corresponding writes to w. There is no internal buffering -
+</span><span style="color:#6272a4">// the write must complete before the read completes.
+</span><span style="color:#6272a4">// Any error encountered while writing is reported as a read error.
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TeeReader</span>(r Reader, w Writer) Reader {
+	<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>teeReader{r, w}
 }
-type teeReader struct {
+<span style="color:#8be9fd;font-style:italic">type</span> teeReader <span style="color:#8be9fd;font-style:italic">struct</span> {
 	r Reader
 	w Writer
 }
 
-func (t *teeReader) Read(p []byte) (n int, err error) {
-	n, err = t.r.Read(p)
-	if n &gt; 0 {
-		if n, err := t.w.Write(p[:n]); err != nil {
-			return n, err
+<span style="color:#8be9fd;font-style:italic">func</span> (t <span style="color:#ff79c6">*</span>teeReader) <span style="color:#50fa7b">Read</span>(p []<span style="color:#8be9fd">byte</span>) (n <span style="color:#8be9fd">int</span>, err <span style="color:#8be9fd">error</span>) {
+	n, err = t.r.<span style="color:#50fa7b">Read</span>(p)
+	<span style="color:#ff79c6">if</span> n &gt; <span style="color:#bd93f9">0</span> {
+		<span style="color:#ff79c6">if</span> n, err <span style="color:#ff79c6">:=</span> t.w.<span style="color:#50fa7b">Write</span>(p[:n]); err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+			<span style="color:#ff79c6">return</span> n, err
 		}
 	}
-	return
+	<span style="color:#ff79c6">return</span>
 }
-</code></pre>
-
-<p>So with this, we can simply wrap the request body with a TeeReader and write it to a buffer to be used later.</p>
-
-<pre><code class="language-go">	recorded := &amp;bytes.Buffer{}
-	request.Body = io.TeeReader(request.Body, recorded)
-</code></pre>
-
-<p>But this does not compile&hellip; The problem is that the return value of <code>io.TeeReader</code> is an <code>io.Reader</code> and the request.Body must be a <code>io.ReadCloser</code>. Thinking fast, we need an <code>io.TeeReadCloser</code>, but it doesn&rsquo;t exist.</p>
-
+</code></pre></td></tr></table>
+</div>
+</div><p>So with this, we can simply wrap the request body with a TeeReader and write it to a buffer to be used later.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go">	recorded <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>bytes.Buffer{}
+	request.Body = io.<span style="color:#50fa7b">TeeReader</span>(request.Body, recorded)
+</code></pre></td></tr></table>
+</div>
+</div><p>But this does not compile&hellip; The problem is that the return value of <code>io.TeeReader</code> is an <code>io.Reader</code> and the request.Body must be a <code>io.ReadCloser</code>. Thinking fast, we need an <code>io.TeeReadCloser</code>, but it doesn&rsquo;t exist.</p>
 <p>Don&rsquo;t panic, we can implement it. we just need to copy/paste the <code>io.teeReader</code> and add the close method.</p>
-
-<pre><code class="language-go">func TeeReadCloser(r io.ReadCloser, w io.Writer) io.ReadCloser {
-	return &amp;teeReadCloser{r, w}
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TeeReadCloser</span>(r io.ReadCloser, w io.Writer) io.ReadCloser {
+	<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>teeReadCloser{r, w}
 }
 
-type teeReadCloser struct {
+<span style="color:#8be9fd;font-style:italic">type</span> teeReadCloser <span style="color:#8be9fd;font-style:italic">struct</span> {
 	r io.ReadCloser
 	w io.Writer
 }
 
-func (t *teeReadCloser) Read(p []byte) (n int, err error) {
-	n, err = t.r.Read(p)
-	if n &gt; 0 {
-		if n, err := t.w.Write(p[:n]); err != nil {
-			return n, err
+<span style="color:#8be9fd;font-style:italic">func</span> (t <span style="color:#ff79c6">*</span>teeReadCloser) <span style="color:#50fa7b">Read</span>(p []<span style="color:#8be9fd">byte</span>) (n <span style="color:#8be9fd">int</span>, err <span style="color:#8be9fd">error</span>) {
+	n, err = t.r.<span style="color:#50fa7b">Read</span>(p)
+	<span style="color:#ff79c6">if</span> n &gt; <span style="color:#bd93f9">0</span> {
+		<span style="color:#ff79c6">if</span> n, err <span style="color:#ff79c6">:=</span> t.w.<span style="color:#50fa7b">Write</span>(p[:n]); err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+			<span style="color:#ff79c6">return</span> n, err
 		}
 	}
-	return
+	<span style="color:#ff79c6">return</span>
 }
-func (t *teeReadCloser) Close() error {
-	return t.r.Close()
+<span style="color:#8be9fd;font-style:italic">func</span> (t <span style="color:#ff79c6">*</span>teeReadCloser) <span style="color:#50fa7b">Close</span>() <span style="color:#8be9fd">error</span> {
+	<span style="color:#ff79c6">return</span> t.r.<span style="color:#50fa7b">Close</span>()
 }
-</code></pre>
-
-<p>Wonderful, but this is not what I want to show you. It would be great if we could &ldquo;inherit&rdquo; from the TeeReader and include the Close functionality. This is how the code looks like.</p>
-
-<pre><code class="language-go">func TeeReadCloser(r io.ReadCloser, w io.Writer) io.ReadCloser {
-	return &amp;teeReadCloser{
-		Reader: io.TeeReader(r, w),
+</code></pre></td></tr></table>
+</div>
+</div><p>Wonderful, but this is not what I want to show you. It would be great if we could &ldquo;inherit&rdquo; from the TeeReader and include the Close functionality. This is how the code looks like.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TeeReadCloser</span>(r io.ReadCloser, w io.Writer) io.ReadCloser {
+	<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>teeReadCloser{
+		Reader: io.<span style="color:#50fa7b">TeeReader</span>(r, w),
 		Closer: r,
 	}
 }
 
-type teeReadCloser struct {
+<span style="color:#8be9fd;font-style:italic">type</span> teeReadCloser <span style="color:#8be9fd;font-style:italic">struct</span> {
 	io.Reader
 	io.Closer
 }
-</code></pre>
-
-<p>With this approach, we avoid code duplication as the functionality of <code>TeeReader</code> is still implemented by the <code>io.TeeReader</code>. Our <code>teeReadCloser</code> is a <strong>composition</strong> of two interfaces <code>io.Reader</code> and <code>io.Closer</code>. The <code>io.Reader</code> is implemented by the <code>io.TeeReader</code> with the original <code>io.ReadCloser</code> and the output <code>io.Writer</code>. Then, The <code>io.Closer</code> is implemented by the  <code>io.ReadCloser</code> passed to the constructor. This effectively redirects the <code>teeReadCloser.Read</code> calls to the <code>io.TeeReader</code> and the <code>teeReadCloser.Close</code> directly to the <code>io.ReadCloser</code>.</p>
-
+</code></pre></td></tr></table>
+</div>
+</div><p>With this approach, we avoid code duplication as the functionality of <code>TeeReader</code> is still implemented by the <code>io.TeeReader</code>. Our <code>teeReadCloser</code> is a <strong>composition</strong> of two interfaces <code>io.Reader</code> and <code>io.Closer</code>. The <code>io.Reader</code> is implemented by the <code>io.TeeReader</code> with the original <code>io.ReadCloser</code> and the output <code>io.Writer</code>. Then, The <code>io.Closer</code> is implemented by the  <code>io.ReadCloser</code> passed to the constructor. This effectively redirects the <code>teeReadCloser.Read</code> calls to the <code>io.TeeReader</code> and the <code>teeReadCloser.Close</code> directly to the <code>io.ReadCloser</code>.</p>
 <p>Another example related to this one is how to extend the implementation of <code>http.ResponseWriter</code> to record the response code. Again, with logging purposes. This is really simple.</p>
-
-<pre><code class="language-go">func NewStatusRecorder(ResponseWriter http.ResponseWriter) *StatusRecorder {
-	return &amp;StatusRecorder{ResponseWriter: ResponseWriter}
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">NewStatusRecorder</span>(ResponseWriter http.ResponseWriter) <span style="color:#ff79c6">*</span>StatusRecorder {
+	<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>StatusRecorder{ResponseWriter: ResponseWriter}
 }
 
-type statusRecorder struct {
+<span style="color:#8be9fd;font-style:italic">type</span> statusRecorder <span style="color:#8be9fd;font-style:italic">struct</span> {
 	http.ResponseWriter
-	StatusCode int
+	StatusCode <span style="color:#8be9fd">int</span>
 }
 
-func (sr *statusRecorder) WriteHeader(statusCode int) {
+<span style="color:#8be9fd;font-style:italic">func</span> (sr <span style="color:#ff79c6">*</span>statusRecorder) <span style="color:#50fa7b">WriteHeader</span>(statusCode <span style="color:#8be9fd">int</span>) {
 	sr.StatusCode = statusCode
-	sr.ResponseWriter.WriteHeader(statusCode)
+	sr.ResponseWriter.<span style="color:#50fa7b">WriteHeader</span>(statusCode)
 }
-</code></pre>
-
-<p>This allows us to override the <code>ResponseWriter.WriteHeader</code> method with our new one that just stores the StatusCode and calls the underlying method. The other two methods of the interface <code>http.ResponseWriter</code> are not modified. I find this approach really clean, easy to extend and easy to modify. The following is an example of how to use this implementation with a middleware.</p>
-
-<pre><code class="language-go">func LogStatus(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		sr := NewStatusRecorder(w)
-		next(sr, r)
-		log.Print(&quot;Response code is %d&quot;, sr.StatusCode)
+</code></pre></td></tr></table>
+</div>
+</div><p>This allows us to override the <code>ResponseWriter.WriteHeader</code> method with our new one that just stores the StatusCode and calls the underlying method. The other two methods of the interface <code>http.ResponseWriter</code> are not modified. I find this approach really clean, easy to extend and easy to modify. The following is an example of how to use this implementation with a middleware.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">LogStatus</span>(next http.HandlerFunc) http.HandlerFunc {
+	<span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">func</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+		sr <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">NewStatusRecorder</span>(w)
+		<span style="color:#50fa7b">next</span>(sr, r)
+		log.<span style="color:#50fa7b">Print</span>(<span style="color:#f1fa8c">&#34;Response code is %d&#34;</span>, sr.StatusCode)
 	}
 }
-</code></pre>
-
-<h2 id="moving-van-cargo-model">Moving van cargo model</h2>
-
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="moving-van-cargo-model">Moving van cargo model</h2>
 <p>So here it is. All my furniture inside a moving van. I&rsquo;m doing this model with furniture slightly bigger than what it actually is and leaving space between objects. The conclusion is that I think I will be able to fit everything inside a big van, so I don&rsquo;t need a small truck.</p>
-
 <p>Random color code:</p>
-
 <ul>
 <li>Blue things are fragile. Fridge, Microwave and decoration.</li>
 <li>Brown is something I will provably disassemble</li>
 <li>Yellow things are the box spring.</li>
 <li>Black is the sofa.</li>
 </ul>
-
-<p><img src="./van.jpg" alt="van" /></p>
-
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="./van.jpg"><img  src="./van.jpg"
+        alt="van"/></a></p>
 <p>I didn&rsquo;t put any box in this model, I hope to be able to put all the boxes in my car. In the worst case, there is still some room in the van for boxes. Let&rsquo;s see&hellip;</p>
-
 <blockquote>
 <p>The model is generated with Blender.</p>
 </blockquote>
-
 <h2 id="references">References</h2>
-
 <ul>
-<li><a href="https://dave.cheney.net/2015/05/22/struct-composition-with-go">struct composition with go</a></li>
+<li><a href="https://dave.cheney.net/2015/05/22/struct-composition-with-go"target="_blank">struct composition with go</a></li>
 </ul></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/weekend/>weekend</a><a class="tag" href=/tags/go/>go</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2020-01-11_boredom/"><span class="li">&larr;</span>How to get bored</a></p><p><a class="link" href="/post/blog/2019-12-15_weekend_learnings/"><span class="li">&rarr;</span>2019-12-15 Weekend Learnings</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
     label="comment" theme="github-light" crossorigin="anonymous" async>
     </script></div><section id="footer" class="footer"><div class="footer-wrap">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>Coronavirus Trend In Spain&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Coronavirus Trend In Spain"/>
@@ -18,21 +18,16 @@
 <body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">Coronavirus Trend In Spain</h1><p class="article date">Tuesday, April 7, 2020<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>After the video from Minute Earth about the coronavirus, I&rsquo;ve decided to plot the same data but only for Spain by province. This gives a good view of which provinces are managing to stop the virus.</p>
-
 <p>You have to watch the video to understand the following plots.</p>
-
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube-nocookie.com/embed/54XLXg4fYsc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-
 <p>Not that your understand&hellip; enjoy it.</p>
-
 <p>You can double click on a label to Isolate it or single click to hide.</p>
-
 <div class="figure">
 <div class="figure-plot" id="local_corona">
 	Code could not finish, this are some reasons why this happen.
@@ -62,7 +57,6 @@ fig = {"data": [{"y": [893.0, 1068.0, 1246.0, 1288.0, 1407.0, 1788.0, 2151.0, 23
   draw()
 </script>
 </div>
-
 <div class="figure">
 <div class="figure-plot" id="total_corona">
 	Code could not finish, this are some reasons why this happen.
@@ -92,9 +86,7 @@ fig = {"data": [{"y": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 8.0, 9.0, 9.0, 13
   draw()
 </script>
 </div>
-
 <p>leave your comments bellow.</p>
-
 <div class="expand">
     <div class="expand-label" id="expand-label-3" style="cursor: pointer;">
         <span>
@@ -105,165 +97,325 @@ fig = {"data": [{"y": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 8.0, 9.0, 9.0, 13
         </span>
     </div>
     <div class="expand-content" id="expand-content-3" style="display: none;">
-        <pre><code class="language-python">import pandas as pd
-import requests
-import json
+        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">149
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">150
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">151
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">152
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">153
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">154
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">155
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">156
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="color:#ff79c6">import</span> pandas <span style="color:#ff79c6">as</span> pd
+<span style="color:#ff79c6">import</span> requests
+<span style="color:#ff79c6">import</span> json
 
-from datetime import timedelta,datetime, date
-from io import StringIO
+<span style="color:#ff79c6">from</span> datetime <span style="color:#ff79c6">import</span> timedelta,datetime, date
+<span style="color:#ff79c6">from</span> io <span style="color:#ff79c6">import</span> StringIO
 
 
-codigos = {'AN':'Andalucía',
-'AR':'Aragón',
-'AS':'Asturias',
-'CN':'Canarias',
-'CB':'Cantabria',
-'CM':'Castilla-La Mancha',
-'CL':'Castilla y León',
-'CT':'Cataluña',
-'EX':'Extremadura',
-'GA':'Galicia',
-'IB':'Islas Baleares',
-'RI':'La Rioja',
-'MD':'Comunidad de Madrid',
-'MC':'Región de Murcia',
-'NC':'Navarra',
-'PV':'País Vasco',
-'VC':'Comunidad Valenciana',
-'CE':'Ceuta',
-'ML':'Melilla'
+codigos <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#39;AN&#39;</span>:<span style="color:#f1fa8c">&#39;Andalucía&#39;</span>,
+<span style="color:#f1fa8c">&#39;AR&#39;</span>:<span style="color:#f1fa8c">&#39;Aragón&#39;</span>,
+<span style="color:#f1fa8c">&#39;AS&#39;</span>:<span style="color:#f1fa8c">&#39;Asturias&#39;</span>,
+<span style="color:#f1fa8c">&#39;CN&#39;</span>:<span style="color:#f1fa8c">&#39;Canarias&#39;</span>,
+<span style="color:#f1fa8c">&#39;CB&#39;</span>:<span style="color:#f1fa8c">&#39;Cantabria&#39;</span>,
+<span style="color:#f1fa8c">&#39;CM&#39;</span>:<span style="color:#f1fa8c">&#39;Castilla-La Mancha&#39;</span>,
+<span style="color:#f1fa8c">&#39;CL&#39;</span>:<span style="color:#f1fa8c">&#39;Castilla y León&#39;</span>,
+<span style="color:#f1fa8c">&#39;CT&#39;</span>:<span style="color:#f1fa8c">&#39;Cataluña&#39;</span>,
+<span style="color:#f1fa8c">&#39;EX&#39;</span>:<span style="color:#f1fa8c">&#39;Extremadura&#39;</span>,
+<span style="color:#f1fa8c">&#39;GA&#39;</span>:<span style="color:#f1fa8c">&#39;Galicia&#39;</span>,
+<span style="color:#f1fa8c">&#39;IB&#39;</span>:<span style="color:#f1fa8c">&#39;Islas Baleares&#39;</span>,
+<span style="color:#f1fa8c">&#39;RI&#39;</span>:<span style="color:#f1fa8c">&#39;La Rioja&#39;</span>,
+<span style="color:#f1fa8c">&#39;MD&#39;</span>:<span style="color:#f1fa8c">&#39;Comunidad de Madrid&#39;</span>,
+<span style="color:#f1fa8c">&#39;MC&#39;</span>:<span style="color:#f1fa8c">&#39;Región de Murcia&#39;</span>,
+<span style="color:#f1fa8c">&#39;NC&#39;</span>:<span style="color:#f1fa8c">&#39;Navarra&#39;</span>,
+<span style="color:#f1fa8c">&#39;PV&#39;</span>:<span style="color:#f1fa8c">&#39;País Vasco&#39;</span>,
+<span style="color:#f1fa8c">&#39;VC&#39;</span>:<span style="color:#f1fa8c">&#39;Comunidad Valenciana&#39;</span>,
+<span style="color:#f1fa8c">&#39;CE&#39;</span>:<span style="color:#f1fa8c">&#39;Ceuta&#39;</span>,
+<span style="color:#f1fa8c">&#39;ML&#39;</span>:<span style="color:#f1fa8c">&#39;Melilla&#39;</span>
 }
 
 
-population = pd.read_html(&quot;https://es.wikipedia.org/wiki/Anexo:Provincias_y_ciudades_aut%C3%B3nomas_de_Espa%C3%B1a&quot;)[0]
-population.Población = population.Población.str.replace(&quot;.&quot;,&quot;&quot;).astype(int)
-population = population.groupby(&quot;Comunidad autónoma&quot;).sum()[&quot;Población&quot;].to_dict()
+population <span style="color:#ff79c6">=</span> pd<span style="color:#ff79c6">.</span>read_html(<span style="color:#f1fa8c">&#34;https://es.wikipedia.org/wiki/Anexo:Provincias_y_ciudades_aut%C3%B3nomas_de_Espa%C3%B1a&#34;</span>)[<span style="color:#bd93f9">0</span>]
+population<span style="color:#ff79c6">.</span>Población <span style="color:#ff79c6">=</span> population<span style="color:#ff79c6">.</span>Población<span style="color:#ff79c6">.</span>str<span style="color:#ff79c6">.</span>replace(<span style="color:#f1fa8c">&#34;.&#34;</span>,<span style="color:#f1fa8c">&#34;&#34;</span>)<span style="color:#ff79c6">.</span>astype(<span style="color:#8be9fd;font-style:italic">int</span>)
+population <span style="color:#ff79c6">=</span> population<span style="color:#ff79c6">.</span>groupby(<span style="color:#f1fa8c">&#34;Comunidad autónoma&#34;</span>)<span style="color:#ff79c6">.</span>sum()[<span style="color:#f1fa8c">&#34;Población&#34;</span>]<span style="color:#ff79c6">.</span>to_dict()
 
-r = requests.get(&quot;https://covid19.isciii.es/resources/serie_historica_acumulados.csv&quot;)
-text = r.text[0:r.text.index(&quot;NOTA&quot;)]
-spain = pd.read_csv(StringIO(text)).dropna(subset=[&quot;CCAA&quot;])
-spain.columns =  [c.strip() for c in spain.columns]
-spain[&quot;Provincia&quot;] = spain[&quot;CCAA&quot;].apply(lambda x: codigos[x])
-spain[&quot;Poblacion&quot;] = spain.Provincia.apply(lambda x: population[x])
-spain[&quot;Nuevos_Casos&quot;] = spain.groupby(&quot;Provincia&quot;)[&quot;CASOS&quot;].diff()
-spain[&quot;Casos_x_1000&quot;] = 1000*spain.CASOS / spain.Poblacion
-spain[&quot;Nuevos_Casos_x_1000&quot;] =  1000* spain.Nuevos_Casos / spain.Poblacion
-spain[&quot;Nuevos_Casos_Ultima_Semana&quot;] = spain.groupby(&quot;Provincia&quot;)[&quot;Nuevos_Casos&quot;].rolling(7).sum().reset_index(0,drop=True)
-spainc = spain[spain.CASOS &gt; 1000]
+r <span style="color:#ff79c6">=</span> requests<span style="color:#ff79c6">.</span>get(<span style="color:#f1fa8c">&#34;https://covid19.isciii.es/resources/serie_historica_acumulados.csv&#34;</span>)
+text <span style="color:#ff79c6">=</span> r<span style="color:#ff79c6">.</span>text[<span style="color:#bd93f9">0</span>:r<span style="color:#ff79c6">.</span>text<span style="color:#ff79c6">.</span>index(<span style="color:#f1fa8c">&#34;NOTA&#34;</span>)]
+spain <span style="color:#ff79c6">=</span> pd<span style="color:#ff79c6">.</span>read_csv(StringIO(text))<span style="color:#ff79c6">.</span>dropna(subset<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c">&#34;CCAA&#34;</span>])
+spain<span style="color:#ff79c6">.</span>columns <span style="color:#ff79c6">=</span>  [c<span style="color:#ff79c6">.</span>strip() <span style="color:#ff79c6">for</span> c <span style="color:#ff79c6">in</span> spain<span style="color:#ff79c6">.</span>columns]
+spain[<span style="color:#f1fa8c">&#34;Provincia&#34;</span>] <span style="color:#ff79c6">=</span> spain[<span style="color:#f1fa8c">&#34;CCAA&#34;</span>]<span style="color:#ff79c6">.</span>apply(<span style="color:#ff79c6">lambda</span> x: codigos[x])
+spain[<span style="color:#f1fa8c">&#34;Poblacion&#34;</span>] <span style="color:#ff79c6">=</span> spain<span style="color:#ff79c6">.</span>Provincia<span style="color:#ff79c6">.</span>apply(<span style="color:#ff79c6">lambda</span> x: population[x])
+spain[<span style="color:#f1fa8c">&#34;Nuevos_Casos&#34;</span>] <span style="color:#ff79c6">=</span> spain<span style="color:#ff79c6">.</span>groupby(<span style="color:#f1fa8c">&#34;Provincia&#34;</span>)[<span style="color:#f1fa8c">&#34;CASOS&#34;</span>]<span style="color:#ff79c6">.</span>diff()
+spain[<span style="color:#f1fa8c">&#34;Casos_x_1000&#34;</span>] <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1000</span><span style="color:#ff79c6">*</span>spain<span style="color:#ff79c6">.</span>CASOS <span style="color:#ff79c6">/</span> spain<span style="color:#ff79c6">.</span>Poblacion
+spain[<span style="color:#f1fa8c">&#34;Nuevos_Casos_x_1000&#34;</span>] <span style="color:#ff79c6">=</span>  <span style="color:#bd93f9">1000</span><span style="color:#ff79c6">*</span> spain<span style="color:#ff79c6">.</span>Nuevos_Casos <span style="color:#ff79c6">/</span> spain<span style="color:#ff79c6">.</span>Poblacion
+spain[<span style="color:#f1fa8c">&#34;Nuevos_Casos_Ultima_Semana&#34;</span>] <span style="color:#ff79c6">=</span> spain<span style="color:#ff79c6">.</span>groupby(<span style="color:#f1fa8c">&#34;Provincia&#34;</span>)[<span style="color:#f1fa8c">&#34;Nuevos_Casos&#34;</span>]<span style="color:#ff79c6">.</span>rolling(<span style="color:#bd93f9">7</span>)<span style="color:#ff79c6">.</span>sum()<span style="color:#ff79c6">.</span>reset_index(<span style="color:#bd93f9">0</span>,drop<span style="color:#ff79c6">=</span>True)
+spainc <span style="color:#ff79c6">=</span> spain[spain<span style="color:#ff79c6">.</span>CASOS <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">1000</span>]
 
-fig = {
-    &quot;data&quot;:[ {
-        &quot;y&quot;:spainc[(spainc[&quot;Provincia&quot;]==cat)][&quot;Nuevos_Casos_Ultima_Semana&quot;].to_list(),
-        &quot;x&quot;:spainc[(spainc[&quot;Provincia&quot;]==cat)][&quot;CASOS&quot;].to_list(),
-        &quot;text&quot;: spainc[(spainc[&quot;Provincia&quot;]==cat)][&quot;FECHA&quot;].to_list(),
-        &quot;name&quot;: cat,
-        &quot;mode&quot;: &quot;lines+markers&quot;
-    } for cat in sorted(spain[&quot;Provincia&quot;].unique()) ],
-    &quot;layout&quot;:{
-        &quot;title&quot;:&quot;Exito frenando el coronavirus por comunidad&quot;,
-        &quot;xaxis&quot;:{
-            &quot;title&quot;: &quot;Casos Totales&quot;,
-            &quot;type&quot;:&quot;log&quot;
+fig <span style="color:#ff79c6">=</span> {
+    <span style="color:#f1fa8c">&#34;data&#34;</span>:[ {
+        <span style="color:#f1fa8c">&#34;y&#34;</span>:spainc[(spainc[<span style="color:#f1fa8c">&#34;Provincia&#34;</span>]<span style="color:#ff79c6">==</span>cat)][<span style="color:#f1fa8c">&#34;Nuevos_Casos_Ultima_Semana&#34;</span>]<span style="color:#ff79c6">.</span>to_list(),
+        <span style="color:#f1fa8c">&#34;x&#34;</span>:spainc[(spainc[<span style="color:#f1fa8c">&#34;Provincia&#34;</span>]<span style="color:#ff79c6">==</span>cat)][<span style="color:#f1fa8c">&#34;CASOS&#34;</span>]<span style="color:#ff79c6">.</span>to_list(),
+        <span style="color:#f1fa8c">&#34;text&#34;</span>: spainc[(spainc[<span style="color:#f1fa8c">&#34;Provincia&#34;</span>]<span style="color:#ff79c6">==</span>cat)][<span style="color:#f1fa8c">&#34;FECHA&#34;</span>]<span style="color:#ff79c6">.</span>to_list(),
+        <span style="color:#f1fa8c">&#34;name&#34;</span>: cat,
+        <span style="color:#f1fa8c">&#34;mode&#34;</span>: <span style="color:#f1fa8c">&#34;lines+markers&#34;</span>
+    } <span style="color:#ff79c6">for</span> cat <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">sorted</span>(spain[<span style="color:#f1fa8c">&#34;Provincia&#34;</span>]<span style="color:#ff79c6">.</span>unique()) ],
+    <span style="color:#f1fa8c">&#34;layout&#34;</span>:{
+        <span style="color:#f1fa8c">&#34;title&#34;</span>:<span style="color:#f1fa8c">&#34;Exito frenando el coronavirus por comunidad&#34;</span>,
+        <span style="color:#f1fa8c">&#34;xaxis&#34;</span>:{
+            <span style="color:#f1fa8c">&#34;title&#34;</span>: <span style="color:#f1fa8c">&#34;Casos Totales&#34;</span>,
+            <span style="color:#f1fa8c">&#34;type&#34;</span>:<span style="color:#f1fa8c">&#34;log&#34;</span>
         },
-        &quot;yaxis&quot;:{
-            &quot;title&quot;: &quot;Casos Nuevos Ultima Semana&quot;,
-            &quot;type&quot;:&quot;log&quot;
+        <span style="color:#f1fa8c">&#34;yaxis&#34;</span>:{
+            <span style="color:#f1fa8c">&#34;title&#34;</span>: <span style="color:#f1fa8c">&#34;Casos Nuevos Ultima Semana&#34;</span>,
+            <span style="color:#f1fa8c">&#34;type&#34;</span>:<span style="color:#f1fa8c">&#34;log&#34;</span>
         }
     }
     
 }
-local = json.dumps(fig)
+local <span style="color:#ff79c6">=</span> json<span style="color:#ff79c6">.</span>dumps(fig)
 
 
-aggregated = spain.groupby([&quot;FECHA&quot;],as_index=False).sum()[[&quot;FECHA&quot;,&quot;CASOS&quot;,&quot;Nuevos_Casos&quot;,&quot;Nuevos_Casos_Ultima_Semana&quot;]].sort_values(&quot;CASOS&quot;)
-fig = {
-    &quot;data&quot;: [{
-        &quot;y&quot;:aggregated[&quot;Nuevos_Casos_Ultima_Semana&quot;].to_list(),
-        &quot;x&quot;:aggregated[&quot;CASOS&quot;].to_list(),
-        &quot;name&quot;: &quot;casos totales&quot;,
-        &quot;mode&quot;: &quot;lines+markers&quot;
+aggregated <span style="color:#ff79c6">=</span> spain<span style="color:#ff79c6">.</span>groupby([<span style="color:#f1fa8c">&#34;FECHA&#34;</span>],as_index<span style="color:#ff79c6">=</span>False)<span style="color:#ff79c6">.</span>sum()[[<span style="color:#f1fa8c">&#34;FECHA&#34;</span>,<span style="color:#f1fa8c">&#34;CASOS&#34;</span>,<span style="color:#f1fa8c">&#34;Nuevos_Casos&#34;</span>,<span style="color:#f1fa8c">&#34;Nuevos_Casos_Ultima_Semana&#34;</span>]]<span style="color:#ff79c6">.</span>sort_values(<span style="color:#f1fa8c">&#34;CASOS&#34;</span>)
+fig <span style="color:#ff79c6">=</span> {
+    <span style="color:#f1fa8c">&#34;data&#34;</span>: [{
+        <span style="color:#f1fa8c">&#34;y&#34;</span>:aggregated[<span style="color:#f1fa8c">&#34;Nuevos_Casos_Ultima_Semana&#34;</span>]<span style="color:#ff79c6">.</span>to_list(),
+        <span style="color:#f1fa8c">&#34;x&#34;</span>:aggregated[<span style="color:#f1fa8c">&#34;CASOS&#34;</span>]<span style="color:#ff79c6">.</span>to_list(),
+        <span style="color:#f1fa8c">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;casos totales&#34;</span>,
+        <span style="color:#f1fa8c">&#34;mode&#34;</span>: <span style="color:#f1fa8c">&#34;lines+markers&#34;</span>
     }],
-    &quot;layout&quot;:{
-        &quot;title&quot;:&quot;Exito frenando el coronavirus total&quot;,
-        &quot;xaxis&quot;:{
-            &quot;title&quot;: &quot;Casos Totales&quot;,
-            &quot;type&quot;:&quot;log&quot;
+    <span style="color:#f1fa8c">&#34;layout&#34;</span>:{
+        <span style="color:#f1fa8c">&#34;title&#34;</span>:<span style="color:#f1fa8c">&#34;Exito frenando el coronavirus total&#34;</span>,
+        <span style="color:#f1fa8c">&#34;xaxis&#34;</span>:{
+            <span style="color:#f1fa8c">&#34;title&#34;</span>: <span style="color:#f1fa8c">&#34;Casos Totales&#34;</span>,
+            <span style="color:#f1fa8c">&#34;type&#34;</span>:<span style="color:#f1fa8c">&#34;log&#34;</span>
         },
-        &quot;yaxis&quot;:{
-            &quot;title&quot;: &quot;Casos Nuevos Ultima Semana&quot;,
-            &quot;type&quot;:&quot;log&quot;
+        <span style="color:#f1fa8c">&#34;yaxis&#34;</span>:{
+            <span style="color:#f1fa8c">&#34;title&#34;</span>: <span style="color:#f1fa8c">&#34;Casos Nuevos Ultima Semana&#34;</span>,
+            <span style="color:#f1fa8c">&#34;type&#34;</span>:<span style="color:#f1fa8c">&#34;log&#34;</span>
         }
     }
     
 }
-total = json.dumps(fig)
+total <span style="color:#ff79c6">=</span> json<span style="color:#ff79c6">.</span>dumps(fig)
 
-template = &quot;&quot;&quot;
-&lt;div class=&quot;figure&quot;&gt;
-&lt;div class=&quot;figure-plot&quot; id=&quot;local_corona&quot;&gt;
-	Code could not finish, this are some reasons why this happen.
-	- Plot name not defined. The first parameter of the shortcode is the name.
-	- There is a syntax error. check browser console.
-&lt;/div&gt;
-&lt;script&gt;
-  function draw(){
-	test = document.getElementById(&quot;local_corona&quot;);
-	if (test == null){
-		console.log(&quot;The plot name is not defined&quot;)
-		return
-	}
+template <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;&#34;&#34;
+</span><span style="color:#f1fa8c">&lt;div class=&#34;figure&#34;&gt;
+</span><span style="color:#f1fa8c">&lt;div class=&#34;figure-plot&#34; id=&#34;local_corona&#34;&gt;
+</span><span style="color:#f1fa8c">	Code could not finish, this are some reasons why this happen.
+</span><span style="color:#f1fa8c">	- Plot name not defined. The first parameter of the shortcode is the name.
+</span><span style="color:#f1fa8c">	- There is a syntax error. check browser console.
+</span><span style="color:#f1fa8c">&lt;/div&gt;
+</span><span style="color:#f1fa8c">&lt;script&gt;
+</span><span style="color:#f1fa8c">  function draw(){
+</span><span style="color:#f1fa8c">	test = document.getElementById(&#34;local_corona&#34;);
+</span><span style="color:#f1fa8c">	if (test == null){
+</span><span style="color:#f1fa8c">		console.log(&#34;The plot name is not defined&#34;)
+</span><span style="color:#f1fa8c">		return
+</span><span style="color:#f1fa8c">	}
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">	fig = null
+</span><span style="color:#f1fa8c">	
+</span><span style="color:#f1fa8c">fig = </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">	if (!fig) {
+</span><span style="color:#f1fa8c">		test.innerText = &#34;ERROR: fig variable is not defined&#34;
+</span><span style="color:#f1fa8c">		return
+</span><span style="color:#f1fa8c">	}
+</span><span style="color:#f1fa8c">	test.innerText = null
+</span><span style="color:#f1fa8c">	Plotly.plot(test ,fig);
+</span><span style="color:#f1fa8c">  }
+</span><span style="color:#f1fa8c">  draw()
+</span><span style="color:#f1fa8c">&lt;/script&gt;
+</span><span style="color:#f1fa8c">&lt;/div&gt;
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">&lt;div class=&#34;figure&#34;&gt;
+</span><span style="color:#f1fa8c">&lt;div class=&#34;figure-plot&#34; id=&#34;total_corona&#34;&gt;
+</span><span style="color:#f1fa8c">	Code could not finish, this are some reasons why this happen.
+</span><span style="color:#f1fa8c">	- Plot name not defined. The first parameter of the shortcode is the name.
+</span><span style="color:#f1fa8c">	- There is a syntax error. check browser console.
+</span><span style="color:#f1fa8c">&lt;/div&gt;
+</span><span style="color:#f1fa8c">&lt;script&gt;
+</span><span style="color:#f1fa8c">  function draw(){
+</span><span style="color:#f1fa8c">	test = document.getElementById(&#34;total_corona&#34;);
+</span><span style="color:#f1fa8c">	if (test == null){
+</span><span style="color:#f1fa8c">		console.log(&#34;The plot name is not defined&#34;)
+</span><span style="color:#f1fa8c">		return
+</span><span style="color:#f1fa8c">	}
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">	fig = null
+</span><span style="color:#f1fa8c">	
+</span><span style="color:#f1fa8c">fig = </span><span style="color:#f1fa8c">%s</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">	if (!fig) {
+</span><span style="color:#f1fa8c">		test.innerText = &#34;ERROR: fig variable is not defined&#34;
+</span><span style="color:#f1fa8c">		return
+</span><span style="color:#f1fa8c">	}
+</span><span style="color:#f1fa8c">	test.innerText = null
+</span><span style="color:#f1fa8c">	Plotly.plot(test ,fig);
+</span><span style="color:#f1fa8c">  }
+</span><span style="color:#f1fa8c">  draw()
+</span><span style="color:#f1fa8c">&lt;/script&gt;
+</span><span style="color:#f1fa8c">&lt;/div&gt;
+</span><span style="color:#f1fa8c">&#34;&#34;&#34;</span>
 
-	fig = null
-	
-fig = %s
-
-
-	if (!fig) {
-		test.innerText = &quot;ERROR: fig variable is not defined&quot;
-		return
-	}
-	test.innerText = null
-	Plotly.plot(test ,fig);
-  }
-  draw()
-&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;figure&quot;&gt;
-&lt;div class=&quot;figure-plot&quot; id=&quot;total_corona&quot;&gt;
-	Code could not finish, this are some reasons why this happen.
-	- Plot name not defined. The first parameter of the shortcode is the name.
-	- There is a syntax error. check browser console.
-&lt;/div&gt;
-&lt;script&gt;
-  function draw(){
-	test = document.getElementById(&quot;total_corona&quot;);
-	if (test == null){
-		console.log(&quot;The plot name is not defined&quot;)
-		return
-	}
-
-	fig = null
-	
-fig = %s
-
-
-	if (!fig) {
-		test.innerText = &quot;ERROR: fig variable is not defined&quot;
-		return
-	}
-	test.innerText = null
-	Plotly.plot(test ,fig);
-  }
-  draw()
-&lt;/script&gt;
-&lt;/div&gt;
-&quot;&quot;&quot;
-
-print(template % (local, total))
-</code></pre>
-
-<p>Refer to <a href="https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/">Add Plots With Hugo Shortcodes</a> if you do not understand the previus template.</p>
+<span style="color:#ff79c6">print</span>(template <span style="color:#ff79c6">%</span> (local, total))
+</code></pre></td></tr></table>
+</div>
+</div><p>Refer to <a href="https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/">Add Plots With Hugo Shortcodes</a> if you do not understand the previus template.</p>
 
     </div>
     <script>
@@ -289,11 +441,9 @@ print(template % (local, total))
         document.getElementById("expand-label-3").addEventListener("click", collapse);
     </script>
 </div>
-
 <h2 id="references">References</h2>
-
 <ul>
-<li><a href="https://covid19.isciii.es/">Situación COVID-19 España</a></li>
+<li><a href="https://covid19.isciii.es/"target="_blank">Situación COVID-19 España</a></li>
 </ul></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/coronavirus/>coronavirus</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2020-03-30-weekend_learnings/"><span class="li">&rarr;</span>2020-03-30 Weekend Learnings</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
     label="comment" theme="github-light" crossorigin="anonymous" async>
     </script></div><section id="footer" class="footer"><div class="footer-wrap">

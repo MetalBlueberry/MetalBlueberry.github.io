@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>2019-12-02 Weekend Learnings&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="2019-12-02 Weekend Learnings"/>
@@ -18,55 +18,80 @@
 <body>
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
     <h1 class="article title">2019-12-02 Weekend Learnings</h1><p class="article date">Monday, December 2, 2019<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>I managed to send audio to my <strong>Google Home</strong>, discovered the <strong>Go tool trace</strong> and started a post about <strong>Python and Jupyter</strong>.</p>
-
 <h2 id="my-new-google-home">My new Google Home</h2>
+<p>I was playing with my new Google Home device when I wonder if it would be possible to trigger local actions, like sending a message to my Raspberry Pi. After some research I found the <a href="https://rithvikvibhu.github.io/GHLocalApi/#top"target="_blank">Hiden API</a> of Google home but It is a little bit disappointing. There is nothing interesting to do with it.</p>
+<p>The I discovered a post about <a href="https://www.gioexperience.com/google-home-hack-send-voice-programmaticaly-with-python/"target="_blank">how to use the Google Home as a Choromecast</a> and this was a little bit more promising. The post starts with a simple tutorial to control the volume using <code>pychromecast</code> library. Then, using <code>gtts</code> Google Text To Speech library, generates an mp3 file and send a request to the Google Home with the url that serves that sound. In the original post, It&rsquo;s using an Apache web server, I replaced it by a simple web static file server in Go. Here is the code. The logRequest is just to have some feedback.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
 
-<p>I was playing with my new Google Home device when I wonder if it would be possible to trigger local actions, like sending a message to my Raspberry Pi. After some research I found the <a href="https://rithvikvibhu.github.io/GHLocalApi/#top">Hiden API</a> of Google home but It is a little bit disappointing. There is nothing interesting to do with it.</p>
-
-<p>The I discovered a post about <a href="https://www.gioexperience.com/google-home-hack-send-voice-programmaticaly-with-python/">how to use the Google Home as a Choromecast</a> and this was a little bit more promising. The post starts with a simple tutorial to control the volume using <code>pychromecast</code> library. Then, using <code>gtts</code> Google Text To Speech library, generates an mp3 file and send a request to the Google Home with the url that serves that sound. In the original post, It&rsquo;s using an Apache web server, I replaced it by a simple web static file server in Go. Here is the code. The logRequest is just to have some feedback.</p>
-
-<pre><code class="language-go">package main
-
-import (
-	&quot;log&quot;
-	&quot;net/http&quot;
+<span style="color:#ff79c6">import</span> (
+	<span style="color:#f1fa8c">&#34;log&#34;</span>
+	<span style="color:#f1fa8c">&#34;net/http&#34;</span>
 )
 
-func main() {
-	fs := logRequest(http.FileServer(http.Dir(&quot;music&quot;)))
-	http.Handle(&quot;/mp3_cache/&quot;, fs)
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+	fs <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">logRequest</span>(http.<span style="color:#50fa7b">FileServer</span>(http.<span style="color:#50fa7b">Dir</span>(<span style="color:#f1fa8c">&#34;music&#34;</span>)))
+	http.<span style="color:#50fa7b">Handle</span>(<span style="color:#f1fa8c">&#34;/mp3_cache/&#34;</span>, fs)
 
-	log.Println(&quot;Listening...&quot;)
-	http.ListenAndServe(&quot;:80&quot;, nil)
+	log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Listening...&#34;</span>)
+	http.<span style="color:#50fa7b">ListenAndServe</span>(<span style="color:#f1fa8c">&#34;:80&#34;</span>, <span style="color:#ff79c6">nil</span>)
 }
 
-func logRequest(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Println(&quot;Request&quot;)
-		next.ServeHTTP(w, r)
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">logRequest</span>(next http.Handler) http.Handler {
+	<span style="color:#ff79c6">return</span> http.<span style="color:#50fa7b">HandlerFunc</span>(<span style="color:#8be9fd;font-style:italic">func</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+		log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Request&#34;</span>)
+		next.<span style="color:#50fa7b">ServeHTTP</span>(w, r)
 	})
 }
-</code></pre>
-
-<p>So this code basically serves the files in the directory music. You just have to modify the Python code to store the mp3 there. Keep in mind that by default, Go looks for the full path in the given directory. This means that the folder structure should look like this</p>
-
-<pre><code class="language-txt">- main.go
+</code></pre></td></tr></table>
+</div>
+</div><p>So this code basically serves the files in the directory music. You just have to modify the Python code to store the mp3 there. Keep in mind that by default, Go looks for the full path in the given directory. This means that the folder structure should look like this</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">- main.go
 - ghome_say.py
 - music
   - mp3_cache
     - voice.mp3
-</code></pre>
-
-<p>This is really funny. I&rsquo;m thinking about removing the dust from my Raspberry Pi and program it warn me if the temperature of my home is too high or too low. why? Because I can.</p>
-
+</code></pre></td></tr></table>
+</div>
+</div><p>This is really funny. I&rsquo;m thinking about removing the dust from my Raspberry Pi and program it warn me if the temperature of my home is too high or too low. why? Because I can.</p>
 <h2 id="go-tool-trace">Go Tool Trace</h2>
-
-<p>I&rsquo;ve found two interesting post about this tool. <a href="https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner">post1</a> <a href="https://making.pusher.com/go-tool-trace/">post2</a>. This has been really interesting for me as I&rsquo;ve been wondering for some time if there was any way of visualizing the program execution time.</p>
-
+<p>I&rsquo;ve found two interesting post about this tool. <a href="https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner"target="_blank">post1</a> <a href="https://making.pusher.com/go-tool-trace/"target="_blank">post2</a>. This has been really interesting for me as I&rsquo;ve been wondering for some time if there was any way of visualizing the program execution time.</p>
 <p>As you my guess, the first thing I did is to run the Mandelbrot tests and visualize the output. This help me to prove that the reason why the performance is the same for the configuration 2x2x512 is that one of the areas is much more expensive to calculate.</p>
-
 <div class="figure">
 <div class="figure-plot" id="figure1">
 	Code could not finish, this are some reasons why this happen.
@@ -96,9 +121,7 @@ fig = {"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16
   draw()
 </script>
 </div>
-
 <p>Adding some tracing to the code I got the exact timing for each section and this is how it looks like.</p>
-
 <table>
 <thead>
 <tr>
@@ -108,7 +131,6 @@ fig = {"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16
 <th>Events</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>0.007260554s</td>
@@ -116,49 +138,42 @@ fig = {"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16
 <td></td>
 <td>Task 1 (complete)</td>
 </tr>
-
 <tr>
 <td>0.007260554</td>
 <td>.</td>
 <td>8a</td>
 <td>task Calculate (id 1, parent 0) created</td>
 </tr>
-
 <tr>
 <td>0.007466081</td>
 <td>.   205527</td>
 <td>39</td>
 <td>region Area 0 started (duration: 289.046531ms)</td>
 </tr>
-
 <tr>
 <td>0.007476658</td>
 <td>.    10577</td>
 <td>38</td>
 <td>region Area 2 started (duration: 4.819706ms)</td>
 </tr>
-
 <tr>
 <td>0.007532978</td>
 <td>.    56320</td>
 <td>37</td>
 <td>region Area 1 started (duration: 563.917497ms)</td>
 </tr>
-
 <tr>
 <td>0.012303297</td>
 <td>.  4770319</td>
 <td>38</td>
 <td>region Area 3 started (duration: 148.341257ms)</td>
 </tr>
-
 <tr>
 <td>0.575309213</td>
 <td>.563005916</td>
 <td>8</td>
 <td>task end</td>
 </tr>
-
 <tr>
 <td>-</td>
 <td>-</td>
@@ -167,22 +182,16 @@ fig = {"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16
 </tr>
 </tbody>
 </table>
-
 <p>So now it&rsquo;s clear, The area with index 1 is the most expensive and takes 563ms to complete. This means that meanwhile one worker is doing this task, the other workers have plenty of time to finish the other areas.</p>
-
 <p>This is just a brief summary of all the information the the tracer can provide. I&rsquo;m thinking about doing a single post about this.</p>
-
 <h2 id="python-an-jupyter">Python an Jupyter</h2>
-
 <p>Provably will be the next #howto post. stay tunned!</p>
-
 <h2 id="references">References</h2>
-
 <ul>
-<li><a href="https://rithvikvibhu.github.io/GHLocalApi/#top">Hiden API</a></li>
-<li><a href="https://www.gioexperience.com/google-home-hack-send-voice-programmaticaly-with-python/">Google Home as Chromecast</a></li>
-<li><a href="https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner">Tracing post 1</a></li>
-<li><a href="https://making.pusher.com/go-tool-trace/">Tracing post 2</a></li>
+<li><a href="https://rithvikvibhu.github.io/GHLocalApi/#top"target="_blank">Hiden API</a></li>
+<li><a href="https://www.gioexperience.com/google-home-hack-send-voice-programmaticaly-with-python/"target="_blank">Google Home as Chromecast</a></li>
+<li><a href="https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner"target="_blank">Tracing post 1</a></li>
+<li><a href="https://making.pusher.com/go-tool-trace/"target="_blank">Tracing post 2</a></li>
 </ul></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/weekend/>weekend</a><a class="tag" href=/tags/go/>go</a></section></div><section class="article navigation"><p><a class="link" href="/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/"><span class="li">&larr;</span>Add Plots With Hugo Shortcodes - Plotly</a></p><p><a class="link" href="/post/blog/2019-11-24_avoid_github_government_block/"><span class="li">&rarr;</span>Avoid Github Government Block</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
     label="comment" theme="github-light" crossorigin="anonymous" async>
     </script></div><section id="footer" class="footer"><div class="footer-wrap">

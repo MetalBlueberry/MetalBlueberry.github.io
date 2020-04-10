@@ -28,7 +28,7 @@
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/blog/2020-03-30-weekend_learnings/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve learned a little bit about frontend testing with chromium web drivers using &lt;a href=&#34;https://agouti.org/&#34;&gt;Agouti&lt;/a&gt; and It has proven to be a really good option to write test in Go. Also we are in quarantine so I let you here a WebGL interactive animation to entertain you.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve learned a little bit about frontend testing with chromium web drivers using &lt;a href=&#34;https://agouti.org/&#34;target=&#34;_blank&#34;&gt;Agouti&lt;/a&gt; and It has proven to be a really good option to write test in Go. Also we are in quarantine so I let you here a WebGL interactive animation to entertain you.&lt;/p&gt;</description>
       
     </item>
     
@@ -48,7 +48,7 @@
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/howto/2020-02-14_nginx_auth_server_with_go/</guid>
-      <description>&lt;p&gt;I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like &lt;a href=&#34;https://developers.google.com/identity/protocols/OAuth2&#34;&gt;Google oauth2&lt;/a&gt;. But if you really need you own system&amp;hellip; this approach should ease the work.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like &lt;a href=&#34;https://developers.google.com/identity/protocols/OAuth2&#34;target=&#34;_blank&#34;&gt;Google oauth2&lt;/a&gt;. But if you really need you own system&amp;hellip; this approach should ease the work.&lt;/p&gt;</description>
       
     </item>
     
@@ -148,7 +148,7 @@
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/blog/2019-11-03_leadership_training/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve attended to a Leadership training by &lt;a href=&#34;https://www.enricllado.com/&#34;&gt;Enric Lladó&lt;/a&gt;, thanks to &lt;a href=&#34;https://www.betterask.erni/&#34;&gt;ERNI&lt;/a&gt;, and this is the summary of it.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve attended to a Leadership training by &lt;a href=&#34;https://www.enricllado.com/&#34;target=&#34;_blank&#34;&gt;Enric Lladó&lt;/a&gt;, thanks to &lt;a href=&#34;https://www.betterask.erni/&#34;target=&#34;_blank&#34;&gt;ERNI&lt;/a&gt;, and this is the summary of it.&lt;/p&gt;</description>
       
     </item>
     
@@ -178,7 +178,7 @@
       <pubDate>Tue, 29 Oct 2019 11:41:00 +0100</pubDate>
       
       <guid>/post/howto/2019-10-29_create-a-blog-like-this/</guid>
-      <description>&lt;p&gt;A blog like this can be generated with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo.io&lt;/a&gt; hosted for free using &lt;a href=&#34;https://github.com/&#34;&gt;Github.com&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;A blog like this can be generated with &lt;a href=&#34;https://gohugo.io/&#34;target=&#34;_blank&#34;&gt;Hugo.io&lt;/a&gt; hosted for free using &lt;a href=&#34;https://github.com/&#34;target=&#34;_blank&#34;&gt;Github.com&lt;/a&gt;.&lt;/p&gt;</description>
       
     </item>
     
