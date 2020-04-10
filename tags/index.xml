@@ -1,149 +1,165 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Tags on MetalBlueberry - A passionate programmer</title>
-    <link>https://metalblueberry.github.io/tags/</link>
-    <description>Recent content in Tags on MetalBlueberry - A passionate programmer</description>
+    <title>Tags on MetalBlueberry</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on MetalBlueberry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>Víctor Pérez Domingo</copyright>
     <lastBuildDate>Tue, 07 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://metalblueberry.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>coronavirus</title>
-      <link>https://metalblueberry.github.io/tags/coronavirus/</link>
+      <link>/tags/coronavirus/</link>
       <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/coronavirus/</guid>
+      <guid>/tags/coronavirus/</guid>
       <description></description>
+      
     </item>
     
     <item>
-      <title>go</title>
-      <link>https://metalblueberry.github.io/tags/go/</link>
+      <title>Go</title>
+      <link>/tags/go/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/go/</guid>
-      <description></description>
+      <guid>/tags/go/</guid>
+      <description>My objective is to become a professional Go developer and I invest a good part of my personal time writing Go code.</description>
+      
     </item>
     
     <item>
       <title>testing</title>
-      <link>https://metalblueberry.github.io/tags/testing/</link>
+      <link>/tags/testing/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/testing/</guid>
+      <guid>/tags/testing/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>weekend</title>
-      <link>https://metalblueberry.github.io/tags/weekend/</link>
+      <link>/tags/weekend/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/weekend/</guid>
+      <guid>/tags/weekend/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>docker</title>
-      <link>https://metalblueberry.github.io/tags/docker/</link>
+      <link>/tags/docker/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/docker/</guid>
+      <guid>/tags/docker/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>git</title>
-      <link>https://metalblueberry.github.io/tags/git/</link>
+      <link>/tags/git/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/git/</guid>
+      <guid>/tags/git/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>leadership</title>
-      <link>https://metalblueberry.github.io/tags/leadership/</link>
+      <link>/tags/leadership/</link>
       <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/leadership/</guid>
+      <guid>/tags/leadership/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>personal</title>
-      <link>https://metalblueberry.github.io/tags/personal/</link>
+      <link>/tags/personal/</link>
       <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/personal/</guid>
+      <guid>/tags/personal/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>VSCode</title>
-      <link>https://metalblueberry.github.io/tags/vscode/</link>
+      <link>/tags/vscode/</link>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/vscode/</guid>
+      <guid>/tags/vscode/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>plotly</title>
-      <link>https://metalblueberry.github.io/tags/plotly/</link>
+      <link>/tags/plotly/</link>
       <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/plotly/</guid>
+      <guid>/tags/plotly/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>python</title>
-      <link>https://metalblueberry.github.io/tags/python/</link>
+      <link>/tags/python/</link>
       <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/python/</guid>
+      <guid>/tags/python/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>hugo</title>
-      <link>https://metalblueberry.github.io/tags/hugo/</link>
+      <link>/tags/hugo/</link>
       <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/hugo/</guid>
+      <guid>/tags/hugo/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>mandelbrot</title>
-      <link>https://metalblueberry.github.io/tags/mandelbrot/</link>
+      <link>/tags/mandelbrot/</link>
       <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/mandelbrot/</guid>
+      <guid>/tags/mandelbrot/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>communication</title>
-      <link>https://metalblueberry.github.io/tags/communication/</link>
+      <link>/tags/communication/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/communication/</guid>
+      <guid>/tags/communication/</guid>
       <description></description>
+      
     </item>
     
     <item>
       <title>training</title>
-      <link>https://metalblueberry.github.io/tags/training/</link>
+      <link>/tags/training/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/tags/training/</guid>
+      <guid>/tags/training/</guid>
       <description></description>
+      
     </item>
     
   </channel>

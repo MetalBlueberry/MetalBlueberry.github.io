@@ -1,0 +1,78 @@
+.post .post-content img[src$='#center'] {
+    display: block;
+    margin: 0.7rem auto;
+}
+
+.post .post-content img[src$='#floatleft'] {
+    float: left;
+    margin: 0.7rem;
+}
+
+.post .post-content img[src$='#floatright'] {
+    float: right;
+    margin: 0.7rem;
+}
+
+.post-category .howto {
+    background: lightblue;
+    border-radius: 10px;
+    padding: 1px;
+}
+.post-category .blog {
+    background: lightyellow;
+    border-radius: 10px;
+    padding: 1px;
+}
+
+.post .post-header .post-tags a::before {
+    content: "#";
+}
+
+.post .post-header .post-tags a {
+    color: #c05b4d;
+}
+
+.highlight pre {
+    -moz-tab-size: 4;
+    tab-size: 4;
+}
+
+
+.post .post-content img[src$='#floatleft'] {
+    float: left;
+    margin: 0.7rem;
+}
+
+.post .post-content img[src$='#floatright'] {
+    float: right;
+    margin: 0.7rem;
+}
+
+.post-category .howto {
+    background: lightblue;
+    border-radius: 10px;
+    padding: 1px;
+}
+.post-category .blog {
+    background: lightyellow;
+    border-radius: 10px;
+    padding: 1px;
+}
+
+.post .post-header .post-tags a::before {
+    content: "#";
+}
+
+.post .post-header .post-tags a {
+    color: #c05b4d;
+}
+
+.highlight pre {
+    -moz-tab-size: 4;
+    tab-size: 4;
+}
+
+.twitter-tweet {
+    display: block;
+    margin: 0.7rem auto;
+}

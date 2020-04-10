@@ -1,86 +1,95 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>howto on MetalBlueberry - A passionate programmer</title>
-    <link>https://metalblueberry.github.io/categories/howto/</link>
-    <description>Recent content in howto on MetalBlueberry - A passionate programmer</description>
+    <title>How To... on MetalBlueberry</title>
+    <link>/categories/howto/</link>
+    <description>Recent content in How To... on MetalBlueberry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>Víctor Pérez Domingo</copyright>
     <lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://metalblueberry.github.io/categories/howto/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/categories/howto/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Use Git to track Git versions</title>
-      <link>https://metalblueberry.github.io/post/howto/2020-03-11_use_git_to_track_git_versions/</link>
+      <link>/post/howto/2020-03-11_use_git_to_track_git_versions/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2020-03-11_use_git_to_track_git_versions/</guid>
+      <guid>/post/howto/2020-03-11_use_git_to_track_git_versions/</guid>
       <description>&lt;p&gt;Everyone who has ever been involved in managing versions of different applications, knows that in can be a pain in the ass. Luckily enough there are tools to ease this work and I&amp;rsquo;ve found that Git provides a general solution independently of your technology stack. Git Submodules.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Ready to Go Auth server with Nginx</title>
-      <link>https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/</link>
+      <link>/post/howto/2020-02-14_nginx_auth_server_with_go/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/</guid>
+      <guid>/post/howto/2020-02-14_nginx_auth_server_with_go/</guid>
       <description>&lt;p&gt;I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like &lt;a href=&#34;https://developers.google.com/identity/protocols/OAuth2&#34;&gt;Google oauth2&lt;/a&gt;. But if you really need you own system&amp;hellip; this approach should ease the work.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Python Jupyter Notebook With Plotly Support</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</link>
+      <link>/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</link>
       <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</guid>
+      <guid>/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</guid>
       <description>&lt;p&gt;Python is awesome because you can do anything. In this case, I&amp;rsquo;m going to show you how to configure a Jupyter notebook with integrated Plotly support to draw interactive graphs. This is very useful if you have to analyse something.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Add Plots With Hugo Shortcodes - Plotly</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</link>
+      <link>/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</link>
       <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</guid>
+      <guid>/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</guid>
       <description>&lt;p&gt;Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&amp;rsquo;m going to show you how to create a shortcode to add plots to your hugo static site.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Mandelbrot Parallel Computation</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-11-17_mandelbrot_parallel_computation/</link>
+      <link>/post/howto/2019-11-17_mandelbrot_parallel_computation/</link>
       <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2019-11-17_mandelbrot_parallel_computation/</guid>
+      <guid>/post/howto/2019-11-17_mandelbrot_parallel_computation/</guid>
       <description>&lt;p&gt;This post explains how to parallelize the computational task of the Mandelbrot set and generate a terminal tool to generate images.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Go CPU profiling</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-11-01_go-cpu-profiling/</link>
+      <link>/post/howto/2019-11-01_go-cpu-profiling/</link>
       <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2019-11-01_go-cpu-profiling/</guid>
+      <guid>/post/howto/2019-11-01_go-cpu-profiling/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s take a look to Go CPU profiling tools to optimize the mandelbrot set calculation from previous post.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Mandelbrot Set Calculation</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/</link>
+      <link>/post/howto/2019-10-31_mandelbrot-set-calculation/</link>
       <pubDate>Tue, 29 Oct 2019 21:33:33 +0100</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/</guid>
+      <guid>/post/howto/2019-10-31_mandelbrot-set-calculation/</guid>
       <description>&lt;p&gt;The Mandelbrot set is one of the most famous fractals and it is really simple to draw. Personally I enjoy a lot seeing how simple rules lead to complex patterns.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Create a Blog Like This</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-10-29_create-a-blog-like-this/</link>
+      <link>/post/howto/2019-10-29_create-a-blog-like-this/</link>
       <pubDate>Tue, 29 Oct 2019 11:41:00 +0100</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2019-10-29_create-a-blog-like-this/</guid>
+      <guid>/post/howto/2019-10-29_create-a-blog-like-this/</guid>
       <description>&lt;p&gt;A blog like this can be generated with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo.io&lt;/a&gt; hosted for free using &lt;a href=&#34;https://github.com/&#34;&gt;Github.com&lt;/a&gt;.&lt;/p&gt;</description>
+      
     </item>
     
   </channel>

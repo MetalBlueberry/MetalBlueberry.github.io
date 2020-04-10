@@ -1,162 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>2019-12-15 Weekend Learnings - MetalBlueberry - A passionate programmer</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="MetalBlueberry" /><meta name="description" content="My Weekend Learnings" /><meta name="keywords" content="vscode, visual studio" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
-
-
-<link rel="canonical" href="https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/style.css">
-
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>2019-12-15 Weekend Learnings&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2019-12-15 Weekend Learnings"/>
+<meta name="twitter:description" content="I&rsquo;ve been using VSCode as my principal editor for a while now, and it keeps improving in every release with things that I cannot believe. Last was remote containers. Today is&hellip;.(drums)&hellip; Live Share!"/>
 
 <meta property="og:title" content="2019-12-15 Weekend Learnings" />
-<meta property="og:description" content="My Weekend Learnings" />
+<meta property="og:description" content="I&rsquo;ve been using VSCode as my principal editor for a while now, and it keeps improving in every release with things that I cannot believe. Last was remote containers. Today is&hellip;.(drums)&hellip; Live Share!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/" />
-
-<meta property="og:image" content="https://metalblueberry.github.io/me.jpeg" />
 <meta property="article:published_time" content="2019-12-15T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-12-17T00:00:00+00:00" />
-<meta itemprop="name" content="2019-12-15 Weekend Learnings">
-<meta itemprop="description" content="My Weekend Learnings">
+<meta property="article:modified_time" content="2020-04-10T11:35:19+02:00" />
 
-
-<meta itemprop="datePublished" content="2019-12-15T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-17T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="719">
-
-
-
-<meta itemprop="keywords" content="weekend,VSCode," />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://metalblueberry.github.io/me.jpeg"/>
-
-<meta name="twitter:title" content="2019-12-15 Weekend Learnings"/>
-<meta name="twitter:description" content="My Weekend Learnings"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
+<meta name="author" content="MetalBlueberry">
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">MetalBlueberry</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a>
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">MetalBlueberry</a>
-</div>
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li>
-  </ul>
-</nav>
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">2019-12-15 Weekend Learnings</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2019-12-15 </span>
-        <div class="post-category">
-    <a class="blog"  href="/categories/blog/"> blog </a>
-    </div>
-          <span class="more-meta"> 719 words </span>
-          <span class="more-meta"> 4 mins read </span>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Contents</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#vs-code-essential-extensions">VS Code essential extensions</a>
-<ul>
-<li><a href="#code-spell-checker">Code Spell Checker</a></li>
-<li><a href="#git-graph-gitlens">Git Graph &amp;&amp; GitLens</a></li>
-<li><a href="#paste-json-as-code">Paste JSON as Code</a></li>
-<li><a href="#settings-sync">Settings Sync</a></li>
-<li><a href="#vim">Vim</a></li>
-<li><a href="#vs-live-share">VS live share</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <p>I&rsquo;ve been using VSCode as my principal editor for a while now, and it keeps improving in every release with things that I cannot believe. Last was remote containers. Today is&hellip;.(drums)&hellip; Live Share!</p>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">2019-12-15 Weekend Learnings</h1><p class="article date">Sunday, December 15, 2019<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>I&rsquo;ve been using VSCode as my principal editor for a while now, and it keeps improving in every release with things that I cannot believe. Last was remote containers. Today is&hellip;.(drums)&hellip; Live Share!</p>
 
 <p>Okay, it has been a short weekend for me because I&rsquo;m planning a move to Bilbao for the next month and this took almost all of my brain and time. Nevertheless, I still had time to read news as usual and investigate a little bit about useful VSCode extensions. I was looking for a test viewer for Ginkgo or something to integrate it. I found &ldquo;Test Explorer UI&rdquo; which is exactly what I was looking for. Then I read in the description of the extension that it is compatible with &ldquo;VS live share&rdquo;. so what&rsquo;s VS live share? It is something that you don&rsquo;t know that you need until you know that it exists.</p>
 
@@ -167,45 +28,20 @@
 <p>I think it is a good moment to list what are my VS Code essential extensions. Get Ready! I will omit specific ones like Python extension or Go extension.</p>
 
 <h3 id="code-spell-checker">Code Spell Checker</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt">Name: Code Spell Checker
+
+<pre><code class="language-txt">Name: Code Spell Checker
 Id: streetsidesoftware.code-spell-checker
 Description: Spelling checker for source code
 Version: 1.7.20
 Publisher: Street Side Software
-VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker</code></pre></td></tr></table>
-</div>
-</div>
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
+</code></pre>
+
 <p>Provides useful warnings about typos. My code spelling will be horrible without this help :)</p>
 
 <h3 id="git-graph-gitlens">Git Graph &amp;&amp; GitLens</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt">Name: Git Graph
+
+<pre><code class="language-txt">Name: Git Graph
 Id: mhutchie.git-graph
 Description: View a Git Graph of your repository, and perform Git actions from the graph.
 Version: 1.19.1
@@ -217,72 +53,45 @@ Id: eamodio.gitlens
 Description: Supercharge the Git capabilities built into Visual Studio Code — Visualize code authorship at a glance via Git blame annotations and code lens, seamlessly navigate and explore Git repositories, gain valuable insights via powerful comparison commands, and so much more
 Version: 10.2.0
 Publisher: Eric Amodio
-VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens</code></pre></td></tr></table>
-</div>
-</div>
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+</code></pre>
+
 <p>These two extensions together with the default VSCode capabilities, turn VSCode in the F*** best git UI that you can find. I&rsquo;m not going to enter in the details of how to use GitLens. Just read the docs.</p>
 
 <h3 id="paste-json-as-code">Paste JSON as Code</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt">Name: Paste JSON as Code
+
+<pre><code class="language-txt">Name: Paste JSON as Code
 Id: quicktype.quicktype
 Description: Copy JSON, paste as Go, TypeScript, C#, C++ and more.
 Version: 12.0.46
 Publisher: quicktype
-VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype</code></pre></td></tr></table>
-</div>
-</div>
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype
+</code></pre>
+
 <p>Another thing that you don&rsquo;t need until you know that it exist. This allows you to paste a JSON object and generate the corresponding code structure. Essential if you work with docstore databases like Dynamo or you are parsing different JSON data.</p>
 
 <h3 id="settings-sync">Settings Sync</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt">Name: Settings Sync
+
+<pre><code class="language-txt">Name: Settings Sync
 Id: shan.code-settings-sync
 Description: Synchronize Settings, Snippets, Themes, File Icons, Launch, Keybindings, Workspaces and Extensions Across Multiple Machines Using GitHub Gist.
 Version: 3.4.3
 Publisher: Shan Khan
-VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync</code></pre></td></tr></table>
-</div>
-</div>
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync
+</code></pre>
+
 <p>This extension makes possible to work with VSCode in different computers without wanting to kill yourself. I recommend you to turn on the automatic upload/download to avoid conflicts.</p>
 
 <h3 id="vim">Vim</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt">Name: Vim
+
+<pre><code class="language-txt">Name: Vim
 Id: vscodevim.vim
 Description: Vim emulation for Visual Studio Code
 Version: 1.12.2
 Publisher: vscodevim
-VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=vscodevim.vim</code></pre></td></tr></table>
-</div>
-</div>
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=vscodevim.vim
+</code></pre>
+
 <p>Well, this is only if you know Vim. And if you don&rsquo;t know Vim. You should learn.</p>
 
 <div class="admonition bug"><p class="admonition-title">bugs</p>
@@ -293,109 +102,23 @@ VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=vscodev
 </div>
 
 <h3 id="vs-live-share">VS live share</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt">Name: Live Share
+
+<pre><code class="language-txt">Name: Live Share
 Id: ms-vsliveshare.vsliveshare
 Description: Real-time collaborative development from the comfort of your favorite tools.
 Version: 1.0.1377
 Publisher: Microsoft
-VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare</code></pre></td></tr></table>
-</div>
-</div>
-<p>If it works as promised, I will use it every day to work with my team mates.</p>
-    </div>
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare
+</code></pre>
 
-    
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/weekend/">weekend</a>
-          <a href="/tags/vscode/">VSCode</a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/blog/2019-12-22_weekend_learnings/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">2019-12-22 Weekend Learnings</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/blog/2019-12-09_weekend_learnings/">
-            <span class="next-text nav-default">2019-12-09 Weekend Learnings</span>
-            <span class="next-text nav-mobile">Next</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-    <script src="https://utteranc.es/client.js"
-            repo="MetalBlueberry/MetalBlueberry.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="mailto:metalblueberry@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://twitter.com/MetalBlueberry" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="https://www.linkedin.com/in/victorperezdomingo/" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="https://github.com/MetalBlueberry" class="iconfont icon-github" title="github"></a>
-  <a href="https://metalblueberry.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    Theme - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2019 - 
-    2020
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">MetalBlueberry</span>
-  </span>
-</div>
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
-
-
+<p>If it works as promised, I will use it every day to work with my team mates.</p></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/weekend/>weekend</a><a class="tag" href=/tags/vscode/>VSCode</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2019-12-22_weekend_learnings/"><span class="li">&larr;</span>2019-12-22 Weekend Learnings</a></p><p><a class="link" href="/post/blog/2019-12-09_weekend_learnings/"><span class="li">&rarr;</span>2019-12-09 Weekend Learnings</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
+    label="comment" theme="github-light" crossorigin="anonymous" async>
+    </script></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Víctor Pérez Domingo</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -406,12 +129,7 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
+</div>
 </body>
+
 </html>

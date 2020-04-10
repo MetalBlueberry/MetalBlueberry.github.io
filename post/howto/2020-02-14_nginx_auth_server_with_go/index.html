@@ -1,164 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Ready to Go Auth server with Nginx - MetalBlueberry - A passionate programmer</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="MetalBlueberry" /><meta name="description" content="learn how to secure a web application behind nginx with an auth server" /><meta name="keywords" content="nginx, go, docker, auth, security, auth_request" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
-
-
-<link rel="canonical" href="https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/style.css">
-
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Ready to Go Auth server with Nginx&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ready to Go Auth server with Nginx"/>
+<meta name="twitter:description" content="I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like Google oauth2. But if you really need you own system&hellip; this approach should ease the work."/>
 
 <meta property="og:title" content="Ready to Go Auth server with Nginx" />
-<meta property="og:description" content="learn how to secure a web application behind nginx with an auth server" />
+<meta property="og:description" content="I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like Google oauth2. But if you really need you own system&hellip; this approach should ease the work." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/" />
-
-<meta property="og:image" content="https://metalblueberry.github.io/me.jpeg" />
 <meta property="article:published_time" content="2020-02-14T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-02-21T00:00:00+00:00" />
-<meta itemprop="name" content="Ready to Go Auth server with Nginx">
-<meta itemprop="description" content="learn how to secure a web application behind nginx with an auth server">
+<meta property="article:modified_time" content="2020-04-10T11:39:35+02:00" />
 
-
-<meta itemprop="datePublished" content="2020-02-14T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-02-21T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2106">
-
-
-
-<meta itemprop="keywords" content="go,docker," />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://metalblueberry.github.io/me.jpeg"/>
-
-<meta name="twitter:title" content="Ready to Go Auth server with Nginx"/>
-<meta name="twitter:description" content="learn how to secure a web application behind nginx with an auth server"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
+<meta name="author" content="MetalBlueberry">
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">MetalBlueberry</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a>
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">MetalBlueberry</a>
-</div>
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li>
-  </ul>
-</nav>
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Ready to Go Auth server with Nginx</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2020-02-14 </span>
-        <div class="post-category">
-    <a class="howto"  href="/categories/howto/"> howto </a>
-    </div>
-          <span class="more-meta"> 2106 words </span>
-          <span class="more-meta"> 10 mins read </span>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Contents</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#sample-app">Sample App</a></li>
-<li><a href="#auth-server">Auth server</a></li>
-<li><a href="#implementation">Implementation</a>
-<ul>
-<li><a href="#loginposthandler">loginPOSTHandler</a></li>
-<li><a href="#logoutposthandler">logoutPOSTHandler</a></li>
-<li><a href="#authhandler">authHandler</a></li>
-<li><a href="#dockerize">Dockerize</a></li>
-<li><a href="#final-docker-compose-yaml">Final docker-compose.yaml</a></li>
-</ul></li>
-<li><a href="#run-it">Run it</a></li>
-<li><a href="#final-thoughts">Final thoughts</a></li>
-<li><a href="#conclusion">Conclusion</a></li>
-<li><a href="#references">References</a></li>
-</ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <p>I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like <a href="https://developers.google.com/identity/protocols/OAuth2">Google oauth2</a>. But if you really need you own system&hellip; this approach should ease the work.</p>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Ready to Go Auth server with Nginx</h1><p class="article date">Friday, February 14, 2020<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like <a href="https://developers.google.com/identity/protocols/OAuth2">Google oauth2</a>. But if you really need you own system&hellip; this approach should ease the work.</p>
 
 <p>First thing, I will try to discourage you to actually do this to store your own passwords. Please, invest some time in watching this video from computerphile</p>
 
@@ -173,124 +32,66 @@
 <p>Let&rsquo;s create a simple docker-compose setup with a minimal application. I&rsquo;m going to include https configuration because it&rsquo;s not that hard. You can go <a href="https://www.humankode.com/ssl/create-a-selfsigned-certificate-for-nginx-in-5-minutes">here</a> to learn how to create your own self signed certificate.</p>
 
 <p>File structure</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt">.
+
+<pre><code class="language-txt">.
 ├── docker-compose.yaml
 └── nginx
     ├── Dockerfile
     ├── localhost.conf
     ├── localhost.crt
     ├── localhost.key
-    └── nginx.conf</code></pre></td></tr></table>
-</div>
-</div>
+    └── nginx.conf
+</code></pre>
+
 <p>docker-compose.yaml</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">version<span class="p">:</span><span class="w"> </span><span class="s2">&#34;2.2&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>services<span class="p">:</span><span class="w">
-</span><span class="w">  </span>nginx<span class="p">:</span><span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>nginx<span class="w">
-</span><span class="w">    </span>volumes<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>./nginx/nginx.conf<span class="p">:</span>/etc/nginx/nginx.conf<span class="p">:</span>ro<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>./nginx/localhost.crt<span class="p">:</span>/etc/ssl/certs/localhost.crt<span class="p">:</span>ro<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>./nginx/localhost.key<span class="p">:</span>/etc/ssl/private/localhost.key<span class="p">:</span>ro<span class="w">
-</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="m">80</span><span class="p">:</span><span class="m">80</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="m">443</span><span class="p">:</span><span class="m">443</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span>whoami<span class="p">:</span><span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>jwilder/whoami<span class="w">
-</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="m">8000</span><span class="p">:</span><span class="m">8000</span></code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-yaml">version: &quot;2.2&quot;
+
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/localhost.crt:/etc/ssl/certs/localhost.crt:ro
+      - ./nginx/localhost.key:/etc/ssl/private/localhost.key:ro
+    ports:
+      - 80:80
+      - 443:443
+
+  whoami:
+    image: jwilder/whoami
+    ports:
+      - 8000:8000
+</code></pre>
+
 <p>nginx.conf</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">http</span> <span class="p">{</span>
-    <span class="kn">server</span> <span class="p">{</span>
-        <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
-        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
 
-        <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$server_name$request_uri</span><span class="p">;</span>
-    <span class="p">}</span>
+<pre><code class="language-nginx">http {
+    server {
+        listen 80;
+        server_name localhost;
 
-    <span class="kn">server</span> <span class="p">{</span>
-        <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
-        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+        return 301 https://$server_name$request_uri;
+    }
 
-        <span class="kn">ssl_certificate</span> <span class="s">/etc/ssl/certs/localhost.crt</span><span class="p">;</span>
-        <span class="kn">ssl_certificate_key</span> <span class="s">/etc/ssl/private/localhost.key</span><span class="p">;</span>
+    server {
+        listen 443 ssl http2;
+        server_name localhost;
 
-        <span class="kn">ssl_protocols</span> <span class="s">TLSv1.2</span> <span class="s">TLSv1.1</span> <span class="p">;</span>
+        ssl_certificate /etc/ssl/certs/localhost.crt;
+        ssl_certificate_key /etc/ssl/private/localhost.key;
+
+        ssl_protocols TLSv1.2 TLSv1.1 ;
 
 
-        <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
-            <span class="kn">proxy_pass</span> <span class="s">http://whoami:8000</span><span class="p">;</span>
-        <span class="p">}</span>
+        location / {
+            proxy_pass http://whoami:8000;
+        }
 
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+    }
+}
+</code></pre>
+
 <p>Et voilà! If you run docker-compose up, you will be able to get the output of whoami image using https from <a href="https://localhost">your browser</a>. BTW, whoami is the easiest application I can imagine. You can find more info <a href="https://hub.docker.com/r/jwilder/whoami/">here</a></p>
 
 <h1 id="auth-server">Auth server</h1>
@@ -302,86 +103,46 @@
 </blockquote>
 
 <p>Now that you understand how Nginx works, let&rsquo;s modify the configuration to protect our app with an auth server.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">http</span> <span class="p">{</span>
-    <span class="kn">server</span> <span class="p">{</span>
-        <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
-        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
 
-        <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$server_name$request_uri</span><span class="p">;</span>
-    <span class="p">}</span>
+<pre><code class="language-nginx">http {
+    server {
+        listen 80;
+        server_name localhost;
 
-    <span class="kn">server</span> <span class="p">{</span>
-        <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
-        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+        return 301 https://$server_name$request_uri;
+    }
 
-        <span class="kn">ssl_certificate</span> <span class="s">/etc/ssl/certs/localhost.crt</span><span class="p">;</span>
-        <span class="kn">ssl_certificate_key</span> <span class="s">/etc/ssl/private/localhost.key</span><span class="p">;</span>
+    server {
+        listen 443 ssl http2;
+        server_name localhost;
 
-        <span class="kn">ssl_protocols</span> <span class="s">TLSv1.2</span> <span class="s">TLSv1.1</span> <span class="p">;</span>
+        ssl_certificate /etc/ssl/certs/localhost.crt;
+        ssl_certificate_key /etc/ssl/private/localhost.key;
 
-        <span class="kn">location</span> <span class="p">=</span> <span class="s">/auth</span> <span class="p">{</span>
-            <span class="kn">internal</span><span class="p">;</span>
-            <span class="kn">proxy_pass</span> <span class="s">http://auth-server:8080</span><span class="p">;</span>
-            <span class="kn">proxy_pass_request_body</span> <span class="no">off</span><span class="p">;</span>
-            <span class="kn">proxy_set_header</span> <span class="s">Content-Length</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
-            <span class="kn">proxy_set_header</span> <span class="s">X-Original-URI</span> <span class="nv">$request_uri</span><span class="p">;</span>
-        <span class="p">}</span>
+        ssl_protocols TLSv1.2 TLSv1.1 ;
 
-        <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/(login|logout)</span> <span class="p">{</span>
-            <span class="kn">proxy_pass</span> <span class="s">http://auth-server:8080</span><span class="p">;</span>
-        <span class="p">}</span>
+        location = /auth {
+            internal;
+            proxy_pass http://auth-server:8080;
+            proxy_pass_request_body off;
+            proxy_set_header Content-Length &quot;&quot;;
+            proxy_set_header X-Original-URI $request_uri;
+        }
+
+        location ~ ^/(login|logout) {
+            proxy_pass http://auth-server:8080;
+        }
 
 
-        <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
-            <span class="kn">proxy_pass</span> <span class="s">http://whoami:8000</span><span class="p">;</span>
-            <span class="kn">auth_request</span> <span class="s">/auth</span><span class="p">;</span>
-            <span class="kn">auth_request_set</span> <span class="nv">$auth_status</span> <span class="nv">$upstream_status</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+        location / {
+            proxy_pass http://whoami:8000;
+            auth_request /auth;
+            auth_request_set $auth_status $upstream_status;
+        }
+    }
+}
+</code></pre>
+
 <h1 id="implementation">Implementation</h1>
 
 <p>The process is really simple. You need the following three endpoint</p>
@@ -406,583 +167,323 @@
 </ol>
 
 <p>Here is the code.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">loginPOSTHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">username</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">FormValue</span><span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">)</span>
-	<span class="nx">password</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">FormValue</span><span class="p">(</span><span class="s">&#34;password&#34;</span><span class="p">)</span>
 
-	<span class="nx">user</span> <span class="o">:=</span> <span class="nf">loginUser</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">user</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
+<pre><code class="language-go">func loginPOSTHandler(w http.ResponseWriter, r *http.Request) {
+	username := r.FormValue(&quot;username&quot;)
+	password := r.FormValue(&quot;password&quot;)
 
-	<span class="nx">expirationTime</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Add</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
-	<span class="nx">claims</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Claims</span><span class="p">{</span>
-		<span class="nx">User</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
-		<span class="nx">StandardClaims</span><span class="p">:</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">StandardClaims</span><span class="p">{</span>
-			<span class="nx">ExpiresAt</span><span class="p">:</span> <span class="nx">expirationTime</span><span class="p">.</span><span class="nf">Unix</span><span class="p">(),</span>
-		<span class="p">},</span>
-	<span class="p">}</span>
+	user := loginUser(username, password)
+	if user == nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
 
-	<span class="nx">token</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nf">NewWithClaims</span><span class="p">(</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">SigningMethodHS256</span><span class="p">,</span> <span class="nx">claims</span><span class="p">)</span>
-	<span class="nx">tokenString</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">token</span><span class="p">.</span><span class="nf">SignedString</span><span class="p">(</span><span class="nx">jwtKey</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
+	expirationTime := time.Now().Add(5 * time.Minute)
+	claims := &amp;Claims{
+		User: user,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
 
-	<span class="nx">http</span><span class="p">.</span><span class="nf">SetCookie</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">{</span>
-		<span class="nx">Name</span><span class="p">:</span>     <span class="s">&#34;token&#34;</span><span class="p">,</span>
-		<span class="nx">Path</span><span class="p">:</span>     <span class="s">&#34;/&#34;</span><span class="p">,</span>
-		<span class="nx">Value</span><span class="p">:</span>    <span class="nx">tokenString</span><span class="p">,</span>
-		<span class="nx">Expires</span><span class="p">:</span>  <span class="nx">expirationTime</span><span class="p">,</span>
-		<span class="nx">HttpOnly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-	<span class="p">})</span>
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString(jwtKey)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 
-	<span class="nx">http</span><span class="p">.</span><span class="nf">Redirect</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">basePath</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusFound</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+	http.SetCookie(w, &amp;http.Cookie{
+		Name:     &quot;token&quot;,
+		Path:     &quot;/&quot;,
+		Value:    tokenString,
+		Expires:  expirationTime,
+		HttpOnly: true,
+	})
+
+	http.Redirect(w, r, basePath, http.StatusFound)
+}
+</code></pre>
+
 <h2 id="logoutposthandler">logoutPOSTHandler</h2>
 
 <p>This handler simply deletes the token cookies if exists.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">logoutPOSTHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">http</span><span class="p">.</span><span class="nf">SetCookie</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">{</span>
-		<span class="nx">Name</span><span class="p">:</span>     <span class="s">&#34;token&#34;</span><span class="p">,</span>
-		<span class="nx">Path</span><span class="p">:</span>     <span class="s">&#34;/&#34;</span><span class="p">,</span>
-		<span class="nx">MaxAge</span><span class="p">:</span>   <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-		<span class="nx">HttpOnly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-	<span class="p">})</span>
 
-	<span class="nx">http</span><span class="p">.</span><span class="nf">Redirect</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">basePath</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusFound</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+<pre><code class="language-go">func logoutPOSTHandler(w http.ResponseWriter, r *http.Request) {
+	http.SetCookie(w, &amp;http.Cookie{
+		Name:     &quot;token&quot;,
+		Path:     &quot;/&quot;,
+		MaxAge:   -1,
+		HttpOnly: true,
+	})
+
+	http.Redirect(w, r, basePath, http.StatusFound)
+}
+</code></pre>
+
 <h2 id="authhandler">authHandler</h2>
 
 <p>The purpose of the authHandler is to validate the token generated by the loginPOSTHandler. Because this is something that will be performed in other places, I&rsquo;ve created the function getSession that given a requests, extracts the JWT claims or returns a nil claim if the token is not valid.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">authHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">claims</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">claims</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-	<span class="nx">encoder</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span>
-	<span class="nx">encoder</span><span class="p">.</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">claims</span><span class="p">.</span><span class="nx">User</span><span class="p">)</span>
-<span class="p">}</span>
 
-<span class="kd">func</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">Claims</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Cookie</span><span class="p">(</span><span class="s">&#34;token&#34;</span><span class="p">)</span>
-	<span class="k">switch</span> <span class="p">{</span>
-	<span class="k">case</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ErrNoCookie</span><span class="p">:</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
-	<span class="k">case</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Could not get token cookie. cause %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
+<pre><code class="language-go">func authHandler(w http.ResponseWriter, r *http.Request) {
+	claims, err := getSession(r)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	if claims == nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	encoder := json.NewEncoder(w)
+	encoder.Encode(claims.User)
+}
 
-	<span class="nx">tokenString</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Value</span>
-	<span class="nx">claims</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Claims</span><span class="p">{}</span>
+func getSession(r *http.Request) (*Claims, error) {
+	c, err := r.Cookie(&quot;token&quot;)
+	switch {
+	case err == http.ErrNoCookie:
+		return nil, nil
+	case err != nil:
+		return nil, fmt.Errorf(&quot;Could not get token cookie. cause %w&quot;, err)
+	}
 
-	<span class="nx">tkn</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nf">ParseWithClaims</span><span class="p">(</span><span class="nx">tokenString</span><span class="p">,</span> <span class="nx">claims</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">token</span> <span class="o">*</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">Token</span><span class="p">)</span> <span class="p">(</span><span class="kd">interface</span><span class="p">{},</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">jwtKey</span><span class="p">,</span> <span class="kc">nil</span>
-	<span class="p">})</span>
-	<span class="k">switch</span> <span class="p">{</span>
-	<span class="k">case</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">ErrSignatureInvalid</span><span class="p">:</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
-	<span class="k">case</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Could not parse jwt, cause %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-	<span class="k">case</span> <span class="p">!</span><span class="nx">tkn</span><span class="p">.</span><span class="nx">Valid</span><span class="p">:</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
-	<span class="p">}</span>
+	tokenString := c.Value
+	claims := &amp;Claims{}
 
-	<span class="k">return</span> <span class="nx">claims</span><span class="p">,</span> <span class="kc">nil</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+	tkn, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
+	switch {
+	case err == jwt.ErrSignatureInvalid:
+		return nil, nil
+	case err != nil:
+		return nil, fmt.Errorf(&quot;Could not parse jwt, cause %w&quot;, err)
+	case !tkn.Valid:
+		return nil, nil
+	}
+
+	return claims, nil
+}
+
+</code></pre>
+
 <p>In a real world problem, you will provably implement some cool frontend that communicates with this service. For simplicity, I&rsquo;ve added a login GET handler that returns a the front end. This takes advantage of the go html/template package. See the source code to see the template code. I&rsquo;m only displaying the name for the logout template.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">loginGETHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">claims</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
 
-	<span class="nx">pages</span> <span class="o">:=</span> <span class="nx">template</span><span class="p">.</span><span class="nf">Must</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nf">ParseGlob</span><span class="p">(</span><span class="s">&#34;templates/*.tmpl&#34;</span><span class="p">))</span>
+<pre><code class="language-go">func loginGETHandler(w http.ResponseWriter, r *http.Request) {
+	claims, err := getSession(r)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 
-	<span class="k">switch</span> <span class="p">{</span>
-	<span class="k">case</span> <span class="nx">claims</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
-		<span class="nx">pages</span><span class="p">.</span><span class="nf">ExecuteTemplate</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;logout.tmpl&#34;</span><span class="p">,</span> <span class="nx">claims</span><span class="p">)</span>
-	<span class="k">default</span><span class="p">:</span>
-		<span class="nx">pages</span><span class="p">.</span><span class="nf">ExecuteTemplate</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;login.tmpl&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-	<span class="p">}</span>
+	pages := template.Must(template.ParseGlob(&quot;templates/*.tmpl&quot;))
 
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+	switch {
+	case claims != nil:
+		pages.ExecuteTemplate(w, &quot;logout.tmpl&quot;, claims)
+	default:
+		pages.ExecuteTemplate(w, &quot;login.tmpl&quot;, nil)
+	}
+
+}
+</code></pre>
 
 <div class="expand">
-    <div class="expand-label" style="cursor: pointer;"
-        onclick="$h = $(this);$h.next('div').slideToggle(100,function () {$h.children('i').attr('class',function () {return $h.next('div').is(':visible') ? 'fas fa-chevron-down' : 'fas fa-chevron-right';});});">
-        <i style="font-size:x-small;" class="fas fa-chevron-right"></i>
+    <div class="expand-label" id="expand-label-1" style="cursor: pointer;">
         <span>
             
             
-            &gt; Click here to see all code from main.go
+            Click here to see all code from main.go
             
         </span>
     </div>
-    <div class="expand-content" style="display: none;">
-        <div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
-</span><span class="lnt">120
-</span><span class="lnt">121
-</span><span class="lnt">122
-</span><span class="lnt">123
-</span><span class="lnt">124
-</span><span class="lnt">125
-</span><span class="lnt">126
-</span><span class="lnt">127
-</span><span class="lnt">128
-</span><span class="lnt">129
-</span><span class="lnt">130
-</span><span class="lnt">131
-</span><span class="lnt">132
-</span><span class="lnt">133
-</span><span class="lnt">134
-</span><span class="lnt">135
-</span><span class="lnt">136
-</span><span class="lnt">137
-</span><span class="lnt">138
-</span><span class="lnt">139
-</span><span class="lnt">140
-</span><span class="lnt">141
-</span><span class="lnt">142
-</span><span class="lnt">143
-</span><span class="lnt">144
-</span><span class="lnt">145
-</span><span class="lnt">146
-</span><span class="lnt">147
-</span><span class="lnt">148
-</span><span class="lnt">149
-</span><span class="lnt">150
-</span><span class="lnt">151
-</span><span class="lnt">152
-</span><span class="lnt">153
-</span><span class="lnt">154
-</span><span class="lnt">155
-</span><span class="lnt">156
-</span><span class="lnt">157
-</span><span class="lnt">158
-</span><span class="lnt">159
-</span><span class="lnt">160
-</span><span class="lnt">161
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+    <div class="expand-content" id="expand-content-1" style="display: none;">
+        <pre><code class="language-go">package main
 
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;encoding/json&#34;</span>
-	<span class="s">&#34;flag&#34;</span>
-	<span class="s">&#34;fmt&#34;</span>
-	<span class="s">&#34;html/template&#34;</span>
-	<span class="s">&#34;log&#34;</span>
-	<span class="s">&#34;net/http&#34;</span>
-	<span class="s">&#34;time&#34;</span>
+import (
+	&quot;encoding/json&quot;
+	&quot;flag&quot;
+	&quot;fmt&quot;
+	&quot;html/template&quot;
+	&quot;log&quot;
+	&quot;net/http&quot;
+	&quot;time&quot;
 
-	<span class="s">&#34;github.com/dgrijalva/jwt-go&#34;</span>
-	<span class="s">&#34;github.com/gorilla/mux&#34;</span>
-<span class="p">)</span>
+	&quot;github.com/dgrijalva/jwt-go&quot;
+	&quot;github.com/gorilla/mux&quot;
+)
 
-<span class="c1">// Create the JWT key used to create the signature
-</span><span class="c1"></span><span class="kd">var</span> <span class="nx">jwtKey</span> <span class="p">=</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&#34;my_secret_key&#34;</span><span class="p">)</span>
+// Create the JWT key used to create the signature
+var jwtKey = []byte(&quot;my_secret_key&quot;)
 
-<span class="kd">type</span> <span class="nx">UserData</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">Name</span>        <span class="kt">string</span> <span class="s">`json:&#34;name,omitempty&#34;`</span>
-	<span class="nx">Email</span>       <span class="kt">string</span> <span class="s">`json:&#34;email,omitempty&#34;`</span>
-	<span class="nx">AccessLevel</span> <span class="kt">int</span>    <span class="s">`json:&#34;access_level,omitempty&#34;`</span>
-<span class="p">}</span>
+type UserData struct {
+	Name        string `json:&quot;name,omitempty&quot;`
+	Email       string `json:&quot;email,omitempty&quot;`
+	AccessLevel int    `json:&quot;access_level,omitempty&quot;`
+}
 
-<span class="kd">type</span> <span class="nx">Claims</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">User</span> <span class="o">*</span><span class="nx">UserData</span> <span class="s">`json:&#34;user&#34;`</span>
-	<span class="nx">jwt</span><span class="p">.</span><span class="nx">StandardClaims</span>
-<span class="p">}</span>
+type Claims struct {
+	User *UserData `json:&quot;user&quot;`
+	jwt.StandardClaims
+}
 
-<span class="kd">var</span> <span class="nx">basePath</span> <span class="kt">string</span>
+var basePath string
 
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">flag</span><span class="p">.</span><span class="nf">StringVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">basePath</span><span class="p">,</span> <span class="s">&#34;base-path&#34;</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="s">&#34;indicates the base path where the app is running&#34;</span><span class="p">)</span>
-	<span class="nx">flag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
+func main() {
+	flag.StringVar(&amp;basePath, &quot;base-path&quot;, &quot;/&quot;, &quot;indicates the base path where the app is running&quot;)
+	flag.Parse()
 
-	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">mux</span><span class="p">.</span><span class="nf">NewRouter</span><span class="p">().</span>
-		<span class="nf">PathPrefix</span><span class="p">(</span><span class="nx">basePath</span><span class="p">).</span>
-		<span class="nf">Subrouter</span><span class="p">()</span>
-	<span class="nx">r</span><span class="p">.</span><span class="nf">Path</span><span class="p">(</span><span class="s">&#34;/auth&#34;</span><span class="p">).</span><span class="nf">Methods</span><span class="p">(</span><span class="s">&#34;GET&#34;</span><span class="p">).</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="nx">authHandler</span><span class="p">)</span>
-	<span class="nx">r</span><span class="p">.</span><span class="nf">Path</span><span class="p">(</span><span class="s">&#34;/login&#34;</span><span class="p">).</span><span class="nf">Methods</span><span class="p">(</span><span class="s">&#34;POST&#34;</span><span class="p">).</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="nx">loginPOSTHandler</span><span class="p">)</span>
-	<span class="nx">r</span><span class="p">.</span><span class="nf">Path</span><span class="p">(</span><span class="s">&#34;/logout&#34;</span><span class="p">).</span><span class="nf">Methods</span><span class="p">(</span><span class="s">&#34;POST&#34;</span><span class="p">).</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="nx">logoutPOSTHandler</span><span class="p">)</span>
-	<span class="nx">r</span><span class="p">.</span><span class="nf">PathPrefix</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">).</span><span class="nf">Methods</span><span class="p">(</span><span class="s">&#34;GET&#34;</span><span class="p">).</span><span class="nf">HandlerFunc</span><span class="p">(</span><span class="nx">loginGETHandler</span><span class="p">)</span>
+	r := mux.NewRouter().
+		PathPrefix(basePath).
+		Subrouter()
+	r.Path(&quot;/auth&quot;).Methods(&quot;GET&quot;).HandlerFunc(authHandler)
+	r.Path(&quot;/login&quot;).Methods(&quot;POST&quot;).HandlerFunc(loginPOSTHandler)
+	r.Path(&quot;/logout&quot;).Methods(&quot;POST&quot;).HandlerFunc(logoutPOSTHandler)
+	r.PathPrefix(&quot;/&quot;).Methods(&quot;GET&quot;).HandlerFunc(loginGETHandler)
 
-	<span class="nx">http</span><span class="p">.</span><span class="nf">Handle</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span>
+	http.Handle(&quot;/&quot;, r)
 
-	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ready&#34;</span><span class="p">)</span>
-	<span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="p">}</span>
+	log.Println(&quot;ready&quot;)
+	http.ListenAndServe(&quot;:8080&quot;, nil)
+}
 
-<span class="kd">func</span> <span class="nf">loginPOSTHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">username</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">FormValue</span><span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">)</span>
-	<span class="nx">password</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">FormValue</span><span class="p">(</span><span class="s">&#34;password&#34;</span><span class="p">)</span>
+func loginPOSTHandler(w http.ResponseWriter, r *http.Request) {
+	username := r.FormValue(&quot;username&quot;)
+	password := r.FormValue(&quot;password&quot;)
 
-	<span class="nx">user</span> <span class="o">:=</span> <span class="nf">loginUser</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">user</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
+	user := loginUser(username, password)
+	if user == nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
 
-	<span class="nx">expirationTime</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Add</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">)</span>
-	<span class="nx">claims</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Claims</span><span class="p">{</span>
-		<span class="nx">User</span><span class="p">:</span> <span class="nx">user</span><span class="p">,</span>
-		<span class="nx">StandardClaims</span><span class="p">:</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">StandardClaims</span><span class="p">{</span>
-			<span class="nx">ExpiresAt</span><span class="p">:</span> <span class="nx">expirationTime</span><span class="p">.</span><span class="nf">Unix</span><span class="p">(),</span>
-		<span class="p">},</span>
-	<span class="p">}</span>
+	expirationTime := time.Now().Add(5 * time.Minute)
+	claims := &amp;Claims{
+		User: user,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
 
-	<span class="nx">token</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nf">NewWithClaims</span><span class="p">(</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">SigningMethodHS256</span><span class="p">,</span> <span class="nx">claims</span><span class="p">)</span>
-	<span class="nx">tokenString</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">token</span><span class="p">.</span><span class="nf">SignedString</span><span class="p">(</span><span class="nx">jwtKey</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString(jwtKey)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 
-	<span class="nx">http</span><span class="p">.</span><span class="nf">SetCookie</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">{</span>
-		<span class="nx">Name</span><span class="p">:</span>     <span class="s">&#34;token&#34;</span><span class="p">,</span>
-		<span class="nx">Path</span><span class="p">:</span>     <span class="s">&#34;/&#34;</span><span class="p">,</span>
-		<span class="nx">Value</span><span class="p">:</span>    <span class="nx">tokenString</span><span class="p">,</span>
-		<span class="nx">Expires</span><span class="p">:</span>  <span class="nx">expirationTime</span><span class="p">,</span>
-		<span class="nx">HttpOnly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-	<span class="p">})</span>
+	http.SetCookie(w, &amp;http.Cookie{
+		Name:     &quot;token&quot;,
+		Path:     &quot;/&quot;,
+		Value:    tokenString,
+		Expires:  expirationTime,
+		HttpOnly: true,
+	})
 
-	<span class="nx">http</span><span class="p">.</span><span class="nf">Redirect</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">basePath</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusFound</span><span class="p">)</span>
-<span class="p">}</span>
+	http.Redirect(w, r, basePath, http.StatusFound)
+}
 
-<span class="kd">func</span> <span class="nf">loginGETHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">claims</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
+func loginGETHandler(w http.ResponseWriter, r *http.Request) {
+	claims, err := getSession(r)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 
-	<span class="nx">pages</span> <span class="o">:=</span> <span class="nx">template</span><span class="p">.</span><span class="nf">Must</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nf">ParseGlob</span><span class="p">(</span><span class="s">&#34;templates/*.tmpl&#34;</span><span class="p">))</span>
+	pages := template.Must(template.ParseGlob(&quot;templates/*.tmpl&quot;))
 
-	<span class="k">switch</span> <span class="p">{</span>
-	<span class="k">case</span> <span class="nx">claims</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
-		<span class="nx">pages</span><span class="p">.</span><span class="nf">ExecuteTemplate</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;logout.tmpl&#34;</span><span class="p">,</span> <span class="nx">claims</span><span class="p">)</span>
-	<span class="k">default</span><span class="p">:</span>
-		<span class="nx">pages</span><span class="p">.</span><span class="nf">ExecuteTemplate</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;login.tmpl&#34;</span><span class="p">,</span> <span class="nx">claims</span><span class="p">)</span>
-	<span class="p">}</span>
+	switch {
+	case claims != nil:
+		pages.ExecuteTemplate(w, &quot;logout.tmpl&quot;, claims)
+	default:
+		pages.ExecuteTemplate(w, &quot;login.tmpl&quot;, claims)
+	}
 
-<span class="p">}</span>
+}
 
-<span class="kd">func</span> <span class="nf">loginUser</span><span class="p">(</span><span class="nx">username</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">UserData</span> <span class="p">{</span>
-	<span class="c1">// TODO: Now any user can login, implement proper validation
-</span><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">UserData</span><span class="p">{</span>
-		<span class="nx">Name</span><span class="p">:</span> <span class="nx">username</span><span class="p">,</span>
-	<span class="p">}</span>
-<span class="p">}</span>
+func loginUser(username string, password string) *UserData {
+	// TODO: Now any user can login, implement proper validation
+	return &amp;UserData{
+		Name: username,
+	}
+}
 
-<span class="kd">func</span> <span class="nf">logoutPOSTHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">http</span><span class="p">.</span><span class="nf">SetCookie</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">{</span>
-		<span class="nx">Name</span><span class="p">:</span>     <span class="s">&#34;token&#34;</span><span class="p">,</span>
-		<span class="nx">Path</span><span class="p">:</span>     <span class="s">&#34;/&#34;</span><span class="p">,</span>
-		<span class="nx">MaxAge</span><span class="p">:</span>   <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-		<span class="nx">HttpOnly</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-	<span class="p">})</span>
+func logoutPOSTHandler(w http.ResponseWriter, r *http.Request) {
+	http.SetCookie(w, &amp;http.Cookie{
+		Name:     &quot;token&quot;,
+		Path:     &quot;/&quot;,
+		MaxAge:   -1,
+		HttpOnly: true,
+	})
 
-	<span class="nx">http</span><span class="p">.</span><span class="nf">Redirect</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">basePath</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusFound</span><span class="p">)</span>
-<span class="p">}</span>
+	http.Redirect(w, r, basePath, http.StatusFound)
+}
 
-<span class="kd">func</span> <span class="nf">authHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">claims</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">claims</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-	<span class="nx">encoder</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span>
-	<span class="nx">encoder</span><span class="p">.</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">claims</span><span class="p">.</span><span class="nx">User</span><span class="p">)</span>
-<span class="p">}</span>
+func authHandler(w http.ResponseWriter, r *http.Request) {
+	claims, err := getSession(r)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	if claims == nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	encoder := json.NewEncoder(w)
+	encoder.Encode(claims.User)
+}
 
-<span class="kd">func</span> <span class="nf">getSession</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">Claims</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Cookie</span><span class="p">(</span><span class="s">&#34;token&#34;</span><span class="p">)</span>
-	<span class="k">switch</span> <span class="p">{</span>
-	<span class="k">case</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ErrNoCookie</span><span class="p">:</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
-	<span class="k">case</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Could not get token cookie. cause %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
+func getSession(r *http.Request) (*Claims, error) {
+	c, err := r.Cookie(&quot;token&quot;)
+	switch {
+	case err == http.ErrNoCookie:
+		return nil, nil
+	case err != nil:
+		return nil, fmt.Errorf(&quot;Could not get token cookie. cause %w&quot;, err)
+	}
 
-	<span class="nx">tokenString</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Value</span>
-	<span class="nx">claims</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Claims</span><span class="p">{}</span>
+	tokenString := c.Value
+	claims := &amp;Claims{}
 
-	<span class="nx">tkn</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nf">ParseWithClaims</span><span class="p">(</span><span class="nx">tokenString</span><span class="p">,</span> <span class="nx">claims</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">token</span> <span class="o">*</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">Token</span><span class="p">)</span> <span class="p">(</span><span class="kd">interface</span><span class="p">{},</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">jwtKey</span><span class="p">,</span> <span class="kc">nil</span>
-	<span class="p">})</span>
-	<span class="k">switch</span> <span class="p">{</span>
-	<span class="k">case</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">ErrSignatureInvalid</span><span class="p">:</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
-	<span class="k">case</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">:</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Could not parse jwt, cause %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
-	<span class="k">case</span> <span class="p">!</span><span class="nx">tkn</span><span class="p">.</span><span class="nx">Valid</span><span class="p">:</span>
-		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
-	<span class="p">}</span>
+	tkn, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
+	switch {
+	case err == jwt.ErrSignatureInvalid:
+		return nil, nil
+	case err != nil:
+		return nil, fmt.Errorf(&quot;Could not parse jwt, cause %w&quot;, err)
+	case !tkn.Valid:
+		return nil, nil
+	}
 
-	<span class="k">return</span> <span class="nx">claims</span><span class="p">,</span> <span class="kc">nil</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+	return claims, nil
+}
+</code></pre>
     </div>
+    <script>
+        function collapse(e) {
+            e = e || window.event;
+            var target = e.target || e.srcElement,
+                text = target.textContent || target.innerText;
+
+            console.log("event received")
+            console.log(target)
+
+            target.classList.toggle("active");
+            var content = this.nextElementSibling;
+            console.log(content)
+            console.log(content.style.display)
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                console.log(content.style.display)
+            } else {
+                content.style.display = "block";
+            }
+        }
+        document.getElementById("expand-label-1").addEventListener("click", collapse);
+    </script>
 </div>
 
 <h2 id="dockerize">Dockerize</h2>
@@ -995,114 +496,63 @@
 
 
 </div>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> golang:alpine AS build</span><span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">COPY</span> go.mod .<span class="err">
-</span><span class="err"></span><span class="k">COPY</span> go.sum .<span class="err">
-</span><span class="err"></span><span class="k">RUN</span> go mod download<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">COPY</span> *.go .<span class="err">
-</span><span class="err"></span><span class="k">RUN</span> go build<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">FROM</span><span class="s"> alpine as run</span><span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">COPY</span> templates templates<span class="err">
-</span><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build /app/auth-server /app/<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">RUN</span> chmod +x auth-server<span class="err">
-</span><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span> <span class="s2">&#34;./auth-server&#34;</span> <span class="p">]</span></code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-Dockerfile">FROM golang:alpine AS build
+
+WORKDIR /app
+
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+
+COPY *.go .
+RUN go build
+
+FROM alpine as run
+
+WORKDIR /app
+
+COPY templates templates
+COPY --from=build /app/auth-server /app/
+
+RUN chmod +x auth-server
+ENTRYPOINT [ &quot;./auth-server&quot; ]
+</code></pre>
+
 <h2 id="final-docker-compose-yaml">Final docker-compose.yaml</h2>
 
 <p>Now we just have to add the auth-server to the docker compose and provide the base path to ensure that it works properly.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yml" data-lang="yml"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yml" data-lang="yml">version<span class="p">:</span><span class="w"> </span><span class="s2">&#34;2.2&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>services<span class="p">:</span><span class="w">
-</span><span class="w">  </span>nginx<span class="p">:</span><span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>nginx<span class="w">
-</span><span class="w">    </span>volumes<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>./nginx/nginx.conf<span class="p">:</span>/etc/nginx/nginx.conf<span class="p">:</span>ro<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>./nginx/localhost.crt<span class="p">:</span>/etc/ssl/certs/localhost.crt<span class="p">:</span>ro<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>./nginx/localhost.key<span class="p">:</span>/etc/ssl/private/localhost.key<span class="p">:</span>ro<span class="w">
-</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="m">80</span><span class="p">:</span><span class="m">80</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="m">443</span><span class="p">:</span><span class="m">443</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span>auth-server<span class="p">:</span><span class="w">
-</span><span class="w">    </span>build<span class="p">:</span><span class="w"> </span>auth-server<span class="w">
-</span><span class="w">    </span>command<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;--base-path&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;/users/&#34;</span><span class="p">]</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span>whoami<span class="p">:</span><span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>jwilder/whoami<span class="w">
-</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="m">8000</span><span class="p">:</span><span class="m">8000</span></code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-yml">version: &quot;2.2&quot;
+
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/localhost.crt:/etc/ssl/certs/localhost.crt:ro
+      - ./nginx/localhost.key:/etc/ssl/private/localhost.key:ro
+    ports:
+      - 80:80
+      - 443:443
+
+  auth-server:
+    build: auth-server
+    command: [&quot;--base-path&quot;, &quot;/users/&quot;]
+
+  whoami:
+    image: jwilder/whoami
+    ports:
+      - 8000:8000
+</code></pre>
+
 <h1 id="run-it">Run it</h1>
 
 <p>Start the service with docker compose and ensure to build the images again.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose up --build</code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-bash">docker-compose up --build
+</code></pre>
+
 <p>The workflow is:</p>
 
 <ol>
@@ -1149,91 +599,14 @@
 <li><a href="https://github.com/pusher/oauth2_proxy">someone did something similar - oauth2_proxy</a></li>
 <li><a href="https://www.w3schools.com/howto/howto_css_login_form.asp">html login form</a></li>
 <li><a href="https://www.sohamkamani.com/blog/golang/2019-01-01-jwt-authentication/">Go JWT auth</a></li>
-</ul>
-    </div>
-
-    
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/go/">go</a>
-          <a href="/tags/docker/">docker</a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/howto/2020-03-11_use_git_to_track_git_versions/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Use Git to track Git versions</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/blog/2020-01-11_boredom/">
-            <span class="next-text nav-default">How to get bored</span>
-            <span class="next-text nav-mobile">Next</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-    <script src="https://utteranc.es/client.js"
-            repo="MetalBlueberry/MetalBlueberry.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="mailto:metalblueberry@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://twitter.com/MetalBlueberry" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="https://www.linkedin.com/in/victorperezdomingo/" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="https://github.com/MetalBlueberry" class="iconfont icon-github" title="github"></a>
-  <a href="https://metalblueberry.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    Theme - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2019 - 
-    2020
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">MetalBlueberry</span>
-  </span>
-</div>
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
-
-
+</ul></article><section class="article labels"><a class="category" href=/categories/howto/>howto</a><a class="tag" href=/tags/go/>go</a><a class="tag" href=/tags/docker/>docker</a></section></div><section class="article navigation"><p><a class="link" href="/post/howto/2020-03-11_use_git_to_track_git_versions/"><span class="li">&larr;</span>Use Git to track Git versions</a></p><p><a class="link" href="/post/blog/2020-01-11_boredom/"><span class="li">&rarr;</span>How to get bored</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
+    label="comment" theme="github-light" crossorigin="anonymous" async>
+    </script></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Víctor Pérez Domingo</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -1244,12 +617,7 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
+</div>
 </body>
+
 </html>

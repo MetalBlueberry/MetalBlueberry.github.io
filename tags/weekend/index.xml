@@ -1,59 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>weekend on MetalBlueberry - A passionate programmer</title>
-    <link>https://metalblueberry.github.io/tags/weekend/</link>
-    <description>Recent content in weekend on MetalBlueberry - A passionate programmer</description>
+    <title>weekend on MetalBlueberry</title>
+    <link>/tags/weekend/</link>
+    <description>Recent content in weekend on MetalBlueberry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>Víctor Pérez Domingo</copyright>
     <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://metalblueberry.github.io/tags/weekend/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/tags/weekend/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>2020-03-30 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2020-03-30-weekend_learnings/</link>
+      <link>/post/blog/2020-03-30-weekend_learnings/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2020-03-30-weekend_learnings/</guid>
+      <guid>/post/blog/2020-03-30-weekend_learnings/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve learned a little bit about frontend testing with chromium web drivers using &lt;a href=&#34;https://agouti.org/&#34;&gt;Agouti&lt;/a&gt; and It has proven to be a really good option to write test in Go. Also we are in quarantine so I let you here a WebGL interactive animation to entertain you.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-22 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</link>
+      <link>/post/blog/2019-12-22_weekend_learnings/</link>
       <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-22_weekend_learnings/</guid>
       <description>&lt;p&gt;I understood how to use Go composition to extend the functionality similar to inheritance in OOP. I&amp;rsquo;ve used it before but now I can say that I understand it. Also, I&amp;rsquo;ve done a 3D model of the van that I&amp;rsquo;m going to use for the moving in January. Just to know if I can fit everything inside.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-15 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</link>
+      <link>/post/blog/2019-12-15_weekend_learnings/</link>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-15_weekend_learnings/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve been using VSCode as my principal editor for a while now, and it keeps improving in every release with things that I cannot believe. Last was remote containers. Today is&amp;hellip;.(drums)&amp;hellip; Live Share!&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-09 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</link>
+      <link>/post/blog/2019-12-09_weekend_learnings/</link>
       <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-09_weekend_learnings/</guid>
       <description>&lt;p&gt;I discovered that Go supports build to Web Assembly. What a great time to be alive. Also I&amp;rsquo;ve spent some time changing the favicon of this blog and finished the post about Python Jupyter notebook with Plotly&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-02 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</link>
+      <link>/post/blog/2019-12-02_weekend_learnings/</link>
       <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-02_weekend_learnings/</guid>
       <description>&lt;p&gt;I managed to send audio to my &lt;strong&gt;Google Home&lt;/strong&gt;, discovered the &lt;strong&gt;Go tool trace&lt;/strong&gt; and started a post about &lt;strong&gt;Python and Jupyter&lt;/strong&gt;.&lt;/p&gt;</description>
+      
     </item>
     
   </channel>

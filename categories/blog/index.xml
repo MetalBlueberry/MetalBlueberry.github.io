@@ -1,104 +1,115 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>blog on MetalBlueberry - A passionate programmer</title>
-    <link>https://metalblueberry.github.io/categories/blog/</link>
-    <description>Recent content in blog on MetalBlueberry - A passionate programmer</description>
+    <title>Blog on MetalBlueberry</title>
+    <link>/categories/blog/</link>
+    <description>Recent content in Blog on MetalBlueberry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>Víctor Pérez Domingo</copyright>
     <lastBuildDate>Tue, 07 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://metalblueberry.github.io/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Coronavirus Trend In Spain</title>
-      <link>https://metalblueberry.github.io/post/blog/2020-04-06_coronavirus_trend_in_spain/</link>
+      <link>/post/blog/2020-04-06_coronavirus_trend_in_spain/</link>
       <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2020-04-06_coronavirus_trend_in_spain/</guid>
+      <guid>/post/blog/2020-04-06_coronavirus_trend_in_spain/</guid>
       <description>&lt;p&gt;After the video from Minute Earth about the coronavirus, I&amp;rsquo;ve decided to plot the same data but only for Spain by province. This gives a good view of which provinces are managing to stop the virus.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2020-03-30 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2020-03-30-weekend_learnings/</link>
+      <link>/post/blog/2020-03-30-weekend_learnings/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2020-03-30-weekend_learnings/</guid>
+      <guid>/post/blog/2020-03-30-weekend_learnings/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve learned a little bit about frontend testing with chromium web drivers using &lt;a href=&#34;https://agouti.org/&#34;&gt;Agouti&lt;/a&gt; and It has proven to be a really good option to write test in Go. Also we are in quarantine so I let you here a WebGL interactive animation to entertain you.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>How to get bored</title>
-      <link>https://metalblueberry.github.io/post/blog/2020-01-11_boredom/</link>
+      <link>/post/blog/2020-01-11_boredom/</link>
       <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2020-01-11_boredom/</guid>
+      <guid>/post/blog/2020-01-11_boredom/</guid>
       <description>&lt;p&gt;Being bored is really unpleasant and is considered as something to avoid for most of the people. In this post I want to show you why &lt;strong&gt;boredom can be something good&lt;/strong&gt; and how you can take advantage of it.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-22 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</link>
+      <link>/post/blog/2019-12-22_weekend_learnings/</link>
       <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-22_weekend_learnings/</guid>
       <description>&lt;p&gt;I understood how to use Go composition to extend the functionality similar to inheritance in OOP. I&amp;rsquo;ve used it before but now I can say that I understand it. Also, I&amp;rsquo;ve done a 3D model of the van that I&amp;rsquo;m going to use for the moving in January. Just to know if I can fit everything inside.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-15 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</link>
+      <link>/post/blog/2019-12-15_weekend_learnings/</link>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-15_weekend_learnings/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve been using VSCode as my principal editor for a while now, and it keeps improving in every release with things that I cannot believe. Last was remote containers. Today is&amp;hellip;.(drums)&amp;hellip; Live Share!&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-09 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</link>
+      <link>/post/blog/2019-12-09_weekend_learnings/</link>
       <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-09_weekend_learnings/</guid>
       <description>&lt;p&gt;I discovered that Go supports build to Web Assembly. What a great time to be alive. Also I&amp;rsquo;ve spent some time changing the favicon of this blog and finished the post about Python Jupyter notebook with Plotly&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-02 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</link>
+      <link>/post/blog/2019-12-02_weekend_learnings/</link>
       <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-02_weekend_learnings/</guid>
       <description>&lt;p&gt;I managed to send audio to my &lt;strong&gt;Google Home&lt;/strong&gt;, discovered the &lt;strong&gt;Go tool trace&lt;/strong&gt; and started a post about &lt;strong&gt;Python and Jupyter&lt;/strong&gt;.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Avoid Github Government Block</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-11-24_avoid_github_government_block/</link>
+      <link>/post/blog/2019-11-24_avoid_github_government_block/</link>
       <pubDate>Sun, 24 Nov 2019 19:25:15 +0100</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-11-24_avoid_github_government_block/</guid>
+      <guid>/post/blog/2019-11-24_avoid_github_government_block/</guid>
       <description>&lt;p&gt;I cannot believe this&amp;hellip; Who in his right mind requires to block github because of terrorism? Open source code is freedom, not terrorism. Anyway, &lt;strong&gt;here is how to avoid it&lt;/strong&gt;.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Leadership Training</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-11-03_leadership_training/</link>
+      <link>/post/blog/2019-11-03_leadership_training/</link>
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-11-03_leadership_training/</guid>
+      <guid>/post/blog/2019-11-03_leadership_training/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve attended to a Leadership training by &lt;a href=&#34;https://www.enricllado.com/&#34;&gt;Enric Lladó&lt;/a&gt;, thanks to &lt;a href=&#34;https://www.betterask.erni/&#34;&gt;ERNI&lt;/a&gt;, and this is the summary of it.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Why This Blog</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-10-24_why-this-blog/</link>
+      <link>/post/blog/2019-10-24_why-this-blog/</link>
       <pubDate>Thu, 24 Oct 2019 17:10:38 +0200</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-10-24_why-this-blog/</guid>
+      <guid>/post/blog/2019-10-24_why-this-blog/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m starting this blog to have feedback of my improvement over time.&lt;/p&gt;</description>
+      
     </item>
     
   </channel>

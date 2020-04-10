@@ -1,86 +1,95 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>go on MetalBlueberry - A passionate programmer</title>
-    <link>https://metalblueberry.github.io/tags/go/</link>
-    <description>Recent content in go on MetalBlueberry - A passionate programmer</description>
+    <title>Go on MetalBlueberry</title>
+    <link>/tags/go/</link>
+    <description>Recent content in Go on MetalBlueberry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>Víctor Pérez Domingo</copyright>
     <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://metalblueberry.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>2020-03-30 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2020-03-30-weekend_learnings/</link>
+      <link>/post/blog/2020-03-30-weekend_learnings/</link>
       <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2020-03-30-weekend_learnings/</guid>
+      <guid>/post/blog/2020-03-30-weekend_learnings/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve learned a little bit about frontend testing with chromium web drivers using &lt;a href=&#34;https://agouti.org/&#34;&gt;Agouti&lt;/a&gt; and It has proven to be a really good option to write test in Go. Also we are in quarantine so I let you here a WebGL interactive animation to entertain you.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Ready to Go Auth server with Nginx</title>
-      <link>https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/</link>
+      <link>/post/howto/2020-02-14_nginx_auth_server_with_go/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/</guid>
+      <guid>/post/howto/2020-02-14_nginx_auth_server_with_go/</guid>
       <description>&lt;p&gt;I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like &lt;a href=&#34;https://developers.google.com/identity/protocols/OAuth2&#34;&gt;Google oauth2&lt;/a&gt;. But if you really need you own system&amp;hellip; this approach should ease the work.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-22 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</link>
+      <link>/post/blog/2019-12-22_weekend_learnings/</link>
       <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-22_weekend_learnings/</guid>
       <description>&lt;p&gt;I understood how to use Go composition to extend the functionality similar to inheritance in OOP. I&amp;rsquo;ve used it before but now I can say that I understand it. Also, I&amp;rsquo;ve done a 3D model of the van that I&amp;rsquo;m going to use for the moving in January. Just to know if I can fit everything inside.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-09 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</link>
+      <link>/post/blog/2019-12-09_weekend_learnings/</link>
       <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-09_weekend_learnings/</guid>
       <description>&lt;p&gt;I discovered that Go supports build to Web Assembly. What a great time to be alive. Also I&amp;rsquo;ve spent some time changing the favicon of this blog and finished the post about Python Jupyter notebook with Plotly&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>2019-12-02 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</link>
+      <link>/post/blog/2019-12-02_weekend_learnings/</link>
       <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</guid>
+      <guid>/post/blog/2019-12-02_weekend_learnings/</guid>
       <description>&lt;p&gt;I managed to send audio to my &lt;strong&gt;Google Home&lt;/strong&gt;, discovered the &lt;strong&gt;Go tool trace&lt;/strong&gt; and started a post about &lt;strong&gt;Python and Jupyter&lt;/strong&gt;.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Mandelbrot Parallel Computation</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-11-17_mandelbrot_parallel_computation/</link>
+      <link>/post/howto/2019-11-17_mandelbrot_parallel_computation/</link>
       <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2019-11-17_mandelbrot_parallel_computation/</guid>
+      <guid>/post/howto/2019-11-17_mandelbrot_parallel_computation/</guid>
       <description>&lt;p&gt;This post explains how to parallelize the computational task of the Mandelbrot set and generate a terminal tool to generate images.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Go CPU profiling</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-11-01_go-cpu-profiling/</link>
+      <link>/post/howto/2019-11-01_go-cpu-profiling/</link>
       <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2019-11-01_go-cpu-profiling/</guid>
+      <guid>/post/howto/2019-11-01_go-cpu-profiling/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s take a look to Go CPU profiling tools to optimize the mandelbrot set calculation from previous post.&lt;/p&gt;</description>
+      
     </item>
     
     <item>
       <title>Mandelbrot Set Calculation</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/</link>
+      <link>/post/howto/2019-10-31_mandelbrot-set-calculation/</link>
       <pubDate>Tue, 29 Oct 2019 21:33:33 +0100</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/</guid>
+      <guid>/post/howto/2019-10-31_mandelbrot-set-calculation/</guid>
       <description>&lt;p&gt;The Mandelbrot set is one of the most famous fractals and it is really simple to draw. Personally I enjoy a lot seeing how simple rules lead to complex patterns.&lt;/p&gt;</description>
+      
     </item>
     
   </channel>

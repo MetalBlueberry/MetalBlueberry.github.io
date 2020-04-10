@@ -1,173 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Use Git to track Git versions - MetalBlueberry - A passionate programmer</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="MetalBlueberry" /><meta name="description" content="Learn how to use Git Submodules with microservices" /><meta name="keywords" content="Git, Submodule, Docker, docker-compose" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
-
-
-<link rel="canonical" href="https://metalblueberry.github.io/post/howto/2020-03-11_use_git_to_track_git_versions/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/style.css">
-
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Use Git to track Git versions&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Use Git to track Git versions"/>
+<meta name="twitter:description" content="Everyone who has ever been involved in managing versions of different applications, knows that in can be a pain in the ass. Luckily enough there are tools to ease this work and I&rsquo;ve found that Git provides a general solution independently of your technology stack. Git Submodules."/>
 
 <meta property="og:title" content="Use Git to track Git versions" />
-<meta property="og:description" content="Learn how to use Git Submodules with microservices" />
+<meta property="og:description" content="Everyone who has ever been involved in managing versions of different applications, knows that in can be a pain in the ass. Luckily enough there are tools to ease this work and I&rsquo;ve found that Git provides a general solution independently of your technology stack. Git Submodules." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://metalblueberry.github.io/post/howto/2020-03-11_use_git_to_track_git_versions/" />
-
-<meta property="og:image" content="https://metalblueberry.github.io/me.jpeg" />
 <meta property="article:published_time" content="2020-03-11T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-03-14T00:00:00+00:00" />
-<meta itemprop="name" content="Use Git to track Git versions">
-<meta itemprop="description" content="Learn how to use Git Submodules with microservices">
+<meta property="article:modified_time" content="2020-04-10T11:39:35+02:00" />
 
-
-<meta itemprop="datePublished" content="2020-03-11T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-03-14T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2271">
-
-
-
-<meta itemprop="keywords" content="git,docker," />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://metalblueberry.github.io/me.jpeg"/>
-
-<meta name="twitter:title" content="Use Git to track Git versions"/>
-<meta name="twitter:description" content="Learn how to use Git Submodules with microservices"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
+<meta name="author" content="MetalBlueberry">
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">MetalBlueberry</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a>
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">MetalBlueberry</a>
-</div>
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li>
-  </ul>
-</nav>
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Use Git to track Git versions</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2020-03-11 </span>
-        <div class="post-category">
-    <a class="howto"  href="/categories/howto/"> howto </a>
-    </div>
-          <span class="more-meta"> 2271 words </span>
-          <span class="more-meta"> 11 mins read </span>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Contents</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#before-we-begin-version-numbers">Before we begin, Version Numbers</a></li>
-<li><a href="#when-to-use-git-to-manage-versions-between-services">When to use Git to manage versions between services</a>
-<ul>
-<li><a href="#git-submodules">Git Submodules</a>
-<ul>
-<li><a href="#init">init</a></li>
-<li><a href="#update">update</a></li>
-<li><a href="#conflicts">conflicts</a></li>
-</ul></li>
-<li><a href="#workflow">Workflow</a></li>
-</ul></li>
-<li><a href="#docker-compose">Docker compose</a></li>
-<li><a href="#gitmodules-file">.gitmodules file</a></li>
-<li><a href="#tips">Tips</a>
-<ul>
-<li><a href="#relative-paths">Relative paths</a></li>
-<li><a href="#update-init">update &ndash;init</a></li>
-<li><a href="#update-remote">update &ndash;remote</a></li>
-<li><a href="#remove-submodule">Remove Submodule</a></li>
-<li><a href="#modules-folder">Modules folder</a></li>
-</ul></li>
-<li><a href="#conclusion">Conclusion</a></li>
-<li><a href="#references">References</a></li>
-</ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <p>Everyone who has ever been involved in managing versions of different applications, knows that in can be a pain in the ass. Luckily enough there are tools to ease this work and I&rsquo;ve found that Git provides a general solution independently of your technology stack. Git Submodules.</p>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Use Git to track Git versions</h1><p class="article date">Wednesday, March 11, 2020<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>Everyone who has ever been involved in managing versions of different applications, knows that in can be a pain in the ass. Luckily enough there are tools to ease this work and I&rsquo;ve found that Git provides a general solution independently of your technology stack. Git Submodules.</p>
 
 <p>The <a href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency Hell</a> is a well known problem and a lot of different solutions has been proposed to solve it. In real life, <strong>there is no golden key</strong> to open all your locks, so you have to look at your problem and decide which approach fits to your project. If you look at different technologies, you will find that most them implement a system to track versions. Recent technologies such as Go modules and NPM, relies on <strong>versions numbers</strong> plus <strong>hashes</strong> to keep track of dependencies.</p>
 
@@ -238,46 +88,20 @@
 <p>A Git <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">Submodule</a> is just a reference to another repository versioned as any other file inside the repository. It&rsquo;s similar to a pointer.</p>
 
 <p>To add Submodules, you have a special git command. This is how you can create the previous environment with Git Submodules.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">git init
+
+<pre><code class="language-bash">git init
 git submodule add https://www.github.com/frontend
 git submodule add https://www.github.com/services/cart
 git submodule add https://www.github.com/services/browse
 git submodule add https://www.github.com/services/search
 git submodule add https://www.github.com/services/recommendation
 git add .
-git commit -m <span class="s2">&#34;added project dependencies&#34;</span></code></pre></td></tr></table>
-</div>
-</div>
+git commit -m &quot;added project dependencies&quot;
+</code></pre>
+
 <p>This is how the file structure will look like.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">.
+
+<pre><code class="language-bash">.
 ├── .git
 ├── browse
 │   └── .git
@@ -288,33 +112,25 @@ git commit -m <span class="s2">&#34;added project dependencies&#34;</span></code
 ├── recommendation
 │   └── .git
 └── search
-    └── .git</code></pre></td></tr></table>
-</div>
-</div>
+    └── .git
+</code></pre>
+
 <p><strong>Each submodule is an independent git repository</strong>. If you cd into one of them, you will see that git commands works as usual. You can edit files, commit and push changes back to the remote repository. When you perform this operation, the parent git repository will display changes in a submodule. This happens when the referenced commit of the submodule is different from the actual commit. Now you can just add this changes and create a commit to tell Git that you want to update the version of a submodule.</p>
 
 <h3 id="init">init</h3>
 
 <p>One of the most annoying parts of Submodules is that when you clone the repository, the Submodules are not cloned by default. There is an special command called <code>init</code> that downloads each repository that must be executed after clone.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">git submodule init</code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-bash">git submodule init
+</code></pre>
+
 <h3 id="update">update</h3>
 
 <p>When you use git checkout to move around the different versions, the Submodules are not updated by default. Once you are in the desired commit, you will see changes in the Git head due to different versions in Submodules. To automatically checkout each submodule to the right version, use <code>update</code>.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">git submodule update</code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-bash">git submodule update
+</code></pre>
+
 <h3 id="conflicts">conflicts</h3>
 
 <p>When you move between versions that have different Submodules, git doesn&rsquo;t handle it gracefully. You will see weird messages when executing update. The easy way to move forward is to remove the submodule folders manually and execute <a href="#init">init</a> again.</p>
@@ -342,29 +158,8 @@ git commit -m <span class="s2">&#34;added project dependencies&#34;</span></code
 <h1 id="docker-compose">Docker compose</h1>
 
 <p>If we assume that each submodule is packaged as a docker container that will be deployed to an orchestrator, this gives us a super easy and straight forward way to create environments on demand. Following the previous sample application, this is how the file structure will look like.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">.
+
+<pre><code class="language-bash">.
 ├── .git
 ├── docker-compose.yaml
 ├── browse
@@ -381,136 +176,73 @@ git commit -m <span class="s2">&#34;added project dependencies&#34;</span></code
 │   └── Dockerfile
 └── search
     ├── .git
-    └── Dockerfile</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">version<span class="p">:</span><span class="w"> </span><span class="s2">&#34;2.4&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span>services<span class="p">:</span><span class="w">
-</span><span class="w">  </span>browser<span class="p">:</span><span class="w">
-</span><span class="w">    </span>build<span class="p">:</span><span class="w"> </span>browser<span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>browser<span class="p">:</span>latest<span class="w">
-</span><span class="w">  </span>cart<span class="p">:</span><span class="w">
-</span><span class="w">    </span>build<span class="p">:</span><span class="w"> </span>cart<span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>cart<span class="p">:</span>latest<span class="w">
-</span><span class="w">  </span>frontend<span class="p">:</span><span class="w">
-</span><span class="w">    </span>build<span class="p">:</span><span class="w"> </span>frontend<span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>frontend<span class="p">:</span>latest<span class="w">
-</span><span class="w">  </span>recommendation<span class="p">:</span><span class="w">
-</span><span class="w">    </span>build<span class="p">:</span><span class="w"> </span>recommendation<span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>recommendation<span class="p">:</span>latest<span class="w">
-</span><span class="w">  </span>search<span class="p">:</span><span class="w">
-</span><span class="w">    </span>build<span class="p">:</span><span class="w"> </span>search<span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>search<span class="p">:</span>latest</code></pre></td></tr></table>
-</div>
-</div>
+    └── Dockerfile
+</code></pre>
+
+<pre><code class="language-yaml">version: &quot;2.4&quot;
+
+services:
+  browser:
+    build: browser
+    image: browser:latest
+  cart:
+    build: cart
+    image: cart:latest
+  frontend:
+    build: frontend
+    image: frontend:latest
+  recommendation:
+    build: recommendation
+    image: recommendation:latest
+  search:
+    build: search
+    image: search:latest
+</code></pre>
+
 <p>Let&rsquo;s translate the previous abstract steps into commands</p>
 
 <ol>
 <li><p>Clone root repository.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://www.github.com/shop</code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code class="language-bash">git clone https://www.github.com/shop
+</code></pre></li>
 
 <li><p>Init Submodules</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">git submodule init</code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code class="language-bash">git submodule init
+</code></pre></li>
 
 <li><p>For each submodule, Checkout version tags.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">git submodule update</code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code class="language-bash">git submodule update
+</code></pre></li>
 
 <li><p>Build/Test service images.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Assuming unit tests are executed at docker build time</span>
-docker-compose build</code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code class="language-bash"># Assuming unit tests are executed at docker build time
+docker-compose build
+</code></pre></li>
 
 <li><p>Commit changes to root repository</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">git add .
-git commit -m <span class="s2">&#34;version x.x.x-rcx build successful&#34;</span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code class="language-bash">git add .
+git commit -m &quot;version x.x.x-rcx build successful&quot;
+</code></pre></li>
 
 <li><p>Push artefacts.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose push</code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code class="language-bash">docker-compose push
+</code></pre></li>
 
 <li><p>Create an environment</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose up</code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code class="language-bash">docker-compose up
+</code></pre></li>
 
 <li><p>Integration testing</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Maybe a newman container or Robot python scripts... Up to you</span></code></pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code class="language-bash"># Maybe a newman container or Robot python scripts... Up to you
+</code></pre></li>
 </ol>
 
 <p>With this approach we solve not only de dependency hell problem, but also the environment recreation. In other words, this solves the problem of &ldquo;works on my machine&rdquo; or at least reduces the chances of finding this problem.</p>
@@ -525,50 +257,28 @@ There are tools for managing container versions</p>
 <p>You may have noticed that there is an extra file called .gitmodules that contains. <a href="https://git-scm.com/docs/gitmodules">Here</a> is the full file reference in case you want to read it. I will just explain the most basic functionality.</p>
 
 <p>This is how the file will look like after adding the Submodules.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt">[submodule &#34;frontend&#34;]
+
+<pre><code class="language-txt">[submodule &quot;frontend&quot;]
 	path = frontend
 	url = https://www.github.com/frontend
 
-[submodule &#34;cart&#34;]
+[submodule &quot;cart&quot;]
 	path = cart
 	url = https://www.github.com/services/cart
 
-[submodule &#34;browse&#34;]
+[submodule &quot;browse&quot;]
 	path = browse
 	url = https://www.github.com/services/browse
 
-[submodule &#34;search&#34;]
+[submodule &quot;search&quot;]
 	path = search
 	url = https://www.github.com/services/search
 
-[submodule &#34;recommendation&#34;]
+[submodule &quot;recommendation&quot;]
 	path = recommendation
-	url = https://www.github.com/services/recommendtion</code></pre></td></tr></table>
-</div>
-</div>
+	url = https://www.github.com/services/recommendtion
+</code></pre>
+
 <p>It is really simple to understand, it specifies the path and the remote url. You can modify these values manually but it is recommended to use the git cli to avoid introducing any mistake. Maybe the only exception is to <a href="#relative-paths">modify the url to be relative</a>. Check the Tips section.</p>
 
 <h1 id="tips">Tips</h1>
@@ -576,74 +286,44 @@ There are tools for managing container versions</p>
 <h2 id="relative-paths">Relative paths</h2>
 
 <p>Submodules added in the previous sections were added with full path. This means that we can specify a different protocol or different servers to clone the data. In practice, the repositories are hosted under the same domain most of the time or forks are crated. This situation allows us to modify paths of the submodules to be relative to the root repository.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-txt" data-lang="txt">[submodule &#34;frontend&#34;]
+
+<pre><code class="language-txt">[submodule &quot;frontend&quot;]
 	path = frontend
 	url = .../frontend
 
-[submodule &#34;cart&#34;]
+[submodule &quot;cart&quot;]
 	path = cart
 	url = .../services/cart
 
-[submodule &#34;browse&#34;]
+[submodule &quot;browse&quot;]
 	path = browse
 	url = .../services/browse
 
-[submodule &#34;search&#34;]
+[submodule &quot;search&quot;]
 	path = search
 	url = .../services/search
 
-[submodule &#34;recommendation&#34;]
+[submodule &quot;recommendation&quot;]
 	path = recommendation
-	url = .../services/recommendation</code></pre></td></tr></table>
-</div>
-</div>
+	url = .../services/recommendation
+</code></pre>
+
 <p>The advantage of this approach is that now you can select https or ssh depending on your needs and only modify it in one place. This is also a requirement if you have a CI/CD pipeline as you can read in <a href="https://docs.gitlab.com/ee/ci/git_submodules.html">GitLab documentation</a></p>
 
 <h2 id="update-init">update &ndash;init</h2>
 
 <p>You can run init + update in a single command with the flag <code>--init</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">git submodule update --init</code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-bash">git submodule update --init
+</code></pre>
+
 <h2 id="update-remote">update &ndash;remote</h2>
 
 <p>If you need to update all the Submodules to the latest version, you can use the &ndash;remote flag.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">git submodule update --remote</code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-bash">git submodule update --remote
+</code></pre>
+
 <p>Also, you can specify which branch to track in .gitmodules file. This will allow you to track branches that are not the default.</p>
 
 <h2 id="remove-submodule">Remove Submodule</h2>
@@ -678,91 +358,14 @@ There are tools for managing container versions</p>
 <li><a href="https://codewinsarguments.co/2016/05/01/git-submodules-vs-git-subtrees/">Submodule vs Subtrees</a></li>
 <li><a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">Submodule</a></li>
 <li><a href="https://gist.github.com/myusuf3/7f645819ded92bda6677">Remove Submodule</a></li>
-</ul>
-    </div>
-
-    
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/git/">git</a>
-          <a href="/tags/docker/">docker</a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/blog/2020-03-30-weekend_learnings/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">2020-03-30 Weekend Learnings</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/howto/2020-02-14_nginx_auth_server_with_go/">
-            <span class="next-text nav-default">Ready to Go Auth server with Nginx</span>
-            <span class="next-text nav-mobile">Next</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-    <script src="https://utteranc.es/client.js"
-            repo="MetalBlueberry/MetalBlueberry.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="mailto:metalblueberry@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://twitter.com/MetalBlueberry" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="https://www.linkedin.com/in/victorperezdomingo/" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="https://github.com/MetalBlueberry" class="iconfont icon-github" title="github"></a>
-  <a href="https://metalblueberry.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    Theme - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2019 - 
-    2020
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">MetalBlueberry</span>
-  </span>
-</div>
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
-
-
+</ul></article><section class="article labels"><a class="category" href=/categories/howto/>howto</a><a class="tag" href=/tags/git/>git</a><a class="tag" href=/tags/docker/>docker</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2020-03-30-weekend_learnings/"><span class="li">&larr;</span>2020-03-30 Weekend Learnings</a></p><p><a class="link" href="/post/howto/2020-02-14_nginx_auth_server_with_go/"><span class="li">&rarr;</span>Ready to Go Auth server with Nginx</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
+    label="comment" theme="github-light" crossorigin="anonymous" async>
+    </script></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Víctor Pérez Domingo</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -773,12 +376,7 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
+</div>
 </body>
+
 </html>

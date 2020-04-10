@@ -1,23 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>python on MetalBlueberry - A passionate programmer</title>
-    <link>https://metalblueberry.github.io/tags/python/</link>
-    <description>Recent content in python on MetalBlueberry - A passionate programmer</description>
+    <title>python on MetalBlueberry</title>
+    <link>/tags/python/</link>
+    <description>Recent content in python on MetalBlueberry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>Víctor Pérez Domingo</copyright>
     <lastBuildDate>Sat, 07 Dec 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://metalblueberry.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Python Jupyter Notebook With Plotly Support</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</link>
+      <link>/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</link>
       <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</guid>
+      <guid>/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</guid>
       <description>&lt;p&gt;Python is awesome because you can do anything. In this case, I&amp;rsquo;m going to show you how to configure a Jupyter notebook with integrated Plotly support to draw interactive graphs. This is very useful if you have to analyse something.&lt;/p&gt;</description>
+      
     </item>
     
   </channel>

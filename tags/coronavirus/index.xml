@@ -1,23 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>coronavirus on MetalBlueberry - A passionate programmer</title>
-    <link>https://metalblueberry.github.io/tags/coronavirus/</link>
-    <description>Recent content in coronavirus on MetalBlueberry - A passionate programmer</description>
+    <title>coronavirus on MetalBlueberry</title>
+    <link>/tags/coronavirus/</link>
+    <description>Recent content in coronavirus on MetalBlueberry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>Víctor Pérez Domingo</copyright>
     <lastBuildDate>Tue, 07 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://metalblueberry.github.io/tags/coronavirus/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/tags/coronavirus/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Coronavirus Trend In Spain</title>
-      <link>https://metalblueberry.github.io/post/blog/2020-04-06_coronavirus_trend_in_spain/</link>
+      <link>/post/blog/2020-04-06_coronavirus_trend_in_spain/</link>
       <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2020-04-06_coronavirus_trend_in_spain/</guid>
+      <guid>/post/blog/2020-04-06_coronavirus_trend_in_spain/</guid>
       <description>&lt;p&gt;After the video from Minute Earth about the coronavirus, I&amp;rsquo;ve decided to plot the same data but only for Spain by province. This gives a good view of which provinces are managing to stop the virus.&lt;/p&gt;</description>
+      
     </item>
     
   </channel>

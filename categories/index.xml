@@ -1,32 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Categories on MetalBlueberry - A passionate programmer</title>
-    <link>https://metalblueberry.github.io/categories/</link>
-    <description>Recent content in Categories on MetalBlueberry - A passionate programmer</description>
+    <title>Categories on MetalBlueberry</title>
+    <link>/categories/</link>
+    <description>Recent content in Categories on MetalBlueberry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>Víctor Pérez Domingo</copyright>
     <lastBuildDate>Tue, 07 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://metalblueberry.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>blog</title>
-      <link>https://metalblueberry.github.io/categories/blog/</link>
+      <title>Blog</title>
+      <link>/categories/blog/</link>
       <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/categories/blog/</guid>
-      <description></description>
+      <guid>/categories/blog/</guid>
+      <description>More frequent posts with random content.</description>
+      
     </item>
     
     <item>
-      <title>howto</title>
-      <link>https://metalblueberry.github.io/categories/howto/</link>
+      <title>How To...</title>
+      <link>/categories/howto/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/categories/howto/</guid>
-      <description></description>
+      <guid>/categories/howto/</guid>
+      <description>Learn How to do things with detailed tutorials.</description>
+      
     </item>
     
   </channel>

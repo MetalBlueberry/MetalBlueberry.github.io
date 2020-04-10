@@ -1,168 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Go CPU profiling - MetalBlueberry - A passionate programmer</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="MetalBlueberry" /><meta name="description" content="Practical example of CPU profiling to optimize a Go program" /><meta name="keywords" content="mandelbrot, go, golang, profiling, cpu, pprof" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
-
-
-<link rel="canonical" href="https://metalblueberry.github.io/post/howto/2019-11-01_go-cpu-profiling/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/style.css">
-
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Go CPU profiling&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go CPU profiling"/>
+<meta name="twitter:description" content="Let&rsquo;s take a look to Go CPU profiling tools to optimize the mandelbrot set calculation from previous post."/>
 
 <meta property="og:title" content="Go CPU profiling" />
-<meta property="og:description" content="Practical example of CPU profiling to optimize a Go program" />
+<meta property="og:description" content="Let&rsquo;s take a look to Go CPU profiling tools to optimize the mandelbrot set calculation from previous post." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://metalblueberry.github.io/post/howto/2019-11-01_go-cpu-profiling/" />
-
-<meta property="og:image" content="https://metalblueberry.github.io/me.jpeg" />
 <meta property="article:published_time" content="2019-11-01T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-11-01T00:00:00+00:00" />
-<meta itemprop="name" content="Go CPU profiling">
-<meta itemprop="description" content="Practical example of CPU profiling to optimize a Go program">
+<meta property="article:modified_time" content="2020-04-10T11:39:35+02:00" />
 
-
-<meta itemprop="datePublished" content="2019-11-01T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-11-01T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2408">
-
-
-
-<meta itemprop="keywords" content="go,mandelbrot," />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://metalblueberry.github.io/me.jpeg"/>
-
-<meta name="twitter:title" content="Go CPU profiling"/>
-<meta name="twitter:description" content="Practical example of CPU profiling to optimize a Go program"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
+<meta name="author" content="MetalBlueberry">
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">MetalBlueberry</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a>
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">MetalBlueberry</a>
-</div>
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li>
-  </ul>
-</nav>
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Go CPU profiling</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2019-11-01 </span>
-        <div class="post-category">
-    <a class="howto"  href="/categories/howto/"> howto </a>
-    </div>
-          <span class="more-meta"> 2408 words </span>
-          <span class="more-meta"> 12 mins read </span>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Contents</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#write-some-benchmarks">Write some benchmarks</a>
-<ul>
-<li><a href="#the-good-feeling">The good feeling</a></li>
-<li><a href="#full-benchmark">Full benchmark</a></li>
-</ul></li>
-<li><a href="#cpu-profiling">CPU profiling</a></li>
-<li><a href="#optimizations">Optimizations</a>
-<ul>
-<li><a href="#progress-reporting">Progress reporting</a></li>
-<li><a href="#slice-traversal">Slice traversal</a></li>
-<li><a href="#math-pow">math.Pow</a></li>
-<li><a href="#pointer-dereference">Pointer dereference</a></li>
-</ul></li>
-<li><a href="#conclusion">Conclusion</a></li>
-<li><a href="#references">References</a></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <p>Let&rsquo;s take a look to Go CPU profiling tools to optimize the mandelbrot set calculation from previous post.</p>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Go CPU profiling</h1><p class="article date">Friday, November 1, 2019<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>Let&rsquo;s take a look to Go CPU profiling tools to optimize the mandelbrot set calculation from previous post.</p>
 
 <div class="admonition warning"><p class="admonition-title">warning</p>
   
@@ -180,89 +35,48 @@
 <p>At first sight I see that the method <code>Diverges</code> can be easily optimized by avoiding the square root. So let&rsquo;s write some benchmarks to test that I&rsquo;m right.</p>
 
 <p>The value external variable is to avoid optimizations during compile time that may reduce the benchmark time. <a href="https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go">Dave Cheney</a> explain all the details in his blog.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">value</span> <span class="kt">bool</span>
 
-<span class="kd">func</span> <span class="nf">BenchmarkDiverges</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-    <span class="nx">point</span> <span class="o">:=</span> <span class="nf">NewPoint</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-    <span class="nx">value</span> <span class="p">=</span> <span class="nx">point</span><span class="p">.</span><span class="nf">Diverges</span><span class="p">()</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<pre><code class="language-go">var value bool
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Diverges</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">cmplx</span><span class="p">.</span><span class="nf">Abs</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span> <span class="p">&gt;</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+func BenchmarkDiverges(b *testing.B) {
+  for i := 0; i &lt; b.N; i++ {
+    point := NewPoint(-0.5, 0.5)
+    value = point.Diverges()
+  }
+}
+
+func (m *Point) Diverges() bool {
+  return cmplx.Abs(m.z) &gt; complex(2, 0)
+}
+</code></pre>
+
 <p>I&rsquo;ve left the <code>Diverges</code> function here just as a reminder. let&rsquo;s run the benchmarks to see the output.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">╰─&gt;$ go <span class="nb">test</span>  -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>BenchmarkDiverges
+
+<pre><code class="language-sh">╰─&gt;$ go test  -run='^$' -bench=BenchmarkDiverges
 goos: linux
 goarch: amd64
 pkg: github.com/metalblueberry/mandelbrot/mandelbrot
-BenchmarkDiverges-6     <span class="m">168255253</span>                <span class="m">6</span>.43 ns/op
+BenchmarkDiverges-6     168255253                6.43 ns/op
 PASS
-ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">1</span>.464s</code></pre></td></tr></table>
-</div>
-</div>
+ok      github.com/metalblueberry/mandelbrot/mandelbrot 1.464s
+</code></pre>
+
 <p>So we have 6.43 ns/op which is quite good. Let&rsquo;s modify the Diverges function and run it again.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Diverges</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nb">real</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span><span class="o">*</span><span class="nb">real</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span><span class="o">+</span><span class="nb">imag</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span><span class="o">*</span><span class="nb">imag</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">4</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">╰─&gt;$ go <span class="nb">test</span>  -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>BenchmarkDiverges
+
+<pre><code class="language-go">func (m *Point) Diverges() bool {
+  return real(m.z)*real(m.z)+imag(m.z)*imag(m.z) &gt; 4
+}
+</code></pre>
+
+<pre><code class="language-sh">╰─&gt;$ go test  -run='^$' -bench=BenchmarkDiverges
 goos: linux
 goarch: amd64
 pkg: github.com/metalblueberry/mandelbrot/mandelbrot
-BenchmarkDiverges-6     <span class="m">227208410</span>                <span class="m">5</span>.10 ns/op
+BenchmarkDiverges-6     227208410                5.10 ns/op
 PASS
-ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">1</span>.625s</code></pre></td></tr></table>
-</div>
-</div>
+ok      github.com/metalblueberry/mandelbrot/mandelbrot 1.625s
+</code></pre>
+
 <p>There is a drop from 6.43 ns/op to 5.10 ns/op and <strong>this is a 20% faster!</strong> we are on the good track.</p>
 
 <p>The bad news are that this is not the best way of optimizing the code. First we need to analyze it to see if saving 1 ns/op in this function is relevant or not to the whole computational work.</p>
@@ -279,127 +93,71 @@ ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">1</span>
 </div>
 
 <p>Let&rsquo;s write a benchmark function that simulates the whole process. The idea is to be as similar as possible to the main.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">mandelbrot_test</span>
 
-<span class="kn">import</span> <span class="p">(</span>
-  <span class="s">&#34;testing&#34;</span>
+<pre><code class="language-go">package mandelbrot_test
 
-  <span class="s">&#34;github.com/metalblueberry/mandelbrot/mandelbrot&#34;</span>
-<span class="p">)</span>
+import (
+  &quot;testing&quot;
 
-<span class="kd">func</span> <span class="nf">BenchmarkArea</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">set</span> <span class="o">:=</span> <span class="nx">mandelbrot</span><span class="p">.</span><span class="nx">Area</span><span class="p">{</span>
-    <span class="nx">HorizontalResolution</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">VerticalResolution</span><span class="p">:</span>   <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">MaxIterations</span><span class="p">:</span>        <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">TopLeft</span><span class="p">:</span>              <span class="nb">complex</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="nx">BottomRight</span><span class="p">:</span>          <span class="nb">complex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span>
-  <span class="p">}</span>
-  <span class="nx">set</span><span class="p">.</span><span class="nf">Init</span><span class="p">()</span>
-  <span class="c1">// Start benchmarking here
-</span><span class="c1"></span>  <span class="nx">b</span><span class="p">.</span><span class="nf">ResetTimer</span><span class="p">()</span>
-  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-    <span class="nx">p</span> <span class="o">:=</span> <span class="nx">set</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">()</span>
-    <span class="c1">// loop until p is closed
-</span><span class="c1"></span>    <span class="k">for</span> <span class="k">range</span> <span class="nx">p</span> <span class="p">{</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+  &quot;github.com/metalblueberry/mandelbrot/mandelbrot&quot;
+)
+
+func BenchmarkArea(b *testing.B) {
+  set := mandelbrot.Area{
+    HorizontalResolution: 200,
+    VerticalResolution:   200,
+    MaxIterations:        200,
+    TopLeft:              complex(-2, 2),
+    BottomRight:          complex(2, -2),
+  }
+  set.Init()
+  // Start benchmarking here
+  b.ResetTimer()
+  for i := 0; i &lt; b.N; i++ {
+    p := set.Calculate()
+    // loop until p is closed
+    for range p {
+    }
+  }
+}
+</code></pre>
+
 <p>First let&rsquo;s compare the output with old Diverge function vs the output with the new one.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1">## Initial</span>
-╰─&gt;$ go <span class="nb">test</span>  -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>BenchmarkArea
-goos: linux
-goarch: amd64
-pkg: github.com/metalblueberry/mandelbrot/mandelbrot
-BenchmarkArea-6             <span class="m">2016</span>            <span class="m">564276</span> ns/op
-PASS
-ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">2</span>.176s
 
-<span class="c1">## Optimized</span>
-╰─&gt;$ go <span class="nb">test</span>  -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>BenchmarkArea
+<pre><code class="language-sh">## Initial
+╰─&gt;$ go test  -run='^$' -bench=BenchmarkArea
 goos: linux
 goarch: amd64
 pkg: github.com/metalblueberry/mandelbrot/mandelbrot
-BenchmarkArea-6             <span class="m">3144</span>            <span class="m">351339</span> ns/op
+BenchmarkArea-6             2016            564276 ns/op
 PASS
-ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">1</span>.950s</code></pre></td></tr></table>
-</div>
-</div>
+ok      github.com/metalblueberry/mandelbrot/mandelbrot 2.176s
+
+## Optimized
+╰─&gt;$ go test  -run='^$' -bench=BenchmarkArea
+goos: linux
+goarch: amd64
+pkg: github.com/metalblueberry/mandelbrot/mandelbrot
+BenchmarkArea-6             3144            351339 ns/op
+PASS
+ok      github.com/metalblueberry/mandelbrot/mandelbrot 1.950s
+
+</code></pre>
+
 <p>The code is 40% faster for this given section of the mandelbrot set, and we&rsquo;ve just removed a square root calculation.</p>
 
 <h2 id="cpu-profiling">CPU profiling</h2>
 
 <p>I&rsquo;m going to run the full benchmark again but this time with the flag <code>-cpuprofile</code> and this will generate a profiling file.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">╰─&gt;$ go <span class="nb">test</span> -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>BenchmarkArea  -cpuprofile profile.out</code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-sh">╰─&gt;$ go test -run='^$' -bench=BenchmarkArea  -cpuprofile profile.out
+</code></pre>
+
 <p>To visualize the profile.out file, we need the go tool pprof. It is a really powerful tool, but for now, let&rsquo;s keep it simple and just run the web interface with the following command.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">go tool pprof -http localhost:8080 profile.out</code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-sh">go tool pprof -http localhost:8080 profile.out
+</code></pre>
+
 <p>The web page will open in the graph view. But personally I prefer to visualize this as a flame graph. You can do this by clicking in <a href="http://localhost:8080/ui/flamegraph">view&gt;flame graph</a>.</p>
 
 <p><img src="flamegraph-master.png" alt="flamegraph-master" /></p>
@@ -522,158 +280,83 @@ ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">1</span>
 <h3 id="progress-reporting">Progress reporting</h3>
 
 <p>It is important to notice that will make Calculate function synchronous.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Previous
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">()</span> <span class="p">(</span><span class="nx">progress</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">progress</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
-  <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">defer</span> <span class="nb">close</span><span class="p">(</span><span class="nx">progress</span><span class="p">)</span>
-    <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pixel</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span> <span class="p">{</span>
-      <span class="nx">pixel</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">MaxIterations</span><span class="p">)</span>
-      <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">pixel</span>
 
-      <span class="k">select</span> <span class="p">{</span>
-      <span class="k">case</span> <span class="nx">progress</span> <span class="o">&lt;-</span> <span class="nx">i</span><span class="p">:</span>
-      <span class="k">default</span><span class="p">:</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}()</span>
-  <span class="k">return</span>
-<span class="p">}</span>
+<pre><code class="language-go">// Previous
+func (a *Area) Calculate() (progress chan int) {
+  progress = make(chan int)
+  go func() {
+    defer close(progress)
+    for i, pixel := range a.Points {
+      pixel.Calculate(a.MaxIterations)
+      a.Points[i] = pixel
 
-<span class="c1">// New
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pixel</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span> <span class="p">{</span>
-    <span class="nx">pixel</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">MaxIterations</span><span class="p">)</span>
-    <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">pixel</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+      select {
+      case progress &lt;- i:
+      default:
+      }
+    }
+  }()
+  return
+}
+
+// New
+func (a *Area) Calculate() {
+  for i, pixel := range a.Points {
+    pixel.Calculate(a.MaxIterations)
+    a.Points[i] = pixel
+  }
+}
+</code></pre>
+
 <p>We need to remove the channel from the benchmark too</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Previous
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">BenchmarkArea</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">set</span> <span class="o">:=</span> <span class="nx">mandelbrot</span><span class="p">.</span><span class="nx">Area</span><span class="p">{</span>
-    <span class="nx">HorizontalResolution</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">VerticalResolution</span><span class="p">:</span>   <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">MaxIterations</span><span class="p">:</span>        <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">TopLeft</span><span class="p">:</span>              <span class="nb">complex</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="nx">BottomRight</span><span class="p">:</span>          <span class="nb">complex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span>
-  <span class="p">}</span>
-  <span class="nx">set</span><span class="p">.</span><span class="nf">Init</span><span class="p">()</span>
-  <span class="nx">b</span><span class="p">.</span><span class="nf">ResetTimer</span><span class="p">()</span>
-  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-    <span class="nx">progress</span> <span class="o">:=</span> <span class="nx">set</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">()</span>
-    <span class="k">for</span> <span class="k">range</span> <span class="nx">progress</span> <span class="p">{</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+
+<pre><code class="language-go">// Previous
+func BenchmarkArea(b *testing.B) {
+  set := mandelbrot.Area{
+    HorizontalResolution: 200,
+    VerticalResolution:   200,
+    MaxIterations:        200,
+    TopLeft:              complex(-2, 2),
+    BottomRight:          complex(2, -2),
+  }
+  set.Init()
+  b.ResetTimer()
+  for i := 0; i &lt; b.N; i++ {
+    progress := set.Calculate()
+    for range progress {
+    }
+  }
+}
   
 
-<span class="c1">// New
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">BenchmarkArea</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">set</span> <span class="o">:=</span> <span class="nx">mandelbrot</span><span class="p">.</span><span class="nx">Area</span><span class="p">{</span>
-    <span class="nx">HorizontalResolution</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">VerticalResolution</span><span class="p">:</span>   <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">MaxIterations</span><span class="p">:</span>        <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">TopLeft</span><span class="p">:</span>              <span class="nb">complex</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="nx">BottomRight</span><span class="p">:</span>          <span class="nb">complex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span>
-  <span class="p">}</span>
-  <span class="nx">set</span><span class="p">.</span><span class="nf">Init</span><span class="p">()</span>
-  <span class="nx">b</span><span class="p">.</span><span class="nf">ResetTimer</span><span class="p">()</span>
-  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-    <span class="nx">set</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">()</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+// New
+func BenchmarkArea(b *testing.B) {
+  set := mandelbrot.Area{
+    HorizontalResolution: 200,
+    VerticalResolution:   200,
+    MaxIterations:        200,
+    TopLeft:              complex(-2, 2),
+    BottomRight:          complex(2, -2),
+  }
+  set.Init()
+  b.ResetTimer()
+  for i := 0; i &lt; b.N; i++ {
+    set.Calculate()
+  }
+}
+</code></pre>
+
 <p>And the benchmark now is&hellip;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">╰─&gt;$ go <span class="nb">test</span> -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>BenchmarkArea  -cpuprofile profile.out
+
+<pre><code class="language-sh">╰─&gt;$ go test -run='^$' -bench=BenchmarkArea  -cpuprofile profile.out
 goos: linux
 goarch: amd64
 pkg: github.com/metalblueberry/mandelbrot/mandelbrot
-BenchmarkArea-6             <span class="m">5301</span>            <span class="m">206832</span> ns/op
+BenchmarkArea-6             5301            206832 ns/op
 PASS
-ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">2</span>.007s</code></pre></td></tr></table>
-</div>
-</div>
+ok      github.com/metalblueberry/mandelbrot/mandelbrot 2.007s
+</code></pre>
+
 <p>If you scroll up to check the previous result, we&rsquo;ve improved from 351339 ns/op to 206832 ns/op. Let&rsquo;s get the flame graph and the top to see how to continue.</p>
 
 <table>
@@ -784,170 +467,94 @@ ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">2</span>
 <p><img src="flamegraph-progress.png" alt="flamegraph-progress" /></p>
 
 <p>96% of the time is spent inside the Area.Calculate function and this means that we are not wasting time doing other stuff. Appart from that, I would expect to spend most of the time inside Point.Calculate, as it is where the iterations are performed. Let&rsquo;s go to the <a href="http://localhost:8080/ui/source">source tab</a> to see the time spent per line.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go">  <span class="nx">Total</span><span class="p">:</span>       <span class="mi">930</span><span class="nx">ms</span>      <span class="mf">1.89</span><span class="nf">s</span> <span class="p">(</span><span class="nx">flat</span><span class="p">,</span> <span class="nx">cum</span><span class="p">)</span>   <span class="mi">100</span><span class="o">%</span>
-     <span class="mi">33</span>            <span class="p">.</span>          <span class="p">.</span>           <span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">()</span> <span class="p">{</span>
-     <span class="mi">34</span>        <span class="mi">510</span><span class="nx">ms</span>      <span class="mi">510</span><span class="nx">ms</span>             <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pixel</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span> <span class="p">{</span>
-     <span class="mi">35</span>        <span class="mi">140</span><span class="nx">ms</span>      <span class="mf">1.10</span><span class="nx">s</span>               <span class="nx">pixel</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">MaxIterations</span><span class="p">)</span>
-     <span class="mi">36</span>        <span class="mi">280</span><span class="nx">ms</span>      <span class="mi">280</span><span class="nx">ms</span>               <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">pixel</span>
-     <span class="mi">37</span>            <span class="p">.</span>          <span class="p">.</span>             <span class="p">}</span>
-     <span class="mi">38</span>            <span class="p">.</span>          <span class="p">.</span>           <span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-go">  Total:       930ms      1.89s (flat, cum)   100%
+     33            .          .           func (a *Area) Calculate() {
+     34        510ms      510ms             for i, pixel := range a.Points {
+     35        140ms      1.10s               pixel.Calculate(a.MaxIterations)
+     36        280ms      280ms               a.Points[i] = pixel
+     37            .          .             }
+     38            .          .           }
+</code></pre>
+
 <p>So we spend <sup>1</sup>&frasl;<sub>3</sub> of the time iterating over the Points array and assigning back the value. I feel a little bit lost at this point so let&rsquo;s just modify the code to see if it can be improved. The first thing I want to try is to replace the range operation for a simple for loop.</p>
 
 <h3 id="slice-traversal">Slice traversal</h3>
 
 <p>This is the new version of the Calculate function.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Previous
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">pixel</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span> <span class="p">{</span>
-    <span class="nx">pixel</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">MaxIterations</span><span class="p">)</span>
-    <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">pixel</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-<span class="c1">// New
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-    <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nf">Calculate</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">MaxIterations</span><span class="p">)</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">╰─&gt;$ go <span class="nb">test</span> -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>BenchmarkArea  -cpuprofile profile.out
+
+<pre><code class="language-go">// Previous
+func (a *Area) Calculate() {
+  for i, pixel := range a.Points {
+    pixel.Calculate(a.MaxIterations)
+    a.Points[i] = pixel
+  }
+}
+// New
+func (a *Area) Calculate() {
+  for i := 0; i &lt; len(a.Points); i++ {
+    a.Points[i].Calculate(a.MaxIterations)
+  }
+}
+</code></pre>
+
+<pre><code class="language-sh">╰─&gt;$ go test -run='^$' -bench=BenchmarkArea  -cpuprofile profile.out
 goos: linux
 goarch: amd64
 pkg: github.com/metalblueberry/mandelbrot/mandelbrot
-BenchmarkArea-6            <span class="m">10767</span>            <span class="m">105798</span> ns/op
+BenchmarkArea-6            10767            105798 ns/op
 PASS
-ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">1</span>.906s</code></pre></td></tr></table>
-</div>
-</div>
+ok      github.com/metalblueberry/mandelbrot/mandelbrot 1.906s
+</code></pre>
+
 <p><img src="flamegraph-slice-traversal.png" alt="flamegraph-slice-traversal" /></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go">  <span class="nx">Total</span><span class="p">:</span>       <span class="mi">390</span><span class="nx">ms</span>      <span class="mf">1.71</span><span class="nf">s</span> <span class="p">(</span><span class="nx">flat</span><span class="p">,</span> <span class="nx">cum</span><span class="p">)</span>   <span class="mi">100</span><span class="o">%</span>
-    <span class="mi">33</span>            <span class="p">.</span>          <span class="p">.</span>           <span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Area</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">()</span> <span class="p">{</span>
-     <span class="mi">34</span>        <span class="mi">210</span><span class="nx">ms</span>      <span class="mi">210</span><span class="nx">ms</span>             <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-     <span class="mi">35</span>        <span class="mi">180</span><span class="nx">ms</span>      <span class="mf">1.50</span><span class="nx">s</span>               <span class="nx">a</span><span class="p">.</span><span class="nx">Points</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nf">Calculate</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">MaxIterations</span><span class="p">)</span>
-     <span class="mi">36</span>            <span class="p">.</span>          <span class="p">.</span>             <span class="p">}</span>
-     <span class="mi">37</span>            <span class="p">.</span>          <span class="p">.</span>           <span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-go">  Total:       390ms      1.71s (flat, cum)   100%
+    33            .          .           func (a *Area) Calculate() {
+     34        210ms      210ms             for i := 0; i &lt; len(a.Points); i++ {
+     35        180ms      1.50s               a.Points[i].Calculate(a.MaxIterations)
+     36            .          .             }
+     37            .          .           }
+</code></pre>
+
 <p>This change gives us 105798 ns/op which is near two times faster than the previous version! This is great. If you check the initial benchmark, it was 564276 ns/op so this means we are already x5 times faster.</p>
 
 <p>Before continuing the optimization, I&rsquo;ve decided to compare the performance vs the <a href="https://sciencedemos.org.uk/mandelbrot.php">online viewer</a>. Just to have some reference of how fast can this task be performed. The sad news are that for the following section, our implementation takes 100s and the online viewer takes 3.7s.</p>
 
 <p>The BenchmarkComplexArea function is the one that takes 100s.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">BenchmarkArea</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">set</span> <span class="o">:=</span> <span class="nx">mandelbrot</span><span class="p">.</span><span class="nx">Area</span><span class="p">{</span>
-    <span class="nx">HorizontalResolution</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">VerticalResolution</span><span class="p">:</span>   <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">MaxIterations</span><span class="p">:</span>        <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">TopLeft</span><span class="p">:</span>              <span class="nb">complex</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="nx">BottomRight</span><span class="p">:</span>          <span class="nb">complex</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span>
-  <span class="p">}</span>
-  <span class="nf">benchmarkGivenArea</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">set</span><span class="p">)</span>
-<span class="p">}</span>
 
-<span class="kd">func</span> <span class="nf">BenchmarkComplexArea</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">set</span> <span class="o">:=</span> <span class="nx">mandelbrot</span><span class="p">.</span><span class="nx">Area</span><span class="p">{</span>
-    <span class="nx">HorizontalResolution</span><span class="p">:</span> <span class="mi">1060</span><span class="p">,</span>
-    <span class="nx">VerticalResolution</span><span class="p">:</span>   <span class="mi">730</span><span class="p">,</span>
-    <span class="nx">MaxIterations</span><span class="p">:</span>        <span class="mi">3534</span><span class="p">,</span>
-    <span class="nx">TopLeft</span><span class="p">:</span>              <span class="nb">complex</span><span class="p">(</span><span class="o">-</span><span class="mf">1.401854499759</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.000743603637</span><span class="p">),</span>
-    <span class="nx">BottomRight</span><span class="p">:</span>          <span class="nb">complex</span><span class="p">(</span><span class="o">-</span><span class="mf">1.399689899172</span><span class="p">,</span> <span class="mf">0.000743603637</span><span class="p">),</span>
-  <span class="p">}</span>
-  <span class="nf">benchmarkGivenArea</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">set</span><span class="p">)</span>
-<span class="p">}</span>
+<pre><code class="language-go">
+func BenchmarkArea(b *testing.B) {
+  set := mandelbrot.Area{
+    HorizontalResolution: 200,
+    VerticalResolution:   200,
+    MaxIterations:        200,
+    TopLeft:              complex(-2, 2),
+    BottomRight:          complex(2, -2),
+  }
+  benchmarkGivenArea(b, set)
+}
 
-<span class="kd">func</span> <span class="nf">benchmarkGivenArea</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">,</span> <span class="nx">set</span> <span class="nx">mandelbrot</span><span class="p">.</span><span class="nx">Area</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">set</span><span class="p">.</span><span class="nf">Init</span><span class="p">()</span>
-  <span class="nx">b</span><span class="p">.</span><span class="nf">ResetTimer</span><span class="p">()</span>
-  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-    <span class="nx">set</span><span class="p">.</span><span class="nf">Calculate</span><span class="p">()</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+func BenchmarkComplexArea(b *testing.B) {
+  set := mandelbrot.Area{
+    HorizontalResolution: 1060,
+    VerticalResolution:   730,
+    MaxIterations:        3534,
+    TopLeft:              complex(-1.401854499759, -0.000743603637),
+    BottomRight:          complex(-1.399689899172, 0.000743603637),
+  }
+  benchmarkGivenArea(b, set)
+}
+
+func benchmarkGivenArea(b *testing.B, set mandelbrot.Area) {
+  set.Init()
+  b.ResetTimer()
+  for i := 0; i &lt; b.N; i++ {
+    set.Calculate()
+  }
+}
+</code></pre>
+
 <p>When running this benchmark, I&rsquo;ve got an interesting profile.out that shows that 93.13% of the time is spent in math/cmplx.Pow function.</p>
 
 <p><img src="flamegraph-benchmarkComplexArea.png" alt="flamegraph-benchmarkComplexArea" /></p>
@@ -957,85 +564,46 @@ ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">1</span>
 <h3 id="math-pow">math.Pow</h3>
 
 <p>Another easy change. These are the old and the new version of <code>point.Calculate</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Previous
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">(</span><span class="nx">MaxIterations</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="p">!</span><span class="nx">m</span><span class="p">.</span><span class="nf">Diverges</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span> <span class="p">&lt;</span> <span class="nx">MaxIterations</span> <span class="p">{</span>
-    <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span><span class="o">++</span>
-    <span class="nx">m</span><span class="p">.</span><span class="nx">z</span> <span class="p">=</span> <span class="nx">cmplx</span><span class="p">.</span><span class="nf">Pow</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nx">m</span><span class="p">.</span><span class="nx">Point</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-<span class="c1">// New
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">(</span><span class="nx">MaxIterations</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="p">!</span><span class="nx">m</span><span class="p">.</span><span class="nf">Diverges</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span> <span class="p">&lt;</span> <span class="nx">MaxIterations</span> <span class="p">{</span>
-    <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span><span class="o">++</span>
-    <span class="nx">m</span><span class="p">.</span><span class="nx">z</span> <span class="p">=</span> <span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="o">*</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span> <span class="o">+</span> <span class="nx">m</span><span class="p">.</span><span class="nx">Point</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-<p>Let&rsquo;s run benchmarks&hellip;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1">## Previous</span>
-╰─&gt;$ go <span class="nb">test</span> -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>Area  -cpuprofile profile.out                                                        <span class="m">12</span>:31:28
-goos: linux
-goarch: amd64
-pkg: github.com/metalblueberry/mandelbrot/mandelbrot
-BenchmarkArea-6                    <span class="m">12500</span>             <span class="m">96135</span> ns/op
-BenchmarkComplexArea-6                 <span class="m">1</span>        <span class="m">103429981309</span> ns/op
-PASS
-ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">106</span>.306s
 
-<span class="c1">## New</span>
-╰─&gt;$ go <span class="nb">test</span> -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>Area  -cpuprofile profile.out
+<pre><code class="language-go">// Previous
+func (m *Point) Calculate(MaxIterations int) {
+  for !m.Diverges() &amp;&amp; m.iterations &lt; MaxIterations {
+    m.iterations++
+    m.z = cmplx.Pow(m.z, 2) + m.Point
+  }
+}
+// New
+func (m *Point) Calculate(MaxIterations int) {
+  for !m.Diverges() &amp;&amp; m.iterations &lt; MaxIterations {
+    m.iterations++
+    m.z = m.z*m.z + m.Point
+  }
+}
+</code></pre>
+
+<p>Let&rsquo;s run benchmarks&hellip;</p>
+
+<pre><code class="language-sh">## Previous
+╰─&gt;$ go test -run='^$' -bench=Area  -cpuprofile profile.out                                                        12:31:28
 goos: linux
 goarch: amd64
 pkg: github.com/metalblueberry/mandelbrot/mandelbrot
-BenchmarkArea-6                    <span class="m">15406</span>             <span class="m">73572</span> ns/op
-BenchmarkComplexArea-6                 <span class="m">1</span>        <span class="m">5013357483</span> ns/op
+BenchmarkArea-6                    12500             96135 ns/op
+BenchmarkComplexArea-6                 1        103429981309 ns/op
 PASS
-ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">5</span>.511s</code></pre></td></tr></table>
-</div>
-</div>
+ok      github.com/metalblueberry/mandelbrot/mandelbrot 106.306s
+
+## New
+╰─&gt;$ go test -run='^$' -bench=Area  -cpuprofile profile.out
+goos: linux
+goarch: amd64
+pkg: github.com/metalblueberry/mandelbrot/mandelbrot
+BenchmarkArea-6                    15406             73572 ns/op
+BenchmarkComplexArea-6                 1        5013357483 ns/op
+PASS
+ok      github.com/metalblueberry/mandelbrot/mandelbrot 5.511s
+</code></pre>
+
 <p>I think we&rsquo;ve found the top offender to the calculation and easily improved it. now the timing is 5013357483 ns/op for the ComplexArea which is 5.013357483 s/op and this is only 1.3 seconds away from the web page!</p>
 
 <div class="admonition tip"><p class="admonition-title">learning</p>
@@ -1055,111 +623,59 @@ ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">5</span>
 <h3 id="pointer-dereference">Pointer dereference</h3>
 
 <p>Inside the method point.Calculate there are several references to variables inside Point. This forces the program to dereference the variables each loop and this is a waste of time. To fix it I&rsquo;m going to create a copy of the variables at the beginning of the method. It is also required to inline the <code>Diverges</code> method.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Previous
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">(</span><span class="nx">MaxIterations</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="p">!</span><span class="nx">m</span><span class="p">.</span><span class="nf">Diverges</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span> <span class="p">&lt;</span> <span class="nx">MaxIterations</span> <span class="p">{</span>
-    <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span><span class="o">++</span>
-    <span class="nx">m</span><span class="p">.</span><span class="nx">z</span> <span class="p">=</span> <span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="o">*</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span> <span class="o">+</span> <span class="nx">m</span><span class="p">.</span><span class="nx">Point</span>
-  <span class="p">}</span>
-<span class="p">}</span>
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Diverges</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nb">real</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span><span class="o">*</span><span class="nb">real</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span><span class="o">+</span><span class="nb">imag</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span><span class="o">*</span><span class="nb">imag</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">z</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">4</span>
-<span class="p">}</span>
+<pre><code class="language-go">// Previous
+func (m *Point) Calculate(MaxIterations int) {
+  for !m.Diverges() &amp;&amp; m.iterations &lt; MaxIterations {
+    m.iterations++
+    m.z = m.z*m.z + m.Point
+  }
+}
 
-<span class="c1">// New
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">Point</span><span class="p">)</span> <span class="nf">Calculate</span><span class="p">(</span><span class="nx">MaxIterations</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">z</span> <span class="kt">complex128</span>
-  <span class="nx">point</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nx">Point</span>
-  <span class="nx">iterations</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span>
+func (m *Point) Diverges() bool {
+  return real(m.z)*real(m.z)+imag(m.z)*imag(m.z) &gt; 4
+}
 
-  <span class="k">for</span> <span class="nb">real</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span><span class="o">*</span><span class="nb">real</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span><span class="o">+</span><span class="nb">imag</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span><span class="o">*</span><span class="nb">imag</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="p">&lt;</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="nx">iterations</span> <span class="p">&lt;</span> <span class="nx">MaxIterations</span> <span class="p">{</span>
-    <span class="nx">iterations</span><span class="o">++</span>
-    <span class="nx">z</span> <span class="p">=</span> <span class="nx">z</span><span class="o">*</span><span class="nx">z</span> <span class="o">+</span> <span class="nx">point</span>
-  <span class="p">}</span>
+// New
+func (m *Point) Calculate(MaxIterations int) {
+  var z complex128
+  point := m.Point
+  iterations := m.iterations
 
-  <span class="nx">m</span><span class="p">.</span><span class="nx">iterations</span> <span class="p">=</span> <span class="nx">iterations</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
+  for real(z)*real(z)+imag(z)*imag(z) &lt; 4 &amp;&amp; iterations &lt; MaxIterations {
+    iterations++
+    z = z*z + point
+  }
+
+  m.iterations = iterations
+}
+</code></pre>
+
 <p>And running benchmarks again&hellip;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1">## Previous</span>
-╰─&gt;$ go <span class="nb">test</span> -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>.
-goos: linux
-goarch: amd64
-pkg: github.com/metalblueberry/mandelbrot/mandelbrot
-BenchmarkArea-6                    <span class="m">16176</span>             <span class="m">76731</span> ns/op
-BenchmarkComplexArea-6                 <span class="m">1</span>        <span class="m">5011883400</span> ns/op
-BenchmarkCalculate-6               <span class="m">94263</span>             <span class="m">12727</span> ns/op
-PASS
-ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">8</span>.308s
 
-<span class="c1">## New</span>
-╰─&gt;$ go <span class="nb">test</span> -run<span class="o">=</span><span class="s1">&#39;^$&#39;</span> -bench<span class="o">=</span>.
+<pre><code class="language-sh">## Previous
+╰─&gt;$ go test -run='^$' -bench=.
 goos: linux
 goarch: amd64
 pkg: github.com/metalblueberry/mandelbrot/mandelbrot
-BenchmarkArea-6                    <span class="m">13608</span>             <span class="m">81561</span> ns/op
-BenchmarkComplexArea-6                 <span class="m">1</span>        <span class="m">3520533936</span> ns/op
-BenchmarkCalculate-6              <span class="m">130862</span>              <span class="m">8912</span> ns/op
+BenchmarkArea-6                    16176             76731 ns/op
+BenchmarkComplexArea-6                 1        5011883400 ns/op
+BenchmarkCalculate-6               94263             12727 ns/op
 PASS
-ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">6</span>.284s</code></pre></td></tr></table>
-</div>
-</div>
+ok      github.com/metalblueberry/mandelbrot/mandelbrot 8.308s
+
+## New
+╰─&gt;$ go test -run='^$' -bench=.
+goos: linux
+goarch: amd64
+pkg: github.com/metalblueberry/mandelbrot/mandelbrot
+BenchmarkArea-6                    13608             81561 ns/op
+BenchmarkComplexArea-6                 1        3520533936 ns/op
+BenchmarkCalculate-6              130862              8912 ns/op
+PASS
+ok      github.com/metalblueberry/mandelbrot/mandelbrot 6.284s
+</code></pre>
+
 <p>It is interesting that the benchmark for the first area is slightly slower even though the other two are faster. I can&rsquo;t give a explanation why this happen. Anyway, the time for the complex are is&hellip; 3.5 seconds!! faster than the webpage.</p>
 
 <h2 id="conclusion">Conclusion</h2>
@@ -1177,99 +693,14 @@ ok      github.com/metalblueberry/mandelbrot/mandelbrot <span class="m">6</span>
 <li><a href="https://www.speedscope.app/">Online flamegraph visualizer</a></li>
 <li><a href="https://sciencedemos.org.uk/mandelbrot.php">Online mandelbrot visualizer</a></li>
 <li><a href="https://github.com/bradfitz/talk-yapc-asia-2015/blob/master/talk.md">Profiling &amp; Optimizing in Go</a></li>
-</ul>
-    </div>
-
-    
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/go/">go</a>
-          <a href="/tags/mandelbrot/">mandelbrot</a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/blog/2019-11-03_leadership_training/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Leadership Training</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/howto/2019-10-31_mandelbrot-set-calculation/">
-            <span class="next-text nav-default">Mandelbrot Set Calculation</span>
-            <span class="next-text nav-mobile">Next</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-    <script src="https://utteranc.es/client.js"
-            repo="MetalBlueberry/MetalBlueberry.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="mailto:metalblueberry@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://twitter.com/MetalBlueberry" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="https://www.linkedin.com/in/victorperezdomingo/" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="https://github.com/MetalBlueberry" class="iconfont icon-github" title="github"></a>
-  <a href="https://metalblueberry.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    Theme - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2019 - 
-    2020
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">MetalBlueberry</span>
-  </span>
-</div>
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
-  <script type="text/javascript">
-    window.MathJax = {
-      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
-      showProcessingMessages: false,
-      messageStyle: 'none'
-    };
-  </script>
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
-
-
+</ul></article><section class="article labels"><a class="category" href=/categories/howto/>howto</a><a class="tag" href=/tags/go/>go</a><a class="tag" href=/tags/mandelbrot/>mandelbrot</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2019-11-03_leadership_training/"><span class="li">&larr;</span>Leadership Training</a></p><p><a class="link" href="/post/howto/2019-10-31_mandelbrot-set-calculation/"><span class="li">&rarr;</span>Mandelbrot Set Calculation</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
+    label="comment" theme="github-light" crossorigin="anonymous" async>
+    </script></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Víctor Pérez Domingo</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -1280,12 +711,7 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
+</div>
 </body>
+
 </html>

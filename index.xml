@@ -1,200 +1,64 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>MetalBlueberry - A passionate programmer</title>
-    <link>https://metalblueberry.github.io/</link>
-    <description>Recent content on MetalBlueberry - A passionate programmer</description>
+    <title>MetalBlueberry</title>
+    <link>/</link>
+    <description>Recent content on MetalBlueberry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>Víctor Pérez Domingo</copyright>
     <lastBuildDate>Tue, 07 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://metalblueberry.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Coronavirus Trend In Spain</title>
-      <link>https://metalblueberry.github.io/post/blog/2020-04-06_coronavirus_trend_in_spain/</link>
+      <title>Posts</title>
+      <link>/post/</link>
       <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://metalblueberry.github.io/post/blog/2020-04-06_coronavirus_trend_in_spain/</guid>
-      <description>&lt;p&gt;After the video from Minute Earth about the coronavirus, I&amp;rsquo;ve decided to plot the same data but only for Spain by province. This gives a good view of which provinces are managing to stop the virus.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>2020-03-30 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2020-03-30-weekend_learnings/</link>
-      <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/post/</guid>
+      <description></description>
       
-      <guid>https://metalblueberry.github.io/post/blog/2020-03-30-weekend_learnings/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve learned a little bit about frontend testing with chromium web drivers using &lt;a href=&#34;https://agouti.org/&#34;&gt;Agouti&lt;/a&gt; and It has proven to be a really good option to write test in Go. Also we are in quarantine so I let you here a WebGL interactive animation to entertain you.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Use Git to track Git versions</title>
-      <link>https://metalblueberry.github.io/post/howto/2020-03-11_use_git_to_track_git_versions/</link>
-      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/howto/2020-03-11_use_git_to_track_git_versions/</guid>
-      <description>&lt;p&gt;Everyone who has ever been involved in managing versions of different applications, knows that in can be a pain in the ass. Luckily enough there are tools to ease this work and I&amp;rsquo;ve found that Git provides a general solution independently of your technology stack. Git Submodules.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Ready to Go Auth server with Nginx</title>
-      <link>https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/</link>
-      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/</guid>
-      <description>&lt;p&gt;I got tired of seeing different implementations of authentication in different applications that tend to be insecure and hard to maintain. Usually, the best way to handle those situations is to delegate on someone with more experience like &lt;a href=&#34;https://developers.google.com/identity/protocols/OAuth2&#34;&gt;Google oauth2&lt;/a&gt;. But if you really need you own system&amp;hellip; this approach should ease the work.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>How to get bored</title>
-      <link>https://metalblueberry.github.io/post/blog/2020-01-11_boredom/</link>
-      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/blog/2020-01-11_boredom/</guid>
-      <description>&lt;p&gt;Being bored is really unpleasant and is considered as something to avoid for most of the people. In this post I want to show you why &lt;strong&gt;boredom can be something good&lt;/strong&gt; and how you can take advantage of it.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>2019-12-22 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</link>
-      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</guid>
-      <description>&lt;p&gt;I understood how to use Go composition to extend the functionality similar to inheritance in OOP. I&amp;rsquo;ve used it before but now I can say that I understand it. Also, I&amp;rsquo;ve done a 3D model of the van that I&amp;rsquo;m going to use for the moving in January. Just to know if I can fit everything inside.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>2019-12-15 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</link>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve been using VSCode as my principal editor for a while now, and it keeps improving in every release with things that I cannot believe. Last was remote containers. Today is&amp;hellip;.(drums)&amp;hellip; Live Share!&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>2019-12-09 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</link>
-      <pubDate>Mon, 09 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</guid>
-      <description>&lt;p&gt;I discovered that Go supports build to Web Assembly. What a great time to be alive. Also I&amp;rsquo;ve spent some time changing the favicon of this blog and finished the post about Python Jupyter notebook with Plotly&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Python Jupyter Notebook With Plotly Support</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</link>
-      <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</guid>
-      <description>&lt;p&gt;Python is awesome because you can do anything. In this case, I&amp;rsquo;m going to show you how to configure a Jupyter notebook with integrated Plotly support to draw interactive graphs. This is very useful if you have to analyse something.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Add Plots With Hugo Shortcodes - Plotly</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</link>
-      <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</guid>
-      <description>&lt;p&gt;Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&amp;rsquo;m going to show you how to create a shortcode to add plots to your hugo static site.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>2019-12-02 Weekend Learnings</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</link>
-      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</guid>
-      <description>&lt;p&gt;I managed to send audio to my &lt;strong&gt;Google Home&lt;/strong&gt;, discovered the &lt;strong&gt;Go tool trace&lt;/strong&gt; and started a post about &lt;strong&gt;Python and Jupyter&lt;/strong&gt;.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Avoid Github Government Block</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-11-24_avoid_github_government_block/</link>
-      <pubDate>Sun, 24 Nov 2019 19:25:15 +0100</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/blog/2019-11-24_avoid_github_government_block/</guid>
-      <description>&lt;p&gt;I cannot believe this&amp;hellip; Who in his right mind requires to block github because of terrorism? Open source code is freedom, not terrorism. Anyway, &lt;strong&gt;here is how to avoid it&lt;/strong&gt;.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Mandelbrot Parallel Computation</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-11-17_mandelbrot_parallel_computation/</link>
-      <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/howto/2019-11-17_mandelbrot_parallel_computation/</guid>
-      <description>&lt;p&gt;This post explains how to parallelize the computational task of the Mandelbrot set and generate a terminal tool to generate images.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Leadership Training</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-11-03_leadership_training/</link>
-      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/blog/2019-11-03_leadership_training/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve attended to a Leadership training by &lt;a href=&#34;https://www.enricllado.com/&#34;&gt;Enric Lladó&lt;/a&gt;, thanks to &lt;a href=&#34;https://www.betterask.erni/&#34;&gt;ERNI&lt;/a&gt;, and this is the summary of it.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Go CPU profiling</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-11-01_go-cpu-profiling/</link>
-      <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/howto/2019-11-01_go-cpu-profiling/</guid>
-      <description>&lt;p&gt;Let&amp;rsquo;s take a look to Go CPU profiling tools to optimize the mandelbrot set calculation from previous post.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Mandelbrot Set Calculation</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/</link>
-      <pubDate>Tue, 29 Oct 2019 21:33:33 +0100</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/howto/2019-10-31_mandelbrot-set-calculation/</guid>
-      <description>&lt;p&gt;The Mandelbrot set is one of the most famous fractals and it is really simple to draw. Personally I enjoy a lot seeing how simple rules lead to complex patterns.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Create a Blog Like This</title>
-      <link>https://metalblueberry.github.io/post/howto/2019-10-29_create-a-blog-like-this/</link>
-      <pubDate>Tue, 29 Oct 2019 11:41:00 +0100</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/howto/2019-10-29_create-a-blog-like-this/</guid>
-      <description>&lt;p&gt;A blog like this can be generated with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo.io&lt;/a&gt; hosted for free using &lt;a href=&#34;https://github.com/&#34;&gt;Github.com&lt;/a&gt;.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Why This Blog</title>
-      <link>https://metalblueberry.github.io/post/blog/2019-10-24_why-this-blog/</link>
-      <pubDate>Thu, 24 Oct 2019 17:10:38 +0200</pubDate>
-      
-      <guid>https://metalblueberry.github.io/post/blog/2019-10-24_why-this-blog/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m starting this blog to have feedback of my improvement over time.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>About Me</title>
-      <link>https://metalblueberry.github.io/about/</link>
+      <link>/about/</link>
       <pubDate>Sat, 19 Oct 2019 13:59:31 +0200</pubDate>
       
-      <guid>https://metalblueberry.github.io/about/</guid>
+      <guid>/about/</guid>
       <description>About MetalBlueberry I&amp;rsquo;m a passionate developer moving toward the specialization in IoT technologies.
 I feel comfortable working with Python and Go as most of my recent development time has been invested with those two languages but I have experience with other popular languages such as C/C++, C# and Java.
 I&amp;rsquo;m always looking for new challenges and constantly learning new things.
 Technical background I&amp;rsquo;ve experience with several technologies from the IoT world from the sensors to the cloud infrastructure.</description>
+      
     </item>
     
     <item>
       <title>About Me - The long story</title>
-      <link>https://metalblueberry.github.io/the-long-story/</link>
+      <link>/the-long-story/</link>
       <pubDate>Sat, 19 Oct 2019 13:59:31 +0200</pubDate>
       
-      <guid>https://metalblueberry.github.io/the-long-story/</guid>
+      <guid>/the-long-story/</guid>
       <description>About MetalBlueberry I&amp;rsquo;m a programmer since I discovered that things could be automated.
 Attention
-You are about to read my life since I remember it, focused on how I became a professional developer.
- The beginning I started with Win-logo in the school by drawing some figures with simple functions. I still remember what could be one of the firsts function I&amp;rsquo;ve ever wrote. tits(size) The objective is clear, draw two tangent circles of a desired size.</description>
+You are about to read my life since I remember it, focused on how I became a professional developer.  The beginning I started with Win-logo in the school by drawing some figures with simple functions. I still remember what could be one of the firsts function I&amp;rsquo;ve ever wrote. tits(size) The objective is clear, draw two tangent circles of a desired size.</description>
+      
+    </item>
+    
+    <item>
+      <title>Social Networks</title>
+      <link>/social/</link>
+      <pubDate>Sat, 19 Oct 2019 13:59:31 +0200</pubDate>
+      
+      <guid>/social/</guid>
+      <description>Follow me on GitHub, Twitter and Linkedin!
+ www.github.com/MetalBlueberry
+ www.twitter.com/MetalBlueberry
+ www.linkedin.com/in/victorperezdomingo
+  </description>
+      
     </item>
     
   </channel>

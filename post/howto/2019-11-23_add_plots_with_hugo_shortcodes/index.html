@@ -1,160 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Add Plots With Hugo Shortcodes - Plotly - MetalBlueberry - A passionate programmer</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="MetalBlueberry" /><meta name="description" content="Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&amp;rsquo;m going to show you how to create a shortcode to add plots to your hugo static site.
-" /><meta name="keywords" content="plotly, hugo, plots, plotly" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
-
-
-<link rel="canonical" href="https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/style.css">
-
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.59.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Add Plots With Hugo Shortcodes - Plotly&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.97dca4f10b4a76a5c62d6c5855e9eaab3b083ba20b6e4059f24dc20a8bb331c418ecdfd5449a29ef5333ebc2c64b286b.css" integrity="sha384-l9yk8QtKdqXGLWxYVenqqzsIO6ILbkBZ8k3CCouzMcQY7N/VRJop71Mz68LGSyhr"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Add Plots With Hugo Shortcodes - Plotly"/>
+<meta name="twitter:description" content="Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&rsquo;m going to show you how to create a shortcode to add plots to your hugo static site."/>
 
 <meta property="og:title" content="Add Plots With Hugo Shortcodes - Plotly" />
 <meta property="og:description" content="Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&rsquo;m going to show you how to create a shortcode to add plots to your hugo static site." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/" />
-
-<meta property="og:image" content="https://metalblueberry.github.io/me.jpeg" />
 <meta property="article:published_time" content="2019-12-06T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-12-06T00:00:00+00:00" />
-<meta itemprop="name" content="Add Plots With Hugo Shortcodes - Plotly">
-<meta itemprop="description" content="Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&rsquo;m going to show you how to create a shortcode to add plots to your hugo static site.">
+<meta property="article:modified_time" content="2020-04-10T11:39:35+02:00" />
 
+<meta name="author" content="MetalBlueberry">
 
-<meta itemprop="datePublished" content="2019-12-06T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-06T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1089">
-
-
-
-<meta itemprop="keywords" content="plotly,hugo," />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://metalblueberry.github.io/me.jpeg"/>
-
-<meta name="twitter:title" content="Add Plots With Hugo Shortcodes - Plotly"/>
-<meta name="twitter:description" content="Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&rsquo;m going to show you how to create a shortcode to add plots to your hugo static site."/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
+<script src="https://cdn.plot.ly/plotly-1.50.0.min.js"></script>
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">MetalBlueberry</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a>
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">MetalBlueberry</a>
-</div>
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li>
-  </ul>
-</nav>
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Add Plots With Hugo Shortcodes - Plotly</h1>
-      <script src="https://cdn.plot.ly/plotly-1.50.0.min.js"></script>
-
-      <div class="post-meta">
-        <span class="post-time"> 2019-12-06 </span>
-        <div class="post-category">
-    <a class="howto"  href="/categories/howto/"> howto </a>
-    </div>
-          <span class="more-meta"> 1089 words </span>
-          <span class="more-meta"> 6 mins read </span>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Contents</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#the-code">The code</a></li>
-<li><a href="#importing-plotly-js">Importing plotly.js</a></li>
-<li><a href="#conclusion">Conclusion</a></li>
-<li><a href="#references">References</a></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <p>Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&rsquo;m going to show you how to create a shortcode to add plots to your hugo static site.</p>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Add Plots With Hugo Shortcodes - Plotly</h1><p class="article date">Friday, December 6, 2019<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>Plotly is my favourite tool to create plots for a lot of reasons. One is that you can create plots with javascript and create interactive graphs. I&rsquo;m going to show you how to create a shortcode to add plots to your hugo static site.</p>
 
 <h2 id="introduction">Introduction</h2>
 
@@ -167,150 +32,79 @@
 <h2 id="the-code">The code</h2>
 
 <p>The javascript codes are available in the <a href="https://plot.ly/javascript/line-charts/">official documentation</a> and are really simple. The following code will draw a line plot in the html div with id <code>myDiv</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">trace1</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="nx">x</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-  <span class="nx">y</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
-  <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;scatter&#39;</span>
-<span class="p">};</span>
 
-<span class="kd">var</span> <span class="nx">trace2</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="nx">x</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-  <span class="nx">y</span><span class="o">:</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
-  <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;scatter&#39;</span>
-<span class="p">};</span>
+<pre><code class="language-js">var trace1 = {
+  x: [1, 2, 3, 4],
+  y: [10, 15, 13, 17],
+  type: 'scatter'
+};
 
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="nx">trace1</span><span class="p">,</span> <span class="nx">trace2</span><span class="p">];</span>
+var trace2 = {
+  x: [1, 2, 3, 4],
+  y: [16, 5, 11, 9],
+  type: 'scatter'
+};
 
-<span class="nx">Plotly</span><span class="p">.</span><span class="nx">newPlot</span><span class="p">(</span><span class="s1">&#39;myDiv&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
-</code></pre></td></tr></table>
-</div>
-</div>
+var data = [trace1, trace2];
+
+Plotly.newPlot('myDiv', data);
+</code></pre>
+
 <p>So we need to create a div with a known id inside the post and also run the necessary js code. This is how the short code looks like.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;figure&#34;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;figure-plot&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;{{ .Get 0 }}&#34;</span><span class="p">&gt;</span>
+
+<pre><code class="language-html">&lt;div class=&quot;figure&quot;&gt;
+&lt;div class=&quot;figure-plot&quot; id=&quot;{{ .Get 0 }}&quot;&gt;
 	Code could not finish, this are some reasons why this happen.
 	- Plot name not defined. The first parameter of the shortcode is the name.
 	- There is a syntax error. check browser console.
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-  <span class="kd">function</span> <span class="nx">draw</span><span class="p">(){</span>
-	<span class="nx">test</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;{{ .Get 0 }}&#34;</span><span class="p">);</span>
-	<span class="k">if</span> <span class="p">(</span><span class="nx">test</span> <span class="o">==</span> <span class="kc">null</span><span class="p">){</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;The plot name is not defined&#34;</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
+&lt;/div&gt;
+&lt;script&gt;
+  function draw(){
+	test = document.getElementById(&quot;{{ .Get 0 }}&quot;);
+	if (test == null){
+		console.log(&quot;The plot name is not defined&quot;)
+		return
+	}
 
-	<span class="nx">fig</span> <span class="o">=</span> <span class="kc">null</span>
-	<span class="p">{{</span> <span class="p">.</span><span class="nx">Inner</span> <span class="o">|</span> <span class="nx">safeJS</span> <span class="p">}}</span>
+	fig = null
+	{{ .Inner | safeJS }}
 
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">fig</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">test</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="s2">&#34;ERROR: fig variable is not defined&#34;</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-	<span class="nx">test</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="kc">null</span>
-	<span class="nx">Plotly</span><span class="p">.</span><span class="nx">plot</span><span class="p">(</span><span class="nx">test</span> <span class="p">,</span><span class="nx">fig</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="nx">draw</span><span class="p">()</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></td></tr></table>
-</div>
-</div>
+	if (!fig) {
+		test.innerText = &quot;ERROR: fig variable is not defined&quot;
+		return
+	}
+	test.innerText = null
+	Plotly.plot(test ,fig);
+  }
+  draw()
+&lt;/script&gt;
+&lt;/div&gt;
+</code></pre>
+
 <p>The line 3-5 are to display a default message in the case the shortcode is not used properly and something fails. The function draw finds the div by id and check if it actually exist. This will print an extra log message to the console if fails. Then it defines the <code>fig</code> variable and evaluates the provided code. This code should assign a value to the fig variable or the shortcode will put an error message <code>ERROR: fig variable is not defined</code>. If it&rsquo;s defined, plotly will do it&rsquo;s magic.</p>
 
 <p>This is how the shortcode is used.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{{</span><span class="cm">/*% plot plot2 %*/</span><span class="p">}}</span>
-<span class="kd">var</span> <span class="nx">trace1</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="nx">x</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-  <span class="nx">y</span><span class="o">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
-  <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;scatter&#39;</span>
-<span class="p">};</span>
 
-<span class="kd">var</span> <span class="nx">trace2</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="nx">x</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-  <span class="nx">y</span><span class="o">:</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
-  <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;scatter&#39;</span>
-<span class="p">};</span>
+<pre><code class="language-js">{{/*% plot plot2 %*/}}
+var trace1 = {
+  x: [1, 2, 3, 4],
+  y: [10, 15, 13, 17],
+  type: 'scatter'
+};
 
-<span class="nx">data</span> <span class="o">=</span> <span class="p">[</span><span class="nx">trace1</span><span class="p">,</span> <span class="nx">trace2</span><span class="p">];</span>
-<span class="nx">fig</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="nx">data</span><span class="o">:</span> <span class="nx">data</span>
-<span class="p">}</span>
-<span class="p">{{</span><span class="cm">/*% /plot %*/</span><span class="p">}}</span>
-</code></pre></td></tr></table>
-</div>
-</div>
+var trace2 = {
+  x: [1, 2, 3, 4],
+  y: [16, 5, 11, 9],
+  type: 'scatter'
+};
+
+data = [trace1, trace2];
+fig = {
+  data: data
+}
+{{/*% /plot %*/}}
+</code></pre>
+
 <p>And the plot generated</p>
 
 <div class="figure">
@@ -359,19 +153,12 @@ fig = {
 </div>
 
 <p>You may wonder why I&rsquo;m putting the Plotly.plot in the shortcode instead of just allowing the user to put everything in the shortocde body. One reason is to give clear feedback of what is broken. But the most important reason is that this shortcode is intended just to draw plots, not to execute complex javascript. My intention is to use Python to generate the complex structure and then just copy and paste. Here is an example of the plot in the mandelbrot parallel calculation post.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{{</span><span class="cm">/* plot figure1 &gt;*/</span><span class="p">}}</span>
-<span class="nx">fig</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;data&#34;</span><span class="o">:</span><span class="p">[{</span><span class="s2">&#34;x&#34;</span><span class="o">:</span><span class="p">[</span><span class="s2">&#34;1024x1024x1&#34;</span><span class="p">,</span><span class="s2">&#34;512x512x2&#34;</span><span class="p">,</span><span class="s2">&#34;256x256x4&#34;</span><span class="p">,</span><span class="s2">&#34;128x128x8&#34;</span><span class="p">,</span><span class="s2">&#34;64x64x16&#34;</span><span class="p">,</span><span class="s2">&#34;32x32x32&#34;</span><span class="p">,</span><span class="s2">&#34;16x16x64&#34;</span><span class="p">,</span><span class="s2">&#34;8x8x128&#34;</span><span class="p">,</span><span class="s2">&#34;4x4x256&#34;</span><span class="p">,</span><span class="s2">&#34;2x2x512&#34;</span><span class="p">,</span><span class="s2">&#34;1x1x1024&#34;</span><span class="p">],</span><span class="s2">&#34;y&#34;</span><span class="o">:</span><span class="p">[</span><span class="mf">5.319377513</span><span class="p">,</span><span class="mf">3.730183194</span><span class="p">,</span><span class="mf">3.492960513</span><span class="p">,</span><span class="mf">3.416568462</span><span class="p">,</span><span class="mf">3.406160365</span><span class="p">,</span><span class="mf">3.404795796</span><span class="p">,</span><span class="mf">3.401629099</span><span class="p">,</span><span class="mf">3.403963371</span><span class="p">,</span><span class="mf">3.406568944</span><span class="p">,</span><span class="mf">3.403851128</span><span class="p">,</span><span class="mf">3.401489335</span><span class="p">],</span><span class="s2">&#34;name&#34;</span><span class="o">:</span><span class="s2">&#34;1 workers&#34;</span><span class="p">},{</span><span class="s2">&#34;x&#34;</span><span class="o">:</span><span class="p">[</span><span class="s2">&#34;1024x1024x1&#34;</span><span class="p">,</span><span class="s2">&#34;512x512x2&#34;</span><span class="p">,</span><span class="s2">&#34;256x256x4&#34;</span><span class="p">,</span><span class="s2">&#34;128x128x8&#34;</span><span class="p">,</span><span class="s2">&#34;64x64x16&#34;</span><span class="p">,</span><span class="s2">&#34;32x32x32&#34;</span><span class="p">,</span><span class="s2">&#34;16x16x64&#34;</span><span class="p">,</span><span class="s2">&#34;8x8x128&#34;</span><span class="p">,</span><span class="s2">&#34;4x4x256&#34;</span><span class="p">,</span><span class="s2">&#34;2x2x512&#34;</span><span class="p">,</span><span class="s2">&#34;1x1x1024&#34;</span><span class="p">],</span><span class="s2">&#34;y&#34;</span><span class="o">:</span><span class="p">[</span><span class="mf">5.105426336</span><span class="p">,</span><span class="mf">2.403512541</span><span class="p">,</span><span class="mf">1.769243872</span><span class="p">,</span><span class="mf">1.720678808</span><span class="p">,</span><span class="mf">1.705878765</span><span class="p">,</span><span class="mf">1.702246865</span><span class="p">,</span><span class="mf">1.705907853</span><span class="p">,</span><span class="mf">1.731687894</span><span class="p">,</span><span class="mf">1.819791773</span><span class="p">,</span><span class="mf">1.954560985</span><span class="p">,</span><span class="mf">3.404077505</span><span class="p">],</span><span class="s2">&#34;name&#34;</span><span class="o">:</span><span class="s2">&#34;2 workers&#34;</span><span class="p">},{</span><span class="s2">&#34;x&#34;</span><span class="o">:</span><span class="p">[</span><span class="s2">&#34;1024x1024x1&#34;</span><span class="p">,</span><span class="s2">&#34;512x512x2&#34;</span><span class="p">,</span><span class="s2">&#34;256x256x4&#34;</span><span class="p">,</span><span class="s2">&#34;128x128x8&#34;</span><span class="p">,</span><span class="s2">&#34;64x64x16&#34;</span><span class="p">,</span><span class="s2">&#34;32x32x32&#34;</span><span class="p">,</span><span class="s2">&#34;16x16x64&#34;</span><span class="p">,</span><span class="s2">&#34;8x8x128&#34;</span><span class="p">,</span><span class="s2">&#34;4x4x256&#34;</span><span class="p">,</span><span class="s2">&#34;2x2x512&#34;</span><span class="p">,</span><span class="s2">&#34;1x1x1024&#34;</span><span class="p">],</span><span class="s2">&#34;y&#34;</span><span class="o">:</span><span class="p">[</span><span class="mf">4.665434148</span><span class="p">,</span><span class="mf">1.840141806</span><span class="p">,</span><span class="mf">1.23159353</span><span class="p">,</span><span class="mf">1.156602142</span><span class="p">,</span><span class="mf">1.139298289</span><span class="p">,</span><span class="mf">1.135465838</span><span class="p">,</span><span class="mf">1.145931396</span><span class="p">,</span><span class="mf">1.190932724</span><span class="p">,</span><span class="mf">1.324346159</span><span class="p">,</span><span class="mf">1.955651422</span><span class="p">,</span><span class="mf">3.401555276</span><span class="p">],</span><span class="s2">&#34;name&#34;</span><span class="o">:</span><span class="s2">&#34;3 workers&#34;</span><span class="p">},{</span><span class="s2">&#34;x&#34;</span><span class="o">:</span><span class="p">[</span><span class="s2">&#34;1024x1024x1&#34;</span><span class="p">,</span><span class="s2">&#34;512x512x2&#34;</span><span class="p">,</span><span class="s2">&#34;256x256x4&#34;</span><span class="p">,</span><span class="s2">&#34;128x128x8&#34;</span><span class="p">,</span><span class="s2">&#34;64x64x16&#34;</span><span class="p">,</span><span class="s2">&#34;32x32x32&#34;</span><span class="p">,</span><span class="s2">&#34;16x16x64&#34;</span><span class="p">,</span><span class="s2">&#34;8x8x128&#34;</span><span class="p">,</span><span class="s2">&#34;4x4x256&#34;</span><span class="p">,</span><span class="s2">&#34;2x2x512&#34;</span><span class="p">,</span><span class="s2">&#34;1x1x1024&#34;</span><span class="p">],</span><span class="s2">&#34;y&#34;</span><span class="o">:</span><span class="p">[</span><span class="mf">3.277424857</span><span class="p">,</span><span class="mf">1.508889857</span><span class="p">,</span><span class="mf">1.000251994</span><span class="p">,</span><span class="mf">0.877004851</span><span class="p">,</span><span class="mf">0.855757891</span><span class="p">,</span><span class="mf">0.851836168</span><span class="p">,</span><span class="mf">0.859728354</span><span class="p">,</span><span class="mf">0.902649372</span><span class="p">,</span><span class="mf">1.012687753</span><span class="p">,</span><span class="mf">1.955834209</span><span class="p">,</span><span class="mf">3.404003372</span><span class="p">],</span><span class="s2">&#34;name&#34;</span><span class="o">:</span><span class="s2">&#34;4 workers&#34;</span><span class="p">},{</span><span class="s2">&#34;x&#34;</span><span class="o">:</span><span class="p">[</span><span class="s2">&#34;1024x1024x1&#34;</span><span class="p">,</span><span class="s2">&#34;512x512x2&#34;</span><span class="p">,</span><span class="s2">&#34;256x256x4&#34;</span><span class="p">,</span><span class="s2">&#34;128x128x8&#34;</span><span class="p">,</span><span class="s2">&#34;64x64x16&#34;</span><span class="p">,</span><span class="s2">&#34;32x32x32&#34;</span><span class="p">,</span><span class="s2">&#34;16x16x64&#34;</span><span class="p">,</span><span class="s2">&#34;8x8x128&#34;</span><span class="p">,</span><span class="s2">&#34;4x4x256&#34;</span><span class="p">,</span><span class="s2">&#34;2x2x512&#34;</span><span class="p">,</span><span class="s2">&#34;1x1x1024&#34;</span><span class="p">],</span><span class="s2">&#34;y&#34;</span><span class="o">:</span><span class="p">[</span><span class="mf">2.687810723</span><span class="p">,</span><span class="mf">1.299930746</span><span class="p">,</span><span class="mf">0.848919389</span><span class="p">,</span><span class="mf">0.71687461</span><span class="p">,</span><span class="mf">0.697146793</span><span class="p">,</span><span class="mf">0.686797944</span><span class="p">,</span><span class="mf">0.695021475</span><span class="p">,</span><span class="mf">0.733307298</span><span class="p">,</span><span class="mf">0.782258103</span><span class="p">,</span><span class="mf">1.958691928</span><span class="p">,</span><span class="mf">3.406197102</span><span class="p">],</span><span class="s2">&#34;name&#34;</span><span class="o">:</span><span class="s2">&#34;5 workers&#34;</span><span class="p">},{</span><span class="s2">&#34;x&#34;</span><span class="o">:</span><span class="p">[</span><span class="s2">&#34;1024x1024x1&#34;</span><span class="p">,</span><span class="s2">&#34;512x512x2&#34;</span><span class="p">,</span><span class="s2">&#34;256x256x4&#34;</span><span class="p">,</span><span class="s2">&#34;128x128x8&#34;</span><span class="p">,</span><span class="s2">&#34;64x64x16&#34;</span><span class="p">,</span><span class="s2">&#34;32x32x32&#34;</span><span class="p">,</span><span class="s2">&#34;16x16x64&#34;</span><span class="p">,</span><span class="s2">&#34;8x8x128&#34;</span><span class="p">,</span><span class="s2">&#34;4x4x256&#34;</span><span class="p">,</span><span class="s2">&#34;2x2x512&#34;</span><span class="p">,</span><span class="s2">&#34;1x1x1024&#34;</span><span class="p">],</span><span class="s2">&#34;y&#34;</span><span class="o">:</span><span class="p">[</span><span class="mf">2.419063112</span><span class="p">,</span><span class="mf">1.172598442</span><span class="p">,</span><span class="mf">0.770078822</span><span class="p">,</span><span class="mf">0.636418239</span><span class="p">,</span><span class="mf">0.59517132</span><span class="p">,</span><span class="mf">0.58758251</span><span class="p">,</span><span class="mf">0.598871324</span><span class="p">,</span><span class="mf">0.655497364</span><span class="p">,</span><span class="mf">0.722161112</span><span class="p">,</span><span class="mf">1.955789037</span><span class="p">,</span><span class="mf">3.40305645</span><span class="p">],</span><span class="s2">&#34;name&#34;</span><span class="o">:</span><span class="s2">&#34;6 workers&#34;</span><span class="p">},{</span><span class="s2">&#34;x&#34;</span><span class="o">:</span><span class="p">[</span><span class="s2">&#34;1024x1024x1&#34;</span><span class="p">,</span><span class="s2">&#34;512x512x2&#34;</span><span class="p">,</span><span class="s2">&#34;256x256x4&#34;</span><span class="p">,</span><span class="s2">&#34;128x128x8&#34;</span><span class="p">,</span><span class="s2">&#34;64x64x16&#34;</span><span class="p">,</span><span class="s2">&#34;32x32x32&#34;</span><span class="p">,</span><span class="s2">&#34;16x16x64&#34;</span><span class="p">,</span><span class="s2">&#34;8x8x128&#34;</span><span class="p">,</span><span class="s2">&#34;4x4x256&#34;</span><span class="p">,</span><span class="s2">&#34;2x2x512&#34;</span><span class="p">,</span><span class="s2">&#34;1x1x1024&#34;</span><span class="p">],</span><span class="s2">&#34;y&#34;</span><span class="o">:</span><span class="p">[</span><span class="mf">1.991583443</span><span class="p">,</span><span class="mf">1.033091053</span><span class="p">,</span><span class="mf">0.712726608</span><span class="p">,</span><span class="mf">0.605582734</span><span class="p">,</span><span class="mf">0.578420338</span><span class="p">,</span><span class="mf">0.577574125</span><span class="p">,</span><span class="mf">0.580463384</span><span class="p">,</span><span class="mf">0.652894185</span><span class="p">,</span><span class="mf">0.691949137</span><span class="p">,</span><span class="mf">1.970116638</span><span class="p">,</span><span class="mf">3.452580344</span><span class="p">],</span><span class="s2">&#34;name&#34;</span><span class="o">:</span><span class="s2">&#34;7 workers&#34;</span><span class="p">},{</span><span class="s2">&#34;x&#34;</span><span class="o">:</span><span class="p">[</span><span class="s2">&#34;1024x1024x1&#34;</span><span class="p">,</span><span class="s2">&#34;512x512x2&#34;</span><span class="p">,</span><span class="s2">&#34;256x256x4&#34;</span><span class="p">,</span><span class="s2">&#34;128x128x8&#34;</span><span class="p">,</span><span class="s2">&#34;64x64x16&#34;</span><span class="p">,</span><span class="s2">&#34;32x32x32&#34;</span><span class="p">,</span><span class="s2">&#34;16x16x64&#34;</span><span class="p">,</span><span class="s2">&#34;8x8x128&#34;</span><span class="p">,</span><span class="s2">&#34;4x4x256&#34;</span><span class="p">,</span><span class="s2">&#34;2x2x512&#34;</span><span class="p">,</span><span class="s2">&#34;1x1x1024&#34;</span><span class="p">],</span><span class="s2">&#34;y&#34;</span><span class="o">:</span><span class="p">[</span><span class="mf">1.942149854</span><span class="p">,</span><span class="mf">0.947873093</span><span class="p">,</span><span class="mf">0.683032395</span><span class="p">,</span><span class="mf">0.605635427</span><span class="p">,</span><span class="mf">0.575207906</span><span class="p">,</span><span class="mf">0.573205018</span><span class="p">,</span><span class="mf">0.580969231</span><span class="p">,</span><span class="mf">0.653116053</span><span class="p">,</span><span class="mf">0.72285752</span><span class="p">,</span><span class="mf">1.954330764</span><span class="p">,</span><span class="mf">3.407772597</span><span class="p">],</span><span class="s2">&#34;name&#34;</span><span class="o">:</span><span class="s2">&#34;8 workers&#34;</span><span class="p">}],</span><span class="s2">&#34;layout&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;title&#34;</span><span class="o">:</span><span class="s2">&#34;Benchmark results&#34;</span><span class="p">,</span><span class="s2">&#34;yaxis&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;title&#34;</span><span class="o">:</span><span class="s2">&#34;s/op&#34;</span><span class="p">,</span><span class="s2">&#34;type&#34;</span><span class="o">:</span><span class="s2">&#34;log&#34;</span><span class="p">,</span><span class="s2">&#34;autorange&#34;</span><span class="o">:</span><span class="kc">true</span><span class="p">},</span><span class="s2">&#34;shapes&#34;</span><span class="o">:</span><span class="p">[{</span><span class="s2">&#34;type&#34;</span><span class="o">:</span><span class="s2">&#34;line&#34;</span><span class="p">,</span><span class="s2">&#34;xref&#34;</span><span class="o">:</span><span class="s2">&#34;paper&#34;</span><span class="p">,</span><span class="s2">&#34;yref&#34;</span><span class="o">:</span><span class="s2">&#34;y&#34;</span><span class="p">,</span><span class="s2">&#34;y0&#34;</span><span class="o">:</span><span class="mf">3.40394218</span><span class="p">,</span><span class="s2">&#34;x0&#34;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&#34;y1&#34;</span><span class="o">:</span><span class="mf">3.40394218</span><span class="p">,</span><span class="s2">&#34;x1&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;line&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;width&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">}},{</span><span class="s2">&#34;type&#34;</span><span class="o">:</span><span class="s2">&#34;line&#34;</span><span class="p">,</span><span class="s2">&#34;xref&#34;</span><span class="o">:</span><span class="s2">&#34;paper&#34;</span><span class="p">,</span><span class="s2">&#34;yref&#34;</span><span class="o">:</span><span class="s2">&#34;y&#34;</span><span class="p">,</span><span class="s2">&#34;y0&#34;</span><span class="o">:</span><span class="mf">1.70197109</span><span class="p">,</span><span class="s2">&#34;x0&#34;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&#34;y1&#34;</span><span class="o">:</span><span class="mf">1.70197109</span><span class="p">,</span><span class="s2">&#34;x1&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;line&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;width&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">}},{</span><span class="s2">&#34;type&#34;</span><span class="o">:</span><span class="s2">&#34;line&#34;</span><span class="p">,</span><span class="s2">&#34;xref&#34;</span><span class="o">:</span><span class="s2">&#34;paper&#34;</span><span class="p">,</span><span class="s2">&#34;yref&#34;</span><span class="o">:</span><span class="s2">&#34;y&#34;</span><span class="p">,</span><span class="s2">&#34;y0&#34;</span><span class="o">:</span><span class="mf">1.1346473933333334</span><span class="p">,</span><span class="s2">&#34;x0&#34;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&#34;y1&#34;</span><span class="o">:</span><span class="mf">1.1346473933333334</span><span class="p">,</span><span class="s2">&#34;x1&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;line&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;width&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">}},{</span><span class="s2">&#34;type&#34;</span><span class="o">:</span><span class="s2">&#34;line&#34;</span><span class="p">,</span><span class="s2">&#34;xref&#34;</span><span class="o">:</span><span class="s2">&#34;paper&#34;</span><span class="p">,</span><span class="s2">&#34;yref&#34;</span><span class="o">:</span><span class="s2">&#34;y&#34;</span><span class="p">,</span><span class="s2">&#34;y0&#34;</span><span class="o">:</span><span class="mf">0.850985545</span><span class="p">,</span><span class="s2">&#34;x0&#34;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&#34;y1&#34;</span><span class="o">:</span><span class="mf">0.850985545</span><span class="p">,</span><span class="s2">&#34;x1&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;line&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;width&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">}},{</span><span class="s2">&#34;type&#34;</span><span class="o">:</span><span class="s2">&#34;line&#34;</span><span class="p">,</span><span class="s2">&#34;xref&#34;</span><span class="o">:</span><span class="s2">&#34;paper&#34;</span><span class="p">,</span><span class="s2">&#34;yref&#34;</span><span class="o">:</span><span class="s2">&#34;y&#34;</span><span class="p">,</span><span class="s2">&#34;y0&#34;</span><span class="o">:</span><span class="mf">0.680788436</span><span class="p">,</span><span class="s2">&#34;x0&#34;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&#34;y1&#34;</span><span class="o">:</span><span class="mf">0.680788436</span><span class="p">,</span><span class="s2">&#34;x1&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;line&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;width&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">}},{</span><span class="s2">&#34;type&#34;</span><span class="o">:</span><span class="s2">&#34;line&#34;</span><span class="p">,</span><span class="s2">&#34;xref&#34;</span><span class="o">:</span><span class="s2">&#34;paper&#34;</span><span class="p">,</span><span class="s2">&#34;yref&#34;</span><span class="o">:</span><span class="s2">&#34;y&#34;</span><span class="p">,</span><span class="s2">&#34;y0&#34;</span><span class="o">:</span><span class="mf">0.5673236966666667</span><span class="p">,</span><span class="s2">&#34;x0&#34;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&#34;y1&#34;</span><span class="o">:</span><span class="mf">0.5673236966666667</span><span class="p">,</span><span class="s2">&#34;x1&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;line&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;width&#34;</span><span class="o">:</span><span class="mi">1</span><span class="p">}}],</span><span class="s2">&#34;margin&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;l&#34;</span><span class="o">:</span><span class="mi">25</span><span class="p">,</span><span class="s2">&#34;r&#34;</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&#34;b&#34;</span><span class="o">:</span><span class="mi">75</span><span class="p">,</span><span class="s2">&#34;t&#34;</span><span class="o">:</span><span class="mi">50</span><span class="p">,</span><span class="s2">&#34;pad&#34;</span><span class="o">:</span><span class="mi">4</span><span class="p">}},</span><span class="s2">&#34;config&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;responsive&#34;</span><span class="o">:</span><span class="kc">true</span><span class="p">}}</span>
-<span class="p">{{</span><span class="cm">/*&lt; /plot &gt;*/</span><span class="p">}}</span>
-</code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-js">{{/* plot figure1 &gt;*/}}
+fig = {&quot;data&quot;:[{&quot;x&quot;:[&quot;1024x1024x1&quot;,&quot;512x512x2&quot;,&quot;256x256x4&quot;,&quot;128x128x8&quot;,&quot;64x64x16&quot;,&quot;32x32x32&quot;,&quot;16x16x64&quot;,&quot;8x8x128&quot;,&quot;4x4x256&quot;,&quot;2x2x512&quot;,&quot;1x1x1024&quot;],&quot;y&quot;:[5.319377513,3.730183194,3.492960513,3.416568462,3.406160365,3.404795796,3.401629099,3.403963371,3.406568944,3.403851128,3.401489335],&quot;name&quot;:&quot;1 workers&quot;},{&quot;x&quot;:[&quot;1024x1024x1&quot;,&quot;512x512x2&quot;,&quot;256x256x4&quot;,&quot;128x128x8&quot;,&quot;64x64x16&quot;,&quot;32x32x32&quot;,&quot;16x16x64&quot;,&quot;8x8x128&quot;,&quot;4x4x256&quot;,&quot;2x2x512&quot;,&quot;1x1x1024&quot;],&quot;y&quot;:[5.105426336,2.403512541,1.769243872,1.720678808,1.705878765,1.702246865,1.705907853,1.731687894,1.819791773,1.954560985,3.404077505],&quot;name&quot;:&quot;2 workers&quot;},{&quot;x&quot;:[&quot;1024x1024x1&quot;,&quot;512x512x2&quot;,&quot;256x256x4&quot;,&quot;128x128x8&quot;,&quot;64x64x16&quot;,&quot;32x32x32&quot;,&quot;16x16x64&quot;,&quot;8x8x128&quot;,&quot;4x4x256&quot;,&quot;2x2x512&quot;,&quot;1x1x1024&quot;],&quot;y&quot;:[4.665434148,1.840141806,1.23159353,1.156602142,1.139298289,1.135465838,1.145931396,1.190932724,1.324346159,1.955651422,3.401555276],&quot;name&quot;:&quot;3 workers&quot;},{&quot;x&quot;:[&quot;1024x1024x1&quot;,&quot;512x512x2&quot;,&quot;256x256x4&quot;,&quot;128x128x8&quot;,&quot;64x64x16&quot;,&quot;32x32x32&quot;,&quot;16x16x64&quot;,&quot;8x8x128&quot;,&quot;4x4x256&quot;,&quot;2x2x512&quot;,&quot;1x1x1024&quot;],&quot;y&quot;:[3.277424857,1.508889857,1.000251994,0.877004851,0.855757891,0.851836168,0.859728354,0.902649372,1.012687753,1.955834209,3.404003372],&quot;name&quot;:&quot;4 workers&quot;},{&quot;x&quot;:[&quot;1024x1024x1&quot;,&quot;512x512x2&quot;,&quot;256x256x4&quot;,&quot;128x128x8&quot;,&quot;64x64x16&quot;,&quot;32x32x32&quot;,&quot;16x16x64&quot;,&quot;8x8x128&quot;,&quot;4x4x256&quot;,&quot;2x2x512&quot;,&quot;1x1x1024&quot;],&quot;y&quot;:[2.687810723,1.299930746,0.848919389,0.71687461,0.697146793,0.686797944,0.695021475,0.733307298,0.782258103,1.958691928,3.406197102],&quot;name&quot;:&quot;5 workers&quot;},{&quot;x&quot;:[&quot;1024x1024x1&quot;,&quot;512x512x2&quot;,&quot;256x256x4&quot;,&quot;128x128x8&quot;,&quot;64x64x16&quot;,&quot;32x32x32&quot;,&quot;16x16x64&quot;,&quot;8x8x128&quot;,&quot;4x4x256&quot;,&quot;2x2x512&quot;,&quot;1x1x1024&quot;],&quot;y&quot;:[2.419063112,1.172598442,0.770078822,0.636418239,0.59517132,0.58758251,0.598871324,0.655497364,0.722161112,1.955789037,3.40305645],&quot;name&quot;:&quot;6 workers&quot;},{&quot;x&quot;:[&quot;1024x1024x1&quot;,&quot;512x512x2&quot;,&quot;256x256x4&quot;,&quot;128x128x8&quot;,&quot;64x64x16&quot;,&quot;32x32x32&quot;,&quot;16x16x64&quot;,&quot;8x8x128&quot;,&quot;4x4x256&quot;,&quot;2x2x512&quot;,&quot;1x1x1024&quot;],&quot;y&quot;:[1.991583443,1.033091053,0.712726608,0.605582734,0.578420338,0.577574125,0.580463384,0.652894185,0.691949137,1.970116638,3.452580344],&quot;name&quot;:&quot;7 workers&quot;},{&quot;x&quot;:[&quot;1024x1024x1&quot;,&quot;512x512x2&quot;,&quot;256x256x4&quot;,&quot;128x128x8&quot;,&quot;64x64x16&quot;,&quot;32x32x32&quot;,&quot;16x16x64&quot;,&quot;8x8x128&quot;,&quot;4x4x256&quot;,&quot;2x2x512&quot;,&quot;1x1x1024&quot;],&quot;y&quot;:[1.942149854,0.947873093,0.683032395,0.605635427,0.575207906,0.573205018,0.580969231,0.653116053,0.72285752,1.954330764,3.407772597],&quot;name&quot;:&quot;8 workers&quot;}],&quot;layout&quot;:{&quot;title&quot;:&quot;Benchmark results&quot;,&quot;yaxis&quot;:{&quot;title&quot;:&quot;s/op&quot;,&quot;type&quot;:&quot;log&quot;,&quot;autorange&quot;:true},&quot;shapes&quot;:[{&quot;type&quot;:&quot;line&quot;,&quot;xref&quot;:&quot;paper&quot;,&quot;yref&quot;:&quot;y&quot;,&quot;y0&quot;:3.40394218,&quot;x0&quot;:0,&quot;y1&quot;:3.40394218,&quot;x1&quot;:1,&quot;line&quot;:{&quot;width&quot;:1}},{&quot;type&quot;:&quot;line&quot;,&quot;xref&quot;:&quot;paper&quot;,&quot;yref&quot;:&quot;y&quot;,&quot;y0&quot;:1.70197109,&quot;x0&quot;:0,&quot;y1&quot;:1.70197109,&quot;x1&quot;:1,&quot;line&quot;:{&quot;width&quot;:1}},{&quot;type&quot;:&quot;line&quot;,&quot;xref&quot;:&quot;paper&quot;,&quot;yref&quot;:&quot;y&quot;,&quot;y0&quot;:1.1346473933333334,&quot;x0&quot;:0,&quot;y1&quot;:1.1346473933333334,&quot;x1&quot;:1,&quot;line&quot;:{&quot;width&quot;:1}},{&quot;type&quot;:&quot;line&quot;,&quot;xref&quot;:&quot;paper&quot;,&quot;yref&quot;:&quot;y&quot;,&quot;y0&quot;:0.850985545,&quot;x0&quot;:0,&quot;y1&quot;:0.850985545,&quot;x1&quot;:1,&quot;line&quot;:{&quot;width&quot;:1}},{&quot;type&quot;:&quot;line&quot;,&quot;xref&quot;:&quot;paper&quot;,&quot;yref&quot;:&quot;y&quot;,&quot;y0&quot;:0.680788436,&quot;x0&quot;:0,&quot;y1&quot;:0.680788436,&quot;x1&quot;:1,&quot;line&quot;:{&quot;width&quot;:1}},{&quot;type&quot;:&quot;line&quot;,&quot;xref&quot;:&quot;paper&quot;,&quot;yref&quot;:&quot;y&quot;,&quot;y0&quot;:0.5673236966666667,&quot;x0&quot;:0,&quot;y1&quot;:0.5673236966666667,&quot;x1&quot;:1,&quot;line&quot;:{&quot;width&quot;:1}}],&quot;margin&quot;:{&quot;l&quot;:25,&quot;r&quot;:5,&quot;b&quot;:75,&quot;t&quot;:50,&quot;pad&quot;:4}},&quot;config&quot;:{&quot;responsive&quot;:true}}
+{{/*&lt; /plot &gt;*/}}
+</code></pre>
+
 <div class="figure">
 <div class="figure-plot" id="figure1">
 	Code could not finish, this are some reasons why this happen.
@@ -405,27 +192,16 @@ fig = {"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16
 <p>The next howto project will be of how to setup a Python Jupyter Notebook environment to easily generate this input.</p>
 
 <p>Just one last thing. To properly visualize the plot it is recommended to adjust the margins and enable responsive behaviour. This can be done easily appending the blocks layout and config to the figure.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">fig</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&#34;data&#34;</span><span class="o">:</span><span class="p">[],</span>
-  <span class="s2">&#34;layout&#34;</span><span class="o">:</span><span class="p">{</span>
-    <span class="s2">&#34;margin&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;l&#34;</span><span class="o">:</span><span class="mi">25</span><span class="p">,</span><span class="s2">&#34;r&#34;</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&#34;b&#34;</span><span class="o">:</span><span class="mi">75</span><span class="p">,</span><span class="s2">&#34;t&#34;</span><span class="o">:</span><span class="mi">50</span><span class="p">,</span><span class="s2">&#34;pad&#34;</span><span class="o">:</span><span class="mi">4</span><span class="p">}</span>
-  <span class="p">},</span>
-  <span class="s2">&#34;config&#34;</span><span class="o">:</span><span class="p">{</span><span class="s2">&#34;responsive&#34;</span><span class="o">:</span><span class="kc">true</span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-js">fig = {
+  &quot;data&quot;:[],
+  &quot;layout&quot;:{
+    &quot;margin&quot;:{&quot;l&quot;:25,&quot;r&quot;:5,&quot;b&quot;:75,&quot;t&quot;:50,&quot;pad&quot;:4}
+  },
+  &quot;config&quot;:{&quot;responsive&quot;:true}
+}
+</code></pre>
+
 <p>Everything else is covered by the plotly docs. Take a look to it and you will find really easy to draw any plot!</p>
 
 <h2 id="importing-plotly-js">Importing plotly.js</h2>
@@ -433,18 +209,12 @@ fig = {"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16
 <p>The last important thing that must be done is to import the plotly.js file into your webpage. How to do this depends on your template. You can add the plotly.js to your custom javacript files.</p>
 
 <p>In my case, I&rsquo;ve modified the post/single.html template, because I only need plots in posts, and included the following snippet in the headers section.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html">{{- if .Params.Plotly }}
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.plot.ly/plotly-1.50.0.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-{{- end }}</code></pre></td></tr></table>
-</div>
-</div>
+
+<pre><code class="language-html">{{- if .Params.Plotly }}
+&lt;script src=&quot;https://cdn.plot.ly/plotly-1.50.0.min.js&quot;&gt;&lt;/script&gt;
+{{- end }}
+</code></pre>
+
 <p>Now, if the post contains plots, I have to add a parameter <code>plotly: true</code> and the plotly.js will be imported.</p>
 
 <h2 id="conclusion">Conclusion</h2>
@@ -456,91 +226,14 @@ fig = {"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16
 <ul>
 <li><a href="https://plot.ly/javascript/">Plotly docs</a></li>
 <li><a href="https://gohugo.io/content-management/shortcodes/">Hugo sortcodes</a></li>
-</ul>
-    </div>
-
-    
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/plotly/">plotly</a>
-          <a href="/tags/hugo/">hugo</a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Python Jupyter Notebook With Plotly Support</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/blog/2019-12-02_weekend_learnings/">
-            <span class="next-text nav-default">2019-12-02 Weekend Learnings</span>
-            <span class="next-text nav-mobile">Next</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-    <script src="https://utteranc.es/client.js"
-            repo="MetalBlueberry/MetalBlueberry.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="mailto:metalblueberry@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://twitter.com/MetalBlueberry" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="https://www.linkedin.com/in/victorperezdomingo/" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="https://github.com/MetalBlueberry" class="iconfont icon-github" title="github"></a>
-  <a href="https://metalblueberry.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    Theme - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2019 - 
-    2020
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">MetalBlueberry</span>
-  </span>
-</div>
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
-
-
+</ul></article><section class="article labels"><a class="category" href=/categories/howto/>howto</a><a class="tag" href=/tags/plotly/>plotly</a><a class="tag" href=/tags/hugo/>hugo</a></section></div><section class="article navigation"><p><a class="link" href="/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/"><span class="li">&larr;</span>Python Jupyter Notebook With Plotly Support</a></p><p><a class="link" href="/post/blog/2019-12-02_weekend_learnings/"><span class="li">&rarr;</span>2019-12-02 Weekend Learnings</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
+    label="comment" theme="github-light" crossorigin="anonymous" async>
+    </script></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Víctor Pérez Domingo</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section>
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -551,12 +244,7 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
+</div>
 </body>
+
 </html>
