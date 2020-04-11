@@ -6,26 +6,21 @@
     <loc>https://metalblueberry.github.io/post/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/blog/2020-03-30-weekend_learnings/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/tags/testing/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-    <loc>https://metalblueberry.github.io/tags/weekend/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-    <loc>https://metalblueberry.github.io/tags/docker/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/tags/git/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/howto/2020-03-11_use_git_to_track_git_versions/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/howto/2020-02-14_nginx_auth_server_with_go/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/blog/2020-01-11_boredom/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-    <loc>https://metalblueberry.github.io/tags/leadership/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/tags/personal/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/blog/2019-12-22_weekend_learnings/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/blog/2019-12-15_weekend_learnings/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/tags/vscode/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/blog/2019-12-09_weekend_learnings/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-    <loc>https://metalblueberry.github.io/tags/plotly/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/tags/python/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/tags/hugo/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/blog/2019-12-02_weekend_learnings/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/blog/2019-11-24_avoid_github_government_block/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-    <loc>https://metalblueberry.github.io/tags/mandelbrot/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/howto/2019-11-17_mandelbrot_parallel_computation/</loc><lastmod>2020-04-10T11:39:35+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/tags/communication/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/post/blog/2019-11-03_leadership_training/</loc><lastmod>2020-04-10T11:35:19+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -39,6 +34,11 @@
     <loc>https://metalblueberry.github.io/</loc><lastmod>2020-04-10T12:33:01+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/social/</loc><lastmod>2020-04-10T12:33:01+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/categories/blog/</loc><lastmod>2020-04-09T22:45:33+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+    <loc>https://metalblueberry.github.io/tags/docker/</loc><lastmod>2020-04-11T10:55:02+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/tags/go/</loc><lastmod>2020-04-10T14:22:38+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
     <loc>https://metalblueberry.github.io/categories/howto/</loc><lastmod>2020-04-09T16:46:16+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-    <loc>https://metalblueberry.github.io/tags/</loc><lastmod>2020-04-10T14:22:38+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
+    <loc>https://metalblueberry.github.io/tags/leadership/</loc><lastmod>2020-04-11T10:55:02+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+    <loc>https://metalblueberry.github.io/tags/mandelbrot/</loc><lastmod>2020-04-10T23:04:23+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+    <loc>https://metalblueberry.github.io/tags/plotly/</loc><lastmod>2020-04-11T10:55:02+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+    <loc>https://metalblueberry.github.io/tags/</loc><lastmod>2020-04-10T14:22:38+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+    <loc>https://metalblueberry.github.io/tags/weekend/</loc><lastmod>2020-04-10T23:04:23+02:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

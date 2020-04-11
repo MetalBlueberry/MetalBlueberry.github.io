@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>2019-12-09 Weekend Learnings&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.e778412f201a2490c8fb7d8d58dc6f908d43f9f8aa7a41339e1ed0d8c627f94f4b190f843f122a0ab4ee3c0f33d8b8be.css" integrity="sha384-53hBLyAaJJDI&#43;32NWNxvkI1D&#43;fiqekEznh7Q2MYn&#43;U9LGQ&#43;EPxIqCrTuPA8z2Li&#43;"><meta name="twitter:card" content="summary"/>
+<meta name="supported-color-schemes" content="light dark"><title>2019-12-09 Weekend Learnings&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.f24fb4390592bdd6221d495c46da137f91725515f6e2dc9c6265dde5deb2989765cf743bd7cb87baeafb8ca62b554269.css" integrity="sha384-8k&#43;0OQWSvdYiHUlcRtoTf5FyVRX24tycYmXd5d6ymJdlz3Q718uHuur7jKYrVUJp"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="2019-12-09 Weekend Learnings"/>
 <meta name="twitter:description" content="I discovered that Go supports build to Web Assembly. What a great time to be alive. Also I&rsquo;ve spent some time changing the favicon of this blog and finished the post about Python Jupyter notebook with Plotly"/>
 
@@ -17,7 +17,7 @@
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">2019-12-09 Weekend Learnings</h1><p class="article date">Monday, December 9, 2019<span class="lastmod"> • edited Friday, April 10, 2020</span></p></section><article class="article markdown-body"><p>I discovered that Go supports build to Web Assembly. What a great time to be alive. Also I&rsquo;ve spent some time changing the favicon of this blog and finished the post about Python Jupyter notebook with Plotly</p>
+    <h1 class="article title">2019-12-09 Weekend Learnings</h1><p class="article date">December 9, 2019<span class="lastmod"> • edited April 10, 2020</span></p></section><article class="article markdown-body"><p>I discovered that Go supports build to Web Assembly. What a great time to be alive. Also I&rsquo;ve spent some time changing the favicon of this blog and finished the post about Python Jupyter notebook with Plotly</p>
 <p>So one weekend more and now I can say that I&rsquo;ve generated Web Assembly. Just the fact that Go can be compiled into WASM is incredible because it means that one day we will be able to write everything with the amazing Go syntax and run everywhere.</p>
 <p>I&rsquo;ve been following <a href="https://tutorialedge.net/golang/go-webassembly-tutorial/"target="_blank">this tutorial</a> that explains how to do a hello world in WASM. I&rsquo;ve modified it to run my Mandelbrot code in the browser and guess what. It actually works! The modifications are really simple. I took the test code used for benchmarks and modified it to return the jpg image encoded as base64. I&rsquo;ve set the number of Areas to 1, this is because WASM doesn&rsquo;t support multithread applications so there is no advantage in splitting the calculation over multiple goroutines.</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
@@ -93,9 +93,14 @@
 </div>
 </div><p>First, I ran this in Firefox, because is my default browser. The result is that the mandelbrot image is rendered in 6.743s. Well&hellip; the go version of this render takes 1.111s. So there is a clear problem of performance. Before throwing everything away and wait a few years before this is improved. I&rsquo;ve read somewhere that the performance of WASM is highly dependent on the browser. So I decided to try in Chrome. It took 1.576s to render the image. AMAZING! Sayonara, JavaScript.</p>
 <p>For fun, I loaded the page in my phone browser and it took about 10s. Not bad.</p>
-<p>Check out the full code in the <a href="https://github.com/MetalBlueberry/go-mandelbrot/tree/mandelbrot-wasm"target="_blank">mandelbrot repository</a> under cmd/mandelbrot-wasm in the mandelbrot-wasm branch</p></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/weekend/>weekend</a><a class="tag" href=/tags/go/>go</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2019-12-15_weekend_learnings/"><span class="li">&larr;</span>2019-12-15 Weekend Learnings</a></p><p><a class="link" href="/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/"><span class="li">&rarr;</span>Python Jupyter Notebook With Plotly Support</a></p></section><script src="https://utteranc.es/client.js" repo="MetalBlueberry/MetalBlueberry.github.io" issue-term="og:title"
-    label="comment" theme="github-light" crossorigin="anonymous" async>
-    </script></div><section id="footer" class="footer"><div class="footer-wrap">
+<p>Check out the full code in the <a href="https://github.com/MetalBlueberry/go-mandelbrot/tree/mandelbrot-wasm"target="_blank">mandelbrot repository</a> under cmd/mandelbrot-wasm in the mandelbrot-wasm branch</p></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/weekend/>weekend</a><a class="tag" href=/tags/go/>go</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2019-12-15_weekend_learnings/"><span class="li">&larr;</span>2019-12-15 Weekend Learnings</a></p><p><a class="link" href="/post/howto/2019-12-01_python_jupyter_notebook_with_plotly_support/"><span class="li">&rarr;</span>Python Jupyter Notebook With Plotly Support</a></p></section><section class="article discussion"><script 
+            src="https://utteranc.es/client.js" 
+            repo="MetalBlueberry/MetalBlueberry.github.io"
+            issue-term="og:title"
+            label=""
+            theme="github-light"
+            crossorigin="anonymous" async>
+        </script></section></div><section id="footer" class="footer"><div class="footer-wrap">
     <p class="copyright">Víctor Pérez Domingo</p>
     <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
         target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 

@@ -32,41 +32,11 @@
     </item>
     
     <item>
-      <title>weekend</title>
-      <link>/tags/weekend/</link>
-      <pubDate>Tue, 31 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/weekend/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>docker</title>
-      <link>/tags/docker/</link>
-      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/docker/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
       <title>git</title>
       <link>/tags/git/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/git/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>leadership</title>
-      <link>/tags/leadership/</link>
-      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/leadership/</guid>
       <description></description>
       
     </item>
@@ -92,16 +62,6 @@
     </item>
     
     <item>
-      <title>plotly</title>
-      <link>/tags/plotly/</link>
-      <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/plotly/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
       <title>python</title>
       <link>/tags/python/</link>
       <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
@@ -117,16 +77,6 @@
       <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/hugo/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>mandelbrot</title>
-      <link>/tags/mandelbrot/</link>
-      <pubDate>Sun, 17 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/mandelbrot/</guid>
       <description></description>
       
     </item>
@@ -152,12 +102,62 @@
     </item>
     
     <item>
+      <title>Docker</title>
+      <link>/tags/docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/docker/</guid>
+      <description>&lt;p&gt;Docker is the most popular containerization software. Almost every cloud application is running inside one.&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
       <title>Go</title>
       <link>/tags/go/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/tags/go/</guid>
       <description>My objective is to become a professional Go developer and I invest a good part of my personal time writing Go code.</description>
+      
+    </item>
+    
+    <item>
+      <title>Leadership</title>
+      <link>/tags/leadership/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/leadership/</guid>
+      <description>&lt;p&gt;Is the ability to guide others. A really useful skill and really hard to master.&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Mandelbrot</title>
+      <link>/tags/mandelbrot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/mandelbrot/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Benoit_Mandelbrot&#34;target=&#34;_blank&#34;&gt;Benoit Mandelbrot&lt;/a&gt; was an awesome mathematician mostly known by the &lt;a href=&#34;https://en.wikipedia.org/wiki/Mandelbrot_set&#34;target=&#34;_blank&#34;&gt;Mandelbrot&lt;/a&gt; set.&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Plotly</title>
+      <link>/tags/plotly/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/plotly/</guid>
+      <description>Plotly is an open source graphing library and is my favourite right now. It&amp;rsquo;s really easy to use and provides fully interactive plots.</description>
+      
+    </item>
+    
+    <item>
+      <title>Weekend</title>
+      <link>/tags/weekend/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/weekend/</guid>
+      <description>Weekend learnings. Usually short posts with diverse content that I&amp;rsquo;ve learned during the weekend.</description>
       
     </item>
     

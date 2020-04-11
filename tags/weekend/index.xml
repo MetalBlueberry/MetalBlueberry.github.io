@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>weekend on MetalBlueberry</title>
+    <title>Weekend on MetalBlueberry</title>
     <link>/tags/weekend/</link>
-    <description>Recent content in weekend on MetalBlueberry</description>
+    <description>Recent content in Weekend on MetalBlueberry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Víctor Pérez Domingo</copyright>
-    <lastBuildDate>Tue, 31 Mar 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/tags/weekend/index.xml" rel="self" type="application/rss+xml" />
     
