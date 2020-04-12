@@ -2,7 +2,9 @@ let accCounter=0;let totalCount=0;const minDeg=1;const maxDeg=72;const particles
 let url="https://uoka0pc550.execute-api.us-east-2.amazonaws.com"+post
 console.log("fetch claps from post "+url)
 function debounce(func,wait,immediate){var timeout;return function(){var context=this,args=arguments;var later=function(){timeout=null;if(!immediate)func.apply(context,args);};var callNow=immediate&&!timeout;clearTimeout(timeout);timeout=setTimeout(later,wait);if(callNow)func.apply(context,args);};};var updateCount=debounce(function(){console.log("send update to server")
-fetch(url,{method:"post",mode:'no-cors',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({post:post,count:accCounter})}).then((response)=>{console.log(response)
+fetch(url,{method:"post",mode:'no-cors',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({post:post,count:accCounter})}).then((response)=>{totalCount=totalCount+accCounter
+accCounter=0
+console.log(response)
 response.json().then((r)=>{console.log(r)})});},2000)
 fetch(url).then(async function(response){let data=await response.json()
 console.log(data)
