@@ -1,13 +1,13 @@
 let accCounter=0;let totalCount=0;const minDeg=1;const maxDeg=72;const particlesClasses=[{class:"pop-top"},{class:"pop-top-left"},{class:"pop-top-right"},{class:"pop-bottom-right"},{class:"pop-bottom-left"},];let post=window.location.pathname
 let url="https://uoka0pc550.execute-api.us-east-2.amazonaws.com"+post
-console.log("fetch claps from post "+url)
-function debounce(func,wait,immediate){var timeout;return function(){var context=this,args=arguments;var later=function(){timeout=null;if(!immediate)func.apply(context,args);};var callNow=immediate&&!timeout;clearTimeout(timeout);timeout=setTimeout(later,wait);if(callNow)func.apply(context,args);};};var updateCount=debounce(function(){console.log("send update to server")
-fetch(url,{method:"post",mode:'no-cors',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({post:post,count:accCounter})}).then((response)=>{totalCount=totalCount+accCounter
+function debounce(func,wait,immediate){var timeout;return function(){var context=this,args=arguments;var later=function(){timeout=null;if(!immediate)func.apply(context,args);};var callNow=immediate&&!timeout;clearTimeout(timeout);timeout=setTimeout(later,wait);if(callNow)func.apply(context,args);};};window.onload=function(){if(!document.getElementById('clap')){return}
+var updateCount=debounce(function(){console.log("send update to server")
+fetch(url,{method:"post",mode:"cors",headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({post:post,count:accCounter})}).then((response)=>{console.log(response)
+response.json().then((r)=>{console.log(r)
+totalCount=r.count
 accCounter=0
-console.log(response)
-response.json().then((r)=>{console.log(r)})});},2000)
+upClickCounter()})});},2000)
 fetch(url).then(async function(response){let data=await response.json()
-console.log(data)
 totalCount=data.count
 document.getElementById('totalCounter').innerText=totalCount;})
 document.getElementById('clap').onmouseover=function(){let sonarClap=document.getElementById('sonar-clap');sonarClap.classList.add('hover-active');setTimeout(()=>{sonarClap.classList.remove('hover-active');},2000);}
@@ -20,4 +20,4 @@ function runParticleAnimationCycle(el,className,duration){if(el&&!el.classList.c
 function animateParticles(particles,dur){addRandomParticlesRotation(particles.id,minDeg,maxDeg);for(let i=0;i<particlesClasses.length;i++){runParticleAnimationCycle(particles.children[i],particlesClasses[i].class,dur);}
 particles.classList.add('animating');setTimeout(()=>{particles.classList.remove('animating');},dur);}
 function getRandomInt(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
-function addRandomParticlesRotation(particlesName,minDeg,maxDeg){const particles=document.getElementById(particlesName);const randomRotationAngle=getRandomInt(minDeg,maxDeg)+'deg';particles.style.transform=`rotate(${randomRotationAngle})`;};
+function addRandomParticlesRotation(particlesName,minDeg,maxDeg){const particles=document.getElementById(particlesName);const randomRotationAngle=getRandomInt(minDeg,maxDeg)+'deg';particles.style.transform=`rotate(${randomRotationAngle})`;}};
