@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>hugo</title>
+      <link>/tags/hugo/</link>
+      <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/hugo/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
       <title>coronavirus</title>
       <link>/tags/coronavirus/</link>
       <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
@@ -67,16 +77,6 @@
       <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/python/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>/tags/hugo/</link>
-      <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/hugo/</guid>
       <description></description>
       
     </item>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>The Clap Button&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.36c851b72bf4d88a16c5b82f6c6113a16b9b6cf8e4368de220e22da181c8b64e2b41ab25f2d20d0c0fd634bab5a808c6.css" integrity="sha384-NshRtyv02IoWxbgvbGEToWubbPjkNo3iIOItoYHItk4rQasl8tINDA/WNLq1qAjG"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Clap Button"/>
+<meta name="twitter:description" content="I always loved the clap button from Medium because it allows people how much you actually like a post. So I just implemented that functionality for my blog."/>
+
+<meta property="og:title" content="The Clap Button" />
+<meta property="og:description" content="I always loved the clap button from Medium because it allows people how much you actually like a post. So I just implemented that functionality for my blog." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://metalblueberry.github.io/post/blog/2020-04-13_the-clap-button/" />
+<meta property="article:published_time" content="2020-04-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-13T16:06:24+02:00" />
+
+<meta name="author" content="MetalBlueberry">
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">The Clap Button</h1><p class="article date">April 13, 2020</p></section><article class="article markdown-body"><p>I always loved the clap button from Medium because it allows people how much you actually like a post. So I just implemented that functionality for my blog.</p>
+<p>If you are reading this, provably you are already seeing the clap button on the bottom left of the page. go ahead and try It! It is really addictive.</p>
+<h2 id="why">Why?</h2>
+<p>I enabled comments almost since the first day of the blog but <strong>I never got any comment</strong>. I know that there are some people reading my blog because Google analytics is telling me so and I&rsquo;ve received some comments in LinkedIn. I think that the problem is that people must be logged in to actually write and that&rsquo;s a huge effort.</p>
+<p>I would like to have a <strong>more human-like metric</strong> of the impact from my post. Something that I cannot get from Google analytics. And It turns out that <strong>the clap button</strong> is just perfect for this purpose.</p>
+<ul>
+<li>It&rsquo;s easy.</li>
+<li>It&rsquo;s funny to click it.</li>
+<li>It&rsquo;s anonymous.</li>
+</ul>
+<p>I hope people read my posts and click the clap button proportionally to how much they like the post.</p>
+<p><strong>did you try the button yet?</strong></p>
+<h2 id="how-it-works">How It works</h2>
+<p>The functionality of the button is really simple, when you hover it, you will see the total number of claps for the post that you are currently browsing. If you click It, the following sequence happens</p>
+<ol>
+<li>Confetti will fly out of the button.</li>
+<li>The total number of claps will be increased by 1.</li>
+<li>Your claps will increase by 1.</li>
+<li>I will be happier.</li>
+</ol>
+<p>If you click fast enough, you can get up to 3 times more confetti than with a single click.</p>
+<div class="admonition warning"><p class="admonition-title">warning</p>
+  
+All the claps submitted cannot be removed. Just like in real life.
+
+</div>
+<p>In case you are curious, the backend is using the following technologies.</p>
+<ul>
+<li><a href="/tags/go">Go</a></li>
+<li>AWS Lambda</li>
+<li>AWS Dynamodb</li>
+<li>AWS HTTP API Gateway</li>
+</ul>
+<p>If you want me to open source the code, just click the clap button. If we reach 1000 claps, I will do it.</p>
+<p>I think 1000 claps is a reasonable number, If one person is really interested, he could reach 1000 alone. Clicking at a rate of 5 clicks/second it will take 3.3 minutes to reach 1000 claps.</p>
+<h2 id="alternatives">Alternatives</h2>
+<p>First, I found that someone already did a clap button ready to plugin in your page. <a href="https://applause-button.com/"target="_blank">Applause</a> also provides the backend and is totally open source. The problem is that I don&rsquo;t like the approach of creating html from javascript and that&rsquo;s exactly what the code is doing. Also, the clap button has some kind of limitation because It doesn&rsquo;t allow you to click as many times as you like. In general, I was disappointed.</p>
+<p>Then I found <a href="https://gist.github.com/JonathanDn/09c3e0f037c4c52efcf56ee0878d5e4c"target="_blank">this Github gist</a> with a clap button without a backend. I took that code and applied some modifications to CSS to style the button for my page and to Javascript to connect to my backend. You can see the result here!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Right now the backend is really simple, It just increments a value in Dynamodb and I don&rsquo;t have any sense of how many different people actually clicked the button. Maybe I will work on that for the future.</p>
+<p>did you know that you can also leave comments?</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://gist.github.com/JonathanDn/09c3e0f037c4c52efcf56ee0878d5e4c">https://gist.github.com/JonathanDn/09c3e0f037c4c52efcf56ee0878d5e4c</a></li>
+<li><a href="https://applause-button.com/">https://applause-button.com/</a></li>
+</ul></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/hugo/>hugo</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2020-04-06_coronavirus_trend_in_spain/"><span class="li">&rarr;</span>Coronavirus Trend In Spain</a></p></section><section class="article discussion"><script 
+            src="https://utteranc.es/client.js" 
+            repo="MetalBlueberry/MetalBlueberry.github.io"
+            issue-term="og:title"
+            label=""
+            theme="github-light"
+            crossorigin="anonymous" async>
+        </script></section>
+<div class="claps">
+  <div class="canvas">
+    <div id="totalCounter" class="total-counter"></div>
+
+    <div id="clap" class="clap-container">
+      <i class="clap-icon fa fa-hand-paper-o"></i>
+    </div>
+
+    <div id="clicker" class="click-counter">
+      <span class="counter"></span>
+    </div>
+
+    <div id="sonar-clap" class="clap-container-sonar"></div>
+
+    <div id="particles" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+    <div id="particles-2" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+    <div id="particles-3" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+  </div>
+</div></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Víctor Pérez Domingo</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-150427130-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="/js/core.min.6d58ae06d163dcf4ea5254fc7006ccd56745fa6fa5feb2b2e417538d70efb617823f575f338d25d3475ad418d50ae9b1.js" integrity="sha384-bViuBtFj3PTqUlT8cAbM1WdF&#43;m&#43;l/rKy5BdTjXDvtheCP1dfM40l00da1BjVCumx"></script></div>
+</body>
+
+</html>

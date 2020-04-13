@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>The Clap Button</title>
+      <link>/post/blog/2020-04-13_the-clap-button/</link>
+      <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/blog/2020-04-13_the-clap-button/</guid>
+      <description>&lt;p&gt;I always loved the clap button from Medium because it allows people how much you actually like a post. So I just implemented that functionality for my blog.&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
       <title>Coronavirus Trend In Spain</title>
       <link>/post/blog/2020-04-06_coronavirus_trend_in_spain/</link>
       <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>

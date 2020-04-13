@@ -1,8 +1,7 @@
 let accCounter=0;let submitted=0;let totalCount=0;const minDeg=1;const maxDeg=72;const particlesClasses=[{class:"pop-top"},{class:"pop-top-left"},{class:"pop-top-right"},{class:"pop-bottom-right"},{class:"pop-bottom-left"},];let post=window.location.pathname
 let url="https://uoka0pc550.execute-api.us-east-2.amazonaws.com"+post
 function debounce(func,wait,immediate){var timeout;return function(){var context=this,args=arguments;var later=function(){timeout=null;if(!immediate)func.apply(context,args);};var callNow=immediate&&!timeout;clearTimeout(timeout);timeout=setTimeout(later,wait);if(callNow)func.apply(context,args);};};window.onload=function(){if(!document.getElementById('clap')){return}
-var updateCount=debounce(function(){console.log("send update with accCounter  "+accCounter+" and submitted "+submitted+"result "+(accCounter-submitted))
-fetch(url,{method:"post",mode:"cors",headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({post:post,count:accCounter-submitted})}).then((response)=>{response.json().then((r)=>{totalCount=r.count
+var updateCount=debounce(function(){fetch(url,{method:"post",mode:"cors",headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({post:post,count:accCounter-submitted})}).then((response)=>{response.json().then((r)=>{totalCount=r.count
 submitted=accCounter
 drawClickCounter()})});},2000)
 fetch(url).then(async function(response){let data=await response.json()
@@ -11,8 +10,7 @@ document.getElementById('totalCounter').innerText=totalCount;})
 document.getElementById('clap').onmouseover=function(){let sonarClap=document.getElementById('sonar-clap');sonarClap.classList.add('hover-active');setTimeout(()=>{sonarClap.classList.remove('hover-active');},2000);}
 document.getElementById('clap').onclick=function(){const clap=document.getElementById('clap');const clickCounter=document.getElementById("clicker");const particles=document.getElementById('particles');const particles2=document.getElementById('particles-2');const particles3=document.getElementById('particles-3');clap.classList.add('clicked');upClickCounter();runAnimationCycle(clap,'scale');if(!particles.classList.contains('animating')){animateParticles(particles,700);}else if(!particles2.classList.contains('animating')){animateParticles(particles2,700);}else if(!particles3.classList.contains('animating')){animateParticles(particles3,700);}
 updateCount()}
-function upClickCounter(){const clickCounter=document.getElementById("clicker");const totalClickCounter=document.getElementById('totalCounter');accCounter++;console.log(accCounter)
-drawClickCounter()
+function upClickCounter(){const clickCounter=document.getElementById("clicker");const totalClickCounter=document.getElementById('totalCounter');accCounter++;drawClickCounter()
 if(clickCounter.classList.contains('first-active')){runAnimationCycle(clickCounter,'active');}else{runAnimationCycle(clickCounter,'first-active');}
 runAnimationCycle(totalClickCounter,'fader');}
 function drawClickCounter(){const clickCounter=document.getElementById("clicker");const totalClickCounter=document.getElementById('totalCounter');clickCounter.children[0].innerText='+'+accCounter;totalClickCounter.innerText=totalCount+accCounter-submitted;}
