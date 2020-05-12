@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Víctor Pérez Domingo</copyright>
-    <lastBuildDate>Mon, 13 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 May 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go Plotly</title>
+      <link>/post/blog/2020-05-11_go_plotly/</link>
+      <pubDate>Mon, 11 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/blog/2020-05-11_go_plotly/</guid>
+      <description>&lt;p&gt;Let me introduce you to &lt;a href=&#34;https://github.com/MetalBlueberry/go-plotly&#34;target=&#34;_blank&#34;&gt;Go Plotly&lt;/a&gt;. This module will help you to build valid Plotly json to easily create figures from Go!&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>The Clap Button</title>

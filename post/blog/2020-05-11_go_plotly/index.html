@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Go Plotly&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.b69232d3a6a8e4a5e8710c8f3745c8e12f1c15ffef612db17ce04c64f908f749a371970efabd56cf8578b92ee1ac2f8a.css" integrity="sha384-tpIy06ao5KXocQyPN0XI4S8cFf/vYS2xfOBMZPkI90mjcZcO&#43;r1Wz4V4uS7hrC&#43;K"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go Plotly"/>
+<meta name="twitter:description" content="Let me introduce you to Go Plotly. This module will help you to build valid Plotly json to easily create figures from Go!"/>
+
+<meta property="og:title" content="Go Plotly" />
+<meta property="og:description" content="Let me introduce you to Go Plotly. This module will help you to build valid Plotly json to easily create figures from Go!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://metalblueberry.github.io/post/blog/2020-05-11_go_plotly/" />
+<meta property="article:published_time" content="2020-05-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-12T21:35:01+02:00" />
+
+<meta name="author" content="MetalBlueberry">
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Go Plotly</h1><p class="article date">May 11, 2020<span class="lastmod"> • edited May 12, 2020</span></p></section><article class="article markdown-body"><p>Let me introduce you to <a href="https://github.com/MetalBlueberry/go-plotly"target="_blank">Go Plotly</a>. This module will help you to build valid Plotly json to easily create figures from Go!</p>
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="plotly.png#m"><img  src="plotly.png#m"
+        alt="plotly"/></a></p>
+<h2 id="the-reasons-behind">The reasons behind</h2>
+<p>I&rsquo;ve been working with Plotly for a long time and I find It really powerful without loosing intuitive usage. The ecosystem is really big and is growing every day.</p>
+<p>Every time I needed to create a Plotly figure from Go code, I created a structure matching the <a href="https://plotly.com/javascript/"target="_blank">Plotly.js</a> expected input and used that to generate the json objects. Although this approach works well, it escalates really poorly and is error prone.</p>
+<p>One day, I decided to write a go-plotly package with all this figures that I frequently used to avoid those little differences between different projects that make everything confusing due to different naming on each project or missing fields. The idea was to have a Go structure with all the field for each available figure in Plotly. At this point, I started to read trough the <a href="https://plotly.com/javascript/reference/"target="_blank">plotly reference</a> and I realised that there was a LOT to be written down. So this approach was easily put aside.</p>
+<p>Another day, I was learning about [JSON schemas] and I found that Plotly provided an schema for their plots and was quickly excited for the possibilities. But it turns out that the schema provided by Plotly doesn&rsquo;t follow the standard JSON schema. In fact, It looks like a custom schema made just for Plotly. Theoretically, It could be possible to read this file and use it from Go to generate figures. But It also looked like a huge task.</p>
+<p>I was reading a post about generics in Go where someone proposes to use code generation instead of generics. arguing that code generation was easier to understand and debug in case something went wrong. what if I could use the Plotly schema to generate the structs to hold the figure data? This is something that could be reasonably achieved.</p>
+<p>Learning about how to write a blog in Markdown, I discovered <a href="https://gohugo.io/"target="_blank">Hugo</a> and this Blog was born. During the process, I gained interest about the powerful Go text <a href="https://golang.org/pkg/text/template/"target="_blank">templating system</a> and read some post of people generating all kind of text data using it. I even found a generics implementation using text templates. so, could I use go templates to generate Go code?</p>
+<p>A month ago I got angry about swagger code generators because most of them didn&rsquo;t generate code that could be updated after a modification in the swagger file and I wonder how hard it could be to generate code from the swagger file. This leaded me to implement a quick tool to parse render go templates based on json input called <a href="https://github.com/MetalBlueberry/plate"target="_blank">Plate</a>.</p>
+<p>Last but not least, I started a serious project that required real time Plots in frontend. This has been the reason why I collected the will power to start working on go-plotly. I wrote a few templates with <a href="https://github.com/MetalBlueberry/plate"target="_blank">Plate</a> and formatted the output with <code>go fmt</code>. Et voila! <a href="https://github.com/MetalBlueberry/go-plotly"target="_blank">go-plotly</a> was born.</p>
+<h1 id="how-it-works">How it works</h1>
+<p>All the necessary information is in the <a href="https://github.com/MetalBlueberry/go-plotly"target="_blank">readme</a> and you can check the examples section to get an idea of how it works.</p>
+<p>Apart from the autogenerated structs, I&rsquo;ve implemented an small offline package that generates html files with the necessary code to display the images. This allows you to write code like this</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">import</span> (
+    grob <span style="color:#f1fa8c">&#34;github.com/MetalBlueberry/go-plotly/graph_objects&#34;</span>
+    <span style="color:#f1fa8c">&#34;github.com/MetalBlueberry/go-plotly/offline&#34;</span>
+)
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+    fig <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>grob.Fig{
+        Data: grob.Traces{
+            <span style="color:#ff79c6">&amp;</span>grob.Bar{
+                Type: grob.TraceTypeBar,
+                X:    []<span style="color:#8be9fd">float64</span>{<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>},
+                Y:    []<span style="color:#8be9fd">float64</span>{<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>},
+            },
+        },
+        Layout: <span style="color:#ff79c6">&amp;</span>grob.Layout{
+            Title: <span style="color:#ff79c6">&amp;</span>grob.LayoutTitle{
+                Text: <span style="color:#f1fa8c">&#34;A Figure Specified By Go Struct&#34;</span>,
+            },
+        },
+    }
+
+    offline.<span style="color:#50fa7b">Show</span>(fig)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>Equivalent to python code</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="color:#ff79c6">import</span> plotly.graph_objects <span style="color:#ff79c6">as</span> go
+<span style="color:#ff79c6">import</span> plotly.io <span style="color:#ff79c6">as</span> pio
+
+<span style="color:#6272a4"># Using graph_objects</span>
+fig <span style="color:#ff79c6">=</span> go<span style="color:#ff79c6">.</span>Figure(
+    data<span style="color:#ff79c6">=</span>[
+        go<span style="color:#ff79c6">.</span>Bar(
+            x<span style="color:#ff79c6">=</span>[<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>],
+            y<span style="color:#ff79c6">=</span>[<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>],
+        ),
+    ],
+    layout_title_text<span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;A Figure Specified By Python Dictionary&#34;</span>,
+)
+
+pio<span style="color:#ff79c6">.</span>show(fig)
+
+<span style="color:#6272a4"># Using dict syntax</span>
+fig <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">dict</span>({
+    <span style="color:#f1fa8c">&#34;data&#34;</span>: [
+        {
+            <span style="color:#f1fa8c">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+            <span style="color:#f1fa8c">&#34;x&#34;</span>: [<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>],
+            <span style="color:#f1fa8c">&#34;y&#34;</span>: [<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">2</span>]
+        }
+    ],
+    <span style="color:#f1fa8c">&#34;layout&#34;</span>: {
+        <span style="color:#f1fa8c">&#34;title&#34;</span>: {
+            <span style="color:#f1fa8c">&#34;text&#34;</span>: <span style="color:#f1fa8c">&#34;A Figure Specified By Python Dictionary&#34;</span>
+        }
+    }
+})
+
+pio<span style="color:#ff79c6">.</span>show(fig)
+</code></pre></td></tr></table>
+</div>
+</div><p>And javascript</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-js" data-lang="js"><span style="color:#8be9fd;font-style:italic">var</span> fig {
+    data<span style="color:#ff79c6">:</span> [
+        {
+            type<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;bar&#34;</span>,
+            x<span style="color:#ff79c6">:</span> [<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>],
+            y<span style="color:#ff79c6">:</span> [<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">2</span>]
+        }
+    ],
+    layout<span style="color:#ff79c6">:</span> {
+        title<span style="color:#ff79c6">:</span> {
+            text<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;A Figure Specified By Python Dictionary&#34;</span>
+        }
+    }
+}
+
+Plotly.newPlot(<span style="color:#f1fa8c">&#39;myDiv&#39;</span>, fig);
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="conclusions">Conclusions</h2>
+<p>This library establishes a good foundation to start other projects related to the plotly ecosystem. I&rsquo;m thinking use It to create a real time plotting library inspired by Plotly Dash. I will let you know of the progress.</p></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/go/>Go</a><a class="tag" href=/tags/plotly/>Plotly</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2020-04-13_the-clap-button/"><span class="li">&rarr;</span>The Clap Button</a></p></section><section class="article discussion"><script 
+            src="https://utteranc.es/client.js" 
+            repo="MetalBlueberry/MetalBlueberry.github.io"
+            issue-term="og:title"
+            label=""
+            theme="github-light"
+            crossorigin="anonymous" async>
+        </script></section>
+<div class="claps">
+  <div class="canvas">
+    <div id="totalCounter" class="total-counter"></div>
+
+    <div id="clap" class="clap-container">
+      <i class="clap-icon fa fa-hand-paper-o"></i>
+    </div>
+
+    <div id="clicker" class="click-counter">
+      <span class="counter"></span>
+    </div>
+
+    <div id="sonar-clap" class="clap-container-sonar"></div>
+
+    <div id="particles" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+    <div id="particles-2" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+    <div id="particles-3" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+  </div>
+</div></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Víctor Pérez Domingo</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-150427130-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="/js/core.min.6d58ae06d163dcf4ea5254fc7006ccd56745fa6fa5feb2b2e417538d70efb617823f575f338d25d3475ad418d50ae9b1.js" integrity="sha384-bViuBtFj3PTqUlT8cAbM1WdF&#43;m&#43;l/rKy5BdTjXDvtheCP1dfM40l00da1BjVCumx"></script></div>
+</body>
+
+</html>
