@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Write code for humans, not for computers&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.1baa80741845b136b835806559f2ee405c2e0bb773e57519c656f30e968ae10295bc89dabda48a532b648c6b69cc9589.css" integrity="sha384-G6qAdBhFsTa4NYBlWfLuQFwuC7dz5XUZxlbzDpaK4QKVvInavaSKUytkjGtpzJWJ"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Write code for humans, not for computers"/>
+<meta name="twitter:description" content="Any fool can write code that a computer can understand. Good programmers write code that humans can understand."/>
+
+<meta property="og:title" content="Write code for humans, not for computers" />
+<meta property="og:description" content="Any fool can write code that a computer can understand. Good programmers write code that humans can understand." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://metalblueberry.github.io/post/blog/2020-06-14_write_code_for_humans_not_for_computers/" />
+<meta property="article:published_time" content="2020-06-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-16T20:18:07+02:00" />
+
+<meta name="author" content="MetalBlueberry">
+
+<script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"><body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/android-chrome-512x512.png" alt /><span class="site name">MetalBlueberry</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Write code for humans, not for computers</h1><p class="article date">June 14, 2020<span class="lastmod"> • edited June 16, 2020</span></p></section><article class="article markdown-body"><p>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</p>
+<h2 id="inspiration">Inspiration</h2>
+<div class="quote">
+<div class="quote-body">
+<p>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</p>
+</div>
+<div class="quote-signature">
+    Martin Fowler, 2008.
+</div>
+</div>
+<div class="quote">
+<div class="quote-body">
+<p>Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live</p>
+</div>
+<div class="quote-signature">
+    John F. Woods, 1991
+</div>
+</div>
+<h2 id="introduction">Introduction</h2>
+<p>Everyone is a beginner at some point. If you learned to code in the university with a teacher that forced you to write good code, you have a good starting point. But sadly, most people learn on their own or with <strong>no proper guidance in code quality</strong>. Some people eventually realize that the code quality is important, but they <strong>lack of the time</strong> to do it. This is the typical situation when you work under pressure or time constrains.</p>
+<p>It is hard to explain to you boss that you need another week to prepare your code when it is &ldquo;already working&rdquo;. So you ship the code anyway because you can not afford to spent one week more. One year later, a simple upgrade is required and when you boss asks about timing, you have to explain that it will take 2 weeks. Also, the chances of breaking something are really high, because not even you remember how the code actually works.</p>
+<p>Code quality alone wont solve the previous issue, but together with a good test coverage, it can considerably reduce the pain and improve the quality of the application for both users and programmers.</p>
+<h2 id="sources-of-poor-quality-code">Sources of poor quality code</h2>
+<h3 id="dark-wizards">Dark Wizards</h3>
+<p>To see if you are writing good code, you can question yourself. <em>how long it will take to fully transfer this project to another person?</em> If the answer is <em>uff, I don&rsquo;t know&hellip; a few months&hellip;</em> your code is like a <strong>magic scroll</strong>. most people can run it, but no body understand how it works. Strangely, I&rsquo;ve seen several places where the <strong>IT department</strong> consist in <strong>dark wizards</strong> that craft scrolls to magically do things. The less people that understand your scroll, the more powerfully it is. Just like if life were a video game.</p>
+<p>Writing spells is fun, but it is definitely not a good idea if you intend to work ast a team. If you still do not understand what a spell is, let me show you a few examples in the language that only the darkest of the wizards can master. <strong>bash</strong>. I challenge you to tell me what it does without looking at the source.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># http://www.bashoneliners.com/oneliners/269/</span>
+netstat -tn 2&gt;/dev/null | grep :80 | awk <span style="color:#f1fa8c">&#39;{print $5}&#39;</span> | cut -d: -f1 | sort | uniq -c | sort -nr | head
+
+<span style="color:#6272a4"># http://www.bashoneliners.com/oneliners/277/</span>
+find . -print0 | xargs -0 -P <span style="color:#bd93f9">40</span> -n <span style="color:#bd93f9">1</span> sh -c <span style="color:#f1fa8c">&#39;ffmpeg -i &#34;$1&#34; 2&gt;&amp;1 | grep &#34;Duration:&#34; | cut -d &#34; &#34; -f 4 | sed &#34;s/.$//&#34; | tr &#34;.&#34; &#34;:&#34;&#39;</span> - | awk -F <span style="color:#f1fa8c">&#39;:&#39;</span> <span style="color:#f1fa8c">&#39;{ sum1+=$1; sum2+=$2; sum3+=$3; sum4+=$4; if (sum4 &gt; 100) { sum3+=1; sum4=0 }; if (sum3 &gt; 60) { sum2+=1; sum3=0 }; if (sum2 &gt; 60) { sum1+=1; sum2=0 } if (NR % 100 == 0) { printf &#34;%.0f:%.0f:%.0f.%.0f\n&#34;, sum1, sum2, sum3, sum4 } } END { printf &#34;%.0f:%.0f:%.0f.%.0f\n&#34;, sum1, sum2, sum3, sum4 }&#39;</span>
+
+<span style="color:#6272a4"># http://www.bashoneliners.com/oneliners/271/</span>
+man -k . | awk <span style="color:#f1fa8c">&#39;{ print $1 &#34; &#34; $2 }&#39;</span> | dmenu -i -p man | awk <span style="color:#f1fa8c">&#39;{ print $2 &#34; &#34; $1 }&#39;</span> | tr -d <span style="color:#f1fa8c">&#39;()&#39;</span> | xargs man -t | ps2pdf - - | zathura -
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>If I were to hire a programmer. I would like to hire an actual programmer and not a wizard.</p>
+</blockquote>
+<h3 id="copy-paster">Copy paster</h3>
+<p>Another source of poor quality code is <strong>Stack overflow</strong>. Although copy paste is an essential skill for any developer, copy paste without understanding yields to code that not even you understands and side effects that will be really hard to foresee.</p>
+<blockquote>
+<p>The rule of thumbs is, <strong>never use code that you do not understand</strong>.</p>
+</blockquote>
+<p>I think this is better explained by an example.</p>
+<p>Let&rsquo;s imagine the situation where a developer is looking for &ldquo;go upload file&rdquo; and he may end <a href="https://astaxie.gitbooks.io/build-web-application-with-golang/en/04.5.html"target="_blank">here</a>. If you simply copy and paste this code into your app, you will have a working file upload server&hellip; with at least one security issue&hellip;</p>
+<p>When you upload the file, the application uses the field &ldquo;name&rdquo; from the file upload to save the file to the disk appending the name to the download directory. The issue is that while the browser always sends only the file name, a request can be crafted to upload a different filename with a relative path. This will allow a caller to upload any file to potentially any directory in the server machine using relative paths. You can test this by yourself following the page tutorial and modifying the go client side in the following block to upload shell scripts wherever you want.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#6272a4">// old: fileWriter, err := bodyWriter.CreateFormFile(&#34;uploadfile&#34;, filename)
+</span><span style="color:#6272a4"></span>fileWriter, err <span style="color:#ff79c6">:=</span> bodyWriter.<span style="color:#50fa7b">CreateFormFile</span>(<span style="color:#f1fa8c">&#34;uploadfile&#34;</span>, <span style="color:#f1fa8c">&#34;../../hack.sh&#34;</span>)
+<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+    fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;error writing to buffer&#34;</span>)
+    <span style="color:#ff79c6">return</span> err
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>Good thing is that you could have avoided that by reading the documentation from <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition#Directives"target="_blank">Mozilla</a>.</p>
+<div class="quote">
+<div class="quote-body">
+<p><strong>filename</strong>: Is followed by a string containing the original name of the file transmitted. <strong>The filename is always optional and must not be used blindly by the application</strong>: path information should be stripped, and conversion to the server file system rules should be done. This parameter provides mostly indicative information. When used in combination with Content-Disposition: attachment, it is used as the default filename for an eventual &ldquo;Save As&rdquo; dialogue presented to the user.</p>
+</div>
+<div class="quote-signature">
+    Mozilla documentation
+</div>
+</div>
+<blockquote>
+<p>Always read the documentation.</p>
+</blockquote>
+<h3 id="open-source-curse">Open source curse</h3>
+<p>Open source is a double edge sword. It allows you to quickly add new functionalities to you codebase with little effort but, what happens if you find a bug in an library? When you work with a private company, you can call the company and request the bug to be fixed, but when you are using Open Source&hellip; there is no one to call aside from opening an issue in Github and hope that someone fixes it.</p>
+<p>Reached this point, people usually forgets about one of the greatest advantages of Open Source. YOU can fix the issue. You can download the source code and dig deep into the code allow you to keep moving. Also, you can merge this changes back to the original repository so others doesn&rsquo;t have to fix it again. win-win relationship.</p>
+<p>Of course, not everyone has the knowledge or the time to fix a bug in a big Open Source project, so it would be wise to do no import an Open Source into your code base unless</p>
+<ul>
+<li>You can maintain the code.</li>
+<li>You trust that the community is big enough to maintain it for you.</li>
+</ul>
+<p>Also, it doesn&rsquo;t hurt to read trough the code base even if you trust the community. It will give you an idea of the quality of the code and the future that it may have.</p>
+<h3 id="never-refactor">Never Refactor</h3>
+<p>Provably you already know that it is a bad idea to name a variable &ldquo;aa&rdquo; or to write 1000 lines function with 8 levels of indentation. The point is,things doesn&rsquo;t get that dirty right the way. Usually you already have a variable &ldquo;a&rdquo; that makes sense but you suddenly have to add another variable &ldquo;a&rdquo; and you don&rsquo;t have time to think a better name. The same for the 1000 lines function, all started with a simple 10 lines function that grow up day by day.</p>
+<p>No one can write perfectly readable code without thinking it twice, and that is when refactor comes into play.</p>
+<p>You could easily read your code again and rename your variables &ldquo;a&rdquo; and &ldquo;aa&rdquo; to something better like &ldquo;p0_a&rdquo; and &ldquo;p1_a&rdquo; and the long function can be split into smaller functions for sure.</p>
+<div class="expand">
+    <div class="expand-label" id="expand-label-3" style="cursor: pointer;">
+        <span>
+            
+            
+            see the code that I&#39;ve in mind
+            
+        </span>
+    </div>
+    <div class="expand-content" id="expand-content-3" style="display: none;">
+        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#6272a4">//bad
+</span><span style="color:#6272a4"></span>a <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">1</span>
+b <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">2</span>
+c <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">3</span>
+
+x <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">1</span>
+
+p0 <span style="color:#ff79c6">:=</span> a<span style="color:#ff79c6">*</span>x<span style="color:#ff79c6">*</span>x<span style="color:#ff79c6">+</span>b<span style="color:#ff79c6">*</span>x<span style="color:#ff79c6">+</span>c
+
+aa <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">1</span>
+bb <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">2</span>
+cc <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">3</span>
+
+xx <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">1</span>
+
+p1 <span style="color:#ff79c6">:=</span> aa<span style="color:#ff79c6">*</span>xx<span style="color:#ff79c6">*</span>xx<span style="color:#ff79c6">+</span>bb<span style="color:#ff79c6">*</span>xx<span style="color:#ff79c6">+</span>c
+
+<span style="color:#6272a4">// better
+</span><span style="color:#6272a4"></span>p0_a <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">1</span>
+p0_b <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">2</span>
+p0_c <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">3</span>
+
+p0_x <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">1</span>
+
+p0 <span style="color:#ff79c6">:=</span> p0_a<span style="color:#ff79c6">*</span>p0_x<span style="color:#ff79c6">*</span>p0_x<span style="color:#ff79c6">+</span>p0_b<span style="color:#ff79c6">*</span>p0_x<span style="color:#ff79c6">+</span>p0_c
+
+p1_a <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">1</span>
+p1_b <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">2</span>
+p1_c <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">3</span>
+
+p1_x <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">1</span>
+
+p1 <span style="color:#ff79c6">:=</span> p1_a<span style="color:#ff79c6">*</span>p1_x<span style="color:#ff79c6">*</span>p1_x<span style="color:#ff79c6">+</span>p1_b<span style="color:#ff79c6">*</span>p1_x<span style="color:#ff79c6">+</span>p1_c
+
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+    <script>
+        function collapse(e) {
+            e = e || window.event;
+            var target = e.target || e.srcElement,
+                text = target.textContent || target.innerText;
+
+            console.log("event received")
+            console.log(target)
+
+            target.classList.toggle("active");
+            var content = this.nextElementSibling;
+            console.log(content)
+            console.log(content.style.display)
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                console.log(content.style.display)
+            } else {
+                content.style.display = "block";
+            }
+        }
+        document.getElementById("expand-label-3").addEventListener("click", collapse);
+    </script>
+</div>
+<p>So the lesson here is take your time to refactor your code. If you wait too long&hellip; it will bite you.</p>
+<h2 id="the-price-of-the-quality">The price of the quality</h2>
+<p>From my point of view, Some people don&rsquo;t invest time in code quality because they <strong>cannot see immediate benefits</strong> in doing so. Investing time in refactoring to achieve good quality code and improving test coverage can be seen as <strong>preventive maintenance</strong>. Does having a high test coverage and a good code quality guarantee that you won&rsquo;t have any bug? of course not, neither doing proper maintenance to your car will prevent it from breaking, but it will definitely reduce the chances.</p>
+<blockquote>
+<p>Quality is an investment.</p>
+</blockquote>
+<p>There are situations where developers argue that they won&rsquo;t end maintaining the code, so the code quality doesn&rsquo;t matter. Just read the second quote at the begging of this post again. Chances are that the future maintainer wont be a psychopath, but if he is a nice person, you will be making his work a lot harder. That person will think that the company behind that code is not a good company and that&rsquo;s really bad for future projects. In the other hand, If the code quality is high, that person will be immensely grateful and will recommend anyone your company for doing a great job. Remember, it is an investment.</p>
+<p>Also, after a few months without reading your own code, it feels like code developed by a total stranger. so in some cases you will be the psychopath wanting to kill yourself. So <strong>do your future self a favour and clean your code</strong>.</p>
+<p>Have you ever measure the cost of a bug? Of course, it depends on the kind of bug, but if the client sees it, even if it is something small, the cost is really high. You are <strong>loosing confidence</strong> and that is really hard to get in the first place and even harder to recover.</p>
+<h2 id="tips-for-clean-code">Tips for clean code</h2>
+<p>This tips should apply to almost any programming language.</p>
+<h3 id="do-not-use-else-for-error-checking">Do not use &ldquo;else&rdquo; for error checking</h3>
+<p>Let&rsquo;s start with the typical case when else is used for error handling</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">if</span> r.Method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;GET&#34;</span> {
+    <span style="color:#ff79c6">if</span> r.Header.<span style="color:#50fa7b">Get</span>(<span style="color:#f1fa8c">&#34;X-API-KEY&#34;</span>) <span style="color:#ff79c6">==</span> key {
+        <span style="color:#6272a4">// ok
+</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>
+    } <span style="color:#ff79c6">else</span> {
+        <span style="color:#ff79c6">return</span> errors.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;Key is not valid&#34;</span>)
+    }
+} <span style="color:#ff79c6">else</span> {
+    <span style="color:#ff79c6">return</span> errors.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;Invalid Method&#34;</span>)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>This code contains 2 levels of indentation and it can easily get more levels if you keep this pattern. The best way to handle it is to inverse the logic of the error checking. See the following example</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">if</span> r.Method <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#34;GET&#34;</span> {
+    <span style="color:#ff79c6">return</span> errors.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;Invalid Method&#34;</span>)
+}
+<span style="color:#ff79c6">if</span> r.Header.<span style="color:#50fa7b">Get</span>(<span style="color:#f1fa8c">&#34;X-API-KEY&#34;</span>) <span style="color:#ff79c6">!=</span> key {
+    <span style="color:#ff79c6">return</span> errors.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;Key is not valid&#34;</span>)
+}
+<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This code is much easier to understand as it do not add levels of indentation and follows the principle where the 0 indentation level is the principal path of the application where other paths are exceptions or rare cases.</p>
+<p><strong>else</strong> is still valuable in some cases, for example when choosing between multiple methods. But I still prefer to use a switch for this situations.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">if</span> r.Method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;GET&#34;</span> {
+    <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">handleGET</span>()
+} <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> r.Method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;POST&#34;</span> {
+    <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">handlePOST</span>()
+} <span style="color:#ff79c6">else</span> {
+    <span style="color:#ff79c6">return</span> errors.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;Invalid Method&#34;</span>)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>Keep in mind that the previous example is only readable because the body of the it blocks is only a function. If you add code inside the blocks&hellip; this gets dirty pretty quickly.</p>
+<h3 id="comments-no-documentation-yes">Comments? No. Documentation? Yes</h3>
+<p>If you have to write comments to explain your code&hellip; it is not clean code.</p>
+<p>When I say comments, I refer mostly to inline comments. You will find different kind of those comments so let&rsquo;s start with one of the most frequent. The tutorials for beginners.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#6272a4">// Check if request method is GET
+</span><span style="color:#6272a4"></span><span style="color:#ff79c6">if</span> r.Method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;GET&#34;</span> {
+    <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">handleGET</span>()
+<span style="color:#6272a4">// If is not GET, check if it is POST
+</span><span style="color:#6272a4"></span>} <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> r.Method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;POST&#34;</span> {
+    <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">handlePOST</span>()
+<span style="color:#6272a4">// If is not GET or POST, return an error
+</span><span style="color:#6272a4"></span>} <span style="color:#ff79c6">else</span> {
+    <span style="color:#ff79c6">return</span> errors.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;Invalid Method&#34;</span>)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>Do you really need those lines? Isn&rsquo;t it clear enough? Well, I still find comments like this in a lot of cases and it gets funnier when the comment is obsolete and the code is doing other things. Following the example, let&rsquo;s imagine that another developer adds support for <strong>PUT</strong> method. I think that this is what would happen.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#6272a4">// Check if request method is GET
+</span><span style="color:#6272a4"></span><span style="color:#ff79c6">if</span> r.Method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;GET&#34;</span> {
+    <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">handleGET</span>()
+<span style="color:#6272a4">// If is not GET, check if it is POST
+</span><span style="color:#6272a4"></span>} <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> r.Method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;POST&#34;</span> {
+    <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">handlePOST</span>()
+<span style="color:#6272a4">// Handle PUT to modify values
+</span><span style="color:#6272a4"></span>} <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> r.Method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;PUT&#34;</span> {
+    <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">handlePOST</span>()
+<span style="color:#6272a4">// If is not GET or POST, return an error
+</span><span style="color:#6272a4"></span>} <span style="color:#ff79c6">else</span> {
+    <span style="color:#ff79c6">return</span> errors.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;Invalid Method&#34;</span>)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>Again, this is a simplified code and the error in clear. but in real world cases&hellip; this happens more often that you may think.</p>
+<p>Another type of comments are the ones trying to explain a spell. This time in Python.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="color:#6272a4">## Solves the FizzBuzz Problem</span>
+<span style="color:#6272a4">## prints the numbers 1-100, each on a new line</span>
+<span style="color:#6272a4">## For each number that is a multiple of 3, print “Fizz” instead of the number</span>
+<span style="color:#6272a4">## For each number that is a multiple of 5, print “Buzz” instead of the number</span>
+<span style="color:#6272a4">## For each number that is a multiple of both 3 and 5, print “FizzBuzz” instead of the number</span>
+(<span style="color:#ff79c6">lambda</span> f, n: f(f, n))(<span style="color:#ff79c6">lambda</span> f, n: [(<span style="color:#ff79c6">not</span> n <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">3</span> <span style="color:#ff79c6">and</span> <span style="color:#f1fa8c">&#34;fizz&#34;</span> <span style="color:#ff79c6">or</span> <span style="color:#f1fa8c">&#34;&#34;</span>) <span style="color:#ff79c6">+</span> (<span style="color:#ff79c6">not</span> n <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">5</span> <span style="color:#ff79c6">and</span> <span style="color:#f1fa8c">&#34;buzz&#34;</span> <span style="color:#ff79c6">or</span> <span style="color:#f1fa8c">&#34;&#34;</span>) <span style="color:#ff79c6">or</span> n] <span style="color:#ff79c6">+</span> f(f, n<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">if</span> n <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">100</span> <span style="color:#ff79c6">else</span> [], <span style="color:#bd93f9">1</span>)
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Do not explain your spells, rewrite them.</p>
+</blockquote>
+<p>This is the moment for jack.</p>
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="but_it_runs.jpg#center"><img  src="but_it_runs.jpg#center"
+        alt="jack"/></a></p>
+<p>Now look at the following code.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">process</span>(number):
+    <span style="color:#ff79c6">if</span> number <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">3</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">and</span> number <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">5</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span>:
+        <span style="color:#ff79c6">return</span> <span style="color:#f1fa8c">&#39;FizzBuzz&#39;</span>
+    <span style="color:#ff79c6">elif</span> number <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">3</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span>:
+        <span style="color:#ff79c6">return</span> <span style="color:#f1fa8c">&#39;Fizz&#39;</span>
+    <span style="color:#ff79c6">elif</span> number <span style="color:#ff79c6">%</span> <span style="color:#bd93f9">5</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span>:
+        <span style="color:#ff79c6">return</span> <span style="color:#f1fa8c">&#39;Buzz&#39;</span>
+    <span style="color:#ff79c6">else</span>:
+        <span style="color:#ff79c6">return</span> number
+
+<span style="color:#ff79c6">def</span> <span style="color:#50fa7b">printFizzBuzz</span>(n<span style="color:#ff79c6">=</span><span style="color:#bd93f9">101</span>):
+    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(<span style="color:#bd93f9">1</span>, n):
+        <span style="color:#ff79c6">print</span>(process(i))
+</code></pre></td></tr></table>
+</div>
+</div><p>This is so clear that you don&rsquo;t even need comments to explain it.</p>
+<p>The last type of comment is the documentation comment. This is the only comment that is really required and you will understand why in a moment.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-python" data-lang="python"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">printFizzBuzz</span>(n<span style="color:#ff79c6">=</span><span style="color:#bd93f9">101</span>):
+    <span style="color:#f1fa8c">&#34;&#34;&#34;
+</span><span style="color:#f1fa8c">    The concept behind FizzBuzz is as follows:
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">    Write a program that prints the numbers 1-100, each on a new line
+</span><span style="color:#f1fa8c">    For each number that is a multiple of 3, print “Fizz” instead of the number
+</span><span style="color:#f1fa8c">    For each number that is a multiple of 5, print “Buzz” instead of the number
+</span><span style="color:#f1fa8c">    For each number that is a multiple of both 3 and 5, print “FizzBuzz” instead of the number
+</span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
+    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">range</span>(<span style="color:#bd93f9">1</span>, n):
+        <span style="color:#ff79c6">print</span>(process(i))
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<ul>
+<li>Code explains <strong>what</strong> and <strong>how</strong></li>
+<li>Documentation explains <strong>why</strong>.</li>
+</ul>
+</blockquote>
+<p>So make sure to write your documentation, but do not explain your spells.</p>
+<h3 id="abstraction-levels-and-cognitive-capacity">Abstraction levels and cognitive capacity</h3>
+<blockquote>
+<p><strong>Cognitive capacity</strong> is the total amount of information the brain is capable of retaining at any particular moment. This amount is finite, so we can say our total capacity is only ever 100%. How much of one&rsquo;s cognitive capacity is being used towards a particular task at any given time is called the cognitive load</p>
+</blockquote>
+<p>This section is closely related to <a href="#do-not-use-else-for-error-checking">else error checking</a>. When you have the following code, your cognitive load increases with the level of indentation.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#ff79c6">if</span> r.Method <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#34;GET&#34;</span> {
+    <span style="color:#ff79c6">if</span> r.Header.<span style="color:#50fa7b">Get</span>(<span style="color:#f1fa8c">&#34;X-API-KEY&#34;</span>) <span style="color:#ff79c6">==</span> key {
+        <span style="color:#6272a4">// ok
+</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>
+    }<span style="color:#ff79c6">else</span>{
+        <span style="color:#ff79c6">return</span> errors.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;Key is not valid&#34;</span>)
+    }
+} <span style="color:#ff79c6">else</span> {
+    <span style="color:#ff79c6">return</span> errors.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;Invalid Method&#34;</span>)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>In more complex programs it is really easy to run out of cognitive capacity and finding yourself going back and forth looking for what the code was doing.</p>
+<p>So, knowing that the cognitive capacity is finite. You have to do your best to reduce it to the minimum. There are several tips for that.</p>
+<ul>
+<li>Write a good documentation so programmers have a good foundation of the reason behind the code</li>
+<li>Avoid indentation levels, If you find yourself with more than 3, you should create a function.</li>
+<li>Never use writeable global variables and only use read-only when there is no other option.</li>
+<li>Write small functions that fit into the screen.</li>
+<li>Do not lie in the purpose of a function.</li>
+</ul>
+<p>I&rsquo;m going to explain the last one.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">ReadConfFile</span>(path <span style="color:#8be9fd">string</span>) (<span style="color:#ff79c6">*</span>Conf, <span style="color:#8be9fd">error</span>){
+    confContent, err<span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(path)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">DefaultConf</span>()
+    }
+    conf<span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>Conf{}
+    err<span style="color:#ff79c6">:=</span>json.<span style="color:#50fa7b">Unmarshal</span>(confContent, conf)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, err
+    }
+    <span style="color:#ff79c6">return</span> conf
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>This function is not bad. It is clear and short. But it lies in it&rsquo;s purpose. When you read <code>ReadConfFile</code> you don&rsquo;t expect the function to return de DefaultConf if the configuration file do not exist. This can be rewritten.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">ReadConfFile</span>(path <span style="color:#8be9fd">string</span>) (<span style="color:#ff79c6">*</span>Conf, <span style="color:#8be9fd">error</span>) {
+    confContent, err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(path)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, err
+    }
+    conf <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>Conf{}
+    err <span style="color:#ff79c6">:=</span> json.<span style="color:#50fa7b">Unmarshal</span>(confContent, conf)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">nil</span>, err
+    }
+    <span style="color:#ff79c6">return</span> conf, <span style="color:#ff79c6">nil</span>
+}
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">DefaultConf</span>() <span style="color:#ff79c6">*</span>Conf {
+    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">&amp;</span>Conf{}
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">LoadConfiguration</span>() <span style="color:#ff79c6">*</span>Conf {
+    conf, err <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">ReadConfFile</span>(os.<span style="color:#50fa7b">Getenv</span>(<span style="color:#f1fa8c">&#34;CONF_FILE&#34;</span>))
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">DefaultConf</span>()
+    }
+    <span style="color:#ff79c6">return</span> conf
+}
+
+</code></pre></td></tr></table>
+</div>
+</div><p>This is much easier to understand from the point of view of cognitive load. The <code>LoadConfiguration</code> function tells you that always returns a valid configuration because it can not return an error. Once you open it, you clearly see that it tries to read a configuration file based on a env variable and if fails, returns the default configuration. Now you can get deeper into those functions in case you need more information.</p>
+<p>The rule of thumb here is. If you cannot start adding new code to your own code within 5 minutes of opening the editor, it provably requires to much cognitive capacity. If you need 5 minutes with a code that it is already familiar to you&hellip; just imagine others that have never seen that code before.</p>
+<h3 id="do-not-write-an-utilscommonmiscellaneous-package">Do not write an utils/common/miscellaneous package</h3>
+<p>Seriously&hellip; Don&rsquo;t do it. The purpose of creating a package is to reuse code, but this advantage comes with a huge drawback. <strong>Dependencies</strong></p>
+<p>People tend to create a common package when the use a function over and over again but they don&rsquo;t know where to put it. Well, if it is a simple small function&hellip; maybe you should simply copy and paste it instead of creating a new dependency for your code. Let&rsquo;s see and example.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#6272a4">// envMustBeSet panics with a proper error message if the required variable is not set.
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">envMustBeSet</span>(key <span style="color:#8be9fd">string</span>) <span style="color:#8be9fd">string</span> {
+    value, ok <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">LookupEnv</span>(key)
+    <span style="color:#ff79c6">if</span> !ok {
+        log.<span style="color:#50fa7b">Panicf</span>(<span style="color:#f1fa8c">&#34;environment variable %s must be set&#34;</span>, value)
+    }
+    <span style="color:#ff79c6">return</span> value
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>As you can imagine, if your application reads configuration from the environment, this function can be really handy at startup to fail quickly if you don&rsquo;t have the proper environment variables defined. but, is it worth to import it from an external module? If you need to use it from two different packages, I think it is easier to maintain two identical function in both packages than to create a third package.</p>
+<blockquote>
+<p>A little copy paste is better than a little dependency.</p>
+</blockquote>
+<p>To explain the dependency problem, I&rsquo;ve used the log package for this implementation but I&rsquo;ve not provided any way of configuring it. Adding another parameter for the log will make this function less handy. what happen if you have to redirect the output of that log and you are using logrus instead of the standard logger?. You will be forced to modify the standard logger in addition to your logrus instance. you could go to the common package and change the log package for the logrus package but then&hellip; other dependencies will be forced to import logrus package just to print this line&hellip; do you see the problem?</p>
+<p>Well, this case is simple, but you will eventually find a functions that you may want to share between packages and is complex enough to do not want to copy/paste it. This is when the common package usually appears. Following this pattern, it quickly becomes a mess of non related functions that anyone but the owner feels brave enough to import. Reading a common package like this requires a LOT of cognitive capacity. Said that, common and miscellaneous packages are a bad idea in most cases, but the util package may have its place. For example, look at packages like <code>io/ioutil</code>. This package groups utility function to perform io operations. Going back to the <code>envMustBeSet</code> function. It may be a good idea to place it in <code>env/envutils</code> with other environment variable utilities like reading numbers from the environment.</p>
+<ul>
+<li>miscellaneous: NEVER</li>
+<li>common: NEVER</li>
+<li>util: only if you specify a scope</li>
+</ul>
+<h3 id="use-blank-lines-to-separate-logical-groups">Use blank lines to separate logical groups</h3>
+<p>This one is really simple, yet effective. just compare this two codes</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+    f, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        fmt.<span style="color:#50fa7b">Println</span>(err)
+        <span style="color:#ff79c6">return</span>
+    }
+    l, err <span style="color:#ff79c6">:=</span> f.<span style="color:#50fa7b">WriteString</span>(<span style="color:#f1fa8c">&#34;Hello World&#34;</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        fmt.<span style="color:#50fa7b">Println</span>(err)
+        f.<span style="color:#50fa7b">Close</span>()
+        <span style="color:#ff79c6">return</span>
+    }
+    fmt.<span style="color:#50fa7b">Println</span>(l, <span style="color:#f1fa8c">&#34;bytes written successfully&#34;</span>)
+    err = f.<span style="color:#50fa7b">Close</span>()
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        fmt.<span style="color:#50fa7b">Println</span>(err)
+        <span style="color:#ff79c6">return</span>
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+
+    f, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        fmt.<span style="color:#50fa7b">Println</span>(err)
+        <span style="color:#ff79c6">return</span>
+    }
+
+    l, err <span style="color:#ff79c6">:=</span> f.<span style="color:#50fa7b">WriteString</span>(<span style="color:#f1fa8c">&#34;Hello World&#34;</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        fmt.<span style="color:#50fa7b">Println</span>(err)
+        f.<span style="color:#50fa7b">Close</span>()
+        <span style="color:#ff79c6">return</span>
+    }
+
+    fmt.<span style="color:#50fa7b">Println</span>(l, <span style="color:#f1fa8c">&#34;bytes written successfully&#34;</span>)
+
+    err = f.<span style="color:#50fa7b">Close</span>()
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        fmt.<span style="color:#50fa7b">Println</span>(err)
+        <span style="color:#ff79c6">return</span>
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>Your brain automatically stops reading at blank lines drastically reducing the cognitive load to understand the code. Also, the brain recognises the pattern of the code and this reduces even more the load.</p>
+<h3 id="chose-the-right-tool">Chose the right tool</h3>
+<p>Even though the tips are independent from the programming language. The language still plays a role in how you follow the tips. As a general rule, refactor operations are much easier in typed languages because you can easily detect missing variables and rename operations works much better. So I would recommend to avoid using scripting languages like <strong>javascript</strong> or <strong>python</strong> for long running projects as you will end wasting most of the time maintaining the code or writing huge testing batteries to ensure everything is still working as expected.</p>
+<p>One of the reasons why I love go is because of the tooling that allows you to ensure code quality, <code>gofmt</code> and <code>go vet</code> are awesome and easy to use. And <code>gopls</code> is improving every day.</p>
+<h3 id="always-write-tests">Always write tests</h3>
+<p>I didn&rsquo;t say, &ldquo;write a test for every function&rdquo;. but at least write tests to ensure the main functionality.</p>
+<p>As testing deserves its own post&hellip; I won&rsquo;t say anything else here.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I think the code quality issues appear more often when developer work alone. It you add more people to the team, things will get better by pure necessity to understand others people code. Keep this in mind when you are writing code by yourself and take your time to refactor so anyone can understand it.</p>
+<p>Internet is full of good practices for writing code I recommend you to keep reading about the subject. What you&rsquo;ve read here is a good starting point, but yet a brief summary.</p>
+<p>Thank you for your reading and feel free to leave a comment If you liked it.</p>
+<p>Or click the clap button.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.quora.com/What-are-some-prime-examples-of-bad-python-code"target="_blank">Python bad fizzbuzz</a></li>
+<li><a href="https://www.blog.pythonlibrary.org/2019/09/18/python-code-kata-fizzbuzz/#:~:text=One%20of%20the%20popular%20programming%20katas%20is%20called%20FizzBuzz.&amp;text=The%20concept%20behind%20FizzBuzz%20is,Buzz%E2%80%9D%20instead%20of%20the%20number"target="_blank">FizzBuzz</a></li>
+</ul></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/quality/>quality</a></section></div><section class="article navigation"><p><a class="link" href="/post/blog/2020-05-11_go_plotly/"><span class="li">&rarr;</span>Go Plotly</a></p></section><section class="article discussion"><script 
+            src="https://utteranc.es/client.js" 
+            repo="MetalBlueberry/MetalBlueberry.github.io"
+            issue-term="og:title"
+            label=""
+            theme="github-light"
+            crossorigin="anonymous" async>
+        </script></section>
+<div class="claps">
+  <div class="canvas">
+    <div id="totalCounter" class="total-counter"></div>
+
+    <div id="clap" class="clap-container">
+      <i class="clap-icon fa fa-hand-paper-o"></i>
+    </div>
+
+    <div id="clicker" class="click-counter">
+      <span class="counter"></span>
+    </div>
+
+    <div id="sonar-clap" class="clap-container-sonar"></div>
+
+    <div id="particles" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+    <div id="particles-2" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+    <div id="particles-3" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+  </div>
+</div><script>
+  anchors.add();
+</script></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Víctor Pérez Domingo</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-150427130-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="/js/core.min.6d58ae06d163dcf4ea5254fc7006ccd56745fa6fa5feb2b2e417538d70efb617823f575f338d25d3475ad418d50ae9b1.js" integrity="sha384-bViuBtFj3PTqUlT8cAbM1WdF&#43;m&#43;l/rKy5BdTjXDvtheCP1dfM40l00da1BjVCumx"></script></div>
+</body>
+
+</html>

@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Víctor Pérez Domingo</copyright>
-    <lastBuildDate>Mon, 11 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Write code for humans, not for computers</title>
+      <link>/post/blog/2020-06-14_write_code_for_humans_not_for_computers/</link>
+      <pubDate>Sun, 14 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/blog/2020-06-14_write_code_for_humans_not_for_computers/</guid>
+      <description>&lt;p&gt;Any fool can write code that a computer can understand. Good programmers write code that humans can understand.&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>Go Plotly</title>
