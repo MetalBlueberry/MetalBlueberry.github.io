@@ -28,11 +28,10 @@
       <pubDate>Sat, 19 Oct 2019 13:59:31 +0200</pubDate>
       
       <guid>/about/</guid>
-      <description>About MetalBlueberry 
-I&amp;rsquo;m a passionate developer moving toward the specialization in IoT technologies.
-I feel comfortable working with Python and Go as most of my recent development time has been invested with those two languages but I have experience with other popular languages such as C/C++, C# and Java.
-I&amp;rsquo;m always looking for new challenges and constantly learning new things.
-Technical background I&amp;rsquo;ve experience with several technologies from the IoT world from the sensors to the cloud infrastructure.</description>
+      <description>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
+ Martin Fowler, 2008.   About MetalBlueberry 
+I&amp;rsquo;m a passionate developer moving toward the specialization in IoT and Big Data technologies.
+I feel comfortable working with Python and Go, and I have no problem understanding other programming languages. I know how to use Docker and most of the time, I deploy applications inside docker containers.</description>
       
     </item>
     
