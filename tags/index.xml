@@ -12,6 +12,26 @@
     
     
     <item>
+      <title>communication</title>
+      <link>/tags/communication/</link>
+      <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/communication/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>coronavirus</title>
+      <link>/tags/coronavirus/</link>
+      <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/coronavirus/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
       <title>quality</title>
       <link>/tags/quality/</link>
       <pubDate>Sun, 14 Jun 2020 00:00:00 +0000</pubDate>
@@ -27,16 +47,6 @@
       <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/hugo/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>coronavirus</title>
-      <link>/tags/coronavirus/</link>
-      <pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/coronavirus/</guid>
       <description></description>
       
     </item>
@@ -87,16 +97,6 @@
       <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/python/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>communication</title>
-      <link>/tags/communication/</link>
-      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/communication/</guid>
       <description></description>
       
     </item>

@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Víctor Pérez Domingo</copyright>
-    <lastBuildDate>Sun, 14 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 03 Sep 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>What I have learned from talking with a mask</title>
+      <link>/post/blog/2020-09-03_what_i_have_learned_from_talking_with_a_mask/</link>
+      <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/blog/2020-09-03_what_i_have_learned_from_talking_with_a_mask/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m the current situation where people is complaining about wearing a face mask because they cannot breath, I want to highlight that we are loosing more than our breath. We are loosing our face.&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>Write code for humans, not for computers</title>
