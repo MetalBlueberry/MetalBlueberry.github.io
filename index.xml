@@ -7,7 +7,6 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Víctor Pérez Domingo</copyright>
-    <lastBuildDate>Sat, 19 Oct 2019 13:59:31 +0200</lastBuildDate>
     
         <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -25,7 +24,7 @@
     <item>
       <title>About Me</title>
       <link>/about/</link>
-      <pubDate>Sat, 19 Oct 2019 13:59:31 +0200</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
       <description>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
@@ -38,19 +37,19 @@ I feel comfortable working with Python and Go, and I have no problem understandi
     <item>
       <title>About Me - The long story</title>
       <link>/the-long-story/</link>
-      <pubDate>Sat, 19 Oct 2019 13:59:31 +0200</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/the-long-story/</guid>
       <description>About MetalBlueberry I&amp;rsquo;m a programmer since I discovered that things could be automated.
 Attention
-You are about to read my life since I remember it, focused on how I became a professional developer.  The beginning I started with Win-logo in the school by drawing some figures with simple functions. I still remember what could be one of the firsts function I&amp;rsquo;ve ever wrote. tits(size) The objective is clear, draw two tangent circles of a desired size.</description>
+You are about to read my life since I remember it, focused on how I became a professional developer.  The beginning I started with Win-logo in the school by drawing some figures with simple functions. I still remember what could be one of the firsts functions I&amp;rsquo;ve ever wrote. tits(size) The objective is clear, draw two tangent circles of the desired size.</description>
       
     </item>
     
     <item>
       <title>Social Networks</title>
       <link>/social/</link>
-      <pubDate>Sat, 19 Oct 2019 13:59:31 +0200</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/social/</guid>
       <description>Follow me on GitHub, Twitter and Linkedin!
