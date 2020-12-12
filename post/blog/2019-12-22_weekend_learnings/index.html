@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.73.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark"><title>2019-12-22 Weekend Learnings&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.60b999055342ab7932e4aa314d0695544a6f92a06cc9e66ba06a256dd171de65ceaa852aed469a1e8e3cd6448118d1bb.css" integrity="sha384-YLmZBVNCq3ky5KoxTQaVVEpvkqBsyeZroGolbdFx3mXOqoUq7UaaHo481kSBGNG7"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -25,7 +25,7 @@
     <h1 class="article title">2019-12-22 Weekend Learnings</h1><p class="article date">December 22, 2019<span class="lastmod"> • edited April 10, 2020</span></p></section><article class="article markdown-body"><p>I understood how to use Go composition to extend the functionality similar to inheritance in OOP. I&rsquo;ve used it before but now I can say that I understand it. Also, I&rsquo;ve done a 3D model of the van that I&rsquo;m going to use for the moving in January. Just to know if I can fit everything inside.</p>
 <h2 id="go-composition">Go composition</h2>
 <blockquote>
-<p>I&rsquo;m a few years late. This guy is explaining a similar problem to the one that I was trying to solve in his post &ldquo;<a href="https://dave.cheney.net/2015/05/22/struct-composition-with-go"target="_blank">struct composition with go</a>&quot;.</p>
+<p>I&rsquo;m a few years late. This guy is explaining a similar problem to the one that I was trying to solve in his post &ldquo;<a href="https://dave.cheney.net/2015/05/22/struct-composition-with-go"target="_blank">struct composition with go</a>&rdquo;.</p>
 </blockquote>
 <p>The problem I was facing this week was how to record a web request body using a middleware. In my case, it was for debugging purposes but this technique can be used in similar scenarios. The structure <code>http.Request</code> contains a lot of fields, but we are only interested now in the <code>Request.Body</code> which is an <code>io.ReadCloser</code></p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
