@@ -7,6 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Víctor Pérez Domingo</copyright>
+    <lastBuildDate>Thu, 03 Sep 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -29,7 +30,7 @@
       <guid>/about/</guid>
       <description>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
  Martin Fowler, 2008.   About MetalBlueberry 
-I&amp;rsquo;m a passionate developer moving toward the specialization in IoT and Big Data technologies.
+I&amp;rsquo;m a passionate developer with experience in the world of BigData and Machine Learning.
 I feel comfortable working with Python and Go, and I have no problem understanding other programming languages. I know how to use Docker and most of the time, I deploy applications inside docker containers.</description>
       
     </item>
@@ -47,16 +48,23 @@ You are about to read my life since I remember it, focused on how I became a pro
     </item>
     
     <item>
+      <title>F.A.Q</title>
+      <link>/faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/faq/</guid>
+      <description>Frequently Asked Questions These are questions that you may want to ask me. I think it is a cool way to get to know each other.
+How is your development environment? My operative system is Linux with the Ubuntu distribution. The desktop environment is Regolith which is based on i3wm. I mainly develop on vscode because it is flexible and can be used for almost any language. check out my extensions.</description>
+      
+    </item>
+    
+    <item>
       <title>Social Networks</title>
       <link>/social/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/social/</guid>
-      <description>Follow me on GitHub, Twitter and Linkedin!
-  www.github.com/MetalBlueberry
-  www.twitter.com/MetalBlueberry
-  www.linkedin.com/in/victorperezdomingo
-  </description>
+      <description>   Víctor Pérez Domingo  Follow @MetalBlueberry   Follow @MetalBlueberry    .centered { display: flex; justify-content: center; flex-direction: column; align-items: center; } </description>
       
     </item>
     
