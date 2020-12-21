@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>personal</title>
+      <link>/tags/personal/</link>
+      <pubDate>Mon, 21 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/personal/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
       <title>communication</title>
       <link>/tags/communication/</link>
       <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
@@ -67,16 +77,6 @@
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/git/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>personal</title>
-      <link>/tags/personal/</link>
-      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/personal/</guid>
       <description></description>
       
     </item>
