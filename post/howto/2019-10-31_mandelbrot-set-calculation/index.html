@@ -305,17 +305,10 @@ $$ z_5 = (-1+i)^2 + i = 1 -2i -1 + i = -i $$</p>
 }
 </code></pre></td></tr></table>
 </div>
-</div><div class="expand">
-    <div class="expand-label" id="expand-label-0" style="cursor: pointer;">
-        <span>
-            
-            
-            Click here to see all code
-            
-        </span>
-    </div>
-    <div class="expand-content" id="expand-content-0" style="display: none;">
-        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+</div><details >
+  <summary>Click here to see all code</summary>
+  <div class="markdown-inner">
+    <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
@@ -398,30 +391,8 @@ $$ z_5 = (-1+i)^2 + i = 1 -2i -1 + i = -i $$</p>
 </code></pre></td></tr></table>
 </div>
 </div>
-    </div>
-    <script>
-        function collapse(e) {
-            e = e || window.event;
-            var target = e.target || e.srcElement,
-                text = target.textContent || target.innerText;
-
-            console.log("event received")
-            console.log(target)
-
-            target.classList.toggle("active");
-            var content = this.nextElementSibling;
-            console.log(content)
-            console.log(content.style.display)
-            if (content.style.display === "block") {
-                content.style.display = "none";
-                console.log(content.style.display)
-            } else {
-                content.style.display = "block";
-            }
-        }
-        document.getElementById("expand-label-0").addEventListener("click", collapse);
-    </script>
-</div>
+  </div>
+</details>
 <h3 id="mandelbrot-set">Mandelbrot set</h3>
 <p>The mandelbrot.Set will hold all the mandelbrot.Points. To ease the usage, I&rsquo;ve added a constructor of rectangular Areas centered at a given point. This will come handy when zooming in the future.</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
@@ -579,17 +550,10 @@ $$ z_5 = (-1+i)^2 + i = 1 -2i -1 + i = -i $$</p>
 }
 </code></pre></td></tr></table>
 </div>
-</div><div class="expand">
-    <div class="expand-label" id="expand-label-1" style="cursor: pointer;">
-        <span>
-            
-            
-            Click here to see all code
-            
-        </span>
-    </div>
-    <div class="expand-content" id="expand-content-1" style="display: none;">
-        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+</div><details >
+  <summary>Click here to see all code</summary>
+  <div class="markdown-inner">
+    <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
@@ -754,30 +718,8 @@ $$ z_5 = (-1+i)^2 + i = 1 -2i -1 + i = -i $$</p>
 </code></pre></td></tr></table>
 </div>
 </div>
-    </div>
-    <script>
-        function collapse(e) {
-            e = e || window.event;
-            var target = e.target || e.srcElement,
-                text = target.textContent || target.innerText;
-
-            console.log("event received")
-            console.log(target)
-
-            target.classList.toggle("active");
-            var content = this.nextElementSibling;
-            console.log(content)
-            console.log(content.style.display)
-            if (content.style.display === "block") {
-                content.style.display = "none";
-                console.log(content.style.display)
-            } else {
-                content.style.display = "block";
-            }
-        }
-        document.getElementById("expand-label-1").addEventListener("click", collapse);
-    </script>
-</div>
+  </div>
+</details>
 <h2 id="generate-mandelbrot-data">Generate Mandelbrot Data</h2>
 <p>Now it is time to generate a simple main program to calculate the data for a given section of the complex number space. I&rsquo;m going to use the image package to generate a png file of the given section and write it to the standard output. I&rsquo;ve chosen a squared area centered at <code>(-0.5, 0)</code> of size 1.5 with 5000x5000 resolution using 200 iterations at maximum.</p>
 <p>After calling <code>set.Calculate</code> I&rsquo;m using range progress to get the updates and to print feedback to Stderr. To avoid printing a line for every pixel, I&rsquo;ve added a <code>&lt;-time.After(time.Second * 1)</code> to limit the prints to 1 per second.</p>

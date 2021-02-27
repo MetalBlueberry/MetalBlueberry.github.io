@@ -641,17 +641,10 @@ fig = {"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16
 }
 </code></pre></td></tr></table>
 </div>
-</div><div class="expand">
-    <div class="expand-label" id="expand-label-3" style="cursor: pointer;">
-        <span>
-            
-            
-            Click here to see all code
-            
-        </span>
-    </div>
-    <div class="expand-content" id="expand-content-3" style="display: none;">
-        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+</div><details >
+  <summary>Click here to see all code</summary>
+  <div class="markdown-inner">
+    <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
@@ -1394,30 +1387,8 @@ fig = {"data":[{"x":["1024x1024x1","512x512x2","256x256x4","128x128x8","64x64x16
 </code></pre></td></tr></table>
 </div>
 </div>
-    </div>
-    <script>
-        function collapse(e) {
-            e = e || window.event;
-            var target = e.target || e.srcElement,
-                text = target.textContent || target.innerText;
-
-            console.log("event received")
-            console.log(target)
-
-            target.classList.toggle("active");
-            var content = this.nextElementSibling;
-            console.log(content)
-            console.log(content.style.display)
-            if (content.style.display === "block") {
-                content.style.display = "none";
-                console.log(content.style.display)
-            } else {
-                content.style.display = "block";
-            }
-        }
-        document.getElementById("expand-label-3").addEventListener("click", collapse);
-    </script>
-</div>
+  </div>
+</details>
 <p>It is important that the caller must read the channel <code>done</code> until the calculation ends because, if there is no receiver, the channel is blocked.</p>
 <p>The <code>saveImage</code> is a flag passed to the test command to keep the generated image for each benchmark. This allows to visually verify that the benchmark is actually rendering the right image.</p>
 <p>This is the section selected for the benchmarks. I&rsquo;m using a different method to give color to the set this time. I&rsquo;m using a color palette with 7 colors and I assign it based on the number of iterations. <code>color[iterations % len(color)]</code> This is awesome because always give the same color to a section independently of the zoom.</p>
@@ -1704,17 +1675,10 @@ timeout <span style="color:#ff79c6">:=</span> flag.<span style="color:#50fa7b">I
 }
 </code></pre></td></tr></table>
 </div>
-</div><div class="expand">
-    <div class="expand-label" id="expand-label-4" style="cursor: pointer;">
-        <span>
-            
-            
-            Click here to see all code
-            
-        </span>
-    </div>
-    <div class="expand-content" id="expand-content-4" style="display: none;">
-        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+</div><details >
+  <summary>Click here to see all code</summary>
+  <div class="markdown-inner">
+    <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
@@ -2001,30 +1965,8 @@ timeout <span style="color:#ff79c6">:=</span> flag.<span style="color:#50fa7b">I
 </code></pre></td></tr></table>
 </div>
 </div>
-    </div>
-    <script>
-        function collapse(e) {
-            e = e || window.event;
-            var target = e.target || e.srcElement,
-                text = target.textContent || target.innerText;
-
-            console.log("event received")
-            console.log(target)
-
-            target.classList.toggle("active");
-            var content = this.nextElementSibling;
-            console.log(content)
-            console.log(content.style.display)
-            if (content.style.display === "block") {
-                content.style.display = "none";
-                console.log(content.style.display)
-            } else {
-                content.style.display = "block";
-            }
-        }
-        document.getElementById("expand-label-4").addEventListener("click", collapse);
-    </script>
-</div>
+  </div>
+</details>
 <h2 id="conclusion">Conclusion</h2>
 <p>This has been really interesting. I was not expecting a x6 speed but looks like I was wrong. I think that the optimal number of divisions comes from a tread-off between the capacity to split the work over multiple cores and the extra time required to send data over channels. I would like to benchmark the code again and see where is the bottle neck for each configuration.</p>
 <p>I think that the next project will be to create a mandelbrot-server that provides a webpage when the user will be able to zoom in the set dynamically. It would be awesome!</p>

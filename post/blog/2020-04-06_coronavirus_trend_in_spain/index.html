@@ -121,17 +121,10 @@ fig = {"data": [{"y": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.0, 13.0, 15.0, 24.0,
 </script>
 </div>
 <p>leave your comments bellow.</p>
-<div class="expand">
-    <div class="expand-label" id="expand-label-4" style="cursor: pointer;">
-        <span>
-            
-            
-            Click here to see the code:
-            
-        </span>
-    </div>
-    <div class="expand-content" id="expand-content-4" style="display: none;">
-        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+<details >
+  <summary>Click here to see the code:</summary>
+  <div class="markdown-inner">
+    <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
@@ -595,30 +588,8 @@ template <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;&
 </div>
 </div><p>Refer to <a href="https://metalblueberry.github.io/post/howto/2019-11-23_add_plots_with_hugo_shortcodes/">Add Plots With Hugo Shortcodes</a> if you do not understand the previus template.</p>
 
-    </div>
-    <script>
-        function collapse(e) {
-            e = e || window.event;
-            var target = e.target || e.srcElement,
-                text = target.textContent || target.innerText;
-
-            console.log("event received")
-            console.log(target)
-
-            target.classList.toggle("active");
-            var content = this.nextElementSibling;
-            console.log(content)
-            console.log(content.style.display)
-            if (content.style.display === "block") {
-                content.style.display = "none";
-                console.log(content.style.display)
-            } else {
-                content.style.display = "block";
-            }
-        }
-        document.getElementById("expand-label-4").addEventListener("click", collapse);
-    </script>
-</div>
+  </div>
+</details>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://covid19.isciii.es/"target="_blank">Situación COVID-19 España</a></li>

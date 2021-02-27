@@ -78,17 +78,10 @@ I feel comfortable working with Python and Go, and I have no problem understandi
 </ul>
 </li>
 </ul>
-<div class="expand">
-    <div class="expand-label" id="expand-label-1" style="cursor: pointer;">
-        <span>
-            
-            
-            See more
-            
-        </span>
-    </div>
-    <div class="expand-content" id="expand-content-1" style="display: none;">
-        <ul>
+<details >
+  <summary>See more</summary>
+  <div class="markdown-inner">
+    <ul>
 <li>
 <p>A bit rusty (more than a year without update)</p>
 <ul>
@@ -115,30 +108,8 @@ I feel comfortable working with Python and Go, and I have no problem understandi
 </li>
 </ul>
 
-    </div>
-    <script>
-        function collapse(e) {
-            e = e || window.event;
-            var target = e.target || e.srcElement,
-                text = target.textContent || target.innerText;
-
-            console.log("event received")
-            console.log(target)
-
-            target.classList.toggle("active");
-            var content = this.nextElementSibling;
-            console.log(content)
-            console.log(content.style.display)
-            if (content.style.display === "block") {
-                content.style.display = "none";
-                console.log(content.style.display)
-            } else {
-                content.style.display = "block";
-            }
-        }
-        document.getElementById("expand-label-1").addEventListener("click", collapse);
-    </script>
-</div>
+  </div>
+</details>
 <h2 id="best-practices">Best Practices</h2>
 <p>I put a lot of effort in writing <strong>high <a href="/tags/quality">quality</a> code</strong>. This includes testing, CI/CD pipelines, documentation, and code best practices.</p>
 <h2 id="soft-skills">Soft Skills</h2>

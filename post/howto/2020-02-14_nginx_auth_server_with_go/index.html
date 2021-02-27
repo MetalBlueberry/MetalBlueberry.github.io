@@ -489,17 +489,10 @@
 }
 </code></pre></td></tr></table>
 </div>
-</div><div class="expand">
-    <div class="expand-label" id="expand-label-1" style="cursor: pointer;">
-        <span>
-            
-            
-            Click here to see all code from main.go
-            
-        </span>
-    </div>
-    <div class="expand-content" id="expand-content-1" style="display: none;">
-        <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
+</div><details >
+  <summary>Click here to see all code from main.go</summary>
+  <div class="markdown-inner">
+    <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
@@ -828,30 +821,8 @@
 </code></pre></td></tr></table>
 </div>
 </div>
-    </div>
-    <script>
-        function collapse(e) {
-            e = e || window.event;
-            var target = e.target || e.srcElement,
-                text = target.textContent || target.innerText;
-
-            console.log("event received")
-            console.log(target)
-
-            target.classList.toggle("active");
-            var content = this.nextElementSibling;
-            console.log(content)
-            console.log(content.style.display)
-            if (content.style.display === "block") {
-                content.style.display = "none";
-                console.log(content.style.display)
-            } else {
-                content.style.display = "block";
-            }
-        }
-        document.getElementById("expand-label-1").addEventListener("click", collapse);
-    </script>
-</div>
+  </div>
+</details>
 <h2 id="dockerize">Dockerize</h2>
 <p>Like any other go project, let&rsquo;s use a simple multi-stage alpine image to get the minimal image size.</p>
 <div class="admonition tip"><p class="admonition-title">tip</p>
