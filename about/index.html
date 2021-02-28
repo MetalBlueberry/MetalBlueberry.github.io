@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.73.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>About Me&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.5906bd043982b3c3160f1d6f645c469b205d2e02dc28379ce7195a8162f736bfc116a8c6c6924208a3d5dd1fb386c999.css" integrity="sha384-WQa9BDmCs8MWDx1vZFxGmyBdLgLcKDec5xlagWL3Nr/BFqjGxpJCCKPV3R&#43;zhsmZ"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="supported-color-schemes" content="light dark"><title>About Me&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.c8e8cc866864fffdb3541b045346723cb933040c6423da62da66f829b9655532bde0cb90c4801ad64ac564e352b8ee86.css" integrity="sha384-yOjMhmhk//2zVBsEU0ZyPLkzBAxkI9pi2mb4KbllVTK94MuQxIAa1krFZONSuO6G"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="alternate icon" href="/favicon.ico">
 <meta name="twitter:card" content="summary"/>
@@ -18,7 +18,7 @@ I&rsquo;m a passionate developer with experience in the world of BigData and Mac
 I feel comfortable working with Python and Go, and I have no problem understanding other programming languages. I know how to use Docker and most of the time, I deploy applications inside docker containers." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://metalblueberry.github.io/about/" />
-<meta property="article:modified_time" content="2020-12-13T22:53:32+01:00" />
+<meta property="article:modified_time" content="2021-02-27T23:16:34+01:00" />
 
 <meta name="author" content="">
 
@@ -43,6 +43,217 @@ I feel comfortable working with Python and Go, and I have no problem understandi
 <p>I feel comfortable working with <strong><a href="/tags/python">Python</a></strong> and <strong><a href="/tags/go">Go</a></strong>, and I have no problem understanding other programming languages. I know how to use <strong><a href="/tags/docker">Docker</a></strong> and most of the time, I deploy applications inside docker containers.</p>
 <p>I would like to become a senior <strong><a href="/tags/go">Go</a></strong> developer and I&rsquo;m investing personal time to keep moving in that direction.</p>
 <p>I&rsquo;m always looking for new challenges and constantly learning new things.</p>
+<h2 id="experience">Experience</h2>
+<div class="timeline">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+  <div class="content">
+    <div class="title">Tecnalia - Tech Lead</div>
+    <div class="moment"  id="moment" >
+      
+    </div>
+    <div class="body"><ul>
+<li>Leading a fullstack team (6 People) (Java/<a href="/tags/go">Go</a>/Angular)</li>
+<li>Implementing best practices (Testing, SonarQube, Pair Programming, Daily stand up&hellip;)</li>
+<li>Setup CI/CD pipelines. (GitLab, Docker, Docker Swarm)</li>
+<li>Knowledge sharing among the organization (Talks, Workshop, Documentation)</li>
+</ul>
+</div>
+  </div>
+  <div class="date">2021</div>
+</div>
+
+<script>
+  function padDigits(number, digits) {
+      return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + number;
+  }
+  function non0plural(number, name) {
+    if (number == 0) {
+    return ""
+    }
+    if (number > 1) {
+    return number + " " + name + "s"
+    }
+    return number + " " +name
+  }
+
+  function refresh() {
+    start = dayjs("2020-02-01")
+    now = dayjs()
+
+    total_seconds = now.diff(start, "s")
+    seconds = total_seconds % 60
+    minutes =Math.floor((total_seconds % 3600) / 60)
+    hours =Math.floor((total_seconds % (60*60*24)) / (60*60))
+
+    total_months = now.diff(start, "M",true)
+    months = total_months % 12
+    years = Math.floor((total_months) / 12)
+    el.innerHTML = non0plural(years,"year")+" "+non0plural(months.toFixed(8),"month")
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+  <div class="content">
+    <div class="title">ERNI/HP - Cloud Software Engineer</div>
+    <div class="moment" >
+        9 months 
+    </div>
+    <div class="body"><ul>
+<li>Mentoring the team to learn Go</li>
+<li>Migrate legacy cloud infrastructure from Java to Go (AWS Lambda, Dynamo, S3)</li>
+<li>Collect metrics to understand current limitations and design future architecture accordingly (AWS Cloud Watch).</li>
+</ul>
+</div>
+  </div>
+  <div class="date">2020</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+  <div class="content">
+    <div class="title">ERNI/HP - Data Management Analyst</div>
+    <div class="moment" >
+        1 year 
+    </div>
+    <div class="body"><ul>
+<li>Understand, Define, Structure and Quality Control of data generated by Large Format Printers.</li>
+<li>Build Jupyter notebooks to present the information (Python/Pandas/Plotly)</li>
+<li>Build dashboards for monitoring (PowerBI/Plotly-Dash)</li>
+<li>Build scripts for unstructured log processing (Logstash, regex)</li>
+<li>Create a data wharehouse (Amazon S3, Parquet, CSV)</li>
+</ul>
+</div>
+  </div>
+  <div class="date">2019</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+  <div class="content">
+    <div class="title">ERNI/HP - junior Business Analyst</div>
+    <div class="moment" >
+        1 year 1 month 
+    </div>
+    <div class="body"><ul>
+<li>Bridge between business requirements and development team.</li>
+<li>Write technical documents documenting business rules for implementation. (Markdown/Jira)</li>
+<li>Support QA team during quality checks. (SQL)</li>
+<li>Develop POCs for new proposals before delivering the task to the development team (Python, Go)</li>
+</ul>
+</div>
+  </div>
+  <div class="date">2018</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+  <div class="content">
+    <div class="title">My Escape - Hardware/Software Developer</div>
+    <div class="moment" >
+        1 year 3 months 
+    </div>
+    <div class="body"><ul>
+<li>Develop an automation software for Escape Room managment(C#,WPF. State Machine)</li>
+<li>Develop PCB for DAQ based on Atmega328 (Arduino) over TCP/UDP (Atmel Studio, Altium)</li>
+<li>Develop an user screen to play videos, messages and receive user input (Qt, QML)</li>
+<li>Design games for the Escape room</li>
+</ul>
+</div>
+  </div>
+  <div class="date">2017</div>
+</div>
+
+
+</div>
+<script>
+  el = document.querySelector("#moment");
+  window.setInterval(refresh, 100);
+</script>
+
 <h2 id="technical-background">Technical background</h2>
 <p>During my career, I&rsquo;ve been involved in several big data-related activities. ranging from data acquisition to reporting. The role could be described as a Data Engineer<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
 <p>I&rsquo;m familiar with the following technology stack related to IoT</p>
@@ -55,7 +266,7 @@ I feel comfortable working with Python and Go, and I have no problem understandi
 <li>Analysis: SQL, Python Pandas, Jupyter Notebook</li>
 <li>Reporting: REST API, <a href="/tags/plotly">Plotly</a> Dash, Power BI</li>
 </ul>
-<p>The following is a list of technologies, tools, frameworks&hellip; that I&rsquo;m familiar with sorted by how comfortable I feel using them. A higher position means more comfortable.</p>
+<p>As a developer, the following is a list of technologies, tools, frameworks&hellip; that I&rsquo;m familiar with, sorted by how comfortable I feel using them. A higher position means more comfortable.</p>
 <ul>
 <li>
 <p>Fluent (used last year)</p>
@@ -65,16 +276,17 @@ I feel comfortable working with Python and Go, and I have no problem understandi
 <li><a href="/tags/git">Git</a></li>
 <li><a href="/tags/vscode">VSCode</a></li>
 <li><a href="/tags/docker">Docker</a></li>
-<li><a href="/tags/python">Python</a></li>
+<li><a href="/tags/python">Python</a> - Dash</li>
+<li><a href="/tags/python">Python</a> - Flask</li>
 <li>Traefik</li>
+<li>GitLab CI/CD</li>
 <li>Java</li>
-<li><a href="https://ebiten.org/"target="_blank">Ebiten</a> (Go game engine)</li>
+<li>HTML/CSS/JS (This blog)</li>
 <li>MongoDB</li>
 <li>Vue + Vuetify</li>
-<li>vim/nvim</li>
 <li>SQL</li>
-<li>JAMStack Hugo</li>
 <li>Web Assembly (Go)</li>
+<li><a href="https://ebiten.org/"target="_blank">Ebiten</a> (Go game engine)</li>
 </ul>
 </li>
 </ul>
@@ -231,7 +443,7 @@ if (!doNotTrack) {
 }
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
-<script src="/js/core.min.6d58ae06d163dcf4ea5254fc7006ccd56745fa6fa5feb2b2e417538d70efb617823f575f338d25d3475ad418d50ae9b1.js" integrity="sha384-bViuBtFj3PTqUlT8cAbM1WdF&#43;m&#43;l/rKy5BdTjXDvtheCP1dfM40l00da1BjVCumx"></script></div>
+<script src="/js/core.min.7b47089a7c73c836fa25511393d88b1f865be72bc194ce2bdd9148aed11e971a65d2ff58f171d57972f3957c01261c4d.js" integrity="sha384-e0cImnxzyDb6JVETk9iLH4Zb5yvBlM4r3ZFIrtEelxpl0v9Y8XHVeXLzlXwBJhxN"></script></div>
 </body>
 
 </html>
