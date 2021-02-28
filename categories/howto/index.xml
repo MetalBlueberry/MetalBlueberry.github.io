@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Hugo Timeline Shortcode</title>
+      <link>/post/howto/2021-02-28_hugo_timeline_shortcode/</link>
+      <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/howto/2021-02-28_hugo_timeline_shortcode/</guid>
+      <description>&lt;p&gt;This is a simple timeline shortcode to display timelines in your Hugo posts.&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
       <title>Use Git to track Git versions</title>
       <link>/post/howto/2020-03-11_use_git_to_track_git_versions/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
