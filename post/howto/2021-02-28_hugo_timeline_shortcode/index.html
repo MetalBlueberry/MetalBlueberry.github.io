@@ -13,7 +13,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://metalblueberry.github.io/post/howto/2021-02-28_hugo_timeline_shortcode/" />
 <meta property="article:published_time" content="2021-02-28T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-02-28T12:46:39+01:00" />
+<meta property="article:modified_time" content="2021-05-09T11:55:55+02:00" />
 
 <meta name="author" content="MetalBlueberry">
 
@@ -22,7 +22,7 @@
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/favicon.svg" alt /><span class="site name">MetalBlueberry</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/faq">F.A.Q.</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Hugo Timeline Shortcode</h1><p class="article date">February 28, 2021</p></section><article class="article markdown-body"><p>This is a simple timeline shortcode to display timelines in your Hugo posts.</p>
+    <h1 class="article title">Hugo Timeline Shortcode</h1><p class="article date">February 28, 2021<span class="lastmod"> • edited May 9, 2021</span></p></section><article class="article markdown-body"><p>This is a simple timeline shortcode to display timelines in your Hugo posts.</p>
 <p>I wanted to add a timeline to the <a href="https://metalblueberry.github.io/about/">about</a> tab to list my professional experience. I was surprised because I couldn&rsquo;t find a timeline shortcode online so I developed one myself to fit my needs.</p>
 <h2 id="research">Research</h2>
 <p>In my mind, the timeline is a series of cards with short descriptions pointing to a line with dots that represent times. So my first attempt was to try to do everything from scratch but I struggle with the annoying <strong>CSS position directives</strong>.</p>
@@ -37,48 +37,9 @@
 <p>I wanted to finish the timeline with a dot, instead of having a line going nowhere, so I moved the timeline dots to the top part and this also forced me to redesign the arrow pointing from the content cards.</p>
 <p>Last but not least, instead of using different colors to differentiate cards from the background, I added a shadow to the containers.</p>
 <p>And this is how it looks like</p>
-<div class="timeline">
-
-    
-
-
-
-
-
-<div class="container">
-  <div class="content">
-    <div class="title">Current position</div>
-    
-    <div class="body"><p>I&rsquo;m working here</p>
-</div>
-  </div>
-  <div class="date">2021</div>
-</div>
-
-
-
-    
-
-
-  
-
-
-
-
-<div class="container">
-  <div class="content">
-    <div class="title">Old position</div>
-    
-    <div class="body"><p>I worked here</p>
-</div>
-  </div>
-  <div class="date">2020</div>
-</div>
-
-
-
-</div>
-
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="timeline_legacy.png"><img  src="timeline_legacy.png"
+        alt="timeline_legacy"/></a></p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
