@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.73.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>How I became a Tech Lead&nbsp;&ndash;&nbsp;MetalBlueberry</title><link rel="stylesheet" href="/css/core.min.c8e8cc866864fffdb3541b045346723cb933040c6423da62da66f829b9655532bde0cb90c4801ad64ac564e352b8ee86.css" integrity="sha384-yOjMhmhk//2zVBsEU0ZyPLkzBAxkI9pi2mb4KbllVTK94MuQxIAa1krFZONSuO6G"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="alternate icon" href="/favicon.ico">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How I became a Tech Lead"/>
+<meta name="twitter:description" content="My leadership coach once said. Nobody can promote you to a leader, you have to do it yourself. This is how I managed to promote myself to Tech Lead."/>
+
+<meta property="og:title" content="How I became a Tech Lead" />
+<meta property="og:description" content="My leadership coach once said. Nobody can promote you to a leader, you have to do it yourself. This is how I managed to promote myself to Tech Lead." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://metalblueberry.github.io/post/blog/2021-05-09_how_i_became_a_tech_lead/" />
+<meta property="article:published_time" content="2021-05-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-05-20T21:07:00+02:00" />
+
+<meta name="author" content="MetalBlueberry">
+
+<script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+<body>
+    <div class="base-body"><section id="header" class="site header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/favicon.svg" alt /><span class="site name">MetalBlueberry</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="/faq">F.A.Q.</a><a class="nav item" href="/social">Follow me</a></nav></div></span></div><div class="site slogan"><span class="title">A passionate programmer</span></div></section><div id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">How I became a Tech Lead</h1><p class="article date">May 9, 2021<span class="lastmod"> • edited May 20, 2021</span></p></section><article class="article markdown-body"><p>My <a href="https://www.enricllado.com/"target="_blank">leadership coach</a> once said. Nobody can promote you to a leader, you have to do it yourself. This is how I managed to promote myself to Tech Lead.</p>
+<p>Before getting into the story, I want to remind you of the difference between a leader and a boss. <strong>A boss is someone in charge because of hierarchy</strong>. Maybe he has been working for the company longer than you or he is the brother of the owner. The most important thing to remember is that <strong>this title has been given to him</strong> by someone else. <strong>A Leader is someone in charge because people follow him</strong>. read the previous sentence again so you can deeply appreciate what it means. Nobody can promote you to be a leader. Even if they promote you to a boss, you are not a leader if people don&rsquo;t follow you.</p>
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="boss_vs_lead.jpeg"><img  src="boss_vs_lead.jpeg"
+        alt="boss vs lead"/></a></p>
+<p>Probably you were already aware of the difference from leader to boss before reading the previous paragraph. What most people don&rsquo;t realize is what I&rsquo;ve said in the introduction to this post. <strong>Nobody can promote you to a leader</strong>. If you want to be the leader of your group, you have to move into the front line and show the path to your team. If you do it right, people will start to follow you. And since the very first moment that someone trusts you to lead the way, you became a leader.</p>
+<h2 id="my-experience">My experience</h2>
+<h3 id="joining-the-team">Joining the team</h3>
+<p>Shortly after joining Tecnalia, I was involved in a big project aiming to <strong>find a way to apply versions to large image datasets</strong>. I was hired as a developer, so my first task was to study the current project status. The first step was to read through the client requirements. It can be summarised as:</p>
+<ul>
+<li>Versioning large datasets.</li>
+<li>Provide a search mechanism for existing datasets.</li>
+<li>Support project creation based on datasets.</li>
+</ul>
+<p>The development was supported by <strong>4 developers</strong>. (1 frontend, 2 big data, 1 DevOps). I was the 5th developer, but my role wasn&rsquo;t defined. I started talking with the DevOps expert to understand how the system was being developed and deployed. At this point, I realised that the <strong>development team was fragmented</strong>. The DevOps expert was working on the projects support requirement and the dependencies on the dataset versioning were communicated by an OpenAPI spec. So two different java services appeared from <strong>team isolation</strong>. Also, the CI/CD pipeline was weak. At this point, the application was deployed using vagrant to create ubuntu machines that then ran poorly designed docker images. Also, how to share and version the images wasn&rsquo;t defined.</p>
+<p>To increase the fun, the vagrant system was deployed on a Windows machine using a lot of <strong>custom scripting</strong>. My first attempt to instal vagrant on Linux and replicate the environment failed catastrophically. I started to dig around <strong>.bat</strong> files and trying to rewrite them as <strong>.sh</strong>. It wasn&rsquo;t hard, but I quickly found that there were missing dependencies. After a week or so, I didn&rsquo;t manage to start the vagrant system, but I gained enough insight into how the system was designed to write an <strong>equivalent docker-compose.yml</strong> file. In the end, we just had a few containers that needed to be connected. This file was an incredible success and when I communicated this to the rest of the team, they quickly followed my track so they could start the environment on their machines.</p>
+<p>Happy with my progress as a DevOps engineer, I attempted to understand the java code. It was <strong>java 8</strong> running JaxRS generated from the swagger definition. I struggle to set up VSCode to work with java8 properly and I finally installed IntelliJ IDEA. I don&rsquo;t know why, but the code looked really complex although it was only acting as a GitLab API simplification layer. At this point, I realised that there was a huge dependency with the <strong>dataset versioning</strong> layer and it wasn&rsquo;t working as I expected.</p>
+<h3 id="questioning-current-decisions">Questioning current decisions</h3>
+<p>I started to <strong>ask questions</strong> about how the dataset versioning worked. The plan was to build a SQL database to store references for every file uploaded. Then, these files must be uploaded to an arbitrary storage site. At that moment, only HDFS was supported but there were plans to support cloud providers. I quickly discovered that they were also using <strong>java 8</strong>, but this time with <strong>Spring Boot</strong> and the swagger code was generated from code annotations. Also, there were using a Eureka service discovery architecture that was designed to automatically discover storage providers.</p>
+<p>Around that time, a workmate not involved in this project suggested using <a href="https://dvc.org/"target="_blank">DVC</a> to track the different files. It provided functionality to track files directly on git repositories and the possibility to upload them to arbitrary remotes. <strong>The big data team started to use DVC</strong> to track files as a POC doing calls <strong>shell calls</strong> to the DVC executable and parsing the stdout. I was annoyed by this approach because it made the application run really slow and it was really easy to create inputs that made the system fail. My brain was thinking, <strong>why don&rsquo;t just use DVC? It meets the 3 main requirements</strong>.</p>
+<h3 id="testing">Testing</h3>
+<p>I thought that we could easily adapt the DVC code to meet our specific requirements. So I started to <strong>read DVC documentation and codebase</strong> to gain a better insight into how it worked. The main reason not to simply switch over was that the team didn&rsquo;t want to throw away all the development. It was a fair point, but there was a catch. <strong>There was no unit test</strong> for the entire platform and only a few integration tests have been written for a small portion of the application. I knew that this was going to be a problem, but it was hard to prove my point.</p>
+<p>I&rsquo;ve already been two months understanding the project and now I could say that <strong>I understood the application requirements</strong>. This enabled me to write e2e tests. The management wasn&rsquo;t aware of the benefits of writing automated test suites. So I asked for permission to write an e2e test suit to ensure the application quality. After a few days, I created a simple Go script that ran all the basic e2e test that I could come up with based on the current API specification. And you can guess what happened then. After a few weeks of back and forth iterations with the development team due to found bugs. We managed to stabilise the test suite and the application. Suddenly, the development team started to notice how they broke things that they were unaware of and they <strong>gained confidence in the test suite</strong>. I slowly extended the test coverage, knowing the application allowed me to write tests that I knew will find bugs. It wasn&rsquo;t too hard because the code wasn&rsquo;t well structured and there were no other kinds of testing.</p>
+<p>This allowed our team to reach the next milestone being <strong>confident with the functionality</strong> of the application. Although there was a lot of known bugs and limitations. The happy path was working and automatically tested after each commit. After the milestone, I had a discussion with the team explaining why we couldn&rsquo;t continue the development this way.</p>
+<ul>
+<li>The team was fragmented, 3 different services created not because they were needed, but because developers worked in different codebases.</li>
+<li>Complexity was exponential, There was a huge variety of technologies that were overkill for the situation.</li>
+<li>It was impossible to write unit tests. The code wasn&rsquo;t well structured.</li>
+<li>Calling DVC from the shell is a bad idea, we should either reimplement the functionality in java 8 or switch to python.</li>
+</ul>
+<h3 id="promotion">Promotion</h3>
+<p>The priority was to work as a team, so this was the point where <strong>I became a Tech Lead</strong>. I started by creating a board with all the individual development tasks that will allow us to track what needs to be done. There was a previous board, but it was oriented as functional requirements from the client. <strong>We needed one board for development tasks</strong>. We didn&rsquo;t need to have different services, so we agreed on using <strong>Spring Boot</strong> server with code generation from an OpenAPI specification. <strong>We created a beautiful monolith</strong>. Now we were working on the same git repository and I suggested following the <strong>git-flow</strong> pattern to organize our work. This included <strong>code reviews</strong> that were missing before. The team complained about the reviews because they felt that it was a waste of time. So leading by example, I did all the reviews myself at that point. I locked the master and the development branch and I was the only one allowed to merge anything. The first reviews were hard. but it became easier as I understood the code. Quickly I was able to detect functionality duplications that the developers weren&rsquo;t aware of because they didn&rsquo;t talk to each other. Some complex reviews quickly required me to enter in a call to resolve the issues. This is how we started to do <strong>pair programming</strong> sessions. Although I wasn&rsquo;t a java expert, I quickly learned from my more experienced team and I could easily share the knowledge between them.</p>
+<p>A drawback was that the time was filing by and we were not delivering new features. We were just learning to work as a team and refactoring the existent functionalities. To prove that we were working, I had the idea to set up <strong>SonarQube</strong> integration. It almost exploded with the number of warnings at the beginning. I shared it with my team and they quickly started to fix issues and more importantly. They didn&rsquo;t create new ones! The graphs generated by SonarQube allowed me to justify our work.</p>
+<p>This took us all the summer. Almost 3 months. But I have to say that <strong>developers were happier than ever</strong>. Although they&rsquo;ve suffered a lot learning to work as a team and rewriting most of the codebase. It was clear that the application was working much better and now it was possible to keep extending with more confidence. We stopped the snowball rolling down the hill.</p>
+<p>Most of the functionality was applying simple business logic over the GitLab API. Also, <strong>doing a unit test in java is hard</strong>&hellip; This made it hard for me to convince my team to invest time in writing them. They were <strong>happy with the e2e tests</strong>. Moreover, I couldn&rsquo;t write simple unit tests to show them how to do it. Again, java unit testing can be hard. There were no interfaces in the code so applying dependency injection wasn&rsquo;t possible. And rewriting everything again was going to take a lot of time. But then, a new opportunity appeared. We addressed the problem of calling DVC from the shell by reimplementing the functionality we needed in java. This was a TDD manual example! I took the initiative and wrote the first <strong>DVC</strong> class implementation with proper unit testing. The team was a little bit sceptical yet, but I quickly show them how these tests enabled me to test a lot of different workflows and validate them within milliseconds. So they started to follow my example. To keep the motivation, I researched how to add <strong>test coverage reports to SonarQube</strong> so we could see our improvement over time. This allowed the team to deliver new functionality at a steady rate with acceptable quality and without breaking previous functionality.</p>
+<p>During the DVC reimplementation, we detected a need to implement a custom remote compatible with <strong>DVC HTTP remote interface</strong>. It was a really simple requirement, but it must be able to upload/download files of arbitrary size. Also, it was a really good candidate to be the bottleneck of the system. Before adding this to our new monolith, I did a small POC with go. Turns out that implementing streaming services with go is much easier than java. Also, the <a href="https://github.com/google/go-cloud"target="_blank">go-cloud</a>/blob project did most of the heavy lifting. After a few refactors, it quickly became a cornerstone for the entire system. Being a separate service allows to scale it independently which is great to handle high volumes of upload/download. Being written in go makes it simple and easy to deploy!</p>
+<p>The project continued for a few months more. Due to internal changes, 2 people left the team and another 2 joined. Thanks to the previous efforts to improve code quality, the ramp-up was much easier and the new joiners were able to produce code in less than a month.</p>
+<p>Along with these responsibilities, I was having <strong>weekly meetings with the client</strong> to report progress and ensure the project was moving in the right direction. I also managed the <strong>task board</strong> to ensure it was updated.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>One way or another, I always knew that I wanted to be a leader. <strong>Helping others to grow is one of the most satisfactory things I&rsquo;ve ever done</strong>. At high school and University I always wanted to become a teacher. But that was discarded from the options when I realised that most of the regulated education is tightly regulated and you are forced to repeat over and over the same outdated concepts. More or less, at the same time, I develop a taste to organize workshops. It was much more interesting and people seem really engaged. When I started my professional career, I discovered the development teams and here is where I realised that <strong>my ideal future position could be leading development teams</strong>. Nevertheless, I think I still need more professional experience to be able to properly lead teams. That is one of the main reasons I decided to leave Tecnalia and join Form3. I need development experience.</p></article><section class="article labels"><a class="category" href=/categories/blog/>blog</a><a class="tag" href=/tags/personal/>personal</a><a class="tag" href=/tags/leadership/>leadership</a></section></div><section class="article navigation"><p><a class="link" href="/post/howto/2021-02-28_hugo_timeline_shortcode/"><span class="li">&rarr;</span>Hugo Timeline Shortcode</a></p></section><section class="article discussion"><script 
+            src="https://utteranc.es/client.js" 
+            repo="MetalBlueberry/MetalBlueberry.github.io"
+            issue-term="og:title"
+            label=""
+            theme="github-light"
+            crossorigin="anonymous" async>
+        </script></section>
+<div class="claps">
+  <div class="canvas">
+    <div id="totalCounter" class="total-counter"></div>
+
+    <div id="clap" class="clap-container">
+      <i class="clap-icon fa fa-hand-paper-o"></i>
+    </div>
+
+    <div id="clicker" class="click-counter">
+      <span class="counter"></span>
+    </div>
+
+    <div id="sonar-clap" class="clap-container-sonar"></div>
+
+    <div id="particles" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+    <div id="particles-2" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+    <div id="particles-3" class="particles-container">
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+      <div class="triangle">
+        <div class="square"></div>
+      </div>
+    </div>
+
+  </div>
+</div><script>
+  anchors.add();
+</script></div><section id="footer" class="footer"><div class="footer-wrap">
+    <p class="copyright">Víctor Pérez Domingo</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-150427130-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="/js/core.min.7b47089a7c73c836fa25511393d88b1f865be72bc194ce2bdd9148aed11e971a65d2ff58f171d57972f3957c01261c4d.js" integrity="sha384-e0cImnxzyDb6JVETk9iLH4Zb5yvBlM4r3ZFIrtEelxpl0v9Y8XHVeXLzlXwBJhxN"></script></div>
+</body>
+
+</html>
