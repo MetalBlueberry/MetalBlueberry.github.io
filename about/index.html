@@ -18,9 +18,11 @@ I&rsquo;m a passionate developer with experience working on critical real time e
 I have more than 4 years of experience writing highly scalable systems with Go and I consider this my main area of expertise. I also feel comfortable with other languages, such as Python and Javascript." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://metalblueberry.github.io/about/" />
-<meta property="article:modified_time" content="2024-06-21T08:50:53+02:00" />
+<meta property="article:modified_time" content="2024-06-21T11:56:56+02:00" />
 
 <meta name="author" content="">
+
+<script src="https://cdn.plot.ly/plotly-1.50.0.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
 <body>
@@ -43,72 +45,127 @@ I have more than 4 years of experience writing highly scalable systems with Go a
 <p>I have more than 4 years of experience writing highly scalable systems with <strong><a href="/tags/go">Go</a></strong> and I consider this my main area of expertise. I also feel comfortable with other languages, such as <strong><a href="/tags/python">Python</a></strong> and <strong>Javascript</strong>. My current skill level allows me to abstract the design patterns to be applied to any environment, independently of the programming language.</p>
 <p>I have been working remotely since 2020 and I&rsquo;ve learned how to <strong>bring people together</strong>. I can build a fully remote team that works way better than a physical team, encouraging interaction across team members and making sure no one feels isolated.</p>
 <p>I&rsquo;ve always been between the software engineer and the lead position, realising that I naturally tend to move in the lead direction. I think this happens because <strong>I love sharing knowledge</strong>, which leads to people around me asking questions that eventually contribute to my own knowledge expanding. This feedback loop is what makes it easy for me to become the lead naturally.</p>
+<div class="figure">
+<div class="figure-plot" id="figure1">
+	Code could not finish, this are some reasons why this happen.
+	- Plot name not defined. The first parameter of the shortcode is the name.
+	- There is a syntax error. check browser console.
+</div>
+<script>
+  function draw(){
+	test = document.getElementById("figure1");
+	if (test == null){
+		console.log("The plot name is not defined")
+		return
+	}
+
+	fig = null
+	
+fig = {
+  data: [
+    {
+      x: [60],
+      name: "Software Engineering",
+      type: "bar",
+      orientation: "h",
+      textposition: 'auto',
+      text: "60%",
+      textfont: {
+        family: 'Arial',
+        size: 30,
+      },
+      marker:{ color: "rgb(1, 173, 216)"}
+    },
+    {
+      x: [25],
+      name: "Communication",
+      type: "bar",
+      orientation: "h",
+      textposition: 'auto',
+      text: "25%",
+      textfont: {
+        family: 'Arial',
+        size: 24,
+      },
+      marker:{ color: "rgb(34, 139, 34)"}
+    },
+    {
+      x: [15],
+      name: "Team leadership",
+      type: "bar",
+      orientation: "h",
+      textposition: 'auto',
+      text: "15%",
+      textfont: {
+        family: 'Arial',
+        size: 24,
+      },
+      marker:{ color: "rgb(255, 165, 0)"}
+    },
+    {
+      x: [10],
+      name: "Data Engineering",
+      type: "bar",
+      orientation: "h",
+      textposition: 'auto',
+      text: "10%",
+      textfont: {
+        family: 'Arial',
+        size: 15,
+      },
+      marker:{ color: "rgb(128, 0, 128)"}
+    }
+  ],
+  layout: {
+      title: "Skill chart",
+      barmode: "stack",
+      xaxis: {
+        showgrid: false,
+        zeroline: false,
+        visible: false
+      },
+      yaxis: {
+        showgrid: false,
+        zeroline: false,
+        visible: false
+      },
+      height: "200",
+      legend: {
+          orientation: "h",
+          traceorder: "normal"
+      },
+      margin: {
+          l: 0, // left margin
+          r: 0, // right margin
+          t: 30, // top margin
+          b: 0, // bottom margin
+      }
+  },
+  config: {
+        staticPlot: true
+  }
+};
+
+
+	if (!fig) {
+		test.innerText = "ERROR: fig variable is not defined"
+		return
+	}
+	test.innerText = null
+	Plotly.plot(test ,fig);
+  }
+  draw()
+</script>
+</div>
 <h2 id="experience">Experience</h2>
 <div class="timeline">
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container">
-  <div class="content">
-    <div class="title">Learning something new</div>
-    <div class="moment"  id="moment" >
-      
-    </div>
-    <div class="body"></div>
-  </div>
-  <div class="date">2024</div>
-</div>
-
-<script>
-  function non0plural(number, name) {
-    if (number == 0) {
-    return ""
-    }
-    if (number == 1 || number == -1) {
-    return number + " " +name
-    }
-    return number + " " + name + "s"
-  }
-
-  el = document.querySelector("#moment");
-  function refresh() {
-    start = dayjs("2024-06-21")
-    now = dayjs()
-
-    total_months = now.diff(start, "M", true)
-    months = total_months % 12
-    let years = 0
-    if (months < 0) {
-      years = Math.ceil((total_months) / 12)
-    } else {
-      years = Math.floor((total_months) / 12)
-    }
-    el.innerHTML = non0plural(years,"year")+" "+non0plural(months.toFixed(8),"month")
-  }
-  window.setInterval(refresh, 100);
-</script>
-
-
-
-
-
   
+
+
 
 
 
@@ -147,7 +204,10 @@ I have more than 4 years of experience writing highly scalable systems with Go a
 
 
 
+
   
+
+
 
 
 
@@ -185,7 +245,10 @@ I have more than 4 years of experience writing highly scalable systems with Go a
 
 
 
+
   
+
+
 
 
 
@@ -223,7 +286,10 @@ I have more than 4 years of experience writing highly scalable systems with Go a
 
 
 
+
   
+
+
 
 
 
@@ -260,7 +326,10 @@ I have more than 4 years of experience writing highly scalable systems with Go a
 
 
 
+
   
+
+
 
 
 
@@ -297,82 +366,6 @@ I have more than 4 years of experience writing highly scalable systems with Go a
 </div>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container">
-  <div class="content">
-    <div class="title">ERNI/HP - junior Business Analyst</div>
-    <div class="moment" >
-        1 years 1 month 
-    </div>
-    <div class="body"><ul>
-<li>Bridge between business requirements and development team.</li>
-<li>Write technical documents documenting business rules for implementation. (Markdown/Jira)</li>
-<li>Support QA team during quality checks. (SQL)</li>
-<li>Develop POCs for new proposals before delivering the task to the development team (Python, Go)</li>
-</ul>
-</div>
-  </div>
-  <div class="date">2017</div>
-</div>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container">
-  <div class="content">
-    <div class="title">My Escape - Hardware/Software Developer</div>
-    <div class="moment" >
-        1 years 3 months 
-    </div>
-    <div class="body"><ul>
-<li>Develop an automation software for Escape Room management(C#,WPF. State Machine)</li>
-<li>Develop PCB for DAQ based on Atmega328 (Arduino) over TCP/UDP (Atmel Studio, Altium)</li>
-<li>Develop a user screen to play videos, messages and receive user input (Qt, QML)</li>
-<li>Design games for the Escape room</li>
-</ul>
-</div>
-  </div>
-  <div class="date">2016</div>
-</div>
-
-
 </div>
 
 <h2 id="technical-background">Technical background</h2>
@@ -391,10 +384,9 @@ I have more than 4 years of experience writing highly scalable systems with Go a
 <p>My background as a <strong>Data Engineer</strong><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> give me those needed skills to understand deferent means to report, process, store and consume data. My contributions designing dashboards to monitor the system were widely adopted across the company and had a direct impact on the confidence engineers had monitoring the environment.</p>
 <p>As a developer, the following is a list of technologies, tools, frameworks&hellip; that I&rsquo;m familiar with, sorted by how comfortable I feel using them. A higher position means more comfortable.</p>
 <ul>
-<li>
-<p>Fluent (used last year)</p>
+<li>Fluent (used last year)
 <ul>
-<li><a href="/tags/go">Go</a></li>
+<li><a href="/tags/go">Go</a> - Since go 1.8 (2017)</li>
 <li>Linux</li>
 <li><a href="/tags/git">Git</a> - GitHub</li>
 <li><a href="/tags/vscode">VSCode</a></li>
