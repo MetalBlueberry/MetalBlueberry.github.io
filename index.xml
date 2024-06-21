@@ -24,6 +24,19 @@
     
     <item>
       <title>About Me</title>
+      <link>/about-less/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about-less/</guid>
+      <description>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
+ Martin Fowler, 2008.   About MetalBlueberry 
+I&amp;rsquo;m a passionate developer with experience working on critical real time environments like payments and bank transfers.
+I have more than 4 years of experience writing highly scalable systems with Go and I consider this my main area of expertise. I also feel comfortable with other languages, such as Python and Javascript.</description>
+      
+    </item>
+    
+    <item>
+      <title>About Me</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
