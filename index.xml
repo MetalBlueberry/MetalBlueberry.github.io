@@ -24,10 +24,10 @@
     
     <item>
       <title>About Me</title>
-      <link>/about-less/</link>
+      <link>/about-timescale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/about-less/</guid>
+      <guid>/about-timescale/</guid>
       <description>Why Timescale? I heard about the Senior Software Engineer - Backend position at Timescale through a friend, who recommended I apply. You can find the opening here.
 I believe I&amp;rsquo;m a great fit for this role with my 7 years of solid experience using Go and 4 years managing real-time critical production systems.
 In my 7 years as a software engineer, I&amp;rsquo;ve focused on managing critical and highly reliable production systems.</description>
