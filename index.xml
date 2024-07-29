@@ -24,6 +24,18 @@
     
     <item>
       <title>About Me</title>
+      <link>/about-less/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about-less/</guid>
+      <description>About Víctor Pérez - (MetalBlueberry) 
+I&amp;rsquo;m a passionate developer with experience working on critical real-time environments like payments.
+I have over 5 years of experience writing highly scalable systems with Go, which I not only consider my main area of expertise but also a language I genuinely enjoy working with. My enthusiasm for coding extends to other languages such as Python and JavaScript. My current skill level allows me to abstract the design patterns to be applied to any environment, independently of the programming language.</description>
+      
+    </item>
+    
+    <item>
+      <title>About Me</title>
       <link>/about-timescale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -42,8 +54,8 @@ In my 7 years as a software engineer, I&amp;rsquo;ve focused on managing critica
       <guid>/about/</guid>
       <description>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.
  Martin Fowler, 2008.   About Víctor Pérez - (MetalBlueberry) 
-I&amp;rsquo;m a passionate developer with experience working on critical real time environments like payments and bank transfers.
-I have more than 4 years of experience writing highly scalable systems with Go and I consider this my main area of expertise. I also feel comfortable with other languages, such as Python and Javascript.</description>
+I&amp;rsquo;m a passionate developer with experience working on critical real-time environments like payments.
+I have over 5 years of experience writing highly scalable systems with Go, which I not only consider my main area of expertise but also a language I genuinely enjoy working with.</description>
       
     </item>
     
