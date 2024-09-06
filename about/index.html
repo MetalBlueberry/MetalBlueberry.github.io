@@ -18,7 +18,7 @@ I&rsquo;m a passionate developer with experience working on critical real-time e
 I have over 5 years of experience writing highly scalable systems with Go, which I not only consider my main area of expertise but also a language I genuinely enjoy working with." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://metalblueberry.github.io/about/" />
-<meta property="article:modified_time" content="2024-07-29T14:14:02+02:00" />
+<meta property="article:modified_time" content="2024-09-06T12:14:08+02:00" />
 
 <meta name="author" content="">
 
@@ -45,7 +45,16 @@ I have over 5 years of experience writing highly scalable systems with Go, which
 <p>I have over 5 years of experience writing highly scalable systems with <strong><a href="/tags/go">Go</a></strong>, which I not only consider my main area of expertise but also a language I genuinely enjoy working with. My enthusiasm for coding extends to other languages such as <strong><a href="/tags/python">Python</a></strong> and <strong>JavaScript</strong>. My current skill level allows me to abstract the design patterns to be applied to any environment, independently of the programming language.</p>
 <p>I have been working remotely since 2020 and I&rsquo;ve learned how to <strong>bring people together</strong>. I can build a fully remote team that works way better than a physical team, encouraging interaction across team members and making sure no one feels isolated.</p>
 <p><strong>I love sharing knowledge</strong>, which leads to people around me asking questions that eventually contribute to my own knowledge expanding. This feedback loop is what makes it easy for me to become the lead naturally.</p>
+
 <div class="figure">
+<div class="figure-error">
+
+
+
+
+
+
+</div>
 <div class="figure-plot" id="figure1">
 	Code could not finish, this are some reasons why this happen.
 	- Plot name not defined. The first parameter of the shortcode is the name.
@@ -61,91 +70,91 @@ I have over 5 years of experience writing highly scalable systems with Go, which
 
 	fig = null
 	
-fig = {
-  data: [
-    {
-      x: [60],
-      name: "Software Engineering",
-      type: "bar",
-      orientation: "h",
-      textposition: 'auto',
-      text: "60%",
-      textfont: {
-        family: 'Arial',
-        size: 30,
-      },
-      marker:{ color: "rgb(1, 173, 216)"}
+	fig = {
+    data: [
+        {
+            x: [60],
+            name: "Software Engineering",
+            type: "bar",
+            orientation: "h",
+            textposition: 'auto',
+            text: "60%",
+            textfont: {
+                family: 'Arial',
+                size: 30,
+            },
+            marker: { color: "rgb(1, 173, 216)" }
+        },
+        {
+            x: [25],
+            name: "Communication",
+            type: "bar",
+            orientation: "h",
+            textposition: 'auto',
+            text: "25%",
+            textfont: {
+                family: 'Arial',
+                size: 24,
+            },
+            marker: { color: "rgb(34, 139, 34)" }
+        },
+        {
+            x: [15],
+            name: "Team leadership",
+            type: "bar",
+            orientation: "h",
+            textposition: 'auto',
+            text: "15%",
+            textfont: {
+                family: 'Arial',
+                size: 24,
+            },
+            marker: { color: "rgb(255, 165, 0)" }
+        },
+        {
+            x: [10],
+            name: "Data Engineering",
+            type: "bar",
+            orientation: "h",
+            textposition: 'auto',
+            text: "10%",
+            textfont: {
+                family: 'Arial',
+                size: 15,
+            },
+            marker: { color: "rgb(128, 0, 128)" }
+        }
+    ],
+    layout: {
+        title: "Skill chart",
+        barmode: "stack",
+        xaxis: {
+            showgrid: false,
+            zeroline: false,
+            visible: false
+        },
+        yaxis: {
+            showgrid: false,
+            zeroline: false,
+            visible: false
+        },
+        height: "200",
+        legend: {
+            orientation: "h",
+            traceorder: "normal"
+        },
+        margin: {
+            l: 0, // left margin
+            r: 0, // right margin
+            t: 30, // top margin
+            b: 0, // bottom margin
+        }
     },
-    {
-      x: [25],
-      name: "Communication",
-      type: "bar",
-      orientation: "h",
-      textposition: 'auto',
-      text: "25%",
-      textfont: {
-        family: 'Arial',
-        size: 24,
-      },
-      marker:{ color: "rgb(34, 139, 34)"}
-    },
-    {
-      x: [15],
-      name: "Team leadership",
-      type: "bar",
-      orientation: "h",
-      textposition: 'auto',
-      text: "15%",
-      textfont: {
-        family: 'Arial',
-        size: 24,
-      },
-      marker:{ color: "rgb(255, 165, 0)"}
-    },
-    {
-      x: [10],
-      name: "Data Engineering",
-      type: "bar",
-      orientation: "h",
-      textposition: 'auto',
-      text: "10%",
-      textfont: {
-        family: 'Arial',
-        size: 15,
-      },
-      marker:{ color: "rgb(128, 0, 128)"}
-    }
-  ],
-  layout: {
-      title: "Skill chart",
-      barmode: "stack",
-      xaxis: {
-        showgrid: false,
-        zeroline: false,
-        visible: false
-      },
-      yaxis: {
-        showgrid: false,
-        zeroline: false,
-        visible: false
-      },
-      height: "200",
-      legend: {
-          orientation: "h",
-          traceorder: "normal"
-      },
-      margin: {
-          l: 0, // left margin
-          r: 0, // right margin
-          t: 30, // top margin
-          b: 0, // bottom margin
-      }
-  },
-  config: {
+    config: {
         staticPlot: true
-  }
+    }
 };
-
+	
 
 	if (!fig) {
 		test.innerText = "ERROR: fig variable is not defined"
