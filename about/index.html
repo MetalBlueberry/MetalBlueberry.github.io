@@ -18,7 +18,7 @@ I&rsquo;m a passionate developer with experience working on critical real-time e
 I have over 5 years of experience writing highly scalable systems with Go, which I not only consider my main area of expertise but also a language I genuinely enjoy working with." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://metalblueberry.github.io/about/" />
-<meta property="article:modified_time" content="2024-09-06T12:14:08+02:00" />
+<meta property="article:modified_time" content="2024-09-29T13:49:18+02:00" />
 
 <meta name="author" content="">
 
@@ -168,6 +168,71 @@ I have over 5 years of experience writing highly scalable systems with Go, which
 </div>
 <h2 id="experience">Experience</h2>
 <div class="timeline">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+  <div class="content">
+    <div class="title">Timescale - Senior Software Engineer (Go)</div>
+    <div class="moment"  id="moment" >
+      
+    </div>
+    <div class="body"><p><a target="_blank" rel="noopener noreferrer" 
+  href="/gif/timescale-lion.gif"><img  src="/gif/timescale-lion.gif"
+        alt="timescale-tiger"/></a></p>
+</div>
+  </div>
+  <div class="date">2024</div>
+</div>
+
+<script>
+  function non0plural(number, name) {
+    if (number == 0) {
+    return ""
+    }
+    if (number == 1 || number == -1) {
+    return number + " " +name
+    }
+    return number + " " + name + "s"
+  }
+
+  el = document.querySelector("#moment");
+  function refresh() {
+    start = dayjs("2024-09-16")
+    now = dayjs()
+
+    total_months = now.diff(start, "M", true)
+    months = total_months % 12
+    let years = 0
+    if (months < 0) {
+      years = Math.ceil((total_months) / 12)
+    } else {
+      years = Math.floor((total_months) / 12)
+    }
+    el.innerHTML = non0plural(years,"year")+" "+non0plural(months.toFixed(8),"month")
+  }
+ window.setInterval(refresh, 100);
+</script>
+
+
 
 
 
